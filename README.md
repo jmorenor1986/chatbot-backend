@@ -1,11 +1,11 @@
-# base-hexagonal-repository
-Its a base project to develop the microservices based in hexagonal architecture.
+# chatbot-backend
+Its a base project to develop the microservices based in layers architecture.
 
 ## Quick start
 
 To obtain the source code, just clone the repository at github
 ```
-git clone git@github.com:jmorenor1986/base-hexagonal-repository.git
+git clone git@github.com:jmorenor1986/chatbot-backend.git
 ``` 
 
 ## Build
@@ -27,30 +27,29 @@ $ mvn clean install
 
 you must see a sucessful build
 ```
-[INFO] ------------------------------------------------------------------------
-[INFO] Reactor Summary for base-hexagonal-architecture 1.0-SNAPSHOT:
+[INFO] Reactor Summary for chatbot-backend 1.0.0:
 [INFO]
-[INFO] base-hexagonal-architecture ........................ SUCCESS [  4.653 s]
-[INFO] base-hexagonal-architecture-web .................... SUCCESS [ 32.682 s]
-[INFO] base-hexagonal-architecture-acceptance-tests ....... SUCCESS [  0.962 s]
+[INFO] chatbot-backend .................................... SUCCESS [  1.356 s]
+[INFO] chatbot-backend-web ................................ SUCCESS [ 52.970 s]
 [INFO] ------------------------------------------------------------------------
 [INFO] BUILD SUCCESS
 [INFO] ------------------------------------------------------------------------
-[INFO] Total time:  39.055 s
-[INFO] Finished at: 2020-01-24T16:10:37+01:00
+[INFO] Total time:  55.187 s
+[INFO] Finished at: 2020-04-04T12:45:34+02:00
 [INFO] ------------------------------------------------------------------------
+
 ```
 To the run application, just use maven
 ```
-mvn -pl base-hexagonal-architecture-web spring-boot:run
+mvn -pl chatbot-backend-web spring-boot:run
 ```
 To validate the service you have two ways:
 
 Open the browser with next url:
 ```
-http://localhost:5000/example/v1/keepalive/
+http://localhost:5000/chatbot-backend/v1/keepalive/
 ```
 and
 ```
-curl -X GET "http://localhost:5000/example/v1/keepalive/" -H "accept: */*"
+curl -X GET "http://localhost:5000/chatbot-backend/v1/keepalive/" -H "accept: */*"
 ```
