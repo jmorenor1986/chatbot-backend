@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.integration.common;
+package co.com.santander.chatbot.backend.web.integration.steps;
 
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Scope;
