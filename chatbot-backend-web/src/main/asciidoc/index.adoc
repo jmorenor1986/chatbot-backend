@@ -1,1 +1,37 @@
-= Documentation of project
+= Documentación
+
+
+Generación certificado
+~~~~~~~~~~~~~~~~~~~~~~
+
+para crear el certificado autofirmado debemos usar las herramientas que provee la herramienta keytool de java. para hacerlo se debe escribir el siguiente comando:
+
+
+[source,python]
+-----------------
+keytool.exe -genkeypair -keyalg RSA -keysize 2048 -storetype PKCS12 -keystore santanderbot.p12 -validity 365
+-----------------
+
+A continuación se debe llenar los campos que solicita la herramienta
+
+[source,python]
+-----------------
+Introduzca la contraseña del almacén de claves:
+Volver a escribir la contraseña nueva:
+¿Cuáles son su nombre y su apellido?
+  [Unknown]:  localhost
+¿Cuál es el nombre de su unidad de organización?
+  [Unknown]:  santander
+¿Cuál es el nombre de su organización?
+  [Unknown]:  santander
+¿Cuál es el nombre de su ciudad o localidad?
+  [Unknown]:  bogota
+¿Cuál es el nombre de su estado o provincia?
+  [Unknown]:  bogota
+¿Cuál es el código de país de dos letras de la unidad?
+  [Unknown]:  CO
+¿Es correcto CN=localhost, OU=santander, O=santander, L=bogota, ST=bogota, C=CO?
+  [no]:  si
+-----------------
+
+La contraseña para este certificado es changeme
