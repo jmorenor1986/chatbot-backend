@@ -4,12 +4,10 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-public class KeepAliveStep {
+public class KeepAliveStep extends ContextLoader {
     @Autowired
-    private HttpClient httpClient;
+    protected HttpClient httpClient;
 
     @When("^call the service keepalive$")
     public void call_the_service_keepalive() {

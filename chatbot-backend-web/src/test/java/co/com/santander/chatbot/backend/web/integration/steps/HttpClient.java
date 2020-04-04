@@ -24,4 +24,5 @@ public class HttpClient {
     public String get(String resource) {
         return restTemplate.getForEntity(exampleEndPoint().concat(resource), String.class).getBody();
     }
+
 }
