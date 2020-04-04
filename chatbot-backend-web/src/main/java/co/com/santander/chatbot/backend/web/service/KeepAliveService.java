@@ -1,4 +1,4 @@
-package com.example.ports.primary;
+package co.com.santander.chatbot.backend.web.service;
 
 public interface KeepAliveService {
     String getAlive();

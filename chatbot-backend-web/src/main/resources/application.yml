@@ -1,4 +1,4 @@
 server:
   servlet:
-    context-path: /example
+    context-path: /chatbot-backend
   port: 5000

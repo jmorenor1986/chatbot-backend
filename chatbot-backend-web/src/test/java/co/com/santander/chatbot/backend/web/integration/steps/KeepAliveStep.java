@@ -1,6 +1,6 @@
-package com.example.integration.steps;
+package co.com.santander.chatbot.backend.web.integration.steps;
 
-import com.example.integration.common.HttpClient;
+import co.com.santander.chatbot.backend.web.integration.common.HttpClient;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.junit.Assert;

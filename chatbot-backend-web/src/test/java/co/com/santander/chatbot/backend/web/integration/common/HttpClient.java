@@ -1,4 +1,4 @@
-package com.example.integration.common;
+package co.com.santander.chatbot.backend.web.integration.common;
 
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Scope;
@@ -11,7 +11,7 @@ import static io.cucumber.spring.CucumberTestContext.SCOPE_CUCUMBER_GLUE;
 @Scope(SCOPE_CUCUMBER_GLUE)
 public class HttpClient {
     private final String SERVER_URL = "http://localhost";
-    private final String EXAMPLE_ENDPOINT = "/example";
+    private final String EXAMPLE_ENDPOINT = "/chatbot-backend";
 
     @LocalServerPort
     private int port;

@@ -1,12 +1,10 @@
-package com.example.core.services;
+package co.com.santander.chatbot.backend.web.service;
 
-import com.example.ports.primary.KeepAliveService;
+import co.com.santander.chatbot.backend.web.service.impl.KeepAliveServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 public class KeepAliveServiceTest {

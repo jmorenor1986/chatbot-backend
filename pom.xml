@@ -95,6 +95,6 @@
     </dependencies>
 
     <modules>
-        <module>base-hexagonal-architecture-web</module>
+        <module>chatbot-backend-web</module>
     </modules>
 </project>

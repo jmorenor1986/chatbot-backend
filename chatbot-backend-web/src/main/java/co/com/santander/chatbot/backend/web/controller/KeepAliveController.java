@@ -1,6 +1,6 @@
-package com.example.adapters.primary.rest.keepalive;
+package co.com.santander.chatbot.backend.web.controller;
 
-import com.example.ports.primary.KeepAliveService;
+import co.com.santander.chatbot.backend.web.service.KeepAliveService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

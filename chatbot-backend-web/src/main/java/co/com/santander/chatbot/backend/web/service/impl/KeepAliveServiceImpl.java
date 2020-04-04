@@ -1,6 +1,6 @@
-package com.example.core.services;
+package co.com.santander.chatbot.backend.web.service.impl;
 
-import com.example.ports.primary.KeepAliveService;
+import co.com.santander.chatbot.backend.web.service.KeepAliveService;
 import org.springframework.stereotype.Service;
 
 @Service

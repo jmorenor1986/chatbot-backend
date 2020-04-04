@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>base-hexagonal-architecture-web</artifactId>
     <properties>
-        <start-class>com.example.Application</start-class>
+        <start-class>co.com.santander.chatbot.backend.web.Application</start-class>
     </properties>
 
     <build>
@@ -48,7 +48,7 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>com.example.Application</exclude>
+                                        <exclude>co.com.santander.chatbot.backend.web.Application</exclude>
                                         <exclude>*Config</exclude>
                                     </excludes>
                                     <limits>

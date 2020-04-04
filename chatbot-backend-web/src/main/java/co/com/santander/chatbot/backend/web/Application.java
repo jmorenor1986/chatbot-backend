@@ -1,4 +1,4 @@
-package com.example;
+package co.com.santander.chatbot.backend.web;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
