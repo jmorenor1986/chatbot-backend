@@ -9,8 +9,8 @@
         <version>2.2.1.RELEASE</version>
         <relativePath/>
     </parent>
-    <groupId>com.example</groupId>
-    <artifactId>base-hexagonal-architecture</artifactId>
+    <groupId>co.com.santander</groupId>
+    <artifactId>chatbot-backend</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0</version>
 
