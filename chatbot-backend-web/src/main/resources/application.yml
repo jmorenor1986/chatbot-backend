@@ -6,3 +6,7 @@ server:
     key-store: classpath:santanderbot.p12
     key-store-password: changeme
     keyStoreType: PKCS12
+
+
+jwt:
+  secret: a6e21884876f43819523c31033fa697e
