@@ -12,6 +12,9 @@
     <properties>
         <start-class>co.com.santander.chatbot.backend.web.Application</start-class>
     </properties>
+    <dependencies>
+
+    </dependencies>
 
     <build>
         <plugins>
