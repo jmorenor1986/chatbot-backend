@@ -3,7 +3,7 @@ package co.com.santander.chatbot.backend.web.dto;
 import lombok.Getter;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
 public class UsuarioDto {
 
     private String correo;

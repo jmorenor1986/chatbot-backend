@@ -56,6 +56,8 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.chatbot.backend.web.Application</exclude>
+                                        <exclude>co.com.santander.chatbot.backend.web.controller.payload.*</exclude>
+                                        <exclude>co.com.santander.chatbot.backend.web.dto.*</exclude>
                                         <exclude>*Config</exclude>
                                     </excludes>
                                     <limits>

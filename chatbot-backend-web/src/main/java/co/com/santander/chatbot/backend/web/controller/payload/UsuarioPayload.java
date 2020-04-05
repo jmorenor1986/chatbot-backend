@@ -1,9 +1,9 @@
 package co.com.santander.chatbot.backend.web.controller.payload;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class UsuarioPayload {
     private Long telefono;

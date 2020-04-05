@@ -3,6 +3,9 @@ package co.com.santander.chatbot.backend.web.integration.steps;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,6 +28,12 @@ public class HttpClient {
 
     public String get(String resource) {
         return restTemplate.getForEntity(exampleEndPoint().concat(resource), String.class).getBody();
+    }
+
+    public ResponseEntity<?> getWithRequest(String resource, Object payload){
+        System.out.println(exampleEndPoint().concat(resource));
+        HttpEntity<Object> request = new HttpEntity<>(payload);
+        return restTemplate.exchange(exampleEndPoint().concat(resource), HttpMethod.GET,request, ResponseEntity.class);
     }
 
 }

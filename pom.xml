@@ -24,7 +24,7 @@
         <maven.surfire.version>3.0.0-M3</maven.surfire.version>
         <ascii.doctor.version>2.0.0.RELEASE</ascii.doctor.version>
         <maven.ascii.doctor>1.5.6</maven.ascii.doctor>
-        <percent.coverage>0%</percent.coverage>
+        <percent.coverage>80%</percent.coverage>
     </properties>
     <dependencies>
         <dependency>
