@@ -1,7 +1,6 @@
 package co.com.santander.chatbot.backend.web.filter;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import io.jsonwebtoken.impl.TextCodec;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,15 +18,28 @@ import java.util.stream.Collectors;
 
 public class JwtFilter extends OncePerRequestFilter {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    private String secret = "a6e21884876f43819523c31033fa697e";
 
     private final String HEADER = "Authorization";
     private final String PREFIX = "Bearer ";
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
+        try {
+            if (existeJWTToken(request, response)) {
+                Claims claims = validateToken(request);
+                if (claims.get("authorities") != null) {
+                    setUpSpringAuthentication(claims);
+                } else {
+                    SecurityContextHolder.clearContext();
+                }
+            }
+            chain.doFilter(request, response);
+        } catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException e) {
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            ((HttpServletResponse) response).sendError(HttpServletResponse.SC_FORBIDDEN, e.getMessage());
+            return;
+        }
     }
 
     private Claims validateToken(HttpServletRequest request) {
