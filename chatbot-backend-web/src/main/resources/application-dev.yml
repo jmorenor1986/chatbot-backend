@@ -1,0 +1,8 @@
+server:
+  servlet:
+    context-path: /chatbot-backend
+  port: 5000
+
+jwt:
+  secret: a6e21884876f43819523c31033fa697e
+

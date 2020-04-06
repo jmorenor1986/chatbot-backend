@@ -1,7 +1,6 @@
 package co.com.santander.chatbot.backend.web.config;
 
 import co.com.santander.chatbot.backend.web.filter.JwtFilter;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
