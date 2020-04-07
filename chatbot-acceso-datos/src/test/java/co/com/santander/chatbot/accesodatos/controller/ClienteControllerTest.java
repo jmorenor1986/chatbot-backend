@@ -11,10 +11,11 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.math.BigInteger;
 import java.util.Optional;
 
 @SpringBootTest
-public class UsuarioControllerTest {
+public class ClienteControllerTest {
 
     private UsuarioController usuarioController;
     @Mock
@@ -28,10 +29,10 @@ public class UsuarioControllerTest {
 
     @Test
     public void testControllerSuccess() {
-        Mockito.when(usuarioService.consultarUsuario(new Long("12345"), "5270")).thenReturn(Optional.of(Boolean.TRUE));
+        Mockito.when(usuarioService.consultarUsuario(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.TRUE));
         ResponseEntity<Boolean> result = usuarioController.consultaUsuario(UsuarioInput.builder()
                 .colaIdentificacion("5270")
-                .telefono(new Long("12345"))
+                .telefono(new BigInteger("12345"))
                 .build());
 
         Assert.assertNotNull(result);
@@ -41,10 +42,10 @@ public class UsuarioControllerTest {
 
     @Test
     public void testControllerNotContent() {
-        Mockito.when(usuarioService.consultarUsuario(new Long("12345"), "5270")).thenReturn(Optional.of(Boolean.FALSE));
+        Mockito.when(usuarioService.consultarUsuario(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.FALSE));
         ResponseEntity<Boolean> result = usuarioController.consultaUsuario(UsuarioInput.builder()
                 .colaIdentificacion("5270")
-                .telefono(new Long("12345"))
+                .telefono(new BigInteger("12345"))
                 .build());
 
         Assert.assertNotNull(result);

@@ -1,8 +1,9 @@
 package co.com.santander.chatbot.accesodatos.service;
 
+import java.math.BigInteger;
 import java.util.Optional;
 
 public interface UsuarioService {
 
-    Optional<Boolean> consultarUsuario(Long aLong, String s);
+    Optional<Boolean> consultarUsuario(BigInteger aLong, String s);
 }

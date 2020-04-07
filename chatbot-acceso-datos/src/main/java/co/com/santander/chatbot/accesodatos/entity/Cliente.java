@@ -9,17 +9,19 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import java.math.BigInteger;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "Usuario.consultarUsuarioXTelefonoId", query = "FROM Usuario u where u.telefono = ?1 and u.colaIdentificacion = ?2 ")
-public class Usuario {
+@NamedQuery(name = "Cliente.consultarUsuarioXTelefonoId", query = "FROM Cliente u where u.telefono = ?1 and u.colaIdentificacion = ?2 ")
+public class Cliente {
     @Id
     private Long id;
-    private Long telefono;
+    @Column(precision = 10, scale = 2)
+    private BigInteger telefono;
     @Column(name = "cola_identificacion")
     private String colaIdentificacion;
 

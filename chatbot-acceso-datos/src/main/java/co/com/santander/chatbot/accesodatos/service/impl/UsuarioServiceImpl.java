@@ -5,6 +5,7 @@ import co.com.santander.chatbot.accesodatos.service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigInteger;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -18,7 +19,7 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     @Override
-    public Optional<Boolean> consultarUsuario(Long aLong, String s) {
+    public Optional<Boolean> consultarUsuario(BigInteger aLong, String s) {
         return Optional.of(Objects.nonNull(usuarioRepository.consultarUsuarioXTelefonoId(aLong, s)));
     }
 }
