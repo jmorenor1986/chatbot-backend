@@ -4,13 +4,11 @@ import lombok.Builder;
 import lombok.Data;
 
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import java.math.BigInteger;
 
 @Builder
 @Data
 public class UsuarioInput {
-    private BigInteger telefono;
+    private int telefono;
     @NotEmpty(message = "Cola identificación es obligatorio")
     private String colaIdentificacion;
 }
