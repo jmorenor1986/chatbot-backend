@@ -1,0 +1,153 @@
+{
+	"info": {
+		"_postman_id": "470669be-2923-49b0-90ab-c4ace2e2e646",
+		"name": "chatbot",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "keepalive",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYwODMwNzYsImV4cCI6MTU4NjA4NjY3Nn0.hG7rCTWd9WqlxyioB9hvf2YVnJ3ChodQYIhHYyWX1Em3_07aMk0ZD_Ac10mEDSpp4RStY1glT5xFFzWVepZAKg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/keepalive/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"keepalive",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"correo\":\"johnmorenoing@gmail.com\",\n\t\"contrasena\":\"12345\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/login/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar usuario",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYxOTgwNjksImV4cCI6MTU4NjIwMTY2OX0.6omVRADPTDi_jUBKK8ki80fXC9WBsrQhSIyd2__Vy7nhX9nJau8WtA1MZWt0kZYQ9REUVUMRQCWgikdKN3sSlA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":3014001618,\n\t\"colaIdentificacion\": \"2642\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/validarUsuario/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"validarUsuario",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Usuario acceso datos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYyODIwNTQsImV4cCI6MTU4NjI4NTY1NH0.vpwsLUvEWX5PWvgrSg_d6K7MD1yVg-UFY1FpaqvGtNkJUO6I9E9iZhO7GYPsELenEN45Wq2V2Vi_wn7eVmTRlA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":3014001617,\n\t\"colaIdentificacion\":\"5270\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/usuario/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"chatbot-acceso-datos",
+						"v1",
+						"usuario",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

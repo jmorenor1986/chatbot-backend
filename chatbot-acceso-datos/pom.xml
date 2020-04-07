@@ -8,16 +8,26 @@
         <version>1.0.0</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>chatbot-backend-web</artifactId>
+    <artifactId>chatbot-acceso-datos</artifactId>
     <properties>
-        <start-class>co.com.santander.chatbot.backend.web.Application</start-class>
+        <h2.database.version>1.4.200</h2.database.version>
     </properties>
+
     <dependencies>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>${h2.database.version}</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
         <dependency>
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpclient</artifactId>
             <version>4.3.4</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
     </dependencies>
     <build>
@@ -55,11 +65,9 @@
                                 <rule>
                                     <element>CLASS</element>
                                     <excludes>
-                                        <exclude>co.com.santander.chatbot.backend.web.Application</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.controller.payload.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.dto.*</exclude>
+                                        <exclude>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</exclude>
+                                        <exclude>co.com.santander.chatbot.accesodatos.controller.input.*</exclude>
                                         <exclude>*Config</exclude>
-                                        <exclude>*Filter</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
@@ -114,5 +122,6 @@
             </plugin>
         </plugins>
     </build>
+
 
 </project>

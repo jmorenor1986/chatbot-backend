@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.config;
+package co.com.santander.chatbot.accesodatos.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ public class SwaggerConfig {
     @Bean
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2).select()
-                .apis(RequestHandlerSelectors.basePackage("co.com.santander.chatbot.backend.web.controller"))
+                .apis(RequestHandlerSelectors.basePackage("co.com.santander.chatbot.accesodatos.controller"))
                 .paths(PathSelectors.any())
                 .build();
     }

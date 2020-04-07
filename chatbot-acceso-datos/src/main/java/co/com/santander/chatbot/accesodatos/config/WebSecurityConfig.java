@@ -1,8 +1,7 @@
-package co.com.santander.chatbot.backend.web.config;
+package co.com.santander.chatbot.accesodatos.config;
 
-import co.com.santander.chatbot.backend.web.filter.JwtFilter;
+import co.com.santander.chatbot.accesodatos.config.filter.JwtFilter;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -19,8 +18,6 @@ class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 .addFilterAfter(new JwtFilter(), UsernamePasswordAuthenticationFilter.class)
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/login/")
-                .permitAll()
                 .anyRequest()
                 .authenticated();
     }
