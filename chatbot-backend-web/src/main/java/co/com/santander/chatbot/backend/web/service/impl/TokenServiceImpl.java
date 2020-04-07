@@ -4,6 +4,7 @@ import co.com.santander.chatbot.backend.web.service.TokenService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.impl.TextCodec;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,13 +19,14 @@ import java.util.stream.Collectors;
 @Service
 public class TokenServiceImpl implements TokenService {
 
-    @Value("${jwt.secret}")
-    private String secret;
+    @Setter
+    private final String secret;
 
     public static Integer seconds = Integer.valueOf("3600") ;
 
     @Autowired
-    public TokenServiceImpl() {
+    public TokenServiceImpl( @Value("${jwt.secret}") String secret ) {
+        this.secret = secret;
     }
 
 
