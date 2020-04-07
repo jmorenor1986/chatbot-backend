@@ -6,3 +6,5 @@ Feature: ValidarUsuario funcionalidades
         | 30144001617 | 22903 |
 		When llama el servicio validarUsuario
 		Then retorna resultastatusCode "403"
+
+

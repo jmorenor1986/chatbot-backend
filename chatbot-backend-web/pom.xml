@@ -59,6 +59,7 @@
                                         <exclude>co.com.santander.chatbot.backend.web.controller.payload.*</exclude>
                                         <exclude>co.com.santander.chatbot.backend.web.dto.*</exclude>
                                         <exclude>*Config</exclude>
+                                        <exclude>*Filter</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
