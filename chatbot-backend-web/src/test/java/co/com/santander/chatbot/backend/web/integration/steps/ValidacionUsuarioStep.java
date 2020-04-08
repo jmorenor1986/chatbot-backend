@@ -1,9 +1,8 @@
 package co.com.santander.chatbot.backend.web.integration.steps;
 
-import co.com.santander.chatbot.backend.web.controller.payload.RespuestaPayload;
 import co.com.santander.chatbot.backend.web.controller.payload.UsuarioPayload;
-import co.com.santander.chatbot.backend.web.dto.TokenDto;
-import co.com.santander.chatbot.backend.web.dto.UsuarioDto;
+import co.com.santander.chatbot.domain.dto.security.TokenDto;
+import co.com.santander.chatbot.domain.dto.security.UsuarioDto;
 import com.google.gson.Gson;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -12,7 +11,6 @@ import io.cucumber.java.en.When;
 import lombok.Getter;
 import lombok.Setter;
 import org.junit.Assert;
-import org.junit.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

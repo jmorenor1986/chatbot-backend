@@ -111,5 +111,6 @@
     <modules>
         <module>chatbot-backend-web</module>
         <module>chatbot-acceso-datos</module>
+        <module>chatbot-domain</module>
     </modules>
 </project>

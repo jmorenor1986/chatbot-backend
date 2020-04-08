@@ -1,8 +1,8 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
-import co.com.santander.chatbot.backend.web.dto.TokenDto;
 import co.com.santander.chatbot.backend.web.service.TokenService;
 import co.com.santander.chatbot.backend.web.service.UsuarioService;
+import co.com.santander.chatbot.domain.dto.security.TokenDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;

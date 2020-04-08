@@ -1,7 +1,7 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
-import co.com.santander.chatbot.accesodatos.controller.input.UsuarioInput;
 import co.com.santander.chatbot.accesodatos.service.UsuarioService;
+import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioInput;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

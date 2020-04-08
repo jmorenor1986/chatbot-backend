@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.dto;
+package co.com.santander.chatbot.domain.dto.security;
 
 import lombok.Builder;
 import lombok.Getter;

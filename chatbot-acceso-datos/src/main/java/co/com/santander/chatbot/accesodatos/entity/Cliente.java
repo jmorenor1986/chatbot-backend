@@ -20,7 +20,7 @@ import java.math.BigInteger;
 public class Cliente {
     @Id
     private Long id;
-    @Column(precision = 10, scale = 2)
+    @Column(precision = 20, scale = 2)
     private BigInteger telefono;
     @Column(name = "cola_identificacion")
     private String colaIdentificacion;

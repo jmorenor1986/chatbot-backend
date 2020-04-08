@@ -1,7 +1,7 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
-import co.com.santander.chatbot.accesodatos.controller.input.UsuarioInput;
 import co.com.santander.chatbot.accesodatos.service.UsuarioService;
+import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioInput;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

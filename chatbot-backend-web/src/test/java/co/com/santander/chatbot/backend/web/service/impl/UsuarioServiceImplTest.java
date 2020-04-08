@@ -1,7 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
-import co.com.santander.chatbot.backend.web.dto.TokenDto;
 import co.com.santander.chatbot.backend.web.service.TokenService;
+import co.com.santander.chatbot.domain.dto.security.TokenDto;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,13 +19,14 @@ public class UsuarioServiceImplTest {
     private TokenService tokenService;
 
     @Before
-    public void setUp(){
+    public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.usuarioService = new UsuarioServiceImpl(tokenService);
     }
+
     @Test
-    public void testGeneraToken(){
-        Optional<TokenDto> tokenDto =  this.usuarioService.generaToken();
+    public void testGeneraToken() {
+        Optional<TokenDto> tokenDto = this.usuarioService.generaToken();
         Assert.assertNotNull(tokenDto);
     }
 

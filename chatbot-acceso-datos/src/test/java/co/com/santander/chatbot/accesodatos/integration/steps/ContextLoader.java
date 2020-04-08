@@ -1,5 +1,4 @@
-package co.com.santander.chatbot.backend.web.integration.steps;
-
+package co.com.santander.chatbot.accesodatos.integration.steps;
 
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
 import co.com.santander.chatbot.domain.dto.security.UsuarioDto;
