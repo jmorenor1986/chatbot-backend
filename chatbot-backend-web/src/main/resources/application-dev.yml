@@ -8,6 +8,14 @@ server:
     key-store-password: changeme
     keyStoreType: PKCS12
 
+logging:
+  level:
+    org:
+      springframework:
+        web:
+          client:
+            RestTemplate: DEBUG
+
 jwt:
   secret: a6e21884876f43819523c31033fa697e
 
