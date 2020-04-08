@@ -1,6 +1,6 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
-import co.com.santander.chatbot.accesodatos.service.UsuarioService;
+import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioInput;
 import org.junit.Assert;
 import org.junit.Before;
@@ -17,20 +17,20 @@ import java.util.Optional;
 @SpringBootTest
 public class ClienteControllerTest {
 
-    private UsuarioController usuarioController;
+    private ClienteController clienteController;
     @Mock
-    private UsuarioService usuarioService;
+    private ClienteService clienteService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        usuarioController = new UsuarioController(usuarioService);
+        clienteController = new ClienteController(clienteService);
     }
 
     @Test
     public void testControllerSuccess() {
-        Mockito.when(usuarioService.consultarUsuario(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.TRUE));
-        ResponseEntity<Boolean> result = usuarioController.consultaUsuario(UsuarioInput.builder()
+        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.TRUE));
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
                 .colaIdentificacion("5270")
                 .telefono(new BigInteger("12345"))
                 .build());
@@ -42,8 +42,8 @@ public class ClienteControllerTest {
 
     @Test
     public void testControllerNotContent() {
-        Mockito.when(usuarioService.consultarUsuario(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.FALSE));
-        ResponseEntity<Boolean> result = usuarioController.consultaUsuario(UsuarioInput.builder()
+        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.FALSE));
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
                 .colaIdentificacion("5270")
                 .telefono(new BigInteger("12345"))
                 .build());

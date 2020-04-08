@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.math.BigInteger;
 
 @Repository
-public interface UsuarioRepository extends JpaRepository<Cliente, Long> {
+public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    public Cliente consultarUsuarioXTelefonoId(BigInteger telefono, String colaIdentificacion);
+    public Cliente consultarClienteXTelefonoId(BigInteger telefono, String colaIdentificacion);
 }

@@ -17,17 +17,17 @@ import java.math.BigInteger;
 public class ClienteRepositoryTest_IT {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    private ClienteRepository clienteRepository;
 
     @Test
     public void testConsultaUsuarioSuccess() {
-        Cliente result = usuarioRepository.consultarUsuarioXTelefonoId(new BigInteger("3014001617"), "5270");
+        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3014001617"), "5270");
         Assert.assertNotNull(result);
     }
 
     @Test
     public void testConsultarUsuarioNotExist() {
-        Cliente result = usuarioRepository.consultarUsuarioXTelefonoId(new BigInteger("3104001617"), "5270");
+        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3104001617"), "5270");
         Assert.assertNull(result);
     }
 }

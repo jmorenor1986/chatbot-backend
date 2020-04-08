@@ -80,7 +80,7 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</exclude>
-                                        <exclude>co.com.santander.chatbot.accesodatos.controller.input.*</exclude>
+                                        <exclude>co.com.santander.chatbot.accesodatos.entity.*</exclude>
                                         <exclude>*Config</exclude>
                                     </excludes>
                                     <limits>

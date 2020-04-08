@@ -1,6 +1,6 @@
 package co.com.santander.chatbot.accesodatos.config;
 
-import co.com.santander.chatbot.accesodatos.config.filter.JwtFilter;
+import co.com.santander.chatbot.domain.filter.security.JwtFilter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

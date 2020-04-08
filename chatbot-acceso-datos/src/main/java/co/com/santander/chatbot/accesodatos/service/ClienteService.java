@@ -3,7 +3,7 @@ package co.com.santander.chatbot.accesodatos.service;
 import java.math.BigInteger;
 import java.util.Optional;
 
-public interface UsuarioService {
+public interface ClienteService {
 
-    Optional<Boolean> consultarUsuario(BigInteger aLong, String s);
+    Optional<Boolean> consultarCliente(BigInteger aLong, String s);
 }
