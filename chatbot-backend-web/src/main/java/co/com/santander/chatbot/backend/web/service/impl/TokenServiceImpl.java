@@ -22,10 +22,10 @@ public class TokenServiceImpl implements TokenService {
     @Setter
     private final String secret;
 
-    public static Integer seconds = Integer.valueOf("3600") ;
+    public static final Integer seconds = Integer.valueOf("3600");
 
     @Autowired
-    public TokenServiceImpl( @Value("${jwt.secret}") String secret ) {
+    public TokenServiceImpl(@Value("${jwt.secret}") String secret) {
         this.secret = secret;
     }
 
