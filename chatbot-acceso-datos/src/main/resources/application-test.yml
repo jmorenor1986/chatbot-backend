@@ -1,0 +1,21 @@
+server:
+  servlet:
+    context-path: /chatbot-acceso-datos
+  port: 5001
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:santander
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  flyway:
+    table: chatbot_acceso_datos_flyway_schema_history
+    baseline-on-migrate: true
+    locations: classpath:test/db/migration
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    generate-ddl: false
