@@ -3,8 +3,8 @@
 --
 CREATE TABLE cliente (
   id                    int8            not null ,
-  cola_identificacion   varchar(255)             ,
-  telefono              numeric(20, 2)           ,
+  NumeroIdentificacion   numeric(20,2)             ,
+  Celular              numeric(20, 2)           ,
 primary key (id)
 );
 --

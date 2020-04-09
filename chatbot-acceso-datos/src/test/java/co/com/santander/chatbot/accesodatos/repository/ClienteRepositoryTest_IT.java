@@ -21,13 +21,13 @@ public class ClienteRepositoryTest_IT {
 
     @Test
     public void testConsultaUsuarioSuccess() {
-        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3014001617"), "5270");
+        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3014001617"), new BigInteger("5270"));
         Assert.assertNotNull(result);
     }
 
     @Test
     public void testConsultarUsuarioNotExist() {
-        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3104001617"), "5270");
+        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3104001617"), new BigInteger("5270"));
         Assert.assertNull(result);
     }
 }

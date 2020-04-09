@@ -2,8 +2,6 @@ package co.com.santander.chatbot.accesodatos.service.impl;
 
 import co.com.santander.chatbot.accesodatos.entity.Cliente;
 import co.com.santander.chatbot.accesodatos.repository.ClienteRepository;
-import co.com.santander.chatbot.accesodatos.service.ClienteService;
-import co.com.santander.chatbot.accesodatos.service.impl.ClienteServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +29,7 @@ public class ClienteServiceImplTest {
 
     @Test
     public void testConsultarUsuarioSuccess() {
-        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), "5270")).thenReturn(Cliente.builder().build());
+        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), new BigInteger("5270"))).thenReturn(Cliente.builder().build());
         Optional<Boolean> result = clienteService.consultarCliente(new BigInteger("0"), "5270");
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.TRUE, result.get());
@@ -39,7 +37,7 @@ public class ClienteServiceImplTest {
 
     @Test
     public void testConsultarUsuarioError() {
-        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), "5270")).thenReturn(null);
+        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), new BigInteger("5270"))).thenReturn(null);
         Optional<Boolean> result = clienteService.consultarCliente(new BigInteger("0"), "5270");
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.FALSE, result.get());

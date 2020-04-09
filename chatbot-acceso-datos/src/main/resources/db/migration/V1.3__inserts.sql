@@ -1,2 +1,2 @@
-INSERT INTO cliente (id,telefono,cola_identificacion) VALUES
-(1,3014001617,'5270');
+INSERT INTO cliente (id,Celular,NumeroIdentificacion) VALUES
+(1,3014001617,5270);
