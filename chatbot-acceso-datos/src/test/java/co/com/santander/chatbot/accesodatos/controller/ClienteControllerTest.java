@@ -36,8 +36,8 @@ public class ClienteControllerTest {
                 .build());
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(result.getBody(), Boolean.TRUE);
-        Assert.assertEquals(result.getStatusCodeValue(), 200);
+        Assert.assertEquals(Boolean.TRUE, result.getBody());
+        Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
     @Test
@@ -49,8 +49,20 @@ public class ClienteControllerTest {
                 .build());
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(result.getBody(), Boolean.FALSE);
-        Assert.assertEquals(result.getStatusCodeValue(), 204);
+        Assert.assertEquals(Boolean.FALSE, result.getBody());
+        Assert.assertEquals(204, result.getStatusCodeValue());
+    }
+
+    @Test
+    public void testControllerInternalServerError() {
+        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.empty());
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
+                .colaIdentificacion("5270")
+                .telefono(new BigInteger("12345"))
+                .build());
+
+        Assert.assertNotNull(result);
+        Assert.assertEquals(500, result.getStatusCodeValue());
     }
 
 }

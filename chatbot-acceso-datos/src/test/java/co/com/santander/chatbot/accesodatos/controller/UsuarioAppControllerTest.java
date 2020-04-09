@@ -6,7 +6,10 @@ import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioAppPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.*;
+import org.mockito.ArgumentMatchers;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -44,7 +47,7 @@ public class UsuarioAppControllerTest {
         Mockito.when(usuarioAppService.createUser(ArgumentMatchers.any())).thenReturn(usuarioApp);
         ResponseEntity<UsuarioAppPayload> rta = usuarioAppController.createUser(usuarioAppPayloadInput);
         Assert.assertNotNull(rta);
-        Assert.assertEquals(rta.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(HttpStatus.OK, rta.getStatusCode());
     }
 
     @Test
@@ -56,7 +59,7 @@ public class UsuarioAppControllerTest {
         Mockito.when(usuarioAppService.validateLoginUser("jsierra", "1234")).thenReturn(Optional.of(Boolean.TRUE));
         ResponseEntity<Boolean> rta = usuarioAppController.validateUser(usuarioAppPayloadInput);
         Assert.assertNotNull(rta);
-        Assert.assertEquals(rta.getStatusCode(), HttpStatus.OK);
+        Assert.assertEquals(HttpStatus.OK, rta.getStatusCode());
 
     }
 
@@ -69,7 +72,7 @@ public class UsuarioAppControllerTest {
         Mockito.when(usuarioAppService.validateLoginUser("jsierra", "1234")).thenReturn(Optional.of(Boolean.FALSE));
         ResponseEntity<Boolean> rta = usuarioAppController.validateUser(usuarioAppPayloadInput);
         Assert.assertNotNull(rta);
-        Assert.assertEquals(rta.getStatusCode(), HttpStatus.UNAUTHORIZED);
+        Assert.assertEquals(HttpStatus.UNAUTHORIZED, rta.getStatusCode());
 
     }
 
