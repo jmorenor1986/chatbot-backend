@@ -16,7 +16,7 @@ import java.math.BigInteger;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "Cliente.consultarClienteXTelefonoId", query = "FROM Cliente u where u.celular = ?1 and rigth(u.numeroIdentificacion,4) = ?2 ")
+@NamedQuery(name = "Cliente.consultarClienteXTelefonoId", query = "FROM Cliente u where u.celular = ?1 and u.numeroIdentificacion like ?2 ")
 public class Cliente {
     @Id
     private Long id;
