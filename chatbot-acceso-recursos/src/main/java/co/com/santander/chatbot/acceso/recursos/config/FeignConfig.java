@@ -10,7 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @XSlf4j
 @Configuration
 @EnableFeignClients(basePackages = "co.com.santander.chatbot.acceso.recursos.clients")
-public class ConfigFeign {
+public class FeignConfig {
+    public FeignConfig() {
+        log.entry(FeignConfig.class.getName());
+    }
+
     @Bean
     Logger.Level feignLoggerLevel() {
         return Logger.Level.FULL;

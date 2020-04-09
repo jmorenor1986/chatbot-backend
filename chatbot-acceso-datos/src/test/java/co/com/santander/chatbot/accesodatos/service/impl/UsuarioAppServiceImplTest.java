@@ -25,7 +25,7 @@ public class UsuarioAppServiceImplTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.usuarioAppServiceImpl = new UsuarioAppServiceImpl(usuarioAppRepository,passwordEncoder);
+        this.usuarioAppServiceImpl = new UsuarioAppServiceImpl(usuarioAppRepository, passwordEncoder);
     }
 
     @Test
@@ -46,7 +46,7 @@ public class UsuarioAppServiceImplTest {
     }
 
     @Test
-    public void validateLoginUserSuccess(){
+    public void validateLoginUserSuccess() {
         Optional<UsuarioApp> usuarioResp = Optional.of(UsuarioApp.builder()
                 .usuario("jnsierra")
                 .contra("$2a$10$wTzQOUmHqTduKyShciUmiuguuG8N9Miz9TZ1b9sjd8qO1VirZR4yi")
@@ -56,11 +56,11 @@ public class UsuarioAppServiceImplTest {
         Mockito.when(passwordEncoder.matches("1234", "$2a$10$wTzQOUmHqTduKyShciUmiuguuG8N9Miz9TZ1b9sjd8qO1VirZR4yi")).thenReturn(true);
         Optional<Boolean> rta = usuarioAppServiceImpl.validateLoginUser("jnsierra", "1234");
         Assert.assertNotNull(rta);
-        Assert.assertEquals(rta.get(), Boolean.TRUE);
+        Assert.assertEquals(Boolean.TRUE, rta.get());
     }
 
     @Test
-    public void validateLoginUserFailed(){
+    public void validateLoginUserFailed() {
         Optional<UsuarioApp> usuarioResp = Optional.of(UsuarioApp.builder()
                 .usuario("jnsierra")
                 .contra("$2a$10$wTzQOUmHqTduKyShciUmiuguuG8N9Miz9TZ1b9sjd8qO1VirZR4yi")
@@ -70,6 +70,6 @@ public class UsuarioAppServiceImplTest {
         Mockito.when(passwordEncoder.matches("1234", "123")).thenReturn(false);
         Optional<Boolean> rta = usuarioAppServiceImpl.validateLoginUser("jnsierra", "1234");
         Assert.assertNotNull(rta);
-        Assert.assertEquals(rta.get(), Boolean.FALSE);
+        Assert.assertEquals(Boolean.FALSE, rta.get());
     }
 }
