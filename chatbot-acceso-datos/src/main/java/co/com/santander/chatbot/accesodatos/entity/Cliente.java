@@ -16,13 +16,13 @@ import java.math.BigInteger;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "Cliente.consultarClienteXTelefonoId", query = "FROM Cliente u where u.telefono = ?1 and u.colaIdentificacion = ?2 ")
+@NamedQuery(name = "Cliente.consultarClienteXTelefonoId", query = "FROM Cliente u where u.celular = ?1 and rigth(u.numeroIdentificacion,4) = ?2 ")
 public class Cliente {
     @Id
     private Long id;
-    @Column(precision = 20, scale = 2)
-    private BigInteger telefono;
-    @Column(name = "cola_identificacion")
-    private String colaIdentificacion;
+    @Column(name = "Celular", precision = 20, scale = 2)
+    private BigInteger celular;
+    @Column(name = "NumeroIdentificacion", precision = 20, scale = 2)
+    private BigInteger numeroIdentificacion;
 
 }

@@ -20,6 +20,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Optional<Boolean> consultarCliente(BigInteger aLong, String s) {
-        return Optional.of(Objects.nonNull(clienteRepository.consultarClienteXTelefonoId(aLong, s)));
+        return Optional.of(Objects.nonNull(clienteRepository.consultarClienteXTelefonoId(aLong, new BigInteger(s))));
     }
 }

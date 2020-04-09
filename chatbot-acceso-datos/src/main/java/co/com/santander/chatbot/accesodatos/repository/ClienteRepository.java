@@ -9,5 +9,5 @@ import java.math.BigInteger;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    public Cliente consultarClienteXTelefonoId(BigInteger telefono, String colaIdentificacion);
+    public Cliente consultarClienteXTelefonoId(BigInteger telefono, BigInteger colaIdentificacion);
 }
