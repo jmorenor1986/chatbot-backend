@@ -91,8 +91,6 @@
                                     <excludes>
                                         <exclude>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</exclude>
                                         <exclude>co.com.santander.chatbot.accesodatos.entity.*</exclude>
-                                        <exclude>co.com.santander.chatbot.accesodatos.service.impl.ClienteServiceImpl</exclude>
-                                        <exclude>co.com.santander.chatbot.accesodatos.controller.ClienteController</exclude>
                                         <exclude>*Config</exclude>
                                     </excludes>
                                     <limits>
@@ -142,7 +140,7 @@
                 <version>${maven.surfire.version}</version>
                 <configuration>
                     <includes>
-                        <include>**/AcceptanceIT.java</include>
+                        <include>**/AcceptanceAccesoDatosIT.java</include>
                     </includes>
                 </configuration>
             </plugin>
