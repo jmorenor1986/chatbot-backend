@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.domain.dto.accesodatos;
+package co.com.santander.chatbot.domain.dto.accesorecursos;
 
 import lombok.Builder;
 import lombok.Data;
