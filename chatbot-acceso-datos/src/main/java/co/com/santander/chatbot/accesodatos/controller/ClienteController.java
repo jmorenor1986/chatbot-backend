@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/usuario")
@@ -25,7 +26,9 @@ public class ClienteController {
 
     @PostMapping("/")
     public ResponseEntity<Boolean> consultaCliente(@Valid @RequestBody UsuarioInput input) {
-        Boolean result = clienteService.consultarCliente(input.getTelefono(), input.getColaIdentificacion()).get();
-        return new ResponseEntity<>(result, result == Boolean.TRUE ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+        Optional<Boolean> result = clienteService.consultarCliente(input.getTelefono(), input.getColaIdentificacion());
+        if (result.isPresent())
+            return new ResponseEntity<>(result.get(), result.get() == Boolean.TRUE ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+        return new ResponseEntity<>(Boolean.FALSE, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
