@@ -11,6 +11,7 @@
     <artifactId>chatbot-acceso-datos</artifactId>
     <properties>
         <h2.database.version>1.4.200</h2.database.version>
+        <start-class>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</start-class>
     </properties>
 
     <dependencies>
@@ -32,6 +33,15 @@
         <dependency>
             <groupId>co.com.santander</groupId>
             <artifactId>chatbot-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>
@@ -81,6 +91,8 @@
                                     <excludes>
                                         <exclude>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</exclude>
                                         <exclude>co.com.santander.chatbot.accesodatos.entity.*</exclude>
+                                        <exclude>co.com.santander.chatbot.accesodatos.service.impl.ClienteServiceImpl</exclude>
+                                        <exclude>co.com.santander.chatbot.accesodatos.controller.ClienteController</exclude>
                                         <exclude>*Config</exclude>
                                     </excludes>
                                     <limits>
