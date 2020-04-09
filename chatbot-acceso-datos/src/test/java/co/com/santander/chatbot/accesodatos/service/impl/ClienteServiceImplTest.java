@@ -1,7 +1,8 @@
-package co.com.santander.chatbot.accesodatos.service;
+package co.com.santander.chatbot.accesodatos.service.impl;
 
 import co.com.santander.chatbot.accesodatos.entity.Cliente;
 import co.com.santander.chatbot.accesodatos.repository.ClienteRepository;
+import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import co.com.santander.chatbot.accesodatos.service.impl.ClienteServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,9 +16,9 @@ import java.math.BigInteger;
 import java.util.Optional;
 
 @SpringBootTest
-public class ClienteServiceTest {
+public class ClienteServiceImplTest {
 
-    private ClienteService clienteService;
+    private ClienteServiceImpl clienteService;
 
     @Mock
     private ClienteRepository clienteRepository;
