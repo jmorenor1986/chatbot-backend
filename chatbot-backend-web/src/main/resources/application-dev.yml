@@ -10,12 +10,22 @@ server:
 
 logging:
   level:
-    org:
-      springframework:
-        web:
-          client:
-            RestTemplate: DEBUG
+    co:
+      com:
+        santander:
+          chatbot:
+            backend:
+              web:
+                client: DEBUG
+
+
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e
+
+
+feignclient:
+  usuario-app:
+    url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
+    service-name: usuario-app
 
