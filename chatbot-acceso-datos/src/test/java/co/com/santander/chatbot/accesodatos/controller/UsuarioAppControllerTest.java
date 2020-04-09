@@ -48,7 +48,7 @@ public class UsuarioAppControllerTest {
     }
 
     @Test
-    public void testValidateUser() {
+    public void testValidateUserSUCCESS() {
         UsuarioAppPayload usuarioAppPayloadInput = UsuarioAppPayload.builder()
                 .usuario("jsierra")
                 .contra("1234")
@@ -57,6 +57,19 @@ public class UsuarioAppControllerTest {
         ResponseEntity<Boolean> rta = usuarioAppController.validateUser(usuarioAppPayloadInput);
         Assert.assertNotNull(rta);
         Assert.assertEquals(rta.getStatusCode(), HttpStatus.OK);
+
+    }
+
+    @Test
+    public void testValidateUserUNAUTHORIZED() {
+        UsuarioAppPayload usuarioAppPayloadInput = UsuarioAppPayload.builder()
+                .usuario("jsierra")
+                .contra("1234")
+                .build();
+        Mockito.when(usuarioAppService.validateLoginUser("jsierra", "1234")).thenReturn(Optional.of(Boolean.FALSE));
+        ResponseEntity<Boolean> rta = usuarioAppController.validateUser(usuarioAppPayloadInput);
+        Assert.assertNotNull(rta);
+        Assert.assertEquals(rta.getStatusCode(), HttpStatus.UNAUTHORIZED);
 
     }
 
