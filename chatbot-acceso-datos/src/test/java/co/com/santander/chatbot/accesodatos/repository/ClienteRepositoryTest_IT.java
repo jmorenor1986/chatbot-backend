@@ -13,7 +13,7 @@ import java.math.BigInteger;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-@ActiveProfiles("dev")
+@ActiveProfiles("test")
 public class ClienteRepositoryTest_IT {
 
     @Autowired
