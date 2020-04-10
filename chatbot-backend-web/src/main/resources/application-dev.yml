@@ -24,3 +24,6 @@ clientes:
     base: http://www.mocky.io
     creditosUsuario: /v2/5e9038263300003c7227d5a4
 
+security:
+  semilla: 1qazxsw23EDC
+
