@@ -23,6 +23,7 @@ public class ValidarUsuarioServiceTest {
 
     private CreditosUsuarioService creditosUsuarioService;
 
+
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);

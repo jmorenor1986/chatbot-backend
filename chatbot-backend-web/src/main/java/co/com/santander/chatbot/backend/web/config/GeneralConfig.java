@@ -13,10 +13,12 @@ import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
+import java.util.Objects;
 
 @Configuration
 public class GeneralConfig {
 
+    public static final String SEMILLA_DEFAULT = "123456789";
     @Value("${security.semilla}")
     private String semilla;
 
@@ -37,6 +39,8 @@ public class GeneralConfig {
 
     @Bean
     public String desencriptar(String texto) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        if (Objects.isNull(semilla))
+            semilla = SEMILLA_DEFAULT;
         byte[] message = Base64.decodeBase64(texto.getBytes("utf-8"));
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] digestOfPassword = md.digest(semilla.getBytes("utf-8"));
