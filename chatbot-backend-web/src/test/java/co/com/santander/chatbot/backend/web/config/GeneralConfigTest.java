@@ -24,9 +24,14 @@ public class GeneralConfigTest {
 
     @Test
     public void testEncriptarSuccess() throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-        String clave = "12345678AAAA";
-        String encriptado = generalConfig.desencriptar(clave);
+        String encriptado = generalConfig.encriptar("12345678AAAA");
         Assert.assertNotNull(encriptado);
+    }
+
+    @Test
+    public void testDesencriptarSuccess() throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
+        String desencriptado = generalConfig.desencriptar("WhMHuAOSLgKlidOUbVwnng==");
+        Assert.assertNotNull(desencriptado);
 
     }
 

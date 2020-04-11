@@ -18,12 +18,14 @@ import java.util.Objects;
 @Configuration
 public class GeneralConfig {
 
-    public static final String SEMILLA_DEFAULT = "123456789";
+    public static final String SEMILLA_DEFAULT = "1qazxsw23EDC";
     @Value("${security.semilla}")
     private String semilla;
 
     @Bean
     public String encriptar(String texto) throws UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        if (Objects.isNull(semilla))
+            semilla = SEMILLA_DEFAULT;
         MessageDigest md = MessageDigest.getInstance("MD5");
         byte[] digestOfPassword = md.digest(semilla.getBytes("utf-8"));
         byte[] keyBytes = Arrays.copyOf(digestOfPassword, 24);
