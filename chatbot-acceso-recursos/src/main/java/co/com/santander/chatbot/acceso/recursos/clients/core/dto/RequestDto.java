@@ -7,4 +7,5 @@ import lombok.Data;
 @Builder
 public class RequestDto {
     private String telefono;
+    private int tipoOperacion;
 }
