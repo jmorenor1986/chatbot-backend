@@ -22,6 +22,12 @@
         <dependency>
             <groupId>co.com.santander</groupId>
             <artifactId>chatbot-domain</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>co.com.santander</groupId>
+            <artifactId>chatbot-acceso-recursos</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.cloud</groupId>
@@ -37,16 +43,7 @@
             <artifactId>slf4j-ext</artifactId>
         </dependency>
     </dependencies>
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>co.com.santander</groupId>
-                <artifactId>chatbot-domain</artifactId>
-                <version>1.0.0</version>
-                <scope>compile</scope>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
+
     <build>
         <plugins>
             <plugin>

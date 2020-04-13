@@ -10,18 +10,22 @@ server:
 
 logging:
   level:
-    co:
-      com:
-        santander:
-          chatbot:
-            backend:
-              web:
-                client: DEBUG
-
-
+    org:
+      springframework:
+        web:
+          client:
+            RestTemplate: DEBUG
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e
+
+clientes:
+  url:
+    base: http://www.mocky.io
+    creditosUsuario: /v2/5e9038263300003c7227d5a4
+
+security:
+  semilla: 1qazxsw23EDC
 
 
 feignclient:
