@@ -1,10 +1,8 @@
 
-package co.com.santander.chatbot.backend.web.config;
+package co.com.santander.chatbot.backend.web.common.utilities;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 
 import javax.crypto.*;
 import javax.crypto.spec.SecretKeySpec;
@@ -15,15 +13,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Objects;
 
-@Configuration
-public class GeneralConfig {
+
+public class SecurityUtilities {
 
     public static final String SEMILLA_DEFAULT = "1qazxsw23EDC";
     @Value("${security.semilla}")
-    private String semilla;
+    private static String semilla;
 
-    @Bean
-    public String encriptar(String texto) throws UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    public static String encriptar(String texto) throws UnsupportedEncodingException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         if (Objects.isNull(semilla))
             semilla = SEMILLA_DEFAULT;
         MessageDigest md = MessageDigest.getInstance("MD5");
@@ -39,8 +36,7 @@ public class GeneralConfig {
         return new String(base64Bytes);
     }
 
-    @Bean
-    public String desencriptar(String texto) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+    public static String desencriptar(String texto) throws UnsupportedEncodingException, NoSuchAlgorithmException, NoSuchPaddingException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         if (Objects.isNull(semilla))
             semilla = SEMILLA_DEFAULT;
         byte[] message = Base64.decodeBase64(texto.getBytes("utf-8"));

@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.config;
+package co.com.santander.chatbot.backend.web.common.config;
 
 import co.com.santander.chatbot.domain.filter.security.JwtFilter;
 import org.springframework.context.annotation.Configuration;

@@ -1,5 +1,6 @@
-package co.com.santander.chatbot.backend.web.config;
+package co.com.santander.chatbot.backend.web.common.utilities;
 
+import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,24 +14,24 @@ import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
 @SpringBootTest
-public class GeneralConfigTest {
+public class SecurityUtilitiesTest {
 
-    private GeneralConfig generalConfig;
+    private SecurityUtilities securityUtilities;
 
     @Before
     public void setUp() {
-        generalConfig = new GeneralConfig();
+        securityUtilities = new SecurityUtilities();
     }
 
     @Test
     public void testEncriptarSuccess() throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-        String encriptado = generalConfig.encriptar("12345678AAAA");
+        String encriptado = securityUtilities.encriptar("12345678AAAA");
         Assert.assertNotNull(encriptado);
     }
 
     @Test
     public void testDesencriptarSuccess() throws NoSuchPaddingException, UnsupportedEncodingException, IllegalBlockSizeException, BadPaddingException, NoSuchAlgorithmException, InvalidKeyException {
-        String desencriptado = generalConfig.desencriptar("WhMHuAOSLgKlidOUbVwnng==");
+        String desencriptado = securityUtilities.desencriptar("WhMHuAOSLgKlidOUbVwnng==");
         Assert.assertNotNull(desencriptado);
 
     }
