@@ -1,10 +1,10 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
-import co.com.santander.chatbot.backend.web.client.UsuarioAppClient;
+import co.com.santander.chatbot.acceso.recursos.clients.core.UsuarioAppClient;
+import co.com.santander.chatbot.acceso.recursos.clients.core.dto.UsuarioAppPayload;
 import co.com.santander.chatbot.backend.web.exceptions.CustomAuthenticationException;
 import co.com.santander.chatbot.backend.web.service.TokenService;
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
-import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioAppPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
