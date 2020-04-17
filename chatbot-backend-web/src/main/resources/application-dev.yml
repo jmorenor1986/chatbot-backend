@@ -27,3 +27,9 @@ clientes:
 security:
   semilla: 1qazxsw23EDC
 
+
+feignclient:
+  usuario-app:
+    url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
+    service-name: usuario-app
+
