@@ -10,7 +10,6 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.math.BigInteger;
 import java.util.Optional;
 
 @SpringBootTest
@@ -29,16 +28,16 @@ public class ClienteServiceImplTest {
 
     @Test
     public void testConsultarUsuarioSuccess() {
-        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), new BigInteger("5270"))).thenReturn(Cliente.builder().build());
-        Optional<Boolean> result = clienteService.consultarCliente(new BigInteger("0"), "5270");
+        Mockito.when(clienteRepository.consultarXCedulaYTelefono("0", "%".concat("5270"))).thenReturn(Cliente.builder().build());
+        Optional<Boolean> result = clienteService.consultarCliente("0", "5270");
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.TRUE, result.get());
     }
 
     @Test
     public void testConsultarUsuarioError() {
-        Mockito.when(clienteRepository.consultarClienteXTelefonoId(new BigInteger("0"), new BigInteger("5270"))).thenReturn(null);
-        Optional<Boolean> result = clienteService.consultarCliente(new BigInteger("0"), "5270");
+        Mockito.when(clienteRepository.consultarXCedulaYTelefono("0", "5270")).thenReturn(null);
+        Optional<Boolean> result = clienteService.consultarCliente("0", "5270");
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.FALSE, result.get());
     }

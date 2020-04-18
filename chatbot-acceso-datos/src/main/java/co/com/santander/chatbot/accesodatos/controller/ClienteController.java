@@ -26,7 +26,7 @@ public class ClienteController {
 
     @PostMapping("/")
     public ResponseEntity<Boolean> consultaCliente(@Valid @RequestBody UsuarioInput input) {
-        Optional<Boolean> result = clienteService.consultarCliente(input.getTelefono(), input.getColaIdentificacion());
+        Optional<Boolean> result = clienteService.consultarCliente(input.getTelefono(), input.getCedula());
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), result.get() == Boolean.TRUE ? HttpStatus.OK : HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(Boolean.FALSE, HttpStatus.INTERNAL_SERVER_ERROR);
