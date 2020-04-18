@@ -1,7 +1,8 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 
-import co.com.santander.chatbot.backend.web.client.UsuarioAppClient;
+
+import co.com.santander.chatbot.acceso.recursos.clients.core.UsuarioAppClient;
 import co.com.santander.chatbot.backend.web.exceptions.CustomAuthenticationException;
 import co.com.santander.chatbot.backend.web.service.TokenService;
 import co.com.santander.chatbot.backend.web.service.UsuarioService;

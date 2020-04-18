@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.client;
+package co.com.santander.chatbot.acceso.recursos.clients.core;
 
 import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioAppPayload;
 import org.springframework.cloud.openfeign.FeignClient;

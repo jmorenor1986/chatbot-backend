@@ -5,7 +5,6 @@ import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigInteger;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -19,7 +18,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Optional<Boolean> consultarCliente(BigInteger aLong, String s) {
-        return Optional.of(Objects.nonNull(clienteRepository.consultarClienteXTelefonoId(aLong, new BigInteger(s))));
+    public Optional<Boolean> consultarCliente(String telefono, String cedula) {
+        return Optional.of(Objects.nonNull(clienteRepository.consultarXCedulaYTelefono(telefono, "%".concat(cedula))));
     }
 }

@@ -3,8 +3,16 @@
 --
 CREATE TABLE cliente (
   id                    int8            not null ,
-  NumeroIdentificacion   numeric(20,2)             ,
-  Celular              numeric(20, 2)           ,
+  Nombre_Cliente         varchar                  ,
+  Telefono              varchar                  ,
+  Cedula                varchar                  ,
+  Email                 varchar                  ,
+  Numero_Credito         varchar                  ,
+  Banco                 varchar                  ,
+  Estado                varchar                  ,
+  id_Producto            varchar                  ,
+  id_Banco               varchar                  ,
+  convenio              varchar                  ,
 primary key (id)
 );
 --

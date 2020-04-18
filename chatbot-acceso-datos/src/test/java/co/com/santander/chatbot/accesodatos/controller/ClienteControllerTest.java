@@ -20,20 +20,22 @@ public class ClienteControllerTest {
     private ClienteController clienteController;
     @Mock
     private ClienteService clienteService;
+    private UsuarioInput usuarioInput;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         clienteController = new ClienteController(clienteService);
+        usuarioInput = UsuarioInput.builder()
+                .cedula("5270")
+                .celular("12345")
+                .build();
     }
 
     @Test
     public void testControllerSuccess() {
-        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.TRUE));
-        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
-                .colaIdentificacion("5270")
-                .telefono(new BigInteger("12345"))
-                .build());
+        Mockito.when(clienteService.consultarCliente("12345", "5270")).thenReturn(Optional.of(Boolean.TRUE));
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(usuarioInput);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.TRUE, result.getBody());
@@ -42,11 +44,8 @@ public class ClienteControllerTest {
 
     @Test
     public void testControllerNotContent() {
-        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.of(Boolean.FALSE));
-        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
-                .colaIdentificacion("5270")
-                .telefono(new BigInteger("12345"))
-                .build());
+        Mockito.when(clienteService.consultarCliente("12345", "5270")).thenReturn(Optional.of(Boolean.FALSE));
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(usuarioInput);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.FALSE, result.getBody());
@@ -55,11 +54,8 @@ public class ClienteControllerTest {
 
     @Test
     public void testControllerInternalServerError() {
-        Mockito.when(clienteService.consultarCliente(new BigInteger("12345"), "5270")).thenReturn(Optional.empty());
-        ResponseEntity<Boolean> result = clienteController.consultaCliente(UsuarioInput.builder()
-                .colaIdentificacion("5270")
-                .telefono(new BigInteger("12345"))
-                .build());
+        Mockito.when(clienteService.consultarCliente("12345", "5270")).thenReturn(Optional.empty());
+        ResponseEntity<Boolean> result = clienteController.consultaCliente(usuarioInput);
 
         Assert.assertNotNull(result);
         Assert.assertEquals(500, result.getStatusCodeValue());

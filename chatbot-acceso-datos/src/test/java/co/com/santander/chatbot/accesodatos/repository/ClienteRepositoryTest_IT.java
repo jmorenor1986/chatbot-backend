@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigInteger;
+import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -21,13 +21,14 @@ public class ClienteRepositoryTest_IT {
 
     @Test
     public void testConsultaUsuarioSuccess() {
-        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3014001617"), new BigInteger("5270"));
+        List<Cliente> listaCliente = clienteRepository.findAll();
+        Cliente result = clienteRepository.consultarXCedulaYTelefono("3005632010", "%9066");
         Assert.assertNotNull(result);
     }
 
     @Test
     public void testConsultarUsuarioNotExist() {
-        Cliente result = clienteRepository.consultarClienteXTelefonoId(new BigInteger("3104001617"), new BigInteger("5270"));
+        Cliente result = clienteRepository.consultarXCedulaYTelefono("3005632010", "5270");
         Assert.assertNull(result);
     }
 }

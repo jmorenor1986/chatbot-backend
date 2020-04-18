@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 
+import co.com.santander.chatbot.acceso.recursos.clients.core.UsuarioAppClient;
 import co.com.santander.chatbot.backend.web.exceptions.CustomAuthenticationException;
 import co.com.santander.chatbot.backend.web.service.TokenService;
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
@@ -16,7 +17,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
-import co.com.santander.chatbot.backend.web.client.UsuarioAppClient;
 
 import java.util.List;
 import java.util.Optional;
