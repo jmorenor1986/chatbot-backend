@@ -28,7 +28,7 @@ public class ClienteServiceImplTest {
 
     @Test
     public void testConsultarUsuarioSuccess() {
-        Mockito.when(clienteRepository.consultarXCedulaYTelefono("0", "5270")).thenReturn(Cliente.builder().build());
+        Mockito.when(clienteRepository.consultarXCedulaYTelefono("0", "%".concat("5270"))).thenReturn(Cliente.builder().build());
         Optional<Boolean> result = clienteService.consultarCliente("0", "5270");
         Assert.assertNotNull(result);
         Assert.assertEquals(Boolean.TRUE, result.get());

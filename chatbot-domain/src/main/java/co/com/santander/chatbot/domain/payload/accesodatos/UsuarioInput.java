@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Data
 public class UsuarioInput {
     @NotNull(message = "Telefono es obligatorio")
-    private String celular;
+    private String telefono;
     @NotNull(message = "Telefono es obligatorio")
     private String cedula;
 }

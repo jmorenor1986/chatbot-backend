@@ -11,7 +11,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
-import java.math.BigInteger;
 import java.util.Optional;
 
 @SpringBootTest
@@ -28,7 +27,7 @@ public class ClienteControllerTest {
         clienteController = new ClienteController(clienteService);
         usuarioInput = UsuarioInput.builder()
                 .cedula("5270")
-                .celular("12345")
+                .telefono("12345")
                 .build();
     }
 
