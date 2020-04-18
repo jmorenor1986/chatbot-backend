@@ -1,11 +1,12 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
-import co.com.santander.chatbot.acceso.recursos.clients.core.UsuarioAppClient;
-import co.com.santander.chatbot.acceso.recursos.clients.core.dto.UsuarioAppPayload;
+
+import co.com.santander.chatbot.backend.web.client.UsuarioAppClient;
 import co.com.santander.chatbot.backend.web.exceptions.CustomAuthenticationException;
 import co.com.santander.chatbot.backend.web.service.TokenService;
 import co.com.santander.chatbot.backend.web.service.UsuarioService;
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
+import co.com.santander.chatbot.domain.payload.accesodatos.UsuarioAppPayload;
 import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -31,7 +32,7 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Optional<TokenDto> generaToken(String usuario, String contra) throws CustomAuthenticationException {
-        if(!validateCredentials(usuario, contra))
+        if (!validateCredentials(usuario, contra))
             throw new CustomAuthenticationException("Usuario o Contrasenia incorrecta");
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
@@ -43,18 +44,18 @@ public class UsuarioServiceImpl implements UsuarioService {
                 .build());
     }
 
-    private Boolean validateCredentials(String usuario, String pass){
+    private Boolean validateCredentials(String usuario, String pass) {
         ResponseEntity<Boolean> rtaService = null;
         try {
-            rtaService =  usuarioAppClient.validateUser(UsuarioAppPayload.builder()
+            rtaService = usuarioAppClient.validateUser(UsuarioAppPayload.builder()
                     .usuario(usuario)
                     .contra(pass)
                     .build());
-        }catch (FeignException e){
-            if(e.status()==401)
+        } catch (FeignException e) {
+            if (e.status() == 401)
                 return Boolean.FALSE;
         }
-        if( HttpStatus.OK.equals(rtaService.getStatusCode()) ){
+        if (HttpStatus.OK.equals(rtaService.getStatusCode())) {
             return rtaService.getBody();
         }
         return Boolean.FALSE;
