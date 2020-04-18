@@ -30,7 +30,7 @@ public class InfoWhatsAppWSRepositoryTest_IT {
                 .numCreditoBanco("12345678")
                 .numeroIdentificacion("1234567")
                 .numPeticionServicio(Long.valueOf(1))
-                .FechaEnvio(new Date())
+                .fechaEnvio(new Date())
                 .estado(Long.valueOf(1))
                 .build();
         InfoWhatsAppWS result = infoWhatsAppWSRepository.save(insert);

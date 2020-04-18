@@ -27,7 +27,7 @@ public class InfoWhatsAppWS {
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha_envio")
-    private Date FechaEnvio;
+    private Date fechaEnvio;
     @Column(name = "estado")
     private Long estado;
 }

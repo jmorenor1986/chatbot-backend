@@ -20,7 +20,7 @@ public class InfoWhatsAppWSPayload {
 
     private Long numPeticionServicio;
 
-    private Date FechaEnvio;
+    private Date fechaEnvio;
 
     private Long estado;
 }

@@ -11,12 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Controller
-@RequestMapping("v1/usuarioapp")
-public class InfoWhatsAppWSController  {
+@RequestMapping("v1/infowhatsappwscontroller")
+public class InfoWhatsAppWSController {
 
     private final InfoWhatsAppWSService infoWhatsAppWSService;
     private final ModelMapper modelMapper;
@@ -27,19 +26,21 @@ public class InfoWhatsAppWSController  {
         this.modelMapper = modelMapper;
     }
 
-    @PostMapping(value = "/",consumes = MediaType.APPLICATION_JSON_VALUE , produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<InfoWhatsAppWSPayload> save(@RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload){
+    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<InfoWhatsAppWSPayload> save(@RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload) {
         //Mapeo del payload a la entidad
         InfoWhatsAppWS entity = modelMapper.map(infoWhatsAppWSPayload, InfoWhatsAppWS.class);
         Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
-        return new ResponseEntity<InfoWhatsAppWSPayload>( modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+        return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
     }
 
-    @GetMapping(value = "/validateexistingprocess/?numCreditoBanco={numCreditoBanco}&numeroIdentificacion={numeroIdentificacion}&numPeticionServicio={numPeticionServicio}")
-    public ResponseEntity<Boolean> validateExistingProcess(@PathVariable(value = "numCreditoBanco")      String numCreditoBanco,
-                                                           @PathVariable(value = "numeroIdentificacion") String numeroIdentificacion,
-                                                           @PathVariable(value = "numPeticionServicio") Long numPeticionServicio){
-        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+    //@GetMapping(value = "/validateexistingprocess/?numCreditoBanco={numCreditoBanco}&numeroIdentificacion={numeroIdentificacion}&numPeticionServicio={numPeticionServicio}")
+    @GetMapping(value = "/validateexistingprocess/")
+    public ResponseEntity<Boolean> validateExistingProcess(@RequestParam(value = "numCreditoBanco") String numCreditoBanco
+            , @RequestParam(value = "numeroIdentificacion") String numeroIdentificacion
+            , @RequestParam(value = "numPeticionServicio") Long numPeticionServicio
+    ) {
+        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
         return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
     }
 }
