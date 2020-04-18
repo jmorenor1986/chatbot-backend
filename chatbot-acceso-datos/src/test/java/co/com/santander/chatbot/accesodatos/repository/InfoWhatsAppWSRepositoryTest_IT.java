@@ -11,6 +11,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @ActiveProfiles("test")
@@ -21,8 +22,8 @@ public class InfoWhatsAppWSRepositoryTest_IT {
 
     @Before
     public void setUp(){
-
     }
+
     @Test
     public void testSaveSUCCESS(){
         InfoWhatsAppWS insert = InfoWhatsAppWS.builder()
@@ -36,5 +37,19 @@ public class InfoWhatsAppWSRepositoryTest_IT {
         Assert.assertNotNull(result);
         Assert.assertNotNull(result.getId());
     }
+    @Test
+    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstadoSUCCESS(){
+        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado("12345678", "1234",Long.valueOf("3"), Long.valueOf("1"));
+        Assert.assertNotNull(result);
+        Assert.assertEquals(1, result.size());
+    }
+
+    @Test
+    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstadoFAILED(){
+        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado("12345678", "1234",Long.valueOf("3"), Long.valueOf("100"));
+        Assert.assertNotNull(result);
+        Assert.assertEquals(0, result.size());
+    }
+
 
 }

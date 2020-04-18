@@ -52,4 +52,14 @@ public class InfoWhatsAppWSControllerTest {
         ResponseEntity<InfoWhatsAppWSPayload> response = infoWhatsAppWSController.save(payload);
         Assert.assertNotNull(response);
     }
+    @Test
+    public void testValidateExistingProcessSUCCESS(){
+        String numCreditoBanco = "12345678";
+        String numeroIdentificacion = "1234";
+        Long numPeticionServicio = Long.valueOf("1");
+        Mockito.when(infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
+                .thenReturn(Optional.of(Boolean.TRUE));
+        ResponseEntity<Boolean> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+        Assert.assertNotNull(respuesta);
+    }
 }

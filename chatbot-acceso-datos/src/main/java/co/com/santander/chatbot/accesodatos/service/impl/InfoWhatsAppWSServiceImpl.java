@@ -6,6 +6,7 @@ import co.com.santander.chatbot.accesodatos.service.InfoWhatsAppWSService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -22,6 +23,15 @@ public class InfoWhatsAppWSServiceImpl implements InfoWhatsAppWSService {
     public Optional<InfoWhatsAppWS> saveEntity(InfoWhatsAppWS entity) {
         InfoWhatsAppWS respuesta = infoWhatsAppWSRepository.save(entity);
         return Optional.of(respuesta);
+    }
+
+    @Override
+    public Optional<Boolean> validateExistingProcess(String numCreditoBanco, String numeroIdentificacion, Long numPeticionServicio) {
+        List<InfoWhatsAppWS> respuesta = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado(numCreditoBanco, numeroIdentificacion, numPeticionServicio, Long.valueOf("0"));
+        if (respuesta.size() == 0)
+            return Optional.of(Boolean.FALSE);
+        else
+            return Optional.of(Boolean.TRUE);
     }
 
 }

@@ -9,10 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.swing.text.html.Option;
 import java.util.Optional;
 
 @Controller
@@ -34,5 +33,13 @@ public class InfoWhatsAppWSController  {
         InfoWhatsAppWS entity = modelMapper.map(infoWhatsAppWSPayload, InfoWhatsAppWS.class);
         Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
         return new ResponseEntity<InfoWhatsAppWSPayload>( modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+    }
+
+    @GetMapping(value = "/validateexistingprocess/?numCreditoBanco={numCreditoBanco}&numeroIdentificacion={numeroIdentificacion}&numPeticionServicio={numPeticionServicio}")
+    public ResponseEntity<Boolean> validateExistingProcess(@PathVariable(value = "numCreditoBanco")      String numCreditoBanco,
+                                                           @PathVariable(value = "numeroIdentificacion") String numeroIdentificacion,
+                                                           @PathVariable(value = "numPeticionServicio") Long numPeticionServicio){
+        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+        return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
     }
 }

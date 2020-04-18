@@ -11,3 +11,13 @@ INSERT INTO cliente (id,Nombre_Cliente,Telefono,Cedula,Email,Numero_Credito,Banc
 --
 INSERT INTO usuario_app(id, password, usuario)
  VALUES (1, '$2a$10$4uQ2gegiWDykYjkjOf3uzuCPyrCLxD9pPkLix7NuUbIwB5mBQILU2', 'jnsierrac@gmail.com');
+
+--
+--Tabla para la creacion
+--
+INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
+                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 0, '12345678', '1', '1234');
+INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
+                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 0, '12345678', '2', '1234');
+INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
+                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '3', '1234');
