@@ -1,7 +1,7 @@
 {
 	"info": {
-		"_postman_id": "470669be-2923-49b0-90ab-c4ace2e2e646",
-		"name": "chatbot",
+		"_postman_id": "133411ab-f4e2-47d3-8d3e-aff38e5ed219",
+		"name": "chatbot copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -40,7 +40,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"correo\":\"johnmorenoing@gmail.com\",\n\t\"contrasena\":\"12345\"\n}",
+					"raw": "{\n\t\"correo\":\"jnsierrac@gmail.com\",\n\t\"contrasena\":\"123\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -115,7 +115,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYyODIwNTQsImV4cCI6MTU4NjI4NTY1NH0.vpwsLUvEWX5PWvgrSg_d6K7MD1yVg-UFY1FpaqvGtNkJUO6I9E9iZhO7GYPsELenEN45Wq2V2Vi_wn7eVmTRlA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODcyODcyNTgsImV4cCI6MTU4NzI5MDg1OH0.16cQ23tEJg9gSreIFgewnaJHIT1iHhIqk5h2lfHYq4JdRSXhKuRi66DZkRqqiCuXqsOo3dttfXb1teEMc6XxwA",
 							"type": "string"
 						}
 					]
@@ -124,7 +124,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"telefono\":3014001617,\n\t\"colaIdentificacion\":\"5270\"\n}",
+					"raw": "{\n\t\"telefono\":\"1\",\n\t\"cedula\":\"1066\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -132,7 +132,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/usuario/",
+					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/cliente/",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -141,7 +141,7 @@
 					"path": [
 						"chatbot-acceso-datos",
 						"v1",
-						"usuario",
+						"cliente",
 						""
 					]
 				}
