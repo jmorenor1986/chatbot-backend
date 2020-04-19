@@ -33,7 +33,7 @@ public class ClienteController {
                     .resultadoValidacion(result.get())
                     .idRespuesta(0)
                     .descripcionRespuesta(result.get().toString())
-                    .build(), result.get() == Boolean.TRUE ? HttpStatus.OK : HttpStatus.NO_CONTENT);
+                    .build(), result.get().equals(Boolean.TRUE) ? HttpStatus.OK : HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(ResponsePayload.builder()
                 .resultadoValidacion(Boolean.TRUE)
                 .idRespuesta(0)

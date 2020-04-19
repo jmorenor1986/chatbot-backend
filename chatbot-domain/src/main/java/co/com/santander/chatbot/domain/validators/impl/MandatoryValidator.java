@@ -15,9 +15,8 @@ public class MandatoryValidator implements ConstraintValidator<MandatoryConstrai
 
     @Override
     public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (!Objects.isNull(s) && !s.isEmpty())
-            if (s.length() >= min && s.length() <= max)
-                return true;
+        if (!Objects.isNull(s) && !s.isEmpty() && s.length() >= min && s.length() <= max)
+            return true;
         throw new MandatoryFieldException(message);
     }
 

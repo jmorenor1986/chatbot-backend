@@ -14,7 +14,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler(MandatoryFieldException.class)
-    public final ResponseEntity<?> handlerMandatoryFieldException(MandatoryFieldException ex, WebRequest request) {
+    public final ResponseEntity<Object> handlerMandatoryFieldException(MandatoryFieldException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta(ex.getMessage())
                 .idRespuesta(1)

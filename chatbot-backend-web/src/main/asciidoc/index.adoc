@@ -35,3 +35,25 @@ Volver a escribir la contraseña nueva:
 -----------------
 
 La contraseña para este certificado es changeme
+
+Ejecución Sonar
+~~~~~~~~~~~~~~~~
+Para ejecutar sonar primero debemos iniciar un contenedor de docker con sonar.
+
+Docker
+~~~~~~
+[source,python]
+-----------------
+docker run -d --name sonarqube -p 9000:9000 -p 9092:9092 sonarqube
+-----------------
+Usuario: admin
+Password: admin
+
+MVN
+~~~
+Luego se debe ejecutar el siguiente comando en el proyecto
+[source,python]
+-----------------
+mvn sonar:sonar -Dsonar.host.url=http://localhost:9000
+-----------------
+
