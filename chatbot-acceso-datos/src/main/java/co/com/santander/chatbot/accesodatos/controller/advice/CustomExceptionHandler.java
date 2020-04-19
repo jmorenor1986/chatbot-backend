@@ -11,7 +11,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ControllerAdvice
-public class CustomExceptionAdvicer extends ResponseEntityExceptionHandler {
+public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+
     @ExceptionHandler(MandatoryFieldException.class)
     public final ResponseEntity<?> handlerMandatoryFieldException(MandatoryFieldException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()
@@ -21,12 +22,5 @@ public class CustomExceptionAdvicer extends ResponseEntityExceptionHandler {
                 .build(), HttpStatus.BAD_REQUEST);
     }
 
-    @ExceptionHandler(Exception.class)
-    public final ResponseEntity<?> handlerGenericException(Exception ex, WebRequest request) {
-        return new ResponseEntity<>(ResponsePayload.builder()
-                .descripcionRespuesta(ex.getMessage())
-                .idRespuesta(1)
-                .resultadoValidacion(Boolean.FALSE)
-                .build(), HttpStatus.INTERNAL_SERVER_ERROR);
-    }
+
 }

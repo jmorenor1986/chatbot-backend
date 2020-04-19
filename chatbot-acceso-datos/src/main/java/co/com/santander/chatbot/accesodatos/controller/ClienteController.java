@@ -37,7 +37,7 @@ public class ClienteController {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .resultadoValidacion(Boolean.TRUE)
                 .idRespuesta(0)
-                .descripcionRespuesta("No existe ningún cliente con los datos ingresados")
+                .descripcionRespuesta("Error consultando el servicio")
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }

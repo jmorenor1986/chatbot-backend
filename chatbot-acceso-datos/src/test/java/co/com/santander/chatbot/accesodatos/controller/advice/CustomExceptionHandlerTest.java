@@ -8,28 +8,21 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
 @SpringBootTest
-public class CustomExceptionAdvicerTest {
+public class CustomExceptionHandlerTest {
 
-    private CustomExceptionAdvicer customExceptionAdvicer;
+    private CustomExceptionHandler customExceptionHandler;
 
     @Before
     public void setUp() {
-        customExceptionAdvicer = new CustomExceptionAdvicer();
+        customExceptionHandler = new CustomExceptionHandler();
     }
 
     @Test
     public void testHandlerMandatoryFieldException() {
         MandatoryFieldException mandatoryFieldException = new MandatoryFieldException("test");
-        ResponseEntity<?> result = customExceptionAdvicer.handlerMandatoryFieldException(mandatoryFieldException, null);
+        ResponseEntity<?> result = customExceptionHandler.handlerMandatoryFieldException(mandatoryFieldException, null);
         Assert.assertEquals(400, result.getStatusCodeValue());
 
-    }
-
-    @Test
-    public void testHandlerGenericException() {
-        Exception exception = new Exception("test");
-        ResponseEntity<?> result = customExceptionAdvicer.handlerGenericException(exception, null);
-        Assert.assertEquals(500, result.getStatusCodeValue());
     }
 
 }
