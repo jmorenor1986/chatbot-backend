@@ -64,26 +64,23 @@
 			"response": []
 		},
 		{
-			"name": "Validar usuario",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
+			"name": "Validar Cliente",
 			"request": {
 				"auth": {
 					"type": "bearer",
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYxOTgwNjksImV4cCI6MTU4NjIwMTY2OX0.6omVRADPTDi_jUBKK8ki80fXC9WBsrQhSIyd2__Vy7nhX9nJau8WtA1MZWt0kZYQ9REUVUMRQCWgikdKN3sSlA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODczMDU1MjYsImV4cCI6MTU4NzMwOTEyNn0.lnMFL9KGhRcd2DLpLAzR9GnNMVGDmPiW0gM8yduI1EFVn_cqYHECkJfsF2yOII4NIl1ONEHchkEaBpKmz1NSGw",
 							"type": "string"
 						}
 					]
 				},
-				"method": "GET",
+				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"telefono\":3014001618,\n\t\"colaIdentificacion\": \"2642\"\n}",
+					"raw": "{\n\t\"telefono\":\"3014001618\",\n\t\"cedula\": \"q\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -91,7 +88,7 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:5000/chatbot-backend/v1/validarUsuario/",
+					"raw": "https://localhost:5000/chatbot-backend/v1/validarCliente/",
 					"protocol": "https",
 					"host": [
 						"localhost"
@@ -100,7 +97,7 @@
 					"path": [
 						"chatbot-backend",
 						"v1",
-						"validarUsuario",
+						"validarCliente",
 						""
 					]
 				}
@@ -115,7 +112,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODcyODcyNTgsImV4cCI6MTU4NzI5MDg1OH0.16cQ23tEJg9gSreIFgewnaJHIT1iHhIqk5h2lfHYq4JdRSXhKuRi66DZkRqqiCuXqsOo3dttfXb1teEMc6XxwA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODcyOTI4MzcsImV4cCI6MTU4NzI5NjQzN30.3uCJwkZveN29gKsnNXARepCVlNdfbUXQ_XhqNaXxnBWq9BVIg6QiCdpl5_SVfvfIY6wjG0PvK5Ll346KNCYGmw",
 							"type": "string"
 						}
 					]
