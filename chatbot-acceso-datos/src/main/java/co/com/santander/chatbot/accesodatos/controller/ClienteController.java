@@ -15,7 +15,7 @@ import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("v1/usuario")
+@RequestMapping("v1/cliente")
 public class ClienteController {
 
     private final ClienteService clienteService;
