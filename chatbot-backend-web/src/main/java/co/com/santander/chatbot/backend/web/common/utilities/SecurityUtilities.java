@@ -46,6 +46,8 @@ public class SecurityUtilities {
     }
 
     public static String desencriptar(String texto) throws Exception {
+        if (Objects.isNull(semilla))
+            semilla = SEMILLA_DEFAULT;
         // Get Cipher Instance
         Cipher cipher = Cipher.getInstance(CIPHER);
         // Create SecretKeySpec

@@ -1,8 +1,8 @@
 package co.com.santander.chatbot.backend.web.integration.steps;
 
-import co.com.santander.chatbot.backend.web.controller.payload.UsuarioPayload;
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
 import co.com.santander.chatbot.domain.dto.security.UsuarioDto;
+import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import com.google.gson.Gson;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.en.Given;
@@ -27,7 +27,7 @@ public class ValidacionUsuarioStep {
     @Autowired
     protected HttpClient httpClient;
     private ResponseEntity<?> response;
-    private UsuarioPayload usuarioPayload;
+    private ClientePayload usuarioPayload;
 
     private UsuarioDto usuarioLoginDto;
     @Getter
@@ -65,9 +65,9 @@ public class ValidacionUsuarioStep {
     public void usuarioConDatos(DataTable payload) {
         List<Map<String, String>> rows = payload.asMaps(String.class, String.class);
         for (Map<String, String> columns : rows) {
-            usuarioPayload = UsuarioPayload.builder()
-                    .colaIdentificacion(columns.get("colaIdentificacion"))
-                    .telefono(Long.parseLong(columns.get("telefono")))
+            usuarioPayload = ClientePayload.builder()
+                    .cedula(columns.get("colaIdentificacion"))
+                    .telefono(columns.get("telefono"))
                     .build();
         }
     }

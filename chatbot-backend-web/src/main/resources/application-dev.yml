@@ -23,6 +23,9 @@ clientes:
   url:
     base: http://www.mocky.io
     creditosUsuario: /v2/5e9038263300003c7227d5a4
+    baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
+    consultaCliente: /v1/cliente/
+
 
 security:
   semilla: 1234567890123456
