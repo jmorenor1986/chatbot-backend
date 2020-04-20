@@ -31,7 +31,7 @@ public class InfoWhatsAppWSController {
         InfoWhatsAppWS entity = modelMapper.map(infoWhatsAppWSPayload, InfoWhatsAppWS.class);
         Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
         if(response.isPresent()){
-            return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+            return new ResponseEntity<>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 
@@ -44,7 +44,7 @@ public class InfoWhatsAppWSController {
     ) {
         Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
         if(respuesta.isPresent()){
-            return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
+            return new ResponseEntity<>(respuesta.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }

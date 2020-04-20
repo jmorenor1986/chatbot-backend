@@ -33,7 +33,7 @@ public class UsuarioAppServiceImpl implements UsuarioAppService {
         Optional<UsuarioApp> usuario = usuarioAppRepository.findByUsuario(user);
         if (usuario.isPresent()) {
             Boolean validaPass = passwordEncoder.matches(password, usuario.get().getContra());
-            if (validaPass) {
+            if (Boolean.TRUE.equals(validaPass) ) {
                 return Optional.of(Boolean.TRUE);
             }
         }
