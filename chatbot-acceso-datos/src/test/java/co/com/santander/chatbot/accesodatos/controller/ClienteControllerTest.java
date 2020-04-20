@@ -1,23 +1,30 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
+import co.com.santander.chatbot.accesodatos.entity.Cliente;
 import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
+import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
 public class ClienteControllerTest {
 
     private ClienteController clienteController;
+    private ModelMapper mapper;
     @Mock
     private ClienteService clienteService;
     private ClientePayload clientePayload;
@@ -25,7 +32,8 @@ public class ClienteControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        clienteController = new ClienteController(clienteService);
+        mapper = new ModelMapper();
+        clienteController = new ClienteController(clienteService, mapper);
         clientePayload = ClientePayload.builder()
                 .cedula("5270")
                 .telefono("12345")
@@ -60,5 +68,45 @@ public class ClienteControllerTest {
         Assert.assertNotNull(result);
         Assert.assertEquals(500, result.getStatusCodeValue());
     }
+
+    @Test
+    public void testGetClientsByTelSUCCES() {
+        String telefono = "3005632010";
+        List<Cliente> listClients = new ArrayList<>();
+        Cliente item = Cliente.builder()
+                .id(Long.valueOf("1"))
+                .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
+                .telefono("3005632010")
+                .cedula("56789066")
+                .email("elisabeth.becerra@samtel.co")
+                .numerCredito("6000000456")
+                .banco("BANCO COMERCIAL AVVILLAS")
+                .estado("Cerrado")
+                .idProducto("9991")
+                .idBanco("52")
+                .convenio("MARCALI INTERNACIONAL SA")
+                .build();
+        listClients.add(item);
+        Optional<List<Cliente>> result = Optional.of(listClients);
+        Mockito.when(clienteService.consultarClienteByTelefono(telefono)).thenReturn(result);
+        ResponseEntity<List<ClienteViewPayload>> response = clienteController.getClientsByTel(telefono);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertNotNull(response.getBody());
+    }
+
+    @Test
+    public void testGetClientsByTelFAILED() {
+        String telefono = "3005632010";
+        Optional<List<Cliente>> result = Optional.empty();
+        Mockito.when(clienteService.consultarClienteByTelefono(telefono)).thenReturn(result);
+        ResponseEntity<List<ClienteViewPayload>> response = clienteController.getClientsByTel(telefono);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
+
+
 
 }
