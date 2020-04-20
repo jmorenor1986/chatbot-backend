@@ -8,6 +8,6 @@ import lombok.Data;
 public class ResponsePayload {
     private Boolean resultadoValidacion;
     private Integer idRespuesta;
-    private String descripcionRespuesta;
+    private Object descripcionRespuesta;
 
 }

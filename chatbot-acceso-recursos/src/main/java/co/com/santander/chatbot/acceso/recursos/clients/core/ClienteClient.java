@@ -18,7 +18,7 @@ public interface ClienteClient {
     String AUTH_TOKEN = "Authorization";
 
     @PostMapping(value = "${clientes.url.consultaCliente}")
-    ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader(AUTH_TOKEN) String bearerToken, ClientePayload cliente);
+    public ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader(AUTH_TOKEN) String bearerToken, ClientePayload cliente);
 
     @GetMapping(value = "${clientes.url.consultaByTel}?telefono={telefono}")
     ResponseEntity<List<ClienteViewPayload>> getClientsByTel(@RequestHeader(AUTH_TOKEN) String bearerToken, @Param(value = "telefono") String telefono);

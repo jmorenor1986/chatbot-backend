@@ -11,11 +11,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("v1/obtenerCreditosUsuario")
 public class ObtenerCreditosUsuarioController {
 
-    private final String AUTH_TOKEN = "Authorization";
-
-    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader(AUTH_TOKEN) String bearerToken, @RequestBody CreditosUsuarioPayload credito){
-        return new ResponseEntity<ResponseObtenerCreditosPayload>(ResponseObtenerCreditosPayload.builder()
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader("Authorization") String bearerToken, @RequestBody CreditosUsuarioPayload credito) {
+        return new ResponseEntity<>(ResponseObtenerCreditosPayload.builder()
                 .resultadoConsulta(Boolean.TRUE)
                 .idRespuesta(Long.valueOf("1"))
                 .descripcionRespuesta("Servicio consumido de forma exitosa")

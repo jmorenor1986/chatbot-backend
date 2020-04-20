@@ -22,7 +22,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
                     .resultadoConsulta(Boolean.TRUE)
                     .descripcionRespuesta("Servicio consumido de forma exitosa")
                     .build();
-            clients.stream().parallel().map(item -> )
+            //clients.stream().parallel().map(item -> )
         }
         return Optional.empty();
     }
