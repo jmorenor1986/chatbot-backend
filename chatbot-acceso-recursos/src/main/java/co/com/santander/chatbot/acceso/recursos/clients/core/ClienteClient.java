@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "cliente", url = "${clientes.url.baseUrlCliente}")
 public interface ClienteClient {
 
-    String AUTH_TOKEN = "Authorization";
-
     @PostMapping(value = "${clientes.url.consultaCliente}")
-    public ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader(AUTH_TOKEN) String bearerToken, ClientePayload cliente);
+    public ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader("Authorization") String bearerToken, ClientePayload cliente);
 
 }
