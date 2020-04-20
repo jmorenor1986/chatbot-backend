@@ -46,20 +46,23 @@ public class UsuarioServiceImpl implements UsuarioService {
     }
 
     private Boolean validateCredentials(String usuario, String pass) {
-        ResponseEntity<Boolean> rtaService = null;
+        Optional<Boolean> response = callServiceValidateUser(UsuarioAppPayload.builder()
+                .usuario(usuario)
+                .contra(pass)
+                .build());
+        return response.isPresent() ? response.get() : Boolean.FALSE ;
+    }
+
+    private Optional<Boolean> callServiceValidateUser(UsuarioAppPayload usuario){
         try {
-            rtaService = usuarioAppClient.validateUser(UsuarioAppPayload.builder()
-                    .usuario(usuario)
-                    .contra(pass)
-                    .build());
-        } catch (FeignException e) {
-            if (e.status() == 401)
-                return Boolean.FALSE;
+            ResponseEntity<Boolean> rtaService = usuarioAppClient.validateUser(usuario);
+            if (HttpStatus.OK.equals(rtaService.getStatusCode())) {
+                return Optional.of(rtaService.getBody());
+            }
+        }catch (FeignException e){
+            return Optional.empty();
         }
-        if (HttpStatus.OK.equals(rtaService.getStatusCode())) {
-            return rtaService.getBody();
-        }
-        return Boolean.FALSE;
+        return Optional.empty();
     }
 
 }

@@ -28,10 +28,13 @@ public class InfoWhatsAppWSController {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<InfoWhatsAppWSPayload> save(@RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload) {
-        //Mapeo del payload a la entidad
         InfoWhatsAppWS entity = modelMapper.map(infoWhatsAppWSPayload, InfoWhatsAppWS.class);
         Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
-        return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+        if(response.isPresent()){
+            return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+
     }
 
     @GetMapping(value = "/validateexistingprocess/")
@@ -40,6 +43,9 @@ public class InfoWhatsAppWSController {
             , @RequestParam(value = "numPeticionServicio") Long numPeticionServicio
     ) {
         Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
-        return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
+        if(respuesta.isPresent()){
+            return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
