@@ -24,3 +24,14 @@ CREATE TABLE usuario_app (
     usuario varchar(255) not null,
     primary key (id)
 );
+
+CREATE TABLE info_whats_appws
+(
+     id                    BIGINT NOT NULL,
+     fecha_envio           TIMESTAMP,
+     estado                BIGINT,
+     num_credito_banco     VARCHAR(255),
+     num_peticion_servicio BIGINT,
+     numero_identificacion VARCHAR(255),
+     PRIMARY KEY (id)
+);

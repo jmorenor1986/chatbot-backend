@@ -31,4 +31,19 @@ public class ClienteRepositoryTest_IT {
         Cliente result = clienteRepository.consultarXCedulaYTelefono("3005632010", "5270");
         Assert.assertNull(result);
     }
+    @Test
+    public void testFindByTelefonoSUCCESS(){
+        String telefono = "3005632010";
+        List<Cliente> creditos = clienteRepository.findByTelefono(telefono);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() > 0 );
+    }
+
+    @Test
+    public void testFindByTelefonoFAILED(){
+        String telefono = "3005632011";
+        List<Cliente> creditos = clienteRepository.findByTelefono(telefono);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() == 0 );
+    }
 }

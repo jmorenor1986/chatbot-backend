@@ -1,17 +1,21 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
+import co.com.santander.chatbot.accesodatos.entity.Cliente;
 import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
+import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -19,10 +23,12 @@ import java.util.Optional;
 public class ClienteController {
 
     private final ClienteService clienteService;
+    private final ModelMapper mapper;
 
     @Autowired
-    public ClienteController(ClienteService clienteService) {
+    public ClienteController(ClienteService clienteService, ModelMapper mapper) {
         this.clienteService = clienteService;
+        this.mapper = mapper;
     }
 
     @PostMapping("/")
@@ -40,4 +46,17 @@ public class ClienteController {
                 .descripcionRespuesta("Error consultando el servicio")
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<ClienteViewPayload>> getClientsByTel(@RequestParam(value = "telefono") String telefono) {
+        Optional<List<Cliente>> listaClientes = clienteService.consultarClienteByTelefono(telefono);
+        if (listaClientes.isPresent()) {
+            Type listType = new TypeToken<List<ClienteViewPayload>>() {
+            }.getType();
+            List<ClienteViewPayload> listaCliente = mapper.map(listaClientes.get(), listType);
+            return new ResponseEntity<>(listaCliente, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }
