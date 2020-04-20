@@ -34,7 +34,6 @@ public class InfoWhatsAppWSController {
         return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
     }
 
-    //@GetMapping(value = "/validateexistingprocess/?numCreditoBanco={numCreditoBanco}&numeroIdentificacion={numeroIdentificacion}&numPeticionServicio={numPeticionServicio}")
     @GetMapping(value = "/validateexistingprocess/")
     public ResponseEntity<Boolean> validateExistingProcess(@RequestParam(value = "numCreditoBanco") String numCreditoBanco
             , @RequestParam(value = "numeroIdentificacion") String numeroIdentificacion

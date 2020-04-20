@@ -40,4 +40,6 @@ public class ClienteController {
                 .descripcionRespuesta("Error consultando el servicio")
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);
     }
+
+
 }
