@@ -31,9 +31,11 @@ public class ValidarUsuarioServiceTest {
         creditosUsuarioService = new CreditosUsuarioServiceImpl(creditosUsuarioClient);
     }
     @Test
-    public void testConsultarCreditosSuccess(String telefono, int tipoOperacion) {
+    public void testConsultarCreditosSuccess() {
+        String telefono = "3005632010";
+        int tipoOperacion = 1;
         Mockito.when(creditosUsuarioClient.conusltarCreditosCliente(RequestDto.builder().build())).thenReturn(new ResponseEntity<>(ResponseDto.builder().build(), HttpStatus.OK));
-       Optional<RespuestaDto> result = creditosUsuarioService.consultarCreditosUsuario(telefono,tipoOperacion);
+        Optional<RespuestaDto> result = creditosUsuarioService.consultarCreditosUsuario(telefono,tipoOperacion);
     }
 
 }

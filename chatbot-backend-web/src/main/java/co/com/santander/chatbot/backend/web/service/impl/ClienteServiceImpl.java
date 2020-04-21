@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.backend.web.service.ClienteService;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
@@ -20,10 +21,12 @@ import java.util.stream.Collectors;
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteClient clienteClient;
+    private final ClienteMapperService clienteMapper;
 
     @Autowired
-    public ClienteServiceImpl(ClienteClient clienteClient) {
+    public ClienteServiceImpl(ClienteClient clienteClient, ClienteMapperService clienteMapper) {
         this.clienteClient = clienteClient;
+        this.clienteMapper = clienteMapper;
     }
 
     @Override
@@ -34,7 +37,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, String telefono) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
-        if(clientesCreditos.isPresent()){
+        if (clientesCreditos.isPresent()) {
             if (Boolean.FALSE.equals(validateClients(clientesCreditos.get()))) {
                 return Optional.of(
                         ResponseObtenerCreditosPayload.builder()
@@ -44,13 +47,12 @@ public class ClienteServiceImpl implements ClienteService {
                                 .build()
                 );
             }
-
+            return clienteMapper.fromListClientView(clientesCreditos.get());
         }
-
         return Optional.empty();
     }
 
-    private Optional<List<ClienteViewPayload>> callServiceCreditosByTel(String token, String telefono){
+    private Optional<List<ClienteViewPayload>> callServiceCreditosByTel(String token, String telefono) {
         ResponseEntity<List<ClienteViewPayload>> respuesta = clienteClient.getClientsByTel(token, telefono);
         if (HttpStatus.OK.equals(respuesta.getStatusCode())) {
             return Optional.of(respuesta.getBody());
