@@ -10,11 +10,14 @@ server:
 
 logging:
   level:
-    org:
-      springframework:
-        web:
-          client:
-            RestTemplate: DEBUG
+    co:
+      com:
+        santander:
+          chatbot:
+            acceso:
+              recursos:
+                clients: DEBUG
+
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e
@@ -25,7 +28,6 @@ clientes:
     creditosUsuario: /v2/5e9038263300003c7227d5a4
     baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
     consultaCliente: /v1/cliente/
-    consultaByTel: /
 
 
 security:
