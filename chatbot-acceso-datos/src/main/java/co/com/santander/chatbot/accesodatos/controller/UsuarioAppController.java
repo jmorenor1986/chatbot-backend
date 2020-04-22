@@ -38,7 +38,7 @@ public class UsuarioAppController {
     @PostMapping(value = "/login/")
     public ResponseEntity<Boolean> validateUser(@RequestBody UsuarioAppPayload usuarioPayload) {
         Optional<Boolean> usuario = usuarioAppService.validateLoginUser(usuarioPayload.getUsuario(), usuarioPayload.getContra());
-        if (usuario.isPresent() && usuario.get()) {
+        if (usuario.isPresent() && Boolean.TRUE.equals(usuario.get()) ) {
             return new ResponseEntity<>(usuario.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
