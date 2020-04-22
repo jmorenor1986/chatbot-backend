@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -19,8 +20,8 @@ public interface ClienteClient {
     String AUTH_TOKEN = "Authorization";
 
     @PostMapping(value = "${clientes.url.consultaCliente}")
-    public ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader(AUTH_TOKEN) String bearerToken, ClientePayload cliente);
+    ResponseEntity<ResponsePayload> conusltarCliente(@RequestHeader(AUTH_TOKEN) String bearerToken, ClientePayload cliente);
 
-    @GetMapping(value = "${clientes.url.consultaCliente}?telefono=3005632010", produces = MediaType.APPLICATION_JSON_VALUE)
-    ResponseEntity<List<ClienteViewPayload>> getClientsByTel(@RequestHeader(AUTH_TOKEN) String bearerToken, @Param(value = "telefono") String telefono);
+    @GetMapping(value = "${clientes.url.consultaCliente}" ,produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<List<ClienteViewPayload>> getClientsByTel(@RequestHeader(AUTH_TOKEN) String bearerToken, @RequestParam(value = "telefono") String telefono);
 }
