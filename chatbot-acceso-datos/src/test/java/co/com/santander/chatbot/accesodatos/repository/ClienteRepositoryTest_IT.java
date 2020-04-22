@@ -46,4 +46,22 @@ public class ClienteRepositoryTest_IT {
         Assert.assertNotNull(creditos);
         Assert.assertTrue( creditos.size() == 0 );
     }
+
+    @Test
+    public void testFindByTelefonoAndNumerCreditoSUCCESS(){
+        String telefono = "3005632010";
+        String numCredito = "6000000456";
+        List<Cliente> creditos = clienteRepository.findByTelefonoAndNumerCredito(telefono, numCredito);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() > 0 );
+    }
+
+    @Test
+    public void testFindByTelefonoAndNumerCreditoFAILED(){
+        String telefono = "3005632015";
+        String numCredito = "60000004567";
+        List<Cliente> creditos = clienteRepository.findByTelefonoAndNumerCredito(telefono, numCredito);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() == 0 );
+    }
 }

@@ -102,11 +102,51 @@ public class ClienteControllerTest {
         Optional<List<Cliente>> result = Optional.empty();
         Mockito.when(clienteService.consultarClienteByTelefono(telefono)).thenReturn(result);
         ResponseEntity<List<ClienteViewPayload>> response = clienteController.getClientsByTel(telefono);
-
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
     }
 
+    @Test
+    public void testGetClientByTelefonoAndNumCredito(){
+        String telefono = "3005632010";
+        String numCredito = "123456789";
+
+        Cliente item = Cliente.builder()
+                .id(Long.valueOf("1"))
+                .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
+                .telefono("3005632010")
+                .numerCredito("123456789")
+                .cedula("56789066")
+                .email("elisabeth.becerra@samtel.co")
+                .numerCredito("6000000456")
+                .banco("BANCO COMERCIAL AVVILLAS")
+                .estado("Cerrado")
+                .idProducto("9991")
+                .idBanco("52")
+                .convenio("MARCALI INTERNACIONAL SA")
+                .build();
+
+        Mockito.when( clienteService.consultarClienteByTelefonoAndNumCredito(telefono,numCredito) ).thenReturn(Optional.of(item));
+
+        ResponseEntity<ClienteViewPayload> response = clienteController.getClientByTelefonoAndNumCredito(telefono,numCredito);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+        Assert.assertNotNull(response.getBody());
+
+    }
+
+    @Test
+    public void testGetClientByTelefonoAndNumCreditoNO_CONTENT(){
+        String telefono = "3005632010";
+        String numCredito = "123456789";
+
+        Mockito.when( clienteService.consultarClienteByTelefonoAndNumCredito(telefono,numCredito) ).thenReturn(Optional.empty());
+        ResponseEntity<ClienteViewPayload> response = clienteController.getClientByTelefonoAndNumCredito(telefono,numCredito);
+
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, response.getStatusCode());
+    }
 
 
 }

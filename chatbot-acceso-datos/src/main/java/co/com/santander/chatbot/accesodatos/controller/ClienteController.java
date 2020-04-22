@@ -59,4 +59,13 @@ public class ClienteController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    public ResponseEntity<ClienteViewPayload> getClientByTelefonoAndNumCredito(@RequestParam(value = "telefono") String telefono, @RequestParam(value = "numCredito") String numCredito){
+        Optional<Cliente> cliente = clienteService.consultarClienteByTelefonoAndNumCredito(telefono,numCredito);
+        if(cliente.isPresent()){
+            ClienteViewPayload clienteView = mapper.map(cliente.get(), ClienteViewPayload.class);
+            return new ResponseEntity<>(clienteView, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

@@ -10,4 +10,6 @@ public interface ClienteService {
     Optional<Boolean> consultarCliente(String telefono, String cedula);
 
     Optional<List<Cliente>> consultarClienteByTelefono(String telefono);
+
+    Optional<Cliente> consultarClienteByTelefonoAndNumCredito(String telefono, String numCredito);
 }
