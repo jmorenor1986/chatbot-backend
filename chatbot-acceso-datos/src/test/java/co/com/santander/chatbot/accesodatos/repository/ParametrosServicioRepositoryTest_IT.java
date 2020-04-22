@@ -26,4 +26,11 @@ public class ParametrosServicioRepositoryTest_IT {
         Assert.assertTrue(result.size() > 0);
     }
 
+    @Test
+    public void testFindByNameServiceNOTCONTENT() {
+        List<ParametrosServicio> result = parametrosServicioRepository.findByNameService("name");
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.size() == 0);
+    }
+
 }
