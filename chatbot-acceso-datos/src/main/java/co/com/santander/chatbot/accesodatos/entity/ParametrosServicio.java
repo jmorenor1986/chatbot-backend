@@ -5,18 +5,22 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 
 @Entity
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Canal {
+@NamedQuery(name = "ParametrosServicio.findByNameService", query = "FROM ParametrosServicio u where u.servicio = ?1")
+
+public class ParametrosServicio {
     @Id
     private Long id;
-    @Column(name = "nombre")
-    private String nombre;
+    private String canal;
+    private String servicio;
+    private Integer numeroIntentos;
+    private Integer tiempoIntentos;
 }
