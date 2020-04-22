@@ -10,11 +10,14 @@ server:
 
 logging:
   level:
-    org:
-      springframework:
-        web:
-          client:
-            RestTemplate: DEBUG
+    co:
+      com:
+        santander:
+          chatbot:
+            acceso:
+              recursos:
+                clients: DEBUG
+
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e

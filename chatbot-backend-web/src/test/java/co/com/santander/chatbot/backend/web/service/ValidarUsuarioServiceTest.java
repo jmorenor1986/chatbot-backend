@@ -6,6 +6,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.dto.ResponseDto;
 import co.com.santander.chatbot.backend.web.service.impl.CreditosUsuarioServiceImpl;
 import co.com.santander.chatbot.domain.dto.accesorecursos.RespuestaDto;
 import org.junit.Before;
+import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -29,10 +30,12 @@ public class ValidarUsuarioServiceTest {
         MockitoAnnotations.initMocks(this);
         creditosUsuarioService = new CreditosUsuarioServiceImpl(creditosUsuarioClient);
     }
-
-    public void testConsultarCreditosSuccess(String telefono, int tipoOperacion) {
+    @Test
+    public void testConsultarCreditosSuccess() {
+        String telefono = "3005632010";
+        int tipoOperacion = 1;
         Mockito.when(creditosUsuarioClient.conusltarCreditosCliente(RequestDto.builder().build())).thenReturn(new ResponseEntity<>(ResponseDto.builder().build(), HttpStatus.OK));
-       Optional<RespuestaDto> result = creditosUsuarioService.consultarCreditosUsuario(telefono,tipoOperacion);
+        Optional<RespuestaDto> result = creditosUsuarioService.consultarCreditosUsuario(telefono,tipoOperacion);
     }
 
 }
