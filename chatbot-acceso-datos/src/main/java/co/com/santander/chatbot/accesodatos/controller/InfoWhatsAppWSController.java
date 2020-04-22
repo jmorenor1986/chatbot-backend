@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -30,7 +31,7 @@ public class InfoWhatsAppWSController {
     public ResponseEntity<InfoWhatsAppWSPayload> save(@RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload) {
         InfoWhatsAppWS entity = modelMapper.map(infoWhatsAppWSPayload, InfoWhatsAppWS.class);
         Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
-        if(response.isPresent()){
+        if (response.isPresent()) {
             return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -38,14 +39,14 @@ public class InfoWhatsAppWSController {
     }
 
     @GetMapping(value = "/validateexistingprocess/")
-    public ResponseEntity<Boolean> validateExistingProcess(@RequestParam(value = "numCreditoBanco") String numCreditoBanco
+    public ResponseEntity<InfoWhatsAppWSPayload> validateExistingProcess(@RequestParam(value = "numCreditoBanco") String numCreditoBanco
             , @RequestParam(value = "numeroIdentificacion") String numeroIdentificacion
             , @RequestParam(value = "numPeticionServicio") Long numPeticionServicio
     ) {
-        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
-        if(respuesta.isPresent()){
-            return new ResponseEntity<Boolean>(respuesta.get(), HttpStatus.OK);
+        List<InfoWhatsAppWS> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
+        if (!respuesta.isEmpty()) {
+            return new ResponseEntity<>(modelMapper.map(respuesta.get(0), InfoWhatsAppWSPayload.class), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

@@ -64,13 +64,11 @@ public class InfoWhatsAppWSServiceImplTest {
 
 
         Mockito.when(infoWhatsAppWSRepository
-                .findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado(numCreditoBanco, numeroIdentificacion,numPeticionServicio,estado))
+                .findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
                 .thenReturn(respuestaRepo);
-        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+        List<InfoWhatsAppWS> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
 
         Assert.assertNotNull(respuesta);
-        Assert.assertEquals(true, respuesta.isPresent());
-        Assert.assertEquals(Boolean.TRUE, respuesta.get());
     }
 
     @Test
@@ -84,12 +82,10 @@ public class InfoWhatsAppWSServiceImplTest {
 
 
         Mockito.when(infoWhatsAppWSRepository
-                .findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado(numCreditoBanco, numeroIdentificacion,numPeticionServicio,estado))
+                .findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
                 .thenReturn(respuestaRepo);
-        Optional<Boolean> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+        List<InfoWhatsAppWS> respuesta = infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
 
         Assert.assertNotNull(respuesta);
-        Assert.assertEquals(true, respuesta.isPresent());
-        Assert.assertEquals(Boolean.FALSE, respuesta.get());
     }
 }

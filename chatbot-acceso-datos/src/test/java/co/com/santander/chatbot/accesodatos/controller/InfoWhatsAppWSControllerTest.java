@@ -13,6 +13,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Optional;
 
@@ -58,8 +59,8 @@ public class InfoWhatsAppWSControllerTest {
         String numeroIdentificacion = "1234";
         Long numPeticionServicio = Long.valueOf("1");
         Mockito.when(infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
-                .thenReturn(Optional.of(Boolean.TRUE));
-        ResponseEntity<Boolean> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco,numeroIdentificacion,numPeticionServicio);
+                .thenReturn(new ArrayList<>());
+        ResponseEntity<InfoWhatsAppWSPayload> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
         Assert.assertNotNull(respuesta);
     }
 }

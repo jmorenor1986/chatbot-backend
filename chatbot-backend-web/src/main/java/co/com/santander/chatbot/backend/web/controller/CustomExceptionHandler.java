@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
+import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -20,6 +21,15 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .idRespuesta(1)
                 .resultadoValidacion(Boolean.FALSE)
                 .build(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ValidateStateCertificateException.class)
+    public final ResponseEntity<Object> validateStateCertificateException(ValidateStateCertificateException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .resultadoValidacion(Boolean.FALSE)
+                .idRespuesta(1)
+                .descripcionRespuesta(ex.getMessage())
+                .build(), HttpStatus.OK);
     }
 
 

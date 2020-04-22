@@ -7,8 +7,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "info_whats_appws")
-@Getter @Setter @Builder
-@AllArgsConstructor @NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@NamedQuery(name = "InfoWhatsAppWS.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio", query = "FROM InfoWhatsAppWS u where u.numCreditoBanco = ?1 and u.numeroIdentificacion = ?2 and u.numPeticionServicio = ?3 order by id desc ")
 public class InfoWhatsAppWS {
     @Id
     @Column(name = "Id")

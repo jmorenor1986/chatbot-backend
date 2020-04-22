@@ -21,11 +21,11 @@ public class InfoWhatsAppWSRepositoryTest_IT {
     private InfoWhatsAppWSRepository infoWhatsAppWSRepository;
 
     @Before
-    public void setUp(){
+    public void setUp() {
     }
 
     @Test
-    public void testSaveSUCCESS(){
+    public void testSaveSUCCESS() {
         InfoWhatsAppWS insert = InfoWhatsAppWS.builder()
                 .numCreditoBanco("12345678")
                 .numeroIdentificacion("1234567")
@@ -37,18 +37,19 @@ public class InfoWhatsAppWSRepositoryTest_IT {
         Assert.assertNotNull(result);
         Assert.assertNotNull(result.getId());
     }
+
     @Test
-    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstadoSUCCESS(){
-        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado("12345678", "1234",Long.valueOf("3"), Long.valueOf("1"));
+    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioSUCCESS() {
+        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio("12345678", "1234", Long.valueOf("3"));
         Assert.assertNotNull(result);
-        Assert.assertEquals(1, result.size());
+        Assert.assertTrue(result.size() > 0);
     }
 
     @Test
-    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstadoFAILED(){
-        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado("12345678", "1234",Long.valueOf("3"), Long.valueOf("100"));
+    public void testFindByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionEstadoFAILED() {
+        List<InfoWhatsAppWS> result = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio("aaqde", "1234", Long.valueOf("3"));
         Assert.assertNotNull(result);
-        Assert.assertEquals(0, result.size());
+        Assert.assertTrue(result.size() == 0);
     }
 
 

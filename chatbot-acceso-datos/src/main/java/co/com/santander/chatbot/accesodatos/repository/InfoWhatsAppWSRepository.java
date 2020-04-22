@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface InfoWhatsAppWSRepository extends JpaRepository<InfoWhatsAppWS, Long> {
 
-    List<InfoWhatsAppWS> findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado(String numCreditoBanco, String numeroIdentificacion, Long numPeticionServicio, Long estado );
+    List<InfoWhatsAppWS> findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio(String numCreditoBanco, String numeroIdentificacion, Long numPeticionServicio);
 }

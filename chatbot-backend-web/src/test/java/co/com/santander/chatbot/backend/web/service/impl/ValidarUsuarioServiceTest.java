@@ -1,8 +1,9 @@
-package co.com.santander.chatbot.backend.web.service;
+package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.CreditosUsuarioClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.dto.RequestDto;
 import co.com.santander.chatbot.acceso.recursos.clients.core.dto.ResponseDto;
+import co.com.santander.chatbot.backend.web.service.CreditosUsuarioService;
 import co.com.santander.chatbot.backend.web.service.impl.CreditosUsuarioServiceImpl;
 import co.com.santander.chatbot.domain.dto.accesorecursos.RespuestaDto;
 import org.junit.Before;

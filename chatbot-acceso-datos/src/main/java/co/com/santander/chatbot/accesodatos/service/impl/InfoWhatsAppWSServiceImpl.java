@@ -26,12 +26,8 @@ public class InfoWhatsAppWSServiceImpl implements InfoWhatsAppWSService {
     }
 
     @Override
-    public Optional<Boolean> validateExistingProcess(String numCreditoBanco, String numeroIdentificacion, Long numPeticionServicio) {
-        List<InfoWhatsAppWS> respuesta = infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicioAndEstado(numCreditoBanco, numeroIdentificacion, numPeticionServicio, Long.valueOf("0"));
-        if (respuesta.size() == 0)
-            return Optional.of(Boolean.FALSE);
-        else
-            return Optional.of(Boolean.TRUE);
+    public List<InfoWhatsAppWS> validateExistingProcess(String numCreditoBanco, String numeroIdentificacion, Long numPeticionServicio) {
+        return infoWhatsAppWSRepository.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
     }
 
 }
