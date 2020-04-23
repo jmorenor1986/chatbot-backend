@@ -13,4 +13,8 @@ public class ResponseCreditosPayload {
     private Long banco;
     private String convenio;
 
+    private String infoUnoR;
+    private String infoDosR;
+    private String infoTresR;
+
 }

@@ -85,4 +85,47 @@ public class ClienteServiceImplTest {
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isPresent());
     }
+
+    @Test
+    public void testFindByTelefonoAndNumerCreditoSUCCESS(){
+        String telefono = "3005632010";
+        String numCredito = "123456789";
+        List<Cliente> result = new ArrayList<>();
+        Cliente item = Cliente.builder()
+                .id(Long.valueOf("1"))
+                .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
+                .telefono("3005632010")
+                .numerCredito("123456789")
+                .cedula("56789066")
+                .email("elisabeth.becerra@samtel.co")
+                .numerCredito("6000000456")
+                .banco("BANCO COMERCIAL AVVILLAS")
+                .estado("Cerrado")
+                .idProducto("9991")
+                .idBanco("52")
+                .convenio("MARCALI INTERNACIONAL SA")
+                .build();
+        result.add(item);
+
+        Mockito.when( clienteRepository.findByTelefonoAndNumerCredito( telefono, numCredito ) ).thenReturn(result);
+
+        Optional<Cliente> response =  clienteService.consultarClienteByTelefonoAndNumCredito(telefono, numCredito);
+
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+    }
+
+    @Test
+    public void testFindByTelefonoAndNumerCreditoFAILED(){
+        String telefono = "3005632010";
+        String numCredito = "1234567891234";
+        List<Cliente> result = new ArrayList<>();
+
+        Mockito.when( clienteRepository.findByTelefonoAndNumerCredito( telefono, numCredito ) ).thenReturn(result);
+
+        Optional<Cliente> response =  clienteService.consultarClienteByTelefonoAndNumCredito(telefono, numCredito);
+
+        Assert.assertNotNull(response);
+        Assert.assertFalse(response.isPresent());
+    }
 }
