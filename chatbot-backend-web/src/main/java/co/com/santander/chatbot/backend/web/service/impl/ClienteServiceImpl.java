@@ -38,7 +38,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, String telefono) {
+    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
         if (clientesCreditos.isPresent()) {
             if (Boolean.FALSE.equals(validateClients(clientesCreditos.get()))) {

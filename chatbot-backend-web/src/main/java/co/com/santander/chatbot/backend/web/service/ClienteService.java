@@ -13,6 +13,6 @@ public interface ClienteService {
 
     ResponseEntity<ResponsePayload> validarCliente(String token, ServiciosEnum serviciosEnum, String telefono, ClientePayload cliente);
 
-    Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, String telefono);
+    Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono);
 
 }

@@ -8,5 +8,4 @@ import lombok.Data;
 public class CertificadoPayload {
     private String identificacion;
     private String numeroCredito;
-    private Long numeroPeticion;
 }
