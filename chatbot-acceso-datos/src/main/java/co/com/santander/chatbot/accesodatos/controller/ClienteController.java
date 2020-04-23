@@ -58,7 +58,7 @@ public class ClienteController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @GetMapping(value = "/telAndNumCredit/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ClienteViewPayload> getClientByTelefonoAndNumCredito(@RequestParam(value = "telefono") String telefono, @RequestParam(value = "numCredito") String numCredito){
         Optional<Cliente> cliente = clienteService.consultarClienteByTelefonoAndNumCredito(telefono,numCredito);
         if(cliente.isPresent()){
