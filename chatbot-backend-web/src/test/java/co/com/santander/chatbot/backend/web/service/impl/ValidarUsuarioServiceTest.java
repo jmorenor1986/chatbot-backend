@@ -6,6 +6,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.dto.ResponseDto;
 import co.com.santander.chatbot.backend.web.service.CreditosUsuarioService;
 import co.com.santander.chatbot.backend.web.service.impl.CreditosUsuarioServiceImpl;
 import co.com.santander.chatbot.domain.dto.accesorecursos.RespuestaDto;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -37,6 +38,7 @@ public class ValidarUsuarioServiceTest {
         int tipoOperacion = 1;
         Mockito.when(creditosUsuarioClient.conusltarCreditosCliente(RequestDto.builder().build())).thenReturn(new ResponseEntity<>(ResponseDto.builder().build(), HttpStatus.OK));
         Optional<RespuestaDto> result = creditosUsuarioService.consultarCreditosUsuario(telefono,tipoOperacion);
+        Assert.assertNotNull(result);
     }
 
 }
