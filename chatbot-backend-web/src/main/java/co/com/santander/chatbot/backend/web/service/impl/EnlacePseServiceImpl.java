@@ -70,7 +70,7 @@ public class EnlacePseServiceImpl implements EnlacePseService {
         }
     }
 
-    public Optional<String> validaBancoEnlacePse(String banco){
+    private Optional<String> validaBancoEnlacePse(String banco){
         if("SANTANDER CONSUMER".equalsIgnoreCase(banco)){
             return Optional.of("https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328");
         }else if("SANTANDER VEHICULO".equalsIgnoreCase(banco)){

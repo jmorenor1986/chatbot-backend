@@ -28,6 +28,6 @@ public class EnlacePseController {
         if(response.isPresent()){
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
         }
-        return new ResponseEntity<>(ResponseEnlacePsePayload.builder().build(), HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
