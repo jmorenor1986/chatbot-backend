@@ -28,7 +28,10 @@ clientes:
     creditosUsuario: /v2/5e9038263300003c7227d5a4
     baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
     consultaCliente: /v1/cliente/
+    consultaProcesoExistente: /v1/infowhatsappwscontroller/validateexistingprocess/
+    guardarProceso: /v1/infowhatsappwscontroller/
     consultaClienteByTelAndNumCred: /v1/cliente/telAndNumCredit/
+    consultaProcesoParametros: /v1/parametros-servicio/consultar-proceso
 
 
 security:

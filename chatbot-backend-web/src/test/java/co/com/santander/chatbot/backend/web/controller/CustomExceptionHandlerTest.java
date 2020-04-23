@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
+import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,6 +24,14 @@ public class CustomExceptionHandlerTest {
         MandatoryFieldException mandatoryFieldException = new MandatoryFieldException("test");
         ResponseEntity<?> result = customExceptionHandler.handlerMandatoryFieldException(mandatoryFieldException, null);
         Assert.assertEquals(400, result.getStatusCodeValue());
+
+    }
+
+    @Test
+    public void testHandlerValidateStateCertificateException() {
+        ValidateStateCertificateException validateStateCertificateException = new ValidateStateCertificateException("test");
+        ResponseEntity<?> result = customExceptionHandler.validateStateCertificateException(validateStateCertificateException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
 
     }
 

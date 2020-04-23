@@ -1,5 +1,6 @@
-package co.com.santander.chatbot.backend.web.service;
+package co.com.santander.chatbot.backend.web.service.impl;
 
+import co.com.santander.chatbot.backend.web.service.KeepAliveService;
 import co.com.santander.chatbot.backend.web.service.impl.KeepAliveServiceImpl;
 import org.junit.Assert;
 import org.junit.Before;

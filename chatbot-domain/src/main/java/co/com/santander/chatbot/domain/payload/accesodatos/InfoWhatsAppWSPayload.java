@@ -9,10 +9,9 @@ import java.util.Date;
 
 @Builder
 @Data
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class InfoWhatsAppWSPayload {
-
-    private Long id;
 
     private String numCreditoBanco;
 

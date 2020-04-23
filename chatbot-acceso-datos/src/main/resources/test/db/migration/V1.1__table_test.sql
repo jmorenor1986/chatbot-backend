@@ -36,3 +36,15 @@ CREATE TABLE info_whats_appws
      numero_identificacion VARCHAR(255),
      PRIMARY KEY (id)
 );
+
+CREATE TABLE parametros_servicio
+(
+    id                 BIGINT NOT NULL,
+    canal              VARCHAR(255) NOT NULL,
+    servicio           VARCHAR(255) NOT NULL,
+    numero_intentos    int8,
+    tiempo_intentos    int8,
+    PRIMARY KEY (id)
+
+
+);
