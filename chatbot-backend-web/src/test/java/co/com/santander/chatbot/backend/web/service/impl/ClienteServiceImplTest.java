@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -45,7 +46,7 @@ public class ClienteServiceImplTest {
                 .telefono("2")
                 .build();
         Mockito.when(clienteClient.conusltarCliente(token, clientePayload)).thenReturn(new ResponseEntity<>(ResponsePayload.builder().build(), HttpStatus.OK));
-        ResponseEntity<ResponsePayload> result = clienteService.validarCliente(clientePayload, token);
+        ResponseEntity<ResponsePayload> result = clienteService.validarCliente(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono() , clientePayload );
         Assert.assertNotNull(result);
         Assert.assertEquals(200, result.getStatusCodeValue());
     }

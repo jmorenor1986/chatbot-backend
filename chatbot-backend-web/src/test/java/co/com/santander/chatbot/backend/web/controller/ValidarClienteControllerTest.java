@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import org.junit.Assert;
@@ -33,7 +34,7 @@ public class ValidarClienteControllerTest {
                 .cedula("1")
                 .telefono("2")
                 .build();
-        Mockito.when(clienteService.validarCliente(clientePayload, token)).thenReturn(new ResponseEntity<>(ResponsePayload.builder().build(), HttpStatus.OK));
+        Mockito.when(clienteService.validarCliente(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono(), clientePayload )).thenReturn(new ResponseEntity<>(ResponsePayload.builder().build(), HttpStatus.OK));
         ResponseEntity<ResponsePayload> result = validarClienteController.validar(token, clientePayload);
         Assert.assertNotNull(result);
         Assert.assertEquals(200, result.getStatusCodeValue());
