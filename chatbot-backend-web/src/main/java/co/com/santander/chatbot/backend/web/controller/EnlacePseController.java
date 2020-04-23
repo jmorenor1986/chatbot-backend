@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.EnlacePsePayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class EnlacePseController {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseEnlacePsePayload> getEnlacePse(@RequestHeader("Authorization") String bearerToken, @RequestBody EnlacePsePayload enlacePsePayload){
-        Optional<ResponseEnlacePsePayload> response = enlacePseService.getEnlacePse(bearerToken, enlacePsePayload.getTelefono(), enlacePsePayload.getNumeroVerificador());
+        Optional<ResponseEnlacePsePayload> response = enlacePseService.getEnlacePse(bearerToken, ServiciosEnum.SERVICIO_ENLACE_PSE,enlacePsePayload.getTelefono(), enlacePsePayload.getNumeroVerificador());
         if(response.isPresent()){
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
         }

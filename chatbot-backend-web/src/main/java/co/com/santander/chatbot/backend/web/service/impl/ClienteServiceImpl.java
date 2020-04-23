@@ -38,21 +38,17 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    @BussinessLog
     public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
         if (clientesCreditos.isPresent()) {
             if (Boolean.FALSE.equals(validateClients(clientesCreditos.get()))) {
-                return Optional.of(
-                        ResponseObtenerCreditosPayload.builder()
-                                .idRespuesta(Long.valueOf("2"))
-                                .resultadoConsulta(false)
-                                .descripcionRespuesta("Numero de telefono asociado a dos clientes")
-                                .build()
-                );
+                return generateFailedResponse("Numero de telefono asociado a dos clientes");
             }
             return clienteMapper.fromListClientView(clientesCreditos.get());
+        }else{
+            return  generateFailedResponse("No existe informacion");
         }
-        return Optional.empty();
     }
 
     private Optional<List<ClienteViewPayload>> callServiceCreditosByTel(String token, String telefono) {
@@ -69,5 +65,14 @@ public class ClienteServiceImpl implements ClienteService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    public Optional<ResponseObtenerCreditosPayload> generateFailedResponse(String mensaje){
+        return  Optional.of(
+                ResponseObtenerCreditosPayload.builder()
+                        .idRespuesta(Long.valueOf("2"))
+                        .resultadoConsulta(false)
+                        .descripcionRespuesta(mensaje)
+                        .build());
     }
 }

@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
 import org.junit.Assert;
@@ -54,7 +55,7 @@ public class EnlacePseServiceImplTest {
 
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, numCredito) ).thenReturn(response);
 
-        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,telefono,numCreditoEnc);
+        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE,telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);
         Assert.assertTrue(respuestaServicio.isPresent());
         Assert.assertNotNull(respuestaServicio.get());
@@ -71,7 +72,7 @@ public class EnlacePseServiceImplTest {
 
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, "") ).thenReturn(response);
 
-        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,telefono,numCreditoEnc);
+        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);
         Assert.assertTrue(respuestaServicio.isPresent());
         Assert.assertNotNull(respuestaServicio.get());
@@ -101,7 +102,7 @@ public class EnlacePseServiceImplTest {
 
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, numCredito) ).thenReturn(response);
 
-        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,telefono,numCreditoEnc);
+        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);
         Assert.assertTrue(respuestaServicio.isPresent());
         Assert.assertNotNull(respuestaServicio.get());
@@ -118,7 +119,7 @@ public class EnlacePseServiceImplTest {
 
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, "") ).thenReturn(response);
 
-        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,telefono,numCreditoEnc);
+        Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);
         Assert.assertTrue(respuestaServicio.isPresent());
         Assert.assertNotNull(respuestaServicio.get());
