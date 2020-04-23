@@ -7,6 +7,7 @@ public enum ServiciosEnum {
     SERVICIO_ENLACE_PSE("Busca enlace PSE"),
     SERVICIO_DEBITO_AUTOMATICO("Debito Automático"),
     SERVICIO_INFORMACION_CREDITO("Informacion  credtito"),
+    SERVICIO_OBTENER_CREDITOS("Obtener creditos"),
     SERVICIO_DECLARACION_RENTA("Declaracion Renta");
 
     private final String message;
