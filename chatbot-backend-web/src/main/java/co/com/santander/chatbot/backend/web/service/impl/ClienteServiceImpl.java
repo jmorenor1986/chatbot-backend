@@ -1,8 +1,10 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -30,7 +32,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ResponseEntity<ResponsePayload> validarCliente(ClientePayload cliente, String token) {
+    @BussinessLog
+    public ResponseEntity<ResponsePayload> validarCliente(String token, ServiciosEnum serviciosEnum, String telefono, ClientePayload cliente) {
         return clienteClient.conusltarCliente(token, cliente);
     }
 

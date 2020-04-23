@@ -65,7 +65,7 @@ public class ValidarEstadoAspect {
                 .canal("WhatsApp")
                 .build());
         if (resultProcessWithParams.getStatusCodeValue() == 200)
-            if (resultProcessWithParams.getBody().getResultadoValidacion() == Boolean.TRUE)
+            if ( Boolean.TRUE.equals(resultProcessWithParams.getBody().getResultadoValidacion()) )
                 return Boolean.TRUE;
             else
                 throw new ValidateStateCertificateException(resultProcessWithParams.getBody().getDescripcionRespuesta().toString());
