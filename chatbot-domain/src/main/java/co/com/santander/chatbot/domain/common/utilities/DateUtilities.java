@@ -1,4 +1,4 @@
-package co.com.santander.chatbot.backend.web.common.utilities;
+package co.com.santander.chatbot.domain.common.utilities;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -12,5 +12,4 @@ public class DateUtilities {
         return calendar.getTime();
     }
 
-    public 
 }
