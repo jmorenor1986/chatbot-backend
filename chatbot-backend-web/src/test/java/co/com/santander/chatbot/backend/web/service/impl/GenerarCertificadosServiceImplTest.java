@@ -42,7 +42,6 @@ public class GenerarCertificadosServiceImplTest {
         Date date = new Date();
         CertificadoPayload certificadoPayload = CertificadoPayload.builder()
                 .identificacion("1234")
-                .numeroPeticion(3L)
                 .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU").build();
         InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
                 .estado(1L)
@@ -52,7 +51,7 @@ public class GenerarCertificadosServiceImplTest {
                 .numPeticionServicio(3L)
                 .build();
         Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificadoPazYSalvo(token, certificadoPayload, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, date);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, certificadoPayload, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, date, 3L);
         Assert.assertNotNull(result);
     }
 }

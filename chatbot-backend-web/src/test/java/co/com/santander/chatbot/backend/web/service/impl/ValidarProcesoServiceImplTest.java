@@ -42,21 +42,20 @@ public class ValidarProcesoServiceImplTest {
         Date date = new Date();
         String token = "1212122";
         CertificadoPayload certificado = CertificadoPayload.builder()
-                .numeroPeticion(1L)
                 .identificacion("12345")
                 .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU")
                 .build();
 
         InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
-                .numPeticionServicio(certificado.getNumeroPeticion())
+                .numPeticionServicio(1L)
                 .numeroIdentificacion(certificado.getIdentificacion())
                 .numCreditoBanco(SecurityUtilities.desencriptar(certificado.getNumeroCredito()))
                 .fechaEnvio(date)
                 .estado(1L)
                 .build();
-        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO};
+        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, 1L};
         Mockito.when(infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(certificado.getNumeroCredito()),
-                certificado.getIdentificacion(), certificado.getNumeroPeticion())).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
+                certificado.getIdentificacion(), 1L)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
         Mockito.when(parametrosServiceClient.consultarProcesoParametros(token, ValidarProcesoPayload.builder()
                 .canal("WhatsApp")
                 .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
@@ -67,5 +66,40 @@ public class ValidarProcesoServiceImplTest {
                 .build(), HttpStatus.OK));
         Boolean result = validarProcesoService.validateExistingProcesss(args);
         Assert.assertEquals(Boolean.TRUE, result);
+    }
+
+    @Test
+    public void testValidateExistingError() throws GeneralSecurityException {
+        Date date = new Date();
+        String token = "1212122";
+        CertificadoPayload certificado = CertificadoPayload.builder()
+                .identificacion("12345")
+                .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU")
+                .build();
+
+        InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
+                .numPeticionServicio(1L)
+                .numeroIdentificacion(certificado.getIdentificacion())
+                .numCreditoBanco(SecurityUtilities.desencriptar(certificado.getNumeroCredito()))
+                .fechaEnvio(date)
+                .estado(1L)
+                .build();
+        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, 1L};
+        Mockito.when(infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(certificado.getNumeroCredito()),
+                certificado.getIdentificacion(), 1L)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.INTERNAL_SERVER_ERROR));
+        Mockito.when(parametrosServiceClient.consultarProcesoParametros(token, ValidarProcesoPayload.builder()
+                .canal("WhatsApp")
+                .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
+                .fechaUltimaSolicitud(date)
+                .build())).thenReturn(new ResponseEntity<>(ResponsePayload.builder()
+                .resultadoValidacion(Boolean.TRUE)
+                .descripcionRespuesta("test")
+                .build(), HttpStatus.OK));
+        Boolean result = Boolean.FALSE;
+        try {
+            result = validarProcesoService.validateExistingProcesss(args);
+        } catch (Exception e) {
+        }
+        Assert.assertEquals(Boolean.FALSE, result);
     }
 }

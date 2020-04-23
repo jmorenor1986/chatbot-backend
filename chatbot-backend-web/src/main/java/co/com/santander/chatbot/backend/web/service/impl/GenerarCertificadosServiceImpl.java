@@ -27,7 +27,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
 
     @Override
     @ValidateState
-    public Optional<ResponsePayload> generarCertificadoPazYSalvo(String token, CertificadoPayload certificadoPayload, ServiciosEnum servicio, Date date, Long idTransaccion) {
+    public Optional<ResponsePayload> generarCertificado(String token, CertificadoPayload certificadoPayload, ServiciosEnum servicio, Date date, Long idTransaccion) {
 
         try {
             ResponseEntity<InfoWhatsAppWSPayload> result = infoWhatsAppWSClient.save(token, InfoWhatsAppWSPayload.builder()
@@ -35,7 +35,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .fechaEnvio(date)
                     .numCreditoBanco(SecurityUtilities.desencriptar(certificadoPayload.getNumeroCredito()))
                     .numeroIdentificacion(certificadoPayload.getIdentificacion())
-                    .numPeticionServicio(idTransacciongit)
+                    .numPeticionServicio(idTransaccion)
                     .build());
             if (result.getStatusCodeValue() == 200)
                 return Optional.of(ResponsePayload.builder()

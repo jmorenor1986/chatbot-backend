@@ -1,7 +1,10 @@
 package co.com.santander.chatbot.domain.enums;
 
 public enum ServiciosEnum {
-    SERVICIO_PAZ_Y_SALVO("Paz y Salvo");
+    SERVICIO_PAZ_Y_SALVO("Paz y Salvo"),
+    SERVICIO_DEBITO_AUTOMATICO("Debito Automático"),
+    SERVICIO_INFORMACION_CREDITO("Informacion  credtito"),
+    SERVICIO_DECLARACION_RENTA("Declaracion Renta");
 
     private final String message;
 
