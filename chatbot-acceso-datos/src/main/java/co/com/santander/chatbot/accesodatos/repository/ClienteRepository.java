@@ -12,4 +12,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
     Cliente consultarXCedulaYTelefono(String telefono, String cedula);
 
     List<Cliente> findByTelefono(String telefono);
+
+    List<Cliente> findByTelefonoAndNumerCredito(String telefono, String numCredito);
+
 }

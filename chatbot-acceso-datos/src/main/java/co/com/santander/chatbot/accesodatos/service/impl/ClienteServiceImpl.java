@@ -32,4 +32,14 @@ public class ClienteServiceImpl implements ClienteService {
         }
         return Optional.of(listaCliente);
     }
+
+    @Override
+    public Optional<Cliente> consultarClienteByTelefonoAndNumCredito(String telefono, String numCredito) {
+        List<Cliente> listaCliente =  clienteRepository.findByTelefonoAndNumerCredito(telefono, numCredito);
+        if( listaCliente.isEmpty() ) {
+            return Optional.empty();
+        }
+        return Optional.of( listaCliente.get(0) );
+    }
+
 }

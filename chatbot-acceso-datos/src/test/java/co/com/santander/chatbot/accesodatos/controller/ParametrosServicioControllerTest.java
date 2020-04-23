@@ -2,6 +2,7 @@ package co.com.santander.chatbot.accesodatos.controller;
 
 import co.com.santander.chatbot.accesodatos.service.ParametrosServicioService;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
+import co.com.santander.chatbot.domain.payload.accesodatos.ValidarProcesoPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -33,7 +34,11 @@ public class ParametrosServicioControllerTest {
     public void testConsultarProcesoSUCCESS() {
         Date date = new Date();
         Mockito.when(parametrosServicioService.validarSolicitud(CANAL, SERVICIO, date)).thenReturn(ResponsePayload.builder().build());
-        ResponseEntity<ResponsePayload> result = parametrosServicioController.consultarProceso(SERVICIO, CANAL, date);
+        ResponseEntity<ResponsePayload> result = parametrosServicioController.consultarProceso(ValidarProcesoPayload.builder()
+                .canal(CANAL)
+                .servicio(SERVICIO)
+                .fechaUltimaSolicitud(date)
+                .build());
         Assert.assertNotNull(result);
     }
 }

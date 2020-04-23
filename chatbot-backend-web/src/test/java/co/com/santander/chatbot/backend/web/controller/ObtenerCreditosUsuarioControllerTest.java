@@ -50,5 +50,19 @@ public class ObtenerCreditosUsuarioControllerTest {
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assert.assertNotNull(response.getBody());
     }
+    @Test
+    public void testObtenerFILED(){
+        String token = "1";
+        CreditosUsuarioPayload credito = CreditosUsuarioPayload.builder()
+                .telefono("3005632010")
+                .tipoOperacion(Long.valueOf("0"))
+                .build();
+
+        Mockito.when(clienteService.obtenerCreditos(token, credito.getTelefono())).thenReturn(Optional.empty());
+
+        ResponseEntity<ResponseObtenerCreditosPayload> response = obtenerCreditosUsuarioController.obtener(token, credito);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 
 }

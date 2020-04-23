@@ -25,4 +25,4 @@ INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_pe
 --
 --Insert parametros servicio
 --
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (1,'WhatssApp','Paz y Salvo',2,60);
+INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (1,'WhatssApp','Paz y Salvo',2,1);

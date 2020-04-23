@@ -24,4 +24,7 @@ public interface ClienteClient {
 
     @GetMapping(value = "${clientes.url.consultaCliente}" ,produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<List<ClienteViewPayload>> getClientsByTel(@RequestHeader(AUTH_TOKEN) String bearerToken, @RequestParam(value = "telefono") String telefono);
+
+    @GetMapping(value = "${clientes.url.consultaClienteByTelAndNumCred}", produces = MediaType.APPLICATION_JSON_VALUE)
+    ResponseEntity<ClienteViewPayload> getClientByTelefonoAndNumCredito(@RequestHeader(AUTH_TOKEN) String bearerToken, @RequestParam(value = "telefono") String telefono, @RequestParam(value = "numCredito") String numCredito);
 }
