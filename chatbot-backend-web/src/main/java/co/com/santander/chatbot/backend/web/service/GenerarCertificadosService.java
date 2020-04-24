@@ -8,5 +8,5 @@ import java.util.Date;
 import java.util.Optional;
 
 public interface GenerarCertificadosService {
-    Optional<ResponsePayload> generarCertificado(String token, CertificadoPayload certificadoPayload, ServiciosEnum servicio, Date date, Long idTransaccion);
+    Optional<ResponsePayload> generarCertificado(String token,  ServiciosEnum servicio,CertificadoPayload certificadoPayload, Date date, Long idTransaccion);
 }

@@ -34,12 +34,13 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
 
     @Override
     public Boolean validateExistingProcesss(Object[] args) {
-        CertificadoPayload datos = (CertificadoPayload) args[1];
+        CertificadoPayload datos = (CertificadoPayload) args[2];
         ResponseEntity<InfoWhatsAppWSPayload> result = null;
-        ServiciosEnum serviciosEnum = (ServiciosEnum) args[2];
+        ServiciosEnum serviciosEnum = (ServiciosEnum) args[1];
+        Date now = (Date) args[3];
         try {
-            result = infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(datos.getNumeroCredito()), datos.getIdentificacion(), (Long) args[3]);
-        } catch (GeneralSecurityException e) {
+            result = infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(datos.getNumeroCredito()), datos.getIdentificacion(), now.getTime() );
+        } catch (GeneralSecurityException e ) {
             throw new ValidateStateCertificateException(ERROR_CIPHER);
         }
         if (result.getStatusCodeValue() == 200)

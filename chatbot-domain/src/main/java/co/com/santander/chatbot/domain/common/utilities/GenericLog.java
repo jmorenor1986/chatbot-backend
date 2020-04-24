@@ -11,5 +11,6 @@ public class GenericLog {
     private String token;
     private ServiciosEnum serviciosEnum;
     private String telefono;
+    private String identificacion;
     private String credito;
 }

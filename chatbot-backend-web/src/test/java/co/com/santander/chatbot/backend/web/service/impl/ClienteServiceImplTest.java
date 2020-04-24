@@ -84,9 +84,10 @@ public class ClienteServiceImplTest {
 
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE,telefono);
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_OBTENER_CREDITOS,telefono);
         Assert.assertNotNull(respuesta);
-        Assert.assertFalse(respuesta.isPresent());
+        Assert.assertTrue(respuesta.isPresent());
+        Assert.assertEquals("No existe informacion", respuesta.get().getDescripcionRespuesta() );
     }
 
     @Test

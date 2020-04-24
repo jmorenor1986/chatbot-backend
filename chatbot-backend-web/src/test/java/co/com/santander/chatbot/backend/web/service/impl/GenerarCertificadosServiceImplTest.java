@@ -51,7 +51,7 @@ public class GenerarCertificadosServiceImplTest {
                 .numPeticionServicio(3L)
                 .build();
         Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, certificadoPayload, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, date, 3L);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
         Assert.assertNotNull(result);
     }
 }

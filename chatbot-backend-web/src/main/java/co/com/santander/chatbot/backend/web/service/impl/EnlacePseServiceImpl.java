@@ -1,8 +1,10 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
 import lombok.extern.java.Log;
@@ -25,7 +27,8 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     }
 
     @Override
-    public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, String telefono, String numcreditoEnc) {
+    @BussinessLog
+    public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, ServiciosEnum serviciosEnum, String telefono, String numcreditoEnc) {
         ResponseEntity<ClienteViewPayload> response =  clienteClient.getClientByTelefonoAndNumCredito(token,telefono, desEncriptarNumCredito(numcreditoEnc));
         return generateInfo(response);
     }
