@@ -21,8 +21,15 @@ INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_pe
                        VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 0, '12345678', '2', '1234');
 INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
                        VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '3', '1234');
+INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
+                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '4', '1234');
+INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
+                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '5', '1234');
 
 --
 --Insert parametros servicio
 --
 INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (1,'WhatssApp','Paz y Salvo',2,1);
+INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (2,'WhatssApp','Debito Automático',2,1);
+INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (3,'WhatssApp','Informacion  credito',2,1);
+INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (4,'WhatssApp','Declaracion Renta',2,1);

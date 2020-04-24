@@ -21,7 +21,7 @@ import java.util.Date;
 public class ValidarProcesoServiceImpl implements ValidarProcesoService {
 
     public static final String ERROR_CONSUMO_SERVICE = "Error al consultar los datos";
-    public static final String ERROR_CIPHER = "Error con los datos ingresados";
+    public static final String ERROR_CIPHER = "Número de credito invalido";
     public static final String ERROR_SOLICITUD_CURSO = "Ya existe una solicitud en curso";
     private final InfoWhatsAppWSClient infoWhatsAppWSClient;
     private final ParametrosServiceClient parametrosServiceClient;
@@ -34,9 +34,9 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
 
     @Override
     public Boolean validateExistingProcesss(Object[] args) {
-        CertificadoPayload datos = (CertificadoPayload) args[1];
+        CertificadoPayload datos = (CertificadoPayload) args[2];
         ResponseEntity<InfoWhatsAppWSPayload> result = null;
-        ServiciosEnum serviciosEnum = (ServiciosEnum) args[2];
+        ServiciosEnum serviciosEnum = (ServiciosEnum) args[1];
         try {
             result = infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(datos.getNumeroCredito()), datos.getIdentificacion(), (Long) args[4]);
         } catch (GeneralSecurityException e) {
