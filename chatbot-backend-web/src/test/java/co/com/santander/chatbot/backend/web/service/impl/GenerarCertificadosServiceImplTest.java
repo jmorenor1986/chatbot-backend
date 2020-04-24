@@ -44,7 +44,7 @@ public class GenerarCertificadosServiceImplTest {
                 .identificacion("1234")
                 .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU").build();
         InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
-                .estado(1L)
+                .estado(0L)
                 .fechaEnvio(date)
                 .numCreditoBanco(SecurityUtilities.desencriptar(certificadoPayload.getNumeroCredito()))
                 .numeroIdentificacion(certificadoPayload.getIdentificacion())

@@ -53,7 +53,7 @@ public class ValidarProcesoServiceImplTest {
                 .fechaEnvio(date)
                 .estado(1L)
                 .build();
-        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, 1L};
+        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, new Date(), 1L};
         Mockito.when(infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(certificado.getNumeroCredito()),
                 certificado.getIdentificacion(), 1L)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
         Mockito.when(parametrosServiceClient.consultarProcesoParametros(token, ValidarProcesoPayload.builder()
@@ -84,7 +84,7 @@ public class ValidarProcesoServiceImplTest {
                 .fechaEnvio(date)
                 .estado(1L)
                 .build();
-        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, 1L};
+        Object[] args = {token, certificado, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, new Date(), 1L};
         Mockito.when(infoWhatsAppWSClient.validateExistingProcess((String) args[0], SecurityUtilities.desencriptar(certificado.getNumeroCredito()),
                 certificado.getIdentificacion(), 1L)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.INTERNAL_SERVER_ERROR));
         Mockito.when(parametrosServiceClient.consultarProcesoParametros(token, ValidarProcesoPayload.builder()
