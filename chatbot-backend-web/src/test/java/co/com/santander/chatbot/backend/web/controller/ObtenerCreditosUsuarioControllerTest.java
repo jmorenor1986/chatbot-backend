@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
@@ -43,13 +44,14 @@ public class ObtenerCreditosUsuarioControllerTest {
         respuesta.setDescripcionRespuesta("Servicio consumido de forma exitosa");
         respuesta.setResultadoConsulta(Boolean.TRUE);
 
-        Mockito.when(clienteService.obtenerCreditos(token, credito.getTelefono())).thenReturn(Optional.of(respuesta));
+        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_OBTENER_CREDITOS,credito.getTelefono())).thenReturn(Optional.of(respuesta));
 
         ResponseEntity<ResponseObtenerCreditosPayload> response = obtenerCreditosUsuarioController.obtener(token, credito);
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
         Assert.assertNotNull(response.getBody());
     }
+
     @Test
     public void testObtenerFILED(){
         String token = "1";
@@ -58,7 +60,7 @@ public class ObtenerCreditosUsuarioControllerTest {
                 .tipoOperacion(Long.valueOf("0"))
                 .build();
 
-        Mockito.when(clienteService.obtenerCreditos(token, credito.getTelefono())).thenReturn(Optional.empty());
+        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_VALIDA_CLIENTE,credito.getTelefono())).thenReturn(Optional.empty());
 
         ResponseEntity<ResponseObtenerCreditosPayload> response = obtenerCreditosUsuarioController.obtener(token, credito);
         Assert.assertNotNull(response);

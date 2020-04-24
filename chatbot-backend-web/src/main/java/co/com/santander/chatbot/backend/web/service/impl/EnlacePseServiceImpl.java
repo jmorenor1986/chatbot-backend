@@ -1,10 +1,13 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Log
 @Service
 public class EnlacePseServiceImpl implements EnlacePseService {
 
@@ -23,7 +27,8 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     }
 
     @Override
-    public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, String telefono, String numcreditoEnc) {
+    @BussinessLog
+    public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, ServiciosEnum serviciosEnum, String telefono, String numcreditoEnc) {
         ResponseEntity<ClienteViewPayload> response =  clienteClient.getClientByTelefonoAndNumCredito(token,telefono, desEncriptarNumCredito(numcreditoEnc));
         return generateInfo(response);
     }
@@ -32,7 +37,7 @@ public class EnlacePseServiceImpl implements EnlacePseService {
         try {
             return SecurityUtilities.desencriptar(numCredito);
         }catch (Exception e){
-            e.printStackTrace();
+            log.severe("Error al desencriptar el credito: ".concat(e.getMessage()));
         }
         return "";
     }
@@ -49,24 +54,12 @@ public class EnlacePseServiceImpl implements EnlacePseService {
                                 .descripcionRespuesta("Servicio consumido de forma exitosa")
                                 .build());
             }else{
-                return Optional.of(ResponseEnlacePsePayload.builder()
-                        .resultadoOperacion("false")
-                        .idRespuesta("2")
-                        .descripcionRespuesta("Banco no existente")
-                        .build());
+                return generateFailedResponse("Banco no existente");
             }
         }else if( HttpStatus.NO_CONTENT.equals(response.getStatusCode()) ){
-            return Optional.of(ResponseEnlacePsePayload.builder()
-                    .resultadoOperacion("false")
-                    .idRespuesta("2")
-                    .descripcionRespuesta("No existe informacion")
-                    .build());
+            return generateFailedResponse("No existe informacion");
         }else{
-            return Optional.of(ResponseEnlacePsePayload.builder()
-                    .resultadoOperacion("false")
-                    .idRespuesta("2")
-                    .descripcionRespuesta("Error de negocio")
-                    .build());
+            return generateFailedResponse("Error de negocio");
         }
     }
 
@@ -79,5 +72,13 @@ public class EnlacePseServiceImpl implements EnlacePseService {
             return Optional.of("https://financierajuriscoop.com.co/oficina-virtual/");
         }
         return Optional.empty();
+    }
+
+    private Optional<ResponseEnlacePsePayload> generateFailedResponse(String message){
+        return Optional.of(ResponseEnlacePsePayload.builder()
+                .resultadoOperacion("false")
+                .idRespuesta("2")
+                .descripcionRespuesta(message)
+                .build());
     }
 }

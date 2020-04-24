@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.aspect.validate.ValidateState;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
@@ -26,8 +27,9 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
     }
 
     @Override
+    @BussinessLog
     @ValidateState
-    public Optional<ResponsePayload> generarCertificado(String token, CertificadoPayload certificadoPayload, ServiciosEnum servicio, Date date, Long idTransaccion) {
+    public Optional<ResponsePayload> generarCertificado(String token, ServiciosEnum servicio, CertificadoPayload certificadoPayload, Date date, Long idTransaccion) {
 
         try {
             ResponseEntity<InfoWhatsAppWSPayload> result = infoWhatsAppWSClient.save(token, InfoWhatsAppWSPayload.builder()

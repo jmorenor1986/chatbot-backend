@@ -1,8 +1,10 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -30,26 +32,23 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public ResponseEntity<ResponsePayload> validarCliente(ClientePayload cliente, String token) {
+    @BussinessLog
+    public ResponseEntity<ResponsePayload> validarCliente(String token, ServiciosEnum serviciosEnum, String telefono, ClientePayload cliente) {
         return clienteClient.conusltarCliente(token, cliente);
     }
 
     @Override
-    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, String telefono) {
+    @BussinessLog
+    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
         if (clientesCreditos.isPresent()) {
             if (Boolean.FALSE.equals(validateClients(clientesCreditos.get()))) {
-                return Optional.of(
-                        ResponseObtenerCreditosPayload.builder()
-                                .idRespuesta(Long.valueOf("2"))
-                                .resultadoConsulta(false)
-                                .descripcionRespuesta("Numero de telefono asociado a dos clientes")
-                                .build()
-                );
+                return generateFailedResponse("Numero de telefono asociado a dos clientes");
             }
             return clienteMapper.fromListClientView(clientesCreditos.get());
+        }else{
+            return  generateFailedResponse("No existe informacion");
         }
-        return Optional.empty();
     }
 
     private Optional<List<ClienteViewPayload>> callServiceCreditosByTel(String token, String telefono) {
@@ -66,5 +65,14 @@ public class ClienteServiceImpl implements ClienteService {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;
+    }
+
+    public Optional<ResponseObtenerCreditosPayload> generateFailedResponse(String mensaje){
+        return  Optional.of(
+                ResponseObtenerCreditosPayload.builder()
+                        .idRespuesta(Long.valueOf("2"))
+                        .resultadoConsulta(false)
+                        .descripcionRespuesta(mensaje)
+                        .build());
     }
 }

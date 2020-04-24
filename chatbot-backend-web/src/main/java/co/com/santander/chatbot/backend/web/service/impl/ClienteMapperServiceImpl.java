@@ -5,6 +5,7 @@ import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseCreditosPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
+import lombok.extern.java.Log;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
+@Log
 public class ClienteMapperServiceImpl implements ClienteMapperService {
 
     @Override
@@ -37,7 +39,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
         try {
             creditoEncriptado = SecurityUtilities.encriptar(clientes.getNumerCredito());
         } catch (Exception e) {
-            e.printStackTrace();
+            log.severe("Error al desencriptar la informacion ".concat(e.getMessage()) );
         }
         return ResponseCreditosPayload.builder()
                 .banco(Long.valueOf(clientes.getIdBanco()))

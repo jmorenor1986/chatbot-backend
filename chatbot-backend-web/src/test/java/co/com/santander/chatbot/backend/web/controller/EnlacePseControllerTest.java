@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.EnlacePsePayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
 import org.junit.Assert;
@@ -44,7 +45,7 @@ public class EnlacePseControllerTest {
                 .idRespuesta("0")
                 .descripcionRespuesta("Servicio consumido de forma exitosa")
                 .build();
-        Mockito.when( enlacePseService.getEnlacePse(token, request.getTelefono(), request.getNumeroVerificador()) )
+        Mockito.when( enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, request.getTelefono(), request.getNumeroVerificador()) )
                 .thenReturn(Optional.of(response));
         ResponseEntity<ResponseEnlacePsePayload> responseController = enlacePseController.getEnlacePse(token, request);
         Assert.assertNotNull(responseController);
@@ -61,7 +62,7 @@ public class EnlacePseControllerTest {
                 .numeroVerificador("lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=")
                 .build();
 
-        Mockito.when( enlacePseService.getEnlacePse(token, request.getTelefono(), request.getNumeroVerificador()) )
+        Mockito.when( enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, request.getTelefono(), request.getNumeroVerificador()) )
                 .thenReturn(Optional.empty());
         ResponseEntity<ResponseEnlacePsePayload> responseController = enlacePseController.getEnlacePse(token, request);
         Assert.assertNotNull(responseController);

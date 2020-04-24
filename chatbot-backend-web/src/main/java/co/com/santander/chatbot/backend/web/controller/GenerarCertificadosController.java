@@ -27,7 +27,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/paz-y-salvo")
     public ResponseEntity<ResponsePayload> generarCertificadoPazYSalvo(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CertificadoPayload certificadoPayload) {
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, certificadoPayload, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, new Date(), 3L);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload , new Date(), 3L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos");
@@ -35,7 +35,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/informacion-credito")
     public ResponseEntity<ResponsePayload> informacionCredito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CertificadoPayload certificadoPayload) {
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, certificadoPayload, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, new Date(), 1L);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken,ServiciosEnum.SERVICIO_INFORMACION_CREDITO, certificadoPayload , new Date(), 1L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos");
@@ -43,7 +43,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/autorizacion-debito")
     public ResponseEntity<ResponsePayload> autorizacionDebito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CertificadoPayload certificadoPayload) {
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, certificadoPayload, ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO, new Date(), 4L);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO, certificadoPayload, new Date(), 4L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos");
@@ -51,7 +51,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/certificacion-declaracion-renta")
     public ResponseEntity<ResponsePayload> certificacionDeclaracionRenta(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CertificadoPayload certificadoPayload) {
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, certificadoPayload, ServiciosEnum.SERVICIO_DECLARACION_RENTA, new Date(), 5L);
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(bearerToken, ServiciosEnum.SERVICIO_DECLARACION_RENTA, certificadoPayload , new Date(), 5L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos");
