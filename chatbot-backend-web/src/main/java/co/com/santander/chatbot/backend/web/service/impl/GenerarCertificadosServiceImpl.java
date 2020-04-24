@@ -31,7 +31,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
 
         try {
             ResponseEntity<InfoWhatsAppWSPayload> result = infoWhatsAppWSClient.save(token, InfoWhatsAppWSPayload.builder()
-                    .estado(1L)
+                    .estado(0L)
                     .fechaEnvio(date)
                     .numCreditoBanco(SecurityUtilities.desencriptar(certificadoPayload.getNumeroCredito()))
                     .numeroIdentificacion(certificadoPayload.getIdentificacion())

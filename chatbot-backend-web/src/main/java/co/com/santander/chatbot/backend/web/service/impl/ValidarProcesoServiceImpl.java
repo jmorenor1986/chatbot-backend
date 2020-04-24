@@ -43,7 +43,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
             throw new ValidateStateCertificateException(ERROR_CIPHER);
         }
         if (result.getStatusCodeValue() == 200)
-            if (result.getBody().getEstado() == 0)
+            if (result.getBody().getEstado() == 1)
                 return validateProcessWithParams(result.getBody().getFechaEnvio(), args[0].toString(), serviciosEnum.getMessage());
             else
                 throw new ValidateStateCertificateException(ERROR_SOLICITUD_CURSO);
