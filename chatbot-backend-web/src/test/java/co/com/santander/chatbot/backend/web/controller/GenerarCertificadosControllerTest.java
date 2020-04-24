@@ -33,7 +33,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarCertificadoPazYSalvo() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(CertificadoPayload.builder().build()), Mockito.eq(ServiciosEnum.SERVICIO_PAZ_Y_SALVO), Mockito.any(), Mockito.eq(3L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
+        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(ServiciosEnum.SERVICIO_PAZ_Y_SALVO), Mockito.eq(CertificadoPayload.builder().build()), Mockito.any(), Mockito.eq(3L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
         ResponseEntity<ResponsePayload> result = generarCertificadosController.generarCertificadoPazYSalvo(token, CertificadoPayload.builder().build());
         Assert.assertNotNull(result);
     }
@@ -42,7 +42,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarCertificadoPazYSalvoError() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(token, CertificadoPayload.builder().build(), ServiciosEnum.SERVICIO_PAZ_Y_SALVO, date, 3L)).thenReturn(Optional.empty());
+        Mockito.when(generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, CertificadoPayload.builder().build(),  date, 3L)).thenReturn(Optional.empty());
         ResponseEntity<ResponsePayload> result = generarCertificadosController.generarCertificadoPazYSalvo(token, CertificadoPayload.builder().build());
     }
 
@@ -50,7 +50,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarAutorizacionDebito() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(CertificadoPayload.builder().build()), Mockito.eq(ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO), Mockito.any(), Mockito.eq(4L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
+        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token),  Mockito.eq(ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO), Mockito.eq(CertificadoPayload.builder().build()), Mockito.any(), Mockito.eq(4L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
         ResponseEntity<ResponsePayload> result = generarCertificadosController.autorizacionDebito(token, CertificadoPayload.builder().build());
         Assert.assertNotNull(result);
     }
@@ -59,7 +59,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarAutorizacionDebitoError() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(token, CertificadoPayload.builder().build(), ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO, date, 4L)).thenReturn(Optional.empty());
+        Mockito.when(generarCertificadosService.generarCertificado(token,  ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO,CertificadoPayload.builder().build(), date, 4L)).thenReturn(Optional.empty());
         ResponseEntity<ResponsePayload> result = generarCertificadosController.autorizacionDebito(token, CertificadoPayload.builder().build());
     }
 
@@ -67,7 +67,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarDeclaracionRenta() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(CertificadoPayload.builder().build()), Mockito.eq(ServiciosEnum.SERVICIO_DECLARACION_RENTA), Mockito.any(), Mockito.eq(5L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
+        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(ServiciosEnum.SERVICIO_DECLARACION_RENTA),  Mockito.eq(CertificadoPayload.builder().build()), Mockito.any(), Mockito.eq(5L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
         ResponseEntity<ResponsePayload> result = generarCertificadosController.certificacionDeclaracionRenta(token, CertificadoPayload.builder().build());
         Assert.assertNotNull(result);
     }
@@ -76,7 +76,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarDeclaracionRentaError() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(token, CertificadoPayload.builder().build(), ServiciosEnum.SERVICIO_DECLARACION_RENTA, date, 5L)).thenReturn(Optional.empty());
+        Mockito.when(generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_DECLARACION_RENTA, CertificadoPayload.builder().build(), date, 5L)).thenReturn(Optional.empty());
         ResponseEntity<ResponsePayload> result = generarCertificadosController.certificacionDeclaracionRenta(token, CertificadoPayload.builder().build());
     }
 
@@ -84,7 +84,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarInformacionCredito() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(CertificadoPayload.builder().build()), Mockito.eq(ServiciosEnum.SERVICIO_INFORMACION_CREDITO), Mockito.any(), Mockito.eq(1L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
+        Mockito.when(generarCertificadosService.generarCertificado(Mockito.eq(token), Mockito.eq(ServiciosEnum.SERVICIO_INFORMACION_CREDITO), Mockito.eq(CertificadoPayload.builder().build()), Mockito.any(), Mockito.eq(1L))).thenReturn(Optional.of(ResponsePayload.builder().build()));
         ResponseEntity<ResponsePayload> result = generarCertificadosController.informacionCredito(token, CertificadoPayload.builder().build());
         Assert.assertNotNull(result);
     }
@@ -93,7 +93,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarInformacionCreditoError() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarCertificado(token, CertificadoPayload.builder().build(), ServiciosEnum.SERVICIO_INFORMACION_CREDITO, date, 1L)).thenReturn(Optional.empty());
+        Mockito.when(generarCertificadosService.generarCertificado(token,  ServiciosEnum.SERVICIO_INFORMACION_CREDITO, CertificadoPayload.builder().build(), date, 1L)).thenReturn(Optional.empty());
         ResponseEntity<ResponsePayload> result = generarCertificadosController.informacionCredito(token, CertificadoPayload.builder().build());
     }
 
