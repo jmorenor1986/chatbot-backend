@@ -47,6 +47,9 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 return validateProcessWithParams(result.getBody().getFechaEnvio(), args[0].toString(), serviciosEnum.getMessage());
             else
                 throw new ValidateStateCertificateException(ERROR_SOLICITUD_CURSO);
+
+        if (result.getStatusCodeValue() == 204)
+            return Boolean.TRUE;
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE);
     }
 

@@ -19,12 +19,7 @@ INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_pe
                        VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 0, '12345678', '1', '1234');
 INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
                        VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 0, '12345678', '2', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '3', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '4', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(next value for infowhatsappws_seq, CURRENT_TIMESTAMP(), 1, '12345678', '5', '1234');
+
 
 --
 --Insert parametros servicio
