@@ -1,0 +1,405 @@
+{
+	"info": {
+		"_postman_id": "133411ab-f4e2-47d3-8d3e-aff38e5ed219",
+		"name": "chatbot copy",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "keepalive",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODYwODMwNzYsImV4cCI6MTU4NjA4NjY3Nn0.hG7rCTWd9WqlxyioB9hvf2YVnJ3ChodQYIhHYyWX1Em3_07aMk0ZD_Ac10mEDSpp4RStY1glT5xFFzWVepZAKg",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/keepalive/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"keepalive",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"correo\":\"jnsierrac@gmail.com\",\n\t\"contrasena\":\"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/login/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"login",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Validar Cliente",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc0NTY5NjQsImV4cCI6MTU4NzQ2MDU2NH0.TH8F8BRO8TKdGpR-8qPllcFf-pitY7DOrUwiVHa6f4jI3VNG0ILRpPUTRM7Wb5qVk8I-heAsqwCiHD4Rm-oUVQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":\"3014001618\",\n\t\"cedula\": \"0000\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/validarCliente/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"validarCliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consulta Usuario acceso datos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODcyOTI4MzcsImV4cCI6MTU4NzI5NjQzN30.3uCJwkZveN29gKsnNXARepCVlNdfbUXQ_XhqNaXxnBWq9BVIg6QiCdpl5_SVfvfIY6wjG0PvK5Ll346KNCYGmw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":\"1\",\n\t\"cedula\":\"1066\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/cliente/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"chatbot-acceso-datos",
+						"v1",
+						"cliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "certificado paz y salvo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTI5NTYsImV4cCI6MTU4Nzc1NjU1Nn0.1SQRSn4A0x6H1l7uvufTxw6Vdu2k4x2-bAVVNgilrqi15Ma3jwKRu4HX_G345wuVY8A4_H3R_iobRxpch4c5UA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/paz-y-salvo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"paz-y-salvo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "informacion-credito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\",\n\t\"numeroPeticion\" : \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/informacion-credito",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"informacion-credito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "autorizacion-debito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/autorizacion-debito",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"autorizacion-debito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "certificacion-declaracion-renta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/certificacion-declaracion-renta",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"certificacion-declaracion-renta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Acceso datos validar proceso existente",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc1NTA0ODgsImV4cCI6MTU4NzU1NDA4OH0.qvW3ey69jdKM3Uy6f-CobvKBO8dYRkGBbVPxw2EPk1vLnndMmk2Sxd8GF4m3UneAOkNVJlgUxiJaJfG85DTv7g",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/infowhatsappwscontroller/validateexistingprocess/?numCreditoBanco=1234&numeroIdentificacion=1234&numPeticionServicio=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"chatbot-acceso-datos",
+						"v1",
+						"infowhatsappwscontroller",
+						"validateexistingprocess",
+						""
+					],
+					"query": [
+						{
+							"key": "numCreditoBanco",
+							"value": "1234"
+						},
+						{
+							"key": "numeroIdentificacion",
+							"value": "1234"
+						},
+						{
+							"key": "numPeticionServicio",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "AccesoDatos consultar-proceso",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc2NDAyMDQsImV4cCI6MTU4NzY0MzgwNH0.w-C9t3yuMyvKq-nWT0TJjtC7t_GiApcwKOtFuEUlqGzCHswhUfgy_JgeNspeZn3JckbGIFDWHSHWXA8g47wkNw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5001/chatbot-acceso-datos/v1/parametros-servicio/consultar-proceso",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5001",
+					"path": [
+						"chatbot-acceso-datos",
+						"v1",
+						"parametros-servicio",
+						"consultar-proceso"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
