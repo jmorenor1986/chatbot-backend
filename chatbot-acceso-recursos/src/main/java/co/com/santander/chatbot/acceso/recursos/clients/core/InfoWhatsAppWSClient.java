@@ -9,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 public interface InfoWhatsAppWSClient {
 
     @GetMapping(value = "${clientes.url.consultaProcesoExistente}")
-    public ResponseEntity<InfoWhatsAppWSPayload> validateExistingProcess(@RequestHeader("Authorization") String bearerToken,
+    ResponseEntity<InfoWhatsAppWSPayload> validateExistingProcess(@RequestHeader("Authorization") String bearerToken,
                                                                          @RequestParam(value = "numCreditoBanco") String numCreditoBanco,
                                                                          @RequestParam(value = "numeroIdentificacion") String numeroIdentificacion,
                                                                          @RequestParam(value = "numPeticionServicio") Long numPeticionServicio);
 
     @PostMapping(value = "${clientes.url.guardarProceso}")
-    public ResponseEntity<InfoWhatsAppWSPayload> save(@RequestHeader("Authorization") String bearerToken, @RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload);
+    ResponseEntity<InfoWhatsAppWSPayload> save(@RequestHeader("Authorization") String bearerToken, @RequestBody InfoWhatsAppWSPayload infoWhatsAppWSPayload);
 }

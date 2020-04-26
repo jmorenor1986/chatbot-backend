@@ -6,11 +6,12 @@ import lombok.Data;
 
 @Data
 @Builder
-public class GenericLog {
+public class GenericLogPayload {
 
     private String token;
     private ServiciosEnum serviciosEnum;
     private String telefono;
     private String identificacion;
     private String credito;
+    private String traza;
 }
