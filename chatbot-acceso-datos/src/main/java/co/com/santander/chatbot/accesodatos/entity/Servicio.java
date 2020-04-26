@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.accesodatos.entity;
 
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

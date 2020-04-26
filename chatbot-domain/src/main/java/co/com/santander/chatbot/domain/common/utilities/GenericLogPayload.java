@@ -13,4 +13,5 @@ public class GenericLog {
     private String telefono;
     private String identificacion;
     private String credito;
+    private String traza;
 }

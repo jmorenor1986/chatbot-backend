@@ -16,8 +16,11 @@ import java.util.Date;
 @NoArgsConstructor
 public class Log {
     @Id
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "log_generator")
+    @SequenceGenerator(name = "log_generator", sequenceName = "log_seq", allocationSize = 1)
     private Long id;
-    @Column(name = "Nombre_Cliente")
+    @Column(name = "telefono")
     private String telefono;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha")
@@ -28,4 +31,6 @@ public class Log {
     private Servicio servicio;
     @ManyToOne(fetch = FetchType.LAZY)
     private Canal canal;
+    @Column(name = "NOMBRE_CLIENTE")
+    private String nombreCliente;
 }
