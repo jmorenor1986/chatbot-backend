@@ -36,7 +36,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Optional<Cliente> consultarClienteByTelefonoAndNumCredito(String telefono, String numCredito) {
-        List<Cliente> listaCliente =  clienteRepository.findByCedulaEndingWithAndNumerCredito(telefono, numCredito);
+        List<Cliente> listaCliente =  clienteRepository.findByTelefonoAndNumerCredito(telefono, numCredito);
         if( listaCliente.isEmpty() ) {
             return Optional.empty();
         }
