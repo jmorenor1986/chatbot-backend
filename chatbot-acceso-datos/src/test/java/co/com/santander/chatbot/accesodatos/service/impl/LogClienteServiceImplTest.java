@@ -58,7 +58,6 @@ public class LogClienteServiceImplTest {
                 .traza("traza")
                 .servicio(Servicio.builder().id(1L).build())
                 .telefono("3229032614")
-                .nombreCliente("Jesus Nicolas Sierra Chaparro")
                 .build();
         Log logRes = Log.builder()
                 .id(1L)
@@ -67,7 +66,6 @@ public class LogClienteServiceImplTest {
                 .traza("traza")
                 .servicio(Servicio.builder().id(1L).build())
                 .telefono("3229032614")
-                .nombreCliente("Jesus Nicolas Sierra Chaparro")
                 .build();
         Mockito.when(servicioRepository.findByNombre(ServiciosEnum.SERVICIO_OBTENER_CREDITOS.name()))
                 .thenReturn(Optional.of(servicioRta));
@@ -95,7 +93,6 @@ public class LogClienteServiceImplTest {
                 .traza("traza")
                 .servicio(Servicio.builder().id(1L).build())
                 .telefono("3229032614")
-                .nombreCliente("Jesus Nicolas Sierra Chaparro")
                 .build();
         Log logRes = Log.builder()
                 .id(1L)
@@ -104,7 +101,6 @@ public class LogClienteServiceImplTest {
                 .traza("traza")
                 .servicio(Servicio.builder().id(1L).build())
                 .telefono("3229032614")
-                .nombreCliente("Jesus Nicolas Sierra Chaparro")
                 .build();
         Mockito.when(servicioRepository.findByNombre(ServiciosEnum.SERVICIO_OBTENER_CREDITOS.name()))
                 .thenReturn(Optional.empty());

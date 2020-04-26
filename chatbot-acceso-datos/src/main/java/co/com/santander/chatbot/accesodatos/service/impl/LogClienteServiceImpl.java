@@ -11,6 +11,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.Optional;
 
 @Service
@@ -32,11 +33,12 @@ public class LogClienteServiceImpl implements LogClienteService {
         //Mapeo la entidad
         Log logEntity = mapper.map(genericLogPayload,Log.class);
         logEntity.setCanal(Canal.builder().id(1L).build());
+        logEntity.setFeha(new Date());
         //Busco el id del servicio que corresponde
         Optional<Servicio> servicio = servicioRepository.findByNombre(genericLogPayload.getServiciosEnum().name());
         if(servicio.isPresent()){
             logEntity.setServicio(servicio.get());
-            logClienteRepository.save(logEntity);
+             logClienteRepository.save(logEntity);
             return Optional.of(Boolean.TRUE);
         }
         return Optional.of(Boolean.FALSE);

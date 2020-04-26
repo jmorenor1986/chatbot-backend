@@ -25,10 +25,9 @@ CREATE TABLE log_cliente(
     id                  int8            not null,
     canal_id            int8            not null,
     servicio_id         int8            not null,
-    nombre_cliente      varchar(255)    not null,
     telefono            varchar(255)    not null,
     fecha               timestamp       not null,
-    traza               varchar(255)    not null,
+    traza               text            not null,
     primary key(id)
 );
 

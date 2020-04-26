@@ -35,7 +35,6 @@ public class LogClienteRepositoryTest_IT {
                 .traza("traza")
                 .servicio(Servicio.builder().id(1L).build())
                 .telefono("3229032614")
-                .nombreCliente("Jesus Nicolas Sierra Chaparro")
                 .build();
         Log logResponse =  logClienteRepository.save(logEntity);
         Assert.assertNotNull(logResponse);
