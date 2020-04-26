@@ -15,4 +15,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     List<Cliente> findByTelefonoAndNumerCredito(String telefono, String numCredito);
 
+    List<Cliente> findByCedulaEndingWithAndNumerCredito(String cedula, String numeroCredito);
+
 }

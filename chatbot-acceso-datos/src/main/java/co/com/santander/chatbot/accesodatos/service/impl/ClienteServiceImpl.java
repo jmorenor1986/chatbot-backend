@@ -12,6 +12,7 @@ import java.util.Optional;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
+
     private final ClienteRepository clienteRepository;
 
     @Autowired
@@ -35,11 +36,29 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Optional<Cliente> consultarClienteByTelefonoAndNumCredito(String telefono, String numCredito) {
-        List<Cliente> listaCliente =  clienteRepository.findByTelefonoAndNumerCredito(telefono, numCredito);
+        List<Cliente> listaCliente =  clienteRepository.findByCedulaEndingWithAndNumerCredito(telefono, numCredito);
         if( listaCliente.isEmpty() ) {
             return Optional.empty();
         }
         return Optional.of( listaCliente.get(0) );
+    }
+
+    @Override
+    public Optional<Boolean> validaCreditoByCedula(String cedula, String credito) {
+        List<Cliente> creditos = clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito);
+        if(creditos.isEmpty()){
+            return Optional.of(Boolean.FALSE);
+        }
+        return Optional.of(Boolean.TRUE);
+    }
+
+    @Override
+    public Optional<String> findCedulaByCedulaAndCredito(String cedula, String credito) {
+        List<Cliente> creditos = clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito);
+        if(creditos.isEmpty()){
+            return Optional.empty();
+        }
+        return Optional.of(creditos.get(0).getCedula());
     }
 
 }

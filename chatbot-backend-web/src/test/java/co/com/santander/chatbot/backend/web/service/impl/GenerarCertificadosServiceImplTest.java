@@ -38,7 +38,7 @@ public class GenerarCertificadosServiceImplTest {
     }
 
     @Test
-    public void testGenerarCertificado() throws GeneralSecurityException {
+    public void testGenerarCertificadoSUCCES() throws GeneralSecurityException {
         Date date = new Date();
         CertificadoPayload certificadoPayload = CertificadoPayload.builder()
                 .identificacion("1234")
@@ -53,5 +53,26 @@ public class GenerarCertificadosServiceImplTest {
         Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
         Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void testGenerarCertificadoINVALID() throws GeneralSecurityException {
+        Date date = new Date();
+        CertificadoPayload certificadoPayload = CertificadoPayload.builder()
+                .identificacion("1234")
+                .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU").build();
+        InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
+                .estado(0L)
+                .fechaEnvio(date)
+                .numCreditoBanco(SecurityUtilities.desencriptar(certificadoPayload.getNumeroCredito()))
+                .numeroIdentificacion(certificadoPayload.getIdentificacion())
+                .numPeticionServicio(3L)
+                .build();
+        Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload))
+                .thenReturn(new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY));
+        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
+        Assert.assertNotNull(result);
+        Assert.assertTrue(result.isPresent());
+        Assert.assertEquals("Datos inconcordantes", result.get().getDescripcionRespuesta());
     }
 }

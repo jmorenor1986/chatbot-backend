@@ -30,7 +30,6 @@ public class BussinesLogAspect {
     @Around("@annotation( co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog)")
     public Object generateLog(ProceedingJoinPoint joinPoint) throws Throwable {
         mapperArgs(joinPoint.getArgs());
-        log.info(genericLog.toString());
         Object response = joinPoint.proceed();
         genericLog.setTraza(new Gson().toJson(response));
         token = genericLog.getToken();

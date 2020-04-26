@@ -10,6 +10,8 @@ import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
+import feign.FeignException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -39,16 +41,25 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .numeroIdentificacion(certificadoPayload.getIdentificacion())
                     .numPeticionServicio(idTransaccion)
                     .build());
-            if (result.getStatusCodeValue() == 200)
-                return Optional.of(ResponsePayload.builder()
-                        .descripcionRespuesta("Transaccion realizada")
-                        .resultadoValidacion(Boolean.TRUE)
-                        .idRespuesta(0)
-                        .build());
+            if (result.getStatusCodeValue() == 200) {
+                return generateRespuesta(Boolean.TRUE, 0, "Transaccion realizada" );
+            }
         } catch (GeneralSecurityException e) {
             throw new ValidateStateCertificateException("Error en los datos ingresados");
+        } catch (FeignException e){
+            if(e.status() == 422 ){
+                return generateRespuesta(Boolean.FALSE, 1, "Datos inconsistentes");
+            }
         }
         throw new ValidateStateCertificateException("Error al consultar la informacion");
+    }
+
+    private Optional<ResponsePayload> generateRespuesta(Boolean resultado, Integer id, String descripcion){
+        return Optional.of(ResponsePayload.builder()
+                .descripcionRespuesta(descripcion)
+                .resultadoValidacion(resultado)
+                .idRespuesta(id)
+                .build());
 
     }
 }

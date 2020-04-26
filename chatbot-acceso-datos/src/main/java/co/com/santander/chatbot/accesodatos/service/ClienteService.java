@@ -12,4 +12,8 @@ public interface ClienteService {
     Optional<List<Cliente>> consultarClienteByTelefono(String telefono);
 
     Optional<Cliente> consultarClienteByTelefonoAndNumCredito(String telefono, String numCredito);
+
+    Optional<Boolean> validaCreditoByCedula(String cedula, String credito);
+
+    Optional<String> findCedulaByCedulaAndCredito(String cedula, String credito);
 }

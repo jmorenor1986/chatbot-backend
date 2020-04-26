@@ -28,6 +28,8 @@ CREATE TABLE log_cliente(
     telefono            varchar(255)    not null,
     fecha               timestamp       not null,
     traza               text            not null,
+    identificacion      varchar(255)            ,
+    credito             varchar(255)            ,
     primary key(id)
 );
 

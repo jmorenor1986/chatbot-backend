@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
 import co.com.santander.chatbot.accesodatos.entity.InfoWhatsAppWS;
+import co.com.santander.chatbot.accesodatos.service.ClienteService;
 import co.com.santander.chatbot.accesodatos.service.InfoWhatsAppWSService;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;
 import org.junit.Assert;
@@ -25,11 +26,13 @@ public class InfoWhatsAppWSControllerTest {
     private ModelMapper modelMapper;
     @Mock
     private InfoWhatsAppWSService infoWhatsAppWSService;
+    @Mock
+    private ClienteService clienteService;
+
     private InfoWhatsAppWS outputEntity;
 
     @Before
     public void setUp(){
-
         outputEntity = InfoWhatsAppWS.builder()
                 .id(Long.valueOf(1))
                 .numCreditoBanco("12345678")
@@ -40,7 +43,7 @@ public class InfoWhatsAppWSControllerTest {
                 .build();
         MockitoAnnotations.initMocks(this);
         this.modelMapper = new ModelMapper();
-        infoWhatsAppWSController = new InfoWhatsAppWSController(infoWhatsAppWSService, modelMapper);
+        infoWhatsAppWSController = new InfoWhatsAppWSController(infoWhatsAppWSService, clienteService, modelMapper);
     }
 
     @Test
@@ -71,6 +74,8 @@ public class InfoWhatsAppWSControllerTest {
         Long numPeticionServicio = Long.valueOf("1");
         final List<InfoWhatsAppWS> respuestaRepo = new ArrayList<>();
         respuestaRepo.add(outputEntity);
+        Mockito.when(clienteService.validaCreditoByCedula(numeroIdentificacion, numCreditoBanco)).thenReturn(Optional.of(Boolean.TRUE));
+
         Mockito.when(infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
                 .thenReturn(respuestaRepo);
         ResponseEntity<InfoWhatsAppWSPayload> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);

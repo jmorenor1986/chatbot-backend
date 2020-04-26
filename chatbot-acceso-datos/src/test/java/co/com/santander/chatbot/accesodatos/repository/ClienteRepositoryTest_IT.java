@@ -64,4 +64,21 @@ public class ClienteRepositoryTest_IT {
         Assert.assertNotNull(creditos);
         Assert.assertTrue( creditos.size() == 0 );
     }
+    @Test
+    public void testFindByCedulaAndNumerCredito(){
+        String numCredito = "6000000457";
+        String cedula = "9098";
+        List<Cliente> creditos = clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, numCredito);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() > 0 );
+    }
+
+    @Test
+    public void testFindByCedulaAndNumerCreditoEMPTY(){
+        String numCredito = "600000045722222";
+        String cedula = "9098";
+        List<Cliente> creditos = clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, numCredito);
+        Assert.assertNotNull(creditos);
+        Assert.assertTrue( creditos.size() == 0 );
+    }
 }

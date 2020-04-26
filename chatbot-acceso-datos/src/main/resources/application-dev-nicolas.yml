@@ -19,3 +19,12 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
     show-sql: true
     generate-ddl: true
+
+#show sql values
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace

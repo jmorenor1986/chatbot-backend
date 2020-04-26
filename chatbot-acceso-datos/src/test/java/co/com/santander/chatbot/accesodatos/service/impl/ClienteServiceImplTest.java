@@ -128,4 +128,91 @@ public class ClienteServiceImplTest {
         Assert.assertNotNull(response);
         Assert.assertFalse(response.isPresent());
     }
+    @Test
+    public void validaCreditoByCedulaSUCCESS(){
+        String credito = "6000000457";
+        String cedula = "56789098";
+
+        List<Cliente> result = new ArrayList<>();
+        Cliente item = Cliente.builder()
+                .id(Long.valueOf("2"))
+                .nombreCliente("GOMEZ GARCIA LUISA CLRA")
+                .telefono("3005632011")
+                .cedula("56789098")
+                .email("jesus.sierra@samtel.co")
+                .numerCredito("6000000457")
+                .banco("BANCO COMERCIAL AVVILLAS")
+                .estado("Cerrado")
+                .idProducto("200")
+                .idBanco("52")
+                .convenio("SIDA S.A.")
+                .build();
+        result.add(item);
+
+        Mockito.when(clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito)).thenReturn(result);
+
+        Optional<Boolean> validate = clienteService.validaCreditoByCedula(cedula, credito);
+        Assert.assertNotNull(validate);
+        Assert.assertTrue(validate.isPresent());
+        Assert.assertTrue(validate.get());
+    }
+
+    @Test
+    public void validaCreditoByCedulaFAILED(){
+        String credito = "6000000457";
+        String cedula = "56789098";
+
+        List<Cliente> result = new ArrayList<>();
+
+        Mockito.when(clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito)).thenReturn(result);
+
+        Optional<Boolean> validate = clienteService.validaCreditoByCedula(cedula, credito);
+        Assert.assertNotNull(validate);
+        Assert.assertTrue(validate.isPresent());
+        Assert.assertFalse(validate.get());
+    }
+
+
+    @Test
+    public void testFindCedulaByCedulaAndCreditoSUCCESS(){
+        String credito = "6000000457";
+        String cedula = "56789098";
+
+        List<Cliente> result = new ArrayList<>();
+        Cliente item = Cliente.builder()
+                .id(Long.valueOf("2"))
+                .nombreCliente("GOMEZ GARCIA LUISA CLRA")
+                .telefono("3005632011")
+                .cedula("56789098")
+                .email("jesus.sierra@samtel.co")
+                .numerCredito("6000000457")
+                .banco("BANCO COMERCIAL AVVILLAS")
+                .estado("Cerrado")
+                .idProducto("200")
+                .idBanco("52")
+                .convenio("SIDA S.A.")
+                .build();
+        result.add(item);
+
+        Mockito.when(clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito)).thenReturn(result);
+
+        Optional<String> validate = clienteService.findCedulaByCedulaAndCredito(cedula, credito);
+        Assert.assertNotNull(validate);
+        Assert.assertTrue(validate.isPresent());
+        Assert.assertNotNull(validate.get());
+    }
+
+    @Test
+    public void testFindCedulaByCedulaAndCreditoFAILED(){
+        String credito = "6000000457";
+        String cedula = "56789098";
+
+        List<Cliente> result = new ArrayList<>();
+
+        Mockito.when(clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, credito)).thenReturn(result);
+
+        Optional<String> validate = clienteService.findCedulaByCedulaAndCredito(cedula, credito);
+        Assert.assertNotNull(validate);
+        Assert.assertFalse(validate.isPresent());
+    }
 }
