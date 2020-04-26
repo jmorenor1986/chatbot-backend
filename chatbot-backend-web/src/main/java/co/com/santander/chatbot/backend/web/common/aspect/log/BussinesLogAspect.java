@@ -1,10 +1,9 @@
 package co.com.santander.chatbot.backend.web.common.aspect.log;
 
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
-import co.com.santander.chatbot.domain.common.utilities.GenericLog;
+import co.com.santander.chatbot.domain.common.utilities.GenericLogPayload;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
-import com.google.gson.Gson;
 import lombok.extern.java.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -17,7 +16,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class BussinesLogAspect {
 
-    private GenericLog genericLog;
+    private GenericLogPayload genericLog;
 
     @Autowired
     public BussinesLogAspect() {
@@ -43,7 +42,7 @@ public class BussinesLogAspect {
         }else{
             telefono = (String) args[2];
         }
-        genericLog = GenericLog.builder()
+        genericLog = GenericLogPayload.builder()
                 .token((String) args[0])
                 .serviciosEnum((ServiciosEnum) args[1])
                 .telefono(telefono)
