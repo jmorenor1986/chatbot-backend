@@ -31,8 +31,10 @@ public class Log {
     private Servicio servicio;
     @ManyToOne(fetch = FetchType.LAZY)
     private Canal canal;
-    @Column()
+    @Column(name = "identificacion")
     private String identificacion;
-    @Column()
+    @Column(name = "credito")
     private String credito;
+    @Column(name = "correo")
+    private String correo;
 }

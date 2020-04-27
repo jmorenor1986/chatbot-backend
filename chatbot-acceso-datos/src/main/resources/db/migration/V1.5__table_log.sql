@@ -30,6 +30,7 @@ CREATE TABLE log_cliente(
     traza               text            not null,
     identificacion      varchar(255)            ,
     credito             varchar(255)            ,
+    correo              varchar(255)            ,
     primary key(id)
 );
 

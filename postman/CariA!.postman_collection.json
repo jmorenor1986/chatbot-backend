@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "c3ae2c37-f888-4653-9100-a5a1344aeb44",
+		"name": "CariA!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"correo\":\"jnsierrac@gmail.com\",\n\t\"contrasena\": \"123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/login/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"login",
+						""
+					]
+				},
+				"description": "Servicio el cual por medio de un usario y contraseña genera un token para las proximas solicitudes."
+			},
+			"response": []
+		},
+		{
+			"name": "001_Validar_Usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MTg1MTcsImV4cCI6MTU4NzkyMjExN30.CLWn9bTdcMLhXJGQpsPXDHKiKZx5eOXLARJqZGb8DfyfGB4_tJMb2_MUBPQzvJlGE6GBUDF9bFRAQXRTv92pGA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":\"3005632010\",\n\t\"cedula\":\"9066\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/validarCliente/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"validarCliente",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "002_Obtener_Creditos_Usuario",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzYzMzMsImV4cCI6MTU4NzkzOTkzM30.Gndl1j8fndpGTs9KNLuHitH5Ol_3eg5cBGN8qbERzoYmCew8vrinWs-JkKVI8oIyTzfjC3o9WVVnPiz9xoPWVQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"telefono\": \"3005632015\",\r\n\"tipoOperacion\": 0,\r\n\"infoUno\": \"\",\r\n\"infoDos\": \"\",\r\n\"infoTres\": \"\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtenerCreditosUsuario/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtenerCreditosUsuario",
+						""
+					]
+				},
+				"description": "**Dado** un usuario autenticado con un numero de teléfono valido, con un solo cliente y un solo crédito asociado **Cuando**  consulte el servicio **Entonces** retornara los datos del cliente y un solo crédito"
+			},
+			"response": []
+		},
+		{
+			"name": "003_Enviar_Informacion_Credito",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzE3NzQsImV4cCI6MTU4NzkzNTM3NH0.OAIHVxHVz9dbBkYbZUuweSe09kpTedx8W6XGrSgEX4holgkr2gCE7OVOdRmgl23t6PSyuUEZ1J1I9IAQ-O6bJA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"7690\",\n\t\"numeroCredito\" : \"lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=\",\n\t\"numeroPeticion\" : \"3\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/informacion-credito",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"informacion-credito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "004_Certificado_Paz_y_Salvo",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzU1MTcsImV4cCI6MTU4NzkzOTExN30.whgFe3g4_uO3RGlwf4qsDfgAwkZrizS4NIqbt0TghTmx4hM2pHKmlt-_zPJbRTQdyE-_y30wWH5pMzIkZ6Ufmw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"7690\",\n\t\"numeroCredito\" : \"lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/paz-y-salvo",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"paz-y-salvo"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "005_Autorizacion_debito_automatico",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzU1MTcsImV4cCI6MTU4NzkzOTExN30.whgFe3g4_uO3RGlwf4qsDfgAwkZrizS4NIqbt0TghTmx4hM2pHKmlt-_zPJbRTQdyE-_y30wWH5pMzIkZ6Ufmw",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"7690\",\n\t\"numeroCredito\" : \"lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/autorizacion-debito",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"autorizacion-debito"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "006_Certificacion_Declaracion_Renta",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzU5NDMsImV4cCI6MTU4NzkzOTU0M30.zsSGc1P2wC9MBuBDN59znuXUeApxbT658A8pEc83O_rHTZMVfsLDbfJSr60C1L-JFidjD6S85fYZJMozvivTyA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"identificacion\":\"7690\",\n\t\"numeroCredito\" : \"lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/obtener-certificados/certificacion-declaracion-renta",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"obtener-certificados",
+						"certificacion-declaracion-renta"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "007_Generar_Link_PSE",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc5MzYzMzMsImV4cCI6MTU4NzkzOTkzM30.Gndl1j8fndpGTs9KNLuHitH5Ol_3eg5cBGN8qbERzoYmCew8vrinWs-JkKVI8oIyTzfjC3o9WVVnPiz9xoPWVQ",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"telefono\":\"3005632015\",\n\t\"numeroCreditoOfuscado\": \"xxxxx00461\",\n\t\"numeroVerificador\": \"lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:5000/chatbot-backend/v1/enlacePse/",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"chatbot-backend",
+						"v1",
+						"enlacePse",
+						""
+					]
+				},
+				"description": "**Dado** un usuario autenticado con un numero de teléfono valido,  un numero de crédito solicitado y  previamente encriptado  **Cuando**  consulte el servicio **Entonces** retornara el link del de pago PSE y demás información"
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

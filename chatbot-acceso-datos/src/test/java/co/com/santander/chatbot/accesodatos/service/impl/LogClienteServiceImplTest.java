@@ -3,6 +3,7 @@ package co.com.santander.chatbot.accesodatos.service.impl;
 import co.com.santander.chatbot.accesodatos.entity.Canal;
 import co.com.santander.chatbot.accesodatos.entity.Log;
 import co.com.santander.chatbot.accesodatos.entity.Servicio;
+import co.com.santander.chatbot.accesodatos.repository.ClienteRepository;
 import co.com.santander.chatbot.accesodatos.repository.LogClienteRepository;
 import co.com.santander.chatbot.accesodatos.repository.ServicioRepository;
 import co.com.santander.chatbot.accesodatos.service.LogClienteService;
@@ -29,13 +30,16 @@ public class LogClienteServiceImplTest {
     private LogClienteRepository logClienteRepository;
     @Mock
     private ServicioRepository servicioRepository;
+    @Mock
+    private ClienteRepository clienteRepository;
+
     private ModelMapper mapper;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.mapper = new ModelMapper();
-        this.logClienteService = new LogClienteServiceImpl(logClienteRepository, servicioRepository, mapper);
+        this.logClienteService = new LogClienteServiceImpl(logClienteRepository, servicioRepository, clienteRepository, mapper);
     }
 
     @Test
