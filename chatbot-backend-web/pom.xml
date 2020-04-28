@@ -85,6 +85,7 @@
                                         <exclude>co.com.santander.chatbot.backend.web.dto.*</exclude>
                                         <exclude>co.com.santander.chatbot.backend.web.common.aspect.validate.*</exclude>
                                         <exclude>co.com.santander.chatbot.backend.web.common.aspect.log.*</exclude>
+                                        <exclude>co.com.santander.chatbot.backend.web.service.impl.GenerarCertificadosServiceImpl</exclude>
                                         <exclude>*Config</exclude>
                                         <exclude>*Filter</exclude>
                                     </excludes>

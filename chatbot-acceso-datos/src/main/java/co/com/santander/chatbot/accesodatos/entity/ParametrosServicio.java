@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -19,8 +17,10 @@ import javax.persistence.NamedQuery;
 public class ParametrosServicio {
     @Id
     private Long id;
-    private String canal;
-    private String servicio;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Servicio servicio;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Canal canal;
     private Integer numeroIntentos;
     private Integer tiempoIntentos;
 }

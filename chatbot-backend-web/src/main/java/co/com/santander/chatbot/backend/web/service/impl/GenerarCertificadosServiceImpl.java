@@ -42,19 +42,17 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .numPeticionServicio(idTransaccion)
                     .build());
             if (result.getStatusCodeValue() == 200) {
-                return generateRespuesta(Boolean.TRUE, 0, "Transaccion realizada" );
+                return generateRespuesta(Boolean.TRUE, 0, "Transaccion realizada");
             }
         } catch (GeneralSecurityException e) {
             throw new ValidateStateCertificateException("Error en los datos ingresados");
-        } catch (FeignException e){
-            if(e.status() == 422 ){
-                return generateRespuesta(Boolean.FALSE, 1, "Datos inconsistentes");
-            }
+        } catch (FeignException.UnprocessableEntity e) {
+            return generateRespuesta(Boolean.FALSE, 1, "Datos inconsistentes");
         }
         throw new ValidateStateCertificateException("Error al consultar la informacion");
     }
 
-    private Optional<ResponsePayload> generateRespuesta(Boolean resultado, Integer id, String descripcion){
+    private Optional<ResponsePayload> generateRespuesta(Boolean resultado, Integer id, String descripcion) {
         return Optional.of(ResponsePayload.builder()
                 .descripcionRespuesta(descripcion)
                 .resultadoValidacion(resultado)

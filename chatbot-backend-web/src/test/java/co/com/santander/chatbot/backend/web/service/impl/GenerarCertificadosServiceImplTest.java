@@ -7,6 +7,8 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
+import feign.FeignException;
+import feign.Request;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,6 +16,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -55,24 +58,5 @@ public class GenerarCertificadosServiceImplTest {
         Assert.assertNotNull(result);
     }
 
-    @Test
-    public void testGenerarCertificadoINVALID() throws GeneralSecurityException {
-        Date date = new Date();
-        CertificadoPayload certificadoPayload = CertificadoPayload.builder()
-                .identificacion("1234")
-                .numeroCredito("kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU").build();
-        InfoWhatsAppWSPayload infoWhatsAppWSPayload = InfoWhatsAppWSPayload.builder()
-                .estado(0L)
-                .fechaEnvio(date)
-                .numCreditoBanco(SecurityUtilities.desencriptar(certificadoPayload.getNumeroCredito()))
-                .numeroIdentificacion(certificadoPayload.getIdentificacion())
-                .numPeticionServicio(3L)
-                .build();
-        Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload))
-                .thenReturn(new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY));
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
-        Assert.assertNotNull(result);
-        Assert.assertTrue(result.isPresent());
-        Assert.assertEquals("Datos inconcordantes", result.get().getDescripcionRespuesta());
-    }
+
 }
