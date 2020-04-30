@@ -4,15 +4,10 @@ package co.com.santander.chatbot.backend.web.common.utilities;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;
 
-import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
+import java.security.GeneralSecurityException;
 import java.util.Base64;
 import java.util.Objects;
 
@@ -33,7 +28,7 @@ public class SecurityUtilities {
     private SecurityUtilities() {
     }
 
-    public static String encriptar(String texto) throws BadPaddingException, IllegalBlockSizeException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException {
+    public static String encriptar(String texto) throws GeneralSecurityException {
         if (Objects.isNull(semilla))
             semilla = SEMILLA_DEFAULT;
         // Get Cipher Instance
@@ -51,7 +46,7 @@ public class SecurityUtilities {
         return Base64.getEncoder().encodeToString(cipherText);
     }
 
-    public static String desencriptar(String texto) throws NoSuchPaddingException, NoSuchAlgorithmException, BadPaddingException, IllegalBlockSizeException, InvalidAlgorithmParameterException, InvalidKeyException {
+    public static String desencriptar(String texto) throws GeneralSecurityException {
         if (Objects.isNull(semilla))
             semilla = SEMILLA_DEFAULT;
         // Get Cipher Instance

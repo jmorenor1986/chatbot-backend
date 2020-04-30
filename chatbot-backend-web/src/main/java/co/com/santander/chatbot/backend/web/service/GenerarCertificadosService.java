@@ -1,12 +1,14 @@
 package co.com.santander.chatbot.backend.web.service;
 
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
-import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.PazYSalvoPayload;
 
-import java.util.Date;
 import java.util.Optional;
 
 public interface GenerarCertificadosService {
-    Optional<ResponsePayload> generarCertificado(String token,  ServiciosEnum servicio,CertificadoPayload certificadoPayload, Date date, Long idTransaccion);
+    public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, InformacionCreditoPayload informacionCreditoPayload);
+
+    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, PazYSalvoPayload pazYSalvoPayload, ServiciosEnum serviciosEnum, Long idTransaccion);
 }

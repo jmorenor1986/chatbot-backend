@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
+import co.com.santander.chatbot.backend.web.service.GuardarTransaccionCertificadoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
@@ -28,13 +29,15 @@ public class GenerarCertificadosServiceImplTest {
 
     @Mock
     private InfoWhatsAppWSClient infoWhatsAppWSClient;
+    @Mock
+    private GuardarTransaccionCertificadoService guardarTransaccionCertificadoService;
     private String token;
 
     @Before
     public void init() {
         MockitoAnnotations.initMocks(this);
         token = "123123123123";
-        generarCertificadosService = new GenerarCertificadosServiceImpl(infoWhatsAppWSClient);
+        generarCertificadosService = new GenerarCertificadosServiceImpl(guardarTransaccionCertificadoService, null);
     }
 
     @Test
@@ -51,7 +54,7 @@ public class GenerarCertificadosServiceImplTest {
                 .numPeticionServicio(3L)
                 .build();
         Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload)).thenReturn(new ResponseEntity<>(infoWhatsAppWSPayload, HttpStatus.OK));
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
+        Optional<ResponsePayload> result = guardarTransaccionCertificadoService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload, date, 3L);
         Assert.assertNotNull(result);
     }
 
@@ -70,7 +73,7 @@ public class GenerarCertificadosServiceImplTest {
                 .build();
         Mockito.when(infoWhatsAppWSClient.save(token, infoWhatsAppWSPayload))
                 .thenReturn(new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY));
-        Optional<ResponsePayload> result = generarCertificadosService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload,  date, 3L);
+        Optional<ResponsePayload> result = guardarTransaccionCertificadoService.generarCertificado(token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificadoPayload, date, 3L);
         Assert.assertNotNull(result);
         Assert.assertTrue(result.isPresent());
         Assert.assertEquals("Datos inconcordantes", result.get().getDescripcionRespuesta());
