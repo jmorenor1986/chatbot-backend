@@ -5,6 +5,8 @@ import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.common.utilities.GenericLogPayload;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.PazYSalvoPayload;
 import com.google.gson.Gson;
 import lombok.extern.java.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -42,11 +44,17 @@ public class BussinesLogAspect {
         String telefono  = "";
         String identificacion = "";
         String credito = "";
-        if(args[2] instanceof CertificadoPayload ){
-            CertificadoPayload data = (CertificadoPayload) args[2];
-            identificacion = data.getIdentificacion();
+        if(args[2] instanceof InformacionCreditoPayload){
+            InformacionCreditoPayload data = (InformacionCreditoPayload) args[2];
+            telefono = data.getTelefono();
             try{
-                credito = SecurityUtilities.desencriptar( data.getNumeroCredito());
+                credito = SecurityUtilities.desencriptar( data.getNumeroVerificador() );
+            }catch (Exception e){}
+        }else if(args[2] instanceof PazYSalvoPayload ){
+            PazYSalvoPayload data = (PazYSalvoPayload) args[2];
+            telefono = data.getTelefono();
+            try{
+                credito = SecurityUtilities.desencriptar( data.getNumeroVerificador() );
             }catch (Exception e){}
         }else{
             telefono = (String) args[2];

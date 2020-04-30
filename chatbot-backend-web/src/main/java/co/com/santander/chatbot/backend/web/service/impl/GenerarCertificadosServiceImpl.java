@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
@@ -33,7 +34,8 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
     }
 
     @Override
-    public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, InformacionCreditoPayload informacionCreditoPayload) {
+    @BussinessLog
+    public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, ServiciosEnum serviciosEnum, InformacionCreditoPayload informacionCreditoPayload) {
         ResponseEntity<ClienteViewPayload> cliente = null;
         try {
             cliente = clienteClient.getClientByTelefonoAndNumCredito(token, informacionCreditoPayload.getTelefono(), SecurityUtilities.desencriptar(informacionCreditoPayload.getNumeroVerificador()));
@@ -54,7 +56,8 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
     }
 
     @Override
-    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, PazYSalvoPayload pazYSalvoPayload, ServiciosEnum serviciosEnum, Long idTransaccion) {
+    @BussinessLog
+    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, ServiciosEnum serviciosEnum, PazYSalvoPayload pazYSalvoPayload, Long idTransaccion) {
         ResponseEntity<ClienteViewPayload> cliente = null;
         try {
             cliente = clienteClient.getClientByTelefonoAndNumCredito(token, pazYSalvoPayload.getTelefono(), SecurityUtilities.desencriptar(pazYSalvoPayload.getNumeroVerificador()));

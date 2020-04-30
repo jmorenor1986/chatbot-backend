@@ -8,7 +8,7 @@ import co.com.santander.chatbot.domain.payload.service.certificados.PazYSalvoPay
 import java.util.Optional;
 
 public interface GenerarCertificadosService {
-    public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, InformacionCreditoPayload informacionCreditoPayload);
+    Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, ServiciosEnum serviciosEnum, InformacionCreditoPayload informacionCreditoPayload);
 
-    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, PazYSalvoPayload pazYSalvoPayload, ServiciosEnum serviciosEnum, Long idTransaccion);
+    Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, ServiciosEnum serviciosEnum, PazYSalvoPayload pazYSalvoPayload, Long idTransaccion);
 }
