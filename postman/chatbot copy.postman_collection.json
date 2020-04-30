@@ -153,7 +153,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTI5NTYsImV4cCI6MTU4Nzc1NjU1Nn0.1SQRSn4A0x6H1l7uvufTxw6Vdu2k4x2-bAVVNgilrqi15Ma3jwKRu4HX_G345wuVY8A4_H3R_iobRxpch4c5UA",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODgyNzMyMTIsImV4cCI6MTU4ODI3NjgxMn0.CXfVxyoXxS7LPD9_Jh6UJXCuOxOCfWEq3llHqwnrbu30u0yVc12_m1BG9tZE9Z8xnU65n6WUpaE7RE3Wje3Ljw",
 							"type": "string"
 						}
 					]
@@ -162,7 +162,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"raw": "{\n\t\"telefono\":\"3005632011\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -194,7 +194,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODgyNzMyMTIsImV4cCI6MTU4ODI3NjgxMn0.CXfVxyoXxS7LPD9_Jh6UJXCuOxOCfWEq3llHqwnrbu30u0yVc12_m1BG9tZE9Z8xnU65n6WUpaE7RE3Wje3Ljw",
 							"type": "string"
 						}
 					]
@@ -203,7 +203,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\",\n\t\"numeroPeticion\" : \"3\"\n}",
+					"raw": "{\n\t\"telefono\":\"3005632011\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\",\n\t\"tipoOperacionUsuario\" : \"1\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -235,7 +235,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODgyNzMyMTIsImV4cCI6MTU4ODI3NjgxMn0.CXfVxyoXxS7LPD9_Jh6UJXCuOxOCfWEq3llHqwnrbu30u0yVc12_m1BG9tZE9Z8xnU65n6WUpaE7RE3Wje3Ljw",
 							"type": "string"
 						}
 					]
@@ -244,7 +244,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"raw": "{\n\t\"telefono\":\"3005632011\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -276,7 +276,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODc3NTM0MDgsImV4cCI6MTU4Nzc1NzAwOH0.JjZeu972ZW-I7g90qedQ0A8s6SDso_25ZRFE_IG1XbVv-l1f0h6PxGov5ODgjcGfYFM-lR1C4bXqvbLjQLzA-g",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODgyNzMyMTIsImV4cCI6MTU4ODI3NjgxMn0.CXfVxyoXxS7LPD9_Jh6UJXCuOxOCfWEq3llHqwnrbu30u0yVc12_m1BG9tZE9Z8xnU65n6WUpaE7RE3Wje3Ljw",
 							"type": "string"
 						}
 					]
@@ -285,7 +285,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"identificacion\":\"1234\",\n\t\"numeroCredito\" : \"kcZsJENvAG0jcwpr5cqdQIYfYdOXHLTU\"\n}",
+					"raw": "{\n\t\"telefono\":\"3005632011\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

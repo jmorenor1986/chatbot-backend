@@ -43,7 +43,7 @@ public class InfoWhatsAppWSController {
                 entity.setNumeroIdentificacion(cedula.get());
                 Optional<InfoWhatsAppWS> response = infoWhatsAppWSService.saveEntity(entity);
                 if (response.isPresent()) {
-                    return new ResponseEntity<InfoWhatsAppWSPayload>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
+                    return new ResponseEntity<>(modelMapper.map(response.get(), InfoWhatsAppWSPayload.class), HttpStatus.OK);
                 }
             }
         }
