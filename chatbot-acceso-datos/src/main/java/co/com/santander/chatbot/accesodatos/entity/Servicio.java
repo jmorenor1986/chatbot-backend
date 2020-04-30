@@ -33,4 +33,11 @@ public class Servicio {
             orphanRemoval = true
     )
     private List<Log> logs = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "servicio",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<ParametrosServicio> parametros = new ArrayList<>();
 }

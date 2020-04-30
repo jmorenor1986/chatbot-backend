@@ -26,4 +26,11 @@ public class Canal {
             orphanRemoval = true
     )
     private List<Log> logs = new ArrayList<>();
+
+    @OneToMany(
+            mappedBy = "canal",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<ParametrosServicio> parametros = new ArrayList<>();
 }

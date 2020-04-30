@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.accesodatos.service.impl;
 
 import co.com.santander.chatbot.accesodatos.entity.Canal;
+import co.com.santander.chatbot.accesodatos.entity.Cliente;
 import co.com.santander.chatbot.accesodatos.entity.Log;
 import co.com.santander.chatbot.accesodatos.entity.Servicio;
 import co.com.santander.chatbot.accesodatos.repository.ClienteRepository;
@@ -20,6 +21,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootTest
@@ -115,4 +117,53 @@ public class LogClienteServiceImplTest {
         Assert.assertTrue(response.isPresent());
         Assert.assertEquals(Boolean.FALSE, response.get());
     }
+
+    @Test
+    public void testBuscaAdicionalesEntidadNULL_TEL(){
+        GenericLogPayload genericLogPayload = GenericLogPayload
+                .builder()
+                .credito("12345678")
+                .identificacion("1234")
+                .serviciosEnum(ServiciosEnum.SERVICIO_OBTENER_CREDITOS)
+                .build();
+        Servicio servicioRta = Servicio.builder()
+                .id(1L)
+                .nombre(ServiciosEnum.SERVICIO_OBTENER_CREDITOS.name())
+                .logs(new ArrayList<>())
+                .build();
+        Log logReq = Log.builder()
+                .canal(Canal.builder().id(1L).build())
+                .feha(new Date())
+                .traza("traza")
+                .servicio(Servicio.builder().id(1L).build())
+                .telefono("3229032614")
+                .build();
+        Log logRes = Log.builder()
+                .id(1L)
+                .canal(Canal.builder().id(1L).build())
+                .feha(new Date())
+                .traza("traza")
+                .servicio(Servicio.builder().id(1L).build())
+                .telefono("3229032614")
+                .build();
+        Cliente cliente = Cliente.builder()
+                .id(1L)
+                .numerCredito("123456")
+                .telefono("3229032614")
+                .cedula("1030585312")
+                .build();
+        List<Cliente> clientes = new ArrayList<>();
+        clientes.add(cliente);
+        Mockito.when(clienteRepository.findByCedulaEndingWithAndNumerCredito(Mockito.any(), Mockito.any())).thenReturn(clientes);
+
+        Mockito.when(servicioRepository.findByNombre(ServiciosEnum.SERVICIO_OBTENER_CREDITOS.name()))
+                .thenReturn(Optional.of(servicioRta));
+        Mockito.when(logClienteRepository.save(logReq)).thenReturn(logRes);
+
+        Optional<Boolean> response = logClienteService.saveLogService(genericLogPayload);
+        Assert.assertNotNull(response);
+        Assert.assertTrue(response.isPresent());
+        Assert.assertNotNull(response.get());
+    }
+
 }

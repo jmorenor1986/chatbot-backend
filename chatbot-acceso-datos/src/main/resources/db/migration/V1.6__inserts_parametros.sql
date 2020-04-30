@@ -1,36 +1,3 @@
-CREATE TABLE parametros_servicio
-(
-    id                 BIGINT NOT NULL,
-    canal              VARCHAR(255) NOT NULL,
-    servicio           VARCHAR(255) NOT NULL,
-    numero_intentos    int8,
-    tiempo_intentos    int8,
-    PRIMARY KEY (id)
-);
-
- create sequence infowhatsappws_seq start 1 increment 1;
---
---Insert parametros servicio
---
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (1,'WhatssApp','Paz y Salvo',2,1);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (2,'WhatssApp','Debito Automático',2,1);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (3,'WhatssApp','Informacion  credito',2,1);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos) VALUES (4,'WhatssApp','Declaracion Renta',2,1);
-
---
---Tabla para la creacion
---
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUEs(nextval('infowhatsappws_seq') , now(), 0, '12345678', '1', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(nextval('infowhatsappws_seq'), now(), 0, '12345678', '2', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(nextval('infowhatsappws_seq'), now(), 1, '12345678', '3', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(nextval('infowhatsappws_seq'), now(), 1, '12345678', '4', '1234');
-INSERT INTO info_whats_appws (id, fecha_envio, estado, num_credito_banco, num_peticion_servicio , numero_identificacion )
-                       VALUES(nextval('infowhatsappws_seq'), now(), 1, '12345678', '5', '1234');
-
 --
 --Insercion para el canal
 --
@@ -68,6 +35,13 @@ INSERT INTO servcios
 (id, nombre_servicio)
 VALUES (nextval('servicio_seq'), 'SERVICIO_DECLARACION_RENTA');
 
+--
+--Insert parametros servicio
+--
+INSERT INTO parametros_servicio (id,canal_id,servicio_id,numero_intentos,tiempo_intentos) VALUES (1,1,1,2,1);
+INSERT INTO parametros_servicio (id,canal_id,servicio_id,numero_intentos,tiempo_intentos) VALUES (2,1,4,2,1);
+INSERT INTO parametros_servicio (id,canal_id,servicio_id,numero_intentos,tiempo_intentos) VALUES (3,1,5,2,1);
+INSERT INTO parametros_servicio (id,canal_id,servicio_id,numero_intentos,tiempo_intentos) VALUES (4,1,7,2,1);
 
 
 

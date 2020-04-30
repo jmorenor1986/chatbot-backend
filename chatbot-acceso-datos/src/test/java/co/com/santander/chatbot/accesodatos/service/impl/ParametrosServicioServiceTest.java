@@ -1,6 +1,8 @@
 package co.com.santander.chatbot.accesodatos.service.impl;
 
+import co.com.santander.chatbot.accesodatos.entity.Canal;
 import co.com.santander.chatbot.accesodatos.entity.ParametrosServicio;
+import co.com.santander.chatbot.accesodatos.entity.Servicio;
 import co.com.santander.chatbot.accesodatos.repository.ParametrosServicioRepository;
 import co.com.santander.chatbot.accesodatos.service.ParametrosServicioService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
@@ -38,9 +40,9 @@ public class ParametrosServicioServiceTest {
         List<ParametrosServicio> parametrosServicioList = new ArrayList<>();
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
-                .canal(CANAL)
+                .canal(new Canal())
                 .numeroIntentos(2)
-                .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
+                .servicio(new Servicio())
                 .tiempoIntentos(-5)
                 .build());
         Mockito.when(parametrosServicioRepository.findByNameService(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())).thenReturn(parametrosServicioList);
@@ -55,9 +57,9 @@ public class ParametrosServicioServiceTest {
         List<ParametrosServicio> parametrosServicioList = new ArrayList<>();
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
-                .canal(CANAL)
+                .canal(new Canal())
                 .numeroIntentos(2)
-                .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
+                .servicio(new Servicio())
                 .tiempoIntentos(5)
                 .build());
         Mockito.when(parametrosServicioRepository.findByNameService(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())).thenReturn(parametrosServicioList);

@@ -12,6 +12,7 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.ArrayList;
@@ -44,6 +45,47 @@ public class InfoWhatsAppWSControllerTest {
         MockitoAnnotations.initMocks(this);
         this.modelMapper = new ModelMapper();
         infoWhatsAppWSController = new InfoWhatsAppWSController(infoWhatsAppWSService, clienteService, modelMapper);
+    }
+
+    @Test
+    public void testSaveUNPROCESSABLE_ENTITY(){
+        InfoWhatsAppWSPayload payload = InfoWhatsAppWSPayload.builder()
+                .numCreditoBanco("12345678")
+                .numeroIdentificacion("1234567")
+                .numPeticionServicio(Long.valueOf(1))
+                .estado(Long.valueOf(1))
+                .build();
+        Mockito.when(clienteService.validaCreditoByCedula(Mockito.any(), Mockito.any()))
+                .thenReturn(Optional.of(Boolean.FALSE));
+        ResponseEntity<InfoWhatsAppWSPayload> response = infoWhatsAppWSController.save(payload);
+        Assert.assertNotNull(response);
+    }
+
+    @Test
+    public void testSaveOK(){
+        InfoWhatsAppWSPayload payload = InfoWhatsAppWSPayload.builder()
+                .numCreditoBanco("12345678")
+                .numeroIdentificacion("5312")
+                .numPeticionServicio(Long.valueOf(1))
+                .estado(Long.valueOf(1))
+                .build();
+        Mockito.when(clienteService.validaCreditoByCedula(Mockito.any(), Mockito.any()))
+                .thenReturn(Optional.of(Boolean.TRUE));
+
+        Mockito.when(clienteService.findCedulaByCedulaAndCredito(Mockito.any(), Mockito.any()))
+                .thenReturn(Optional.of("1030585312"));
+
+        Optional<InfoWhatsAppWS> responseEntity = Optional.of(InfoWhatsAppWS.builder()
+                .id(Long.valueOf(1))
+                .numCreditoBanco("12345678")
+                .numeroIdentificacion("1234567")
+                .numPeticionServicio(Long.valueOf(1))
+                .estado(Long.valueOf(1))
+                .build());
+        Mockito.when(infoWhatsAppWSService.saveEntity(Mockito.any())).thenReturn(responseEntity);
+        ResponseEntity<InfoWhatsAppWSPayload> response = infoWhatsAppWSController.save(payload);
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
@@ -80,5 +122,18 @@ public class InfoWhatsAppWSControllerTest {
                 .thenReturn(respuestaRepo);
         ResponseEntity<InfoWhatsAppWSPayload> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
         Assert.assertNotNull(respuesta);
+    }
+
+    @Test
+    public void testValidateExistingProcessNO_CONTENT(){
+        String numCreditoBanco = "12345678";
+        String numeroIdentificacion = "1234";
+        Long numPeticionServicio = Long.valueOf("1");
+
+        Mockito.when(infoWhatsAppWSService.validateExistingProcess(numCreditoBanco, numeroIdentificacion,numPeticionServicio))
+                .thenReturn(new ArrayList<>());
+        ResponseEntity<InfoWhatsAppWSPayload> respuesta = infoWhatsAppWSController.validateExistingProcess(numCreditoBanco, numeroIdentificacion, numPeticionServicio);
+        Assert.assertNotNull(respuesta);
+        Assert.assertEquals(HttpStatus.NO_CONTENT, respuesta.getStatusCode());
     }
 }
