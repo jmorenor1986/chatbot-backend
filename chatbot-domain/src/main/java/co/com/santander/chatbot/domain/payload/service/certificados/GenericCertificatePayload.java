@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class PazYSalvoPayload {
+public class GenericCertificatePayload {
     @MandatoryConstraint(message = "Número de télefono errado", min = 10, max = 12)
     private String telefono;
     @MandatoryConstraint(message = "Número de crédito errado")

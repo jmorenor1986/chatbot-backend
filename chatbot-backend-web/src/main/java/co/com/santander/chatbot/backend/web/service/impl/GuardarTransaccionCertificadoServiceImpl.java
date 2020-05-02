@@ -9,7 +9,6 @@ import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
-import feign.FeignException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -45,10 +44,6 @@ public class GuardarTransaccionCertificadoServiceImpl implements GuardarTransacc
             }
         } catch (GeneralSecurityException e) {
             throw new ValidateStateCertificateException("Error en los datos ingresados");
-        } catch (FeignException e) {
-            if (e.status() == 422) {
-                return generateRespuesta(Boolean.FALSE, 1, "Datos inconsistentes");
-            }
         }
         throw new ValidateStateCertificateException("Error al consultar la informacion");
     }

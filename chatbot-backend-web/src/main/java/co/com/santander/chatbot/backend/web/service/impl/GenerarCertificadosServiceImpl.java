@@ -12,7 +12,7 @@ import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPa
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.PazYSalvoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -57,16 +57,16 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
 
     @Override
     @BussinessLog
-    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, ServiciosEnum serviciosEnum, PazYSalvoPayload pazYSalvoPayload, Long idTransaccion) {
+    public Optional<InformacionCreditoResponsePayload> generarCertificadoEstandar(String token, ServiciosEnum serviciosEnum, GenericCertificatePayload genericCertificatePayload, Long idTransaccion) {
         ResponseEntity<ClienteViewPayload> cliente = null;
         try {
-            cliente = clienteClient.getClientByTelefonoAndNumCredito(token, pazYSalvoPayload.getTelefono(), SecurityUtilities.desencriptar(pazYSalvoPayload.getNumeroVerificador()));
+            cliente = clienteClient.getClientByTelefonoAndNumCredito(token, genericCertificatePayload.getTelefono(), SecurityUtilities.desencriptar(genericCertificatePayload.getNumeroVerificador()));
         } catch (GeneralSecurityException e) {
             throw new ValidateStateCertificateException("Número de crédito incorrecto");
         }
         if (HttpStatus.OK.equals(cliente.getStatusCode())) {
             Optional<ResponsePayload> respuestaGuardarCliente = guardarTransaccionCertificadoService.generarCertificado(token, serviciosEnum, CertificadoPayload.builder()
-                    .numeroCredito(pazYSalvoPayload.getNumeroVerificador())
+                    .numeroCredito(genericCertificatePayload.getNumeroVerificador())
                     .identificacion(cliente.getBody().getCedula())
                     .build(), new Date(), idTransaccion);
             if (respuestaGuardarCliente.isPresent())
