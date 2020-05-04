@@ -72,7 +72,7 @@ public class ClienteServiceImplTest {
         lista.add(item);
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(lista,HttpStatus.OK);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token,ServiciosEnum.SERVICIO_OBTENER_CREDITOS, telefono);
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token,ServiciosEnum.SERVICIO_OBTENER_CREDITOS, telefono, Mockito.any());
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
     }
@@ -84,7 +84,7 @@ public class ClienteServiceImplTest {
 
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_OBTENER_CREDITOS,telefono);
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_OBTENER_CREDITOS,telefono, Mockito.any());
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
         Assert.assertEquals("No existe informacion", respuesta.get().getDescripcionRespuesta() );
@@ -127,7 +127,7 @@ public class ClienteServiceImplTest {
 
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(lista,HttpStatus.OK);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, telefono);
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, telefono, Mockito.any());
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
         Assert.assertEquals(Boolean.FALSE, respuesta.get().getResultadoConsulta());

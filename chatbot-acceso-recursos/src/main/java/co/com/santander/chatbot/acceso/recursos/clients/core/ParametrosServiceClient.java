@@ -12,5 +12,5 @@ import org.springframework.web.bind.annotation.RequestHeader;
 public interface ParametrosServiceClient {
 
     @PostMapping(value = "${clientes.url.consultaProcesoParametros}")
-    public ResponseEntity<ResponsePayload> consultarProcesoParametros(@RequestHeader("Authorization") String bearerToken, @RequestBody ValidarProcesoPayload validarProcesoPayload);
+    ResponseEntity<ResponsePayload> consultarProcesoParametros(@RequestHeader("Authorization") String bearerToken, @RequestBody ValidarProcesoPayload validarProcesoPayload);
 }

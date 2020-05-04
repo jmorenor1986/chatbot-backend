@@ -25,8 +25,10 @@ public class Log {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha")
     private Date feha;
-    @Column(name = "traza")
+    @Column(name = "response")
     private String traza;
+    @Column(name = "request")
+    private String request;
     @ManyToOne(fetch = FetchType.LAZY)
     private Servicio servicio;
     @ManyToOne(fetch = FetchType.LAZY)

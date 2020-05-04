@@ -25,7 +25,7 @@ public class ObtenerCreditosUsuarioController {
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader("Authorization") String bearerToken, @RequestBody CreditosUsuarioPayload credito) {
-        Optional<ResponseObtenerCreditosPayload> response = clienteService.obtenerCreditos(bearerToken, ServiciosEnum.SERVICIO_OBTENER_CREDITOS, credito.getTelefono());
+        Optional<ResponseObtenerCreditosPayload> response = clienteService.obtenerCreditos(bearerToken, ServiciosEnum.SERVICIO_OBTENER_CREDITOS, credito.getTelefono(), credito);
         if (response.isPresent()) {
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
         }

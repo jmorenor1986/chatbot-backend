@@ -9,5 +9,6 @@ public class ResponsePayload {
     private Boolean resultadoValidacion;
     private Integer idRespuesta;
     private Object descripcionRespuesta;
+    private Long minutos;
 
 }

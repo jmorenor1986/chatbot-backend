@@ -12,8 +12,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@NamedQuery(name = "ParametrosServicio.findByNameService", query = "FROM ParametrosServicio u where u.servicio = ?1")
-
+@NamedQuery(name = "ParametrosServicio.findByNameService", query = "FROM ParametrosServicio param inner join param.servicio ser  where ser.nombre = ?1")
 public class ParametrosServicio {
     @Id
     private Long id;

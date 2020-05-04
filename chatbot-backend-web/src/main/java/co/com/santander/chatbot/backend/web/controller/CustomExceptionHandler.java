@@ -28,6 +28,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .resultadoValidacion(Boolean.FALSE)
                 .idRespuesta(1)
+                .minutos(ex.getMinutos())
                 .descripcionRespuesta(ex.getMessage())
                 .build(), HttpStatus.OK);
     }

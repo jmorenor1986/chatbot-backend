@@ -40,7 +40,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
         try {
             cliente = clienteClient.getClientByTelefonoAndNumCredito(token, informacionCreditoPayload.getTelefono(), SecurityUtilities.desencriptar(informacionCreditoPayload.getNumeroVerificador()));
         } catch (GeneralSecurityException e) {
-            throw new ValidateStateCertificateException("Número de crédito incorrecto");
+            throw new ValidateStateCertificateException("Número de crédito incorrecto", 0L);
         }
         if (HttpStatus.OK.equals(cliente.getStatusCode())) {
             Optional<ResponsePayload> respuestaGuardarCliente = guardarTransaccionCertificadoService.generarCertificado(token, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, CertificadoPayload.builder()
@@ -51,7 +51,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                 if (Boolean.TRUE.equals(respuestaGuardarCliente.get().getResultadoValidacion()))
                     return Optional.of(generarRespuesta(cliente.getBody()));
         }
-        throw new ValidateStateCertificateException("Cliente con datos incorrectos");
+        throw new ValidateStateCertificateException("Cliente con datos incorrectos",0L);
 
     }
 
@@ -62,7 +62,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
         try {
             cliente = clienteClient.getClientByTelefonoAndNumCredito(token, genericCertificatePayload.getTelefono(), SecurityUtilities.desencriptar(genericCertificatePayload.getNumeroVerificador()));
         } catch (GeneralSecurityException e) {
-            throw new ValidateStateCertificateException("Número de crédito incorrecto");
+            throw new ValidateStateCertificateException("Número de crédito incorrecto", 0L);
         }
         if (HttpStatus.OK.equals(cliente.getStatusCode())) {
             Optional<ResponsePayload> respuestaGuardarCliente = guardarTransaccionCertificadoService.generarCertificado(token, serviciosEnum, CertificadoPayload.builder()
@@ -73,7 +73,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                 if (Boolean.TRUE.equals(respuestaGuardarCliente.get().getResultadoValidacion()))
                     return Optional.of(generarRespuesta(cliente.getBody()));
         }
-        throw new ValidateStateCertificateException("Cliente con datos incorrectos");
+        throw new ValidateStateCertificateException("Cliente con datos incorrectos", 0L);
     }
 
 

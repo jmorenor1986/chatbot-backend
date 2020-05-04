@@ -44,7 +44,7 @@ public class ObtenerCreditosUsuarioControllerTest {
         respuesta.setDescripcionRespuesta("Servicio consumido de forma exitosa");
         respuesta.setResultadoConsulta(Boolean.TRUE);
 
-        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_OBTENER_CREDITOS,credito.getTelefono())).thenReturn(Optional.of(respuesta));
+        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_OBTENER_CREDITOS,credito.getTelefono(),Mockito.any() )).thenReturn(Optional.of(respuesta));
 
         ResponseEntity<ResponseObtenerCreditosPayload> response = obtenerCreditosUsuarioController.obtener(token, credito);
         Assert.assertNotNull(response);
@@ -60,7 +60,7 @@ public class ObtenerCreditosUsuarioControllerTest {
                 .tipoOperacion(Long.valueOf("0"))
                 .build();
 
-        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_VALIDA_CLIENTE,credito.getTelefono())).thenReturn(Optional.empty());
+        Mockito.when(clienteService.obtenerCreditos(token,  ServiciosEnum.SERVICIO_VALIDA_CLIENTE,credito.getTelefono(), Mockito.any())).thenReturn(Optional.empty());
 
         ResponseEntity<ResponseObtenerCreditosPayload> response = obtenerCreditosUsuarioController.obtener(token, credito);
         Assert.assertNotNull(response);

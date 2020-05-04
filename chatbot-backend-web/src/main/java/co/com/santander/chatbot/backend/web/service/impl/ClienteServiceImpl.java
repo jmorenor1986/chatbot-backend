@@ -8,6 +8,7 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
+import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,7 +40,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     @BussinessLog
-    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono) {
+    public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono, CreditosUsuarioPayload credito) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
         if (clientesCreditos.isPresent()) {
             if (Boolean.FALSE.equals(validateClients(clientesCreditos.get()))) {

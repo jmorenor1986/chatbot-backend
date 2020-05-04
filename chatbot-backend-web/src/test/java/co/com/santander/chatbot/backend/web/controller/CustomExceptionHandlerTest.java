@@ -29,7 +29,7 @@ public class CustomExceptionHandlerTest {
 
     @Test
     public void testHandlerValidateStateCertificateException() {
-        ValidateStateCertificateException validateStateCertificateException = new ValidateStateCertificateException("test");
+        ValidateStateCertificateException validateStateCertificateException = new ValidateStateCertificateException("test", 0L);
         ResponseEntity<?> result = customExceptionHandler.validateStateCertificateException(validateStateCertificateException, null);
         Assert.assertEquals(200, result.getStatusCodeValue());
 

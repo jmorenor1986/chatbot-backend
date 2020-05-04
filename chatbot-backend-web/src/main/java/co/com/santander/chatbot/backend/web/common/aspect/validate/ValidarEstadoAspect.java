@@ -6,9 +6,11 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
+@Order(1)
 @Component
 public class ValidarEstadoAspect {
 
@@ -23,7 +25,7 @@ public class ValidarEstadoAspect {
     public Object validarEstado(ProceedingJoinPoint joinPoint) throws Throwable {
         if (validarProcesoService.validateExistingProcesss(joinPoint.getArgs()))
             return joinPoint.proceed();
-        throw new ValidateStateCertificateException("Ya existe una solicitud en curso, por favor espere un momento.");
+        throw new ValidateStateCertificateException("Ya existe una solicitud en curso, por favor espere un momento.", 0L);
     }
 
 

@@ -43,9 +43,9 @@ public class GuardarTransaccionCertificadoServiceImpl implements GuardarTransacc
                 return generateRespuesta(Boolean.TRUE, 0, "Transaccion realizada");
             }
         } catch (GeneralSecurityException e) {
-            throw new ValidateStateCertificateException("Error en los datos ingresados");
+            throw new ValidateStateCertificateException("Error en los datos ingresados",0L);
         }
-        throw new ValidateStateCertificateException("Error al consultar la informacion");
+        throw new ValidateStateCertificateException("Error al consultar la informacion",0L);
     }
 
     private Optional<ResponsePayload> generateRespuesta(Boolean resultado, Integer id, String descripcion) {

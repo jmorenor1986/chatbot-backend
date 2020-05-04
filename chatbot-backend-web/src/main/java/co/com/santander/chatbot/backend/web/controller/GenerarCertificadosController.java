@@ -30,7 +30,7 @@ public class GenerarCertificadosController {
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, genericCertificatePayload, 3L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
-        throw new ValidateStateCertificateException("Error al consultar los datos");
+        throw new ValidateStateCertificateException("Error al consultar los datos",0L);
     }
 
     @PostMapping(value = "/informacion-credito")
@@ -38,7 +38,7 @@ public class GenerarCertificadosController {
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarInformacionCredito(bearerToken, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
-        throw new ValidateStateCertificateException("Error al consultar los datos");
+        throw new ValidateStateCertificateException("Error al consultar los datos", 0L);
     }
 
     @PostMapping(value = "/autorizacion-debito")
@@ -46,7 +46,7 @@ public class GenerarCertificadosController {
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO, debitoPayload, 4L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
-        throw new ValidateStateCertificateException("Error al consultar los datos");
+        throw new ValidateStateCertificateException("Error al consultar los datos",0L);
     }
 
     @PostMapping(value = "/certificacion-declaracion-renta")
@@ -54,6 +54,6 @@ public class GenerarCertificadosController {
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_DECLARACION_RENTA, declaracionRentaPayload,  5L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
-        throw new ValidateStateCertificateException("Error al consultar los datos");
+        throw new ValidateStateCertificateException("Error al consultar los datos", 0L);
     }
 }
