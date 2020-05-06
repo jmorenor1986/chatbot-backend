@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.ResponseEntity;
 
@@ -20,6 +21,7 @@ public class ParametrosServicioControllerTest {
     public static final String CANAL = "WhatsApp";
     public static final String SERVICIO = "Paz y Salvo";
     private ParametrosServicioController parametrosServicioController;
+    private ModelMapper mapper;
 
     @Mock
     private ParametrosServicioService parametrosServicioService;
@@ -27,7 +29,8 @@ public class ParametrosServicioControllerTest {
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        parametrosServicioController = new ParametrosServicioController(parametrosServicioService);
+        this.mapper = new ModelMapper();
+        parametrosServicioController = new ParametrosServicioController(parametrosServicioService, mapper);
     }
 
     @Test

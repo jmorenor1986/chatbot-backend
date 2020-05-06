@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseCreditosPayload;
@@ -45,24 +46,10 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
                 .banco(Long.valueOf(clientes.getIdBanco()))
                 .convenio(clientes.getConvenio())
                 .numeroVerificador(creditoEncriptado)
-                .numeroCreditoOfuscado(ofuscarCredito(clientes.getNumerCredito()))
+                .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clientes.getNumerCredito()))
                 .build();
     }
 
-    private String ofuscarCredito(String credito) {
-        String resultado = "";
-        int tamanio = credito.length();
-        for (int i = 0; i < tamanio; i++) {
-            resultado += "x";
-        }
-        String temporal = "";
-        for(int i = 0 ; i < 5 ; i++){
-            String caracter = credito.substring(tamanio-1, tamanio);
-            temporal =   caracter + temporal;
-            tamanio--;
-        }
-        resultado = resultado.substring(0, tamanio);
-        return resultado + temporal;
-    }
+
 
 }

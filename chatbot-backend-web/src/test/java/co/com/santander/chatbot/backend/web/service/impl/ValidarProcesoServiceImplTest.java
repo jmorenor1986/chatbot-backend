@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
+import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosServiceClient;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
@@ -31,11 +32,13 @@ public class ValidarProcesoServiceImplTest {
     private ParametrosServiceClient parametrosServiceClient;
 
     private ValidarProcesoService validarProcesoService;
+    @Mock
+    private ClienteClient clienteClient;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        validarProcesoService = new ValidarProcesoServiceImpl(infoWhatsAppWSClient, parametrosServiceClient);
+        validarProcesoService = new ValidarProcesoServiceImpl(infoWhatsAppWSClient, parametrosServiceClient, clienteClient);
     }
 
     @Test

@@ -68,4 +68,14 @@ public class ClienteController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping(value = "/cedulaAndNumCredit/", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<ClienteViewPayload> getClientByCedulaAndNumCredito(@RequestParam(value = "cedula") String cedula, @RequestParam(value = "numCredito") String numCredito){
+        Optional<Cliente> cliente = clienteService.findByCedulaAndCredito(cedula,numCredito);
+        if(cliente.isPresent()){
+            ClienteViewPayload clienteView = mapper.map(cliente.get(), ClienteViewPayload.class);
+            return new ResponseEntity<>(clienteView, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
 }

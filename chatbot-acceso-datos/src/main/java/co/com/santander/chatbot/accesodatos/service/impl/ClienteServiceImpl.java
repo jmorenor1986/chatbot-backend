@@ -61,4 +61,8 @@ public class ClienteServiceImpl implements ClienteService {
         return Optional.of(creditos.get(0).getCedula());
     }
 
+    @Override
+    public Optional<Cliente> findByCedulaAndCredito(String cedula, String credito) {
+        return clienteRepository.findByCedulaAndNumerCredito(cedula, credito);
+    }
 }

@@ -29,6 +29,7 @@ CREATE TABLE log_cliente(
     fecha               timestamp       not null,
     request             text            not null,
     response            text            not null,
+    tipo_operacion      int8                    ,
     identificacion      varchar(255)            ,
     credito             varchar(255)            ,
     correo              varchar(255)            ,
@@ -52,8 +53,9 @@ CREATE TABLE parametros_servicio
     id                 BIGINT NOT NULL,
     canal_id            int8            not null,
     servicio_id         int8            not null,
-    numero_intentos    int8,
-    tiempo_intentos    int8,
+    numero_intentos     int8                    ,
+    tiempo_intentos     int8                    ,
+    tiempo_posterior    int8                    ,
     PRIMARY KEY (id)
 );
 

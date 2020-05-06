@@ -22,4 +22,6 @@ public class ParametrosServicio {
     private Canal canal;
     private Integer numeroIntentos;
     private Integer tiempoIntentos;
+    @Column(name = "tiempo_posterior")
+    private Integer tiempoPosterior;
 }

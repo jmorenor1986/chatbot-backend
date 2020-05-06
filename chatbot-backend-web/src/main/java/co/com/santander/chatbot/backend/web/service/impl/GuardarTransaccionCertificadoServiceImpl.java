@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
+import co.com.santander.chatbot.backend.web.common.aspect.afteroperation.ValidateAfter;
 import co.com.santander.chatbot.backend.web.common.aspect.validate.ValidateState;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GuardarTransaccionCertificadoService;
@@ -29,6 +30,7 @@ public class GuardarTransaccionCertificadoServiceImpl implements GuardarTransacc
 
     @Override
     @ValidateState
+    @ValidateAfter
     public Optional<ResponsePayload> generarCertificado(String token, ServiciosEnum servicio, CertificadoPayload certificadoPayload, Date date, Long idTransaccion) {
 
         try {

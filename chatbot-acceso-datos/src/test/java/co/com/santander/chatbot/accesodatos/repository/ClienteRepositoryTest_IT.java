@@ -10,6 +10,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
+import java.util.Optional;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -80,5 +81,23 @@ public class ClienteRepositoryTest_IT {
         List<Cliente> creditos = clienteRepository.findByCedulaEndingWithAndNumerCredito(cedula, numCredito);
         Assert.assertNotNull(creditos);
         Assert.assertTrue( creditos.size() == 0 );
+    }
+
+    @Test
+    public void testFindByCedulaAndNumerCreditoSUCCESS(){
+        String numCredito = "6000000457";
+        String cedula = "56789098";
+        Optional<Cliente> cliente = clienteRepository.findByCedulaAndNumerCredito(cedula, numCredito);
+        Assert.assertNotNull(cliente);
+        Assert.assertTrue(cliente.isPresent());
+    }
+
+    @Test
+    public void testFindByCedulaAndNumerCreditEMPTY(){
+        String numCredito = "6000000457";
+        String cedula = "56789098444444";
+        Optional<Cliente> cliente = clienteRepository.findByCedulaAndNumerCredito(cedula, numCredito);
+        Assert.assertNotNull(cliente);
+        Assert.assertFalse(cliente.isPresent());
     }
 }

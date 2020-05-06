@@ -29,6 +29,7 @@ CREATE TABLE log_cliente(
     fecha               timestamp       not null,
     request             varchar(255)    not null,
     response            varchar(255)    not null,
+    tipo_operacion      int8                    ,
     identificacion      varchar(255)            ,
     credito             varchar(255)            ,
     correo              varchar(255)            ,

@@ -32,6 +32,8 @@ clientes:
     guardarProceso: /v1/infowhatsappwscontroller/
     consultaClienteByTelAndNumCred: /v1/cliente/telAndNumCredit/
     consultaProcesoParametros: /v1/parametros-servicio/consultar-proceso
+    consultaParametrosByServicio: /v1/parametros-servicio/servicio/
+    consultaCedulaAndCredito: /v1/cliente/cedulaAndNumCredit/
     logger: /v1/logger/
 
 
