@@ -16,4 +16,6 @@ public interface ClienteService {
     Optional<Boolean> validaCreditoByCedula(String cedula, String credito);
 
     Optional<String> findCedulaByCedulaAndCredito(String cedula, String credito);
+
+    Optional<Cliente> findByCedulaAndCredito(String cedula, String credito);
 }

@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosServiceClient;
+import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.ValidarProcesoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
@@ -66,26 +67,9 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
             if (resultProcessWithParams.getBody().getResultadoValidacion() == Boolean.TRUE){
                 return Boolean.TRUE;
             }else{
-                Long minutos = generateDifferenceDates(fechaEnvio, new Date());
+                Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());
                 throw new ValidateStateCertificateException(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), minutos);
             }
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);
-    }
-
-    private Long generateDifferenceDates(Date fIni, Date fFin) {
-        long milis1, milis2, diff;
-
-        //INSTANCIA DEL CALENDARIO GREGORIANO
-        Calendar cinicio = Calendar.getInstance();
-        Calendar cfinal = Calendar.getInstance();
-
-        //ESTABLECEMOS LA FECHA DEL CALENDARIO CON EL DATE GENERADO ANTERIORMENTE
-        cinicio.setTime(fIni);
-        cfinal.setTime(fFin);
-
-        milis1 = cinicio.getTimeInMillis();
-        milis2 = cfinal.getTimeInMillis();
-        diff = milis2-milis1;
-        return Math.abs (diff / (60 * 1000));
     }
 }

@@ -15,4 +15,5 @@ public class GenericLogPayload {
     private String credito;
     private String traza;
     private String request;
+    private Long tipoOperacion;
 }

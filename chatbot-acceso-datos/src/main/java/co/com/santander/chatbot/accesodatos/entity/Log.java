@@ -29,6 +29,8 @@ public class Log {
     private String traza;
     @Column(name = "request")
     private String request;
+    @Column(name = "tipo_operacion")
+    private Long tipoOperacion;
     @ManyToOne(fetch = FetchType.LAZY)
     private Servicio servicio;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -7,6 +7,7 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
+import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import com.google.gson.Gson;
 import lombok.extern.java.Log;
@@ -49,6 +50,17 @@ public class BussinesLogAspect {
         }
         generateLog(strResponse);
         return response;
+    }
+
+    public Long getTipoOperacion(ServiciosEnum servicioEnum, Object[] args ){
+        if(ServiciosEnum.SERVICIO_OBTENER_CREDITOS.equals(servicioEnum)){
+            CreditosUsuarioPayload credito = (CreditosUsuarioPayload) args[3];
+            return credito.getTipoOperacion();
+        }else if(ServiciosEnum.SERVICIO_INFORMACION_CREDITO.equals(servicioEnum)){
+            InformacionCreditoPayload informacionCreditoPayload = (InformacionCreditoPayload) args[2];
+            return  Long.valueOf(informacionCreditoPayload.getTipoOperacionUsuario());
+        }
+        return null;
     }
 
     public String generateResponseException(ValidateStateCertificateException e){
@@ -97,6 +109,7 @@ public class BussinesLogAspect {
                 .identificacion(identificacion)
                 .credito(credito)
                 .request(request)
+                .tipoOperacion(getTipoOperacion((ServiciosEnum) args[1], args))
                 .build();
     }
 }
