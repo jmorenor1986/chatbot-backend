@@ -89,6 +89,9 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
             if(info.getEstado().equals(1L)){
                 Long tiempo = DateUtilities.generateDifferenceDates(new Date(), info.getFechaEnvio());
                 return evaluaTiempo(tiempo);
+            }else if(info.getEstado().equals(0L)){
+                //Tiene una solicitud pendiente sin procesar lo cual no es ingerencia de este aspecto
+                return Boolean.TRUE;
             }
             //En el caso de que en la tabla MTF no encuentre informacion quiere decir que es la primera solicitud que realiza el usuario
         }else if(HttpStatus.NO_CONTENT.equals(response.getStatusCode())){

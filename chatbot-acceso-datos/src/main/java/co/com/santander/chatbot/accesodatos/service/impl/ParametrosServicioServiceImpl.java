@@ -26,13 +26,19 @@ public class ParametrosServicioServiceImpl implements ParametrosServicioService 
         List<ParametrosServicio> resultRepository = parametrosServicioRepository.findByNameService( ServiciosEnum.findEnum(servicio).name());
         if (resultRepository.isEmpty())
             throw new ValidateStateCertificateException("No hay parametros para consultar en el servicio ", 0L);
-        if (validarHoraSolicitud(fecha, new Date(), resultRepository.get(0).getTiempoIntentos()))
+        if (validarHoraSolicitud(fecha, new Date(), resultRepository.get(0).getTiempoIntentos())) {
             return ResponsePayload.builder()
                     .resultadoValidacion(Boolean.TRUE)
                     .idRespuesta(0)
                     .descripcionRespuesta("Puede realizar la solicitud")
                     .build();
-        throw new ValidateStateCertificateException("No se puede realizar la solicitud, por favor intente más tarde",0L);
+        }else{
+            return ResponsePayload.builder()
+                    .resultadoValidacion(Boolean.FALSE)
+                    .idRespuesta(1)
+                    .descripcionRespuesta("No puede realizar la solicitud de nuevo tiene una pendiente de procesar")
+                    .build();
+        }
     }
 
     @Override
