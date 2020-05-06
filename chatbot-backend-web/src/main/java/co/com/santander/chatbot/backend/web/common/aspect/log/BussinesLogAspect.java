@@ -7,8 +7,10 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
+import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
 import com.google.gson.Gson;
 import lombok.extern.java.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -43,10 +45,14 @@ public class BussinesLogAspect {
         try {
             response = joinPoint.proceed();
             strResponse = new Gson().toJson(response);
-        }catch (ValidateStateCertificateException e){
+        }catch (ValidateStateCertificateException  e){
             strResponse = generateResponseException(e);
             generateLog(strResponse);
-            throw new ValidateStateCertificateException(e.getMessage(), e.getMinutos());
+            throw new ValidateStateCertificateException(e.getMessage(), 0L);
+        }catch (ValidateStatusAfterProcess e){
+            strResponse = generateResponseExceptionAfter(e);
+            generateLog(strResponse);
+            throw new ValidateStatusAfterProcess(e.getMessage(),e.getEmail(), e.getNumeroCredito(), e.getConvenio(), e.getMinutos());
         }
         generateLog(strResponse);
         return response;
@@ -63,12 +69,22 @@ public class BussinesLogAspect {
         return null;
     }
 
-    public String generateResponseException(ValidateStateCertificateException e){
+    public String generateResponseException(Exception e){
         return new Gson().toJson( ResponsePayload.builder()
                 .resultadoValidacion(Boolean.FALSE)
                 .idRespuesta(1)
                 .descripcionRespuesta(e.getMessage())
-                .minutos(e.getMinutos())
+                .build() );
+    }
+
+    public String generateResponseExceptionAfter(ValidateStatusAfterProcess ex){
+        return new Gson().toJson( InformacionCreditoResponsePayload.builder()
+                .resultadoEnvio(Boolean.FALSE.toString())
+                .emailOfuscado(ex.getEmail())
+                .numeroCreditoOfuscado(ex.getNumeroCredito())
+                .convenio(ex.getConvenio())
+                .infoUnoR(ex.getMinutos().toString())
+                .descripcionRespuesta(ex.getMessage())
                 .build() );
     }
 
