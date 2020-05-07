@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.domain.payload.accesodatos.cliente;
 
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,4 +21,6 @@ public class ClienteViewPayload {
     private String idProducto;
     private String idBanco;
     private String convenio;
+    private Long valorPagar;
+    private TipoCredito tipoCredito;
 }

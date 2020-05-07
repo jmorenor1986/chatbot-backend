@@ -50,6 +50,8 @@ public class EnlacePseServiceImpl implements EnlacePseService {
                         ResponseEnlacePsePayload.builder()
                                 .resultadoOperacion("true")
                                 .idRespuesta("0")
+                                .tipoCredito(response.getBody().getTipoCredito().name())
+                                .valorPagar(response.getBody().getValorPagar().toString())
                                 .enlace(linkPse.get())
                                 .descripcionRespuesta("Servicio consumido de forma exitosa")
                                 .build());

@@ -1,14 +1,13 @@
 package co.com.santander.chatbot.accesodatos.entity;
 
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
+import java.math.BigDecimal;
 
 @Entity
 @Data
@@ -39,5 +38,10 @@ public class Cliente {
     private String idBanco;
     @Column(name = "convenio")
     private String convenio;
+    @Column(name = "valor_a_pagar")
+    private Long valorPagar;
+    @Enumerated(value = EnumType.ORDINAL)
+    @Column(name = "tipo_credito")
+    private TipoCredito tipoCredito;
 
 }

@@ -13,6 +13,7 @@ CREATE TABLE cliente (
   id_Producto            varchar                  ,
   id_Banco               varchar                  ,
   convenio              varchar                  ,
+  valor_a_pagar          numeric                  ,
 primary key (id)
 );
 --
