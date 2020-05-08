@@ -1,6 +1,11 @@
 package co.com.santander.chatbot.accesodatos.controller;
 
+import co.com.santander.chatbot.accesodatos.entity.Canal;
+import co.com.santander.chatbot.accesodatos.entity.ParametrosServicio;
+import co.com.santander.chatbot.accesodatos.entity.Servicio;
 import co.com.santander.chatbot.accesodatos.service.ParametrosServicioService;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.payload.accesodatos.ParametrosServicioPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ValidarProcesoPayload;
 import org.junit.Assert;
@@ -11,9 +16,11 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Date;
+import java.util.Optional;
 
 @SpringBootTest
 public class ParametrosServicioControllerTest {
@@ -43,6 +50,24 @@ public class ParametrosServicioControllerTest {
                 .fechaUltimaSolicitud(date)
                 .build());
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void testGetParametroService(){
+        Optional<ParametrosServicio> response = Optional.of(ParametrosServicio.builder()
+                .id(1L)
+                .canal(Canal.builder().build())
+                .servicio(Servicio.builder().build())
+                .numeroIntentos(1)
+                .tiempoIntentos(2)
+                .tiempoPosterior(2)
+                .build());
+        Mockito.doReturn(response).when(parametrosServicioService).findByServicio(Mockito.any());
+
+        ResponseEntity<ParametrosServicioPayload> responseParam = parametrosServicioController.getParametroService(ServiciosEnum.SERVICIO_PAZ_Y_SALVO);
+
+        Assert.assertNotNull(responseParam);
+        Assert.assertEquals(HttpStatus.OK, responseParam.getStatusCode());
     }
 }
 
