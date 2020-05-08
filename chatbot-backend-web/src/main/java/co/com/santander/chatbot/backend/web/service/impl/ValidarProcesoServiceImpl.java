@@ -41,8 +41,6 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
     private ClienteViewPayload cliente;
     private Long numPeticionServicio;
 
-    private Long minutosRestantes;
-
     private final InfoWhatsAppWSClient infoWhatsAppWSClient;
     private final ParametrosServiceClient parametrosServiceClient;
     private final ClienteClient clienteClient;
@@ -61,7 +59,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
             ResponseEntity<InfoWhatsAppWSPayload>  result = infoWhatsAppWSClient.validateExistingProcess(token, getCredito(), getIdentificacion(), getNumPeticionServicio());
             if (result.getStatusCodeValue() == 200)
                 if (result.getBody().getEstado() == 0) {
-                    return validateProcessWithParams(getToken(), result.getBody().getFechaEnvio(), serviciosEnum.getMessage());
+                    return validateProcessWithParams(getToken(), result.getBody().getFechaEnvio(), getServiciosEnum().getMessage());
                 } else {
                     return Boolean.TRUE;
                 }
@@ -93,7 +91,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 return Boolean.TRUE;
             } else {
                 Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());
-                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(cliente.getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), cliente.getConvenio(), minutos);
+                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), getCliente().getConvenio(), minutos);
             }
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);
     }

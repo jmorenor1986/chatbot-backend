@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
+import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,7 +33,13 @@ public class CustomExceptionHandlerTest {
         ValidateStateCertificateException validateStateCertificateException = new ValidateStateCertificateException("test", 0L);
         ResponseEntity<?> result = customExceptionHandler.validateStateCertificateException(validateStateCertificateException, null);
         Assert.assertEquals(200, result.getStatusCodeValue());
+    }
 
+    @Test
+    public void testHandlerValidateStateAfter() {
+        ValidateStatusAfterProcess validateStatusAfterProcessException = new ValidateStatusAfterProcess("test", "xxxxxa@gmail.com", "xxxxx12345","LOS COCHES S.A.", 0L);
+        ResponseEntity<?> result = customExceptionHandler.validateStateAfter(validateStatusAfterProcessException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
 }
