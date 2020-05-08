@@ -1,0 +1,7 @@
+server:
+  servlet:
+    context-path: /chatbot-acceso-rescursos-rest
+  port: 5004
+
+services:
+  getToken: https://felec.computec.com/WSSAML/ComputecSTSService/ComputecSTSService.wsdl
