@@ -49,7 +49,7 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
     }
 
     @Override
-    public Boolean validateExistingExistingSuccess(Object[] args) {
+    public Boolean validateExistingAfterProcess(Object[] args) {
         getParams(args);
         if(findClient()){
             return validacionProcessoInfoWhatsApp();

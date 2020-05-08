@@ -25,7 +25,7 @@ public class ValidateAfterAspect {
     @Around("@annotation(co.com.santander.chatbot.backend.web.common.aspect.afteroperation.ValidateAfter)")
     public Object generateLog(ProceedingJoinPoint joinPoint) throws Throwable {
         log.info("Paso por el interceptor");
-        if(validateProcessAfterService.validateExistingExistingSuccess(joinPoint.getArgs())){
+        if(validateProcessAfterService.validateExistingAfterProcess(joinPoint.getArgs())){
             return joinPoint.proceed();
         }
         throw new ValidateStateCertificateException("Validacion errornea.", 0L);
