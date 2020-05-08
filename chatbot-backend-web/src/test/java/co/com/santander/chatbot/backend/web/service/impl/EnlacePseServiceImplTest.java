@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
 import org.junit.Assert;
@@ -49,6 +50,8 @@ public class EnlacePseServiceImplTest {
                 .idProducto("1")
                 .idBanco("9000")
                 .convenio("LOS COCHES F SAS")
+                .tipoCredito(TipoCredito.CONSUMO)
+                .valorPagar(100000L)
                 .build();
 
         ResponseEntity<ClienteViewPayload> response = new ResponseEntity<>(respuesta, HttpStatus.OK);

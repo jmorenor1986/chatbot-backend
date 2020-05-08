@@ -7,6 +7,7 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
+import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
 import org.junit.Assert;
 import org.junit.Before;
@@ -45,7 +46,8 @@ public class ClienteServiceImplTest {
                 .cedula("1")
                 .telefono("2")
                 .build();
-        Mockito.when(clienteClient.conusltarCliente(token, clientePayload)).thenReturn(new ResponseEntity<>(ResponsePayload.builder().build(), HttpStatus.OK));
+        Mockito.doReturn(new ResponseEntity<>(ResponsePayload.builder().build(), HttpStatus.OK)).when(clienteClient).conusltarCliente(token,clientePayload);
+
         ResponseEntity<ResponsePayload> result = clienteService.validarCliente(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono() , clientePayload );
         Assert.assertNotNull(result);
         Assert.assertEquals(200, result.getStatusCodeValue());
@@ -70,9 +72,14 @@ public class ClienteServiceImplTest {
                 .convenio("MARCALI INTERNACIONAL SA")
                 .build();
         lista.add(item);
+        CreditosUsuarioPayload credito = CreditosUsuarioPayload.builder()
+                .telefono("3229032614")
+                .tipoOperacion(1L)
+                .build();
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(lista,HttpStatus.OK);
-        Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token,ServiciosEnum.SERVICIO_OBTENER_CREDITOS, telefono, Mockito.any());
+        Mockito.doReturn(respuestaMock).when(clienteClient).getClientsByTel(Mockito.any(), Mockito.any());
+
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token,ServiciosEnum.SERVICIO_OBTENER_CREDITOS, telefono, credito);
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
     }
@@ -81,10 +88,14 @@ public class ClienteServiceImplTest {
     public void testObtenerCreditosFAILED(){
         String token = "1";
         String telefono = "3005632010";
+        CreditosUsuarioPayload credito = CreditosUsuarioPayload.builder()
+                .telefono("3229032614")
+                .tipoOperacion(1L)
+                .build();
 
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(HttpStatus.NO_CONTENT);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_OBTENER_CREDITOS,telefono, Mockito.any());
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_OBTENER_CREDITOS,telefono, credito);
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
         Assert.assertEquals("No existe informacion", respuesta.get().getDescripcionRespuesta() );
@@ -94,6 +105,10 @@ public class ClienteServiceImplTest {
     public void testObtenerCreditosFAILED_DIFERENT_CLIENT_SAME_TEL(){
         String token = "1";
         String telefono = "3005632010";
+        CreditosUsuarioPayload credito = CreditosUsuarioPayload.builder()
+                .telefono("3229032614")
+                .tipoOperacion(1L)
+                .build();
 
         List<ClienteViewPayload> lista = new ArrayList<>();
         ClienteViewPayload item = ClienteViewPayload.builder()
@@ -127,7 +142,7 @@ public class ClienteServiceImplTest {
 
         ResponseEntity<List<ClienteViewPayload>> respuestaMock = new ResponseEntity<>(lista,HttpStatus.OK);
         Mockito.when(clienteClient.getClientsByTel(token, telefono)).thenReturn(respuestaMock);
-        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, telefono, Mockito.any());
+        Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, telefono, credito);
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
         Assert.assertEquals(Boolean.FALSE, respuesta.get().getResultadoConsulta());
