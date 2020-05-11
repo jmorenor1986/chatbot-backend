@@ -4,4 +4,7 @@ server:
   port: 5004
 
 services:
-  getToken: https://felec.computec.com/WSSAMLPruebas/ComputecSTSService/ComputecSTSService.wsdl
+  getToken: https://felec.computec.com/WSSAML/ComputecSTSService/ComputecSTSService.wsdl
+  user: john
+  password: 12345678
+  documentos: https://felec.computec.com/WSFelecJAXWSP/WsFelecService/WsFelecService.wsdl

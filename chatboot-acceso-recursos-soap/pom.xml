@@ -11,5 +11,61 @@
 
     <artifactId>chatboot-acceso-recursos-soap</artifactId>
 
+    <properties>
+        <cxf.version>2.7.18</cxf.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>co.com.santander</groupId>
+            <artifactId>chatbot-domain</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--Apache cxf-->
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-frontend-jaxws</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-ws-security</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cxf</groupId>
+            <artifactId>cxf-rt-transports-http</artifactId>
+            <version>${cxf.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <!--                Generate artifacts from wsdl http://chuwiki.chuidiang.org/index.php?title=Generar_clases_java_a_partir_de_un_wsdl_con_maven_y_cxf-->
+        <!--        <plugins>-->
+        <!--            <plugin>-->
+        <!--                <groupId>org.apache.cxf</groupId>-->
+        <!--                <artifactId>cxf-codegen-plugin</artifactId>-->
+        <!--                <version>2.4.2</version>-->
+        <!--                <executions>-->
+        <!--                    <execution>-->
+        <!--                        <id>generate-sources</id>-->
+        <!--                        <phase>generate-sources</phase>-->
+        <!--                        <configuration>-->
+        <!--                            <sourceRoot>${basedir}/src/main/java/co/com/santander/accesorecursos/soap/resources/token-->
+        <!--                            </sourceRoot>-->
+        <!--                            <wsdlOptions>-->
+        <!--                                <wsdlOption>-->
+        <!--                                    <wsdl>${basedir}/src/main/resources/wsdl/ComputecSTSService.wsdl</wsdl>-->
+        <!--                                </wsdlOption>-->
+        <!--                            </wsdlOptions>-->
+        <!--                        </configuration>-->
+        <!--                        <goals>-->
+        <!--                            <goal>wsdl2java</goal>-->
+        <!--                        </goals>-->
+        <!--                    </execution>-->
+        <!--                </executions>-->
+        <!--            </plugin>-->
+
+        <!--        </plugins>-->
+    </build>
+
 
 </project>

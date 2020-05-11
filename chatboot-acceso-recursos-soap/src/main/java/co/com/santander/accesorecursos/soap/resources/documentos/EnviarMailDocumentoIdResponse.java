@@ -1,5 +1,5 @@
 
-package co.com.santander.accesorecursos.soap.resources.token.co.experian.computec.sts;
+package co.com.santander.accesorecursos.soap.resources.documentos;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -8,12 +8,12 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para obtenerTokenResponse complex type.
+ * <p>Clase Java para enviarMailDocumentoIdResponse complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="obtenerTokenResponse">
+ * &lt;complexType name="enviarMailDocumentoIdResponse">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
@@ -27,10 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "obtenerTokenResponse", propOrder = {
+@XmlType(name = "enviarMailDocumentoIdResponse", propOrder = {
     "_return"
 })
-public class ObtenerTokenResponse {
+public class EnviarMailDocumentoIdResponse {
 
     @XmlElement(name = "return")
     protected String _return;

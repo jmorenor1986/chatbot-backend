@@ -1,5 +1,5 @@
 
-package co.com.santander.accesorecursos.soap.resources.token.co.experian.computec.sts;
+package co.com.santander.accesorecursos.soap.resources.documentos;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,17 +7,17 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Clase Java para computecSTSDTO complex type.
+ * <p>Clase Java para datoEnvioDTO complex type.
  * 
  * <p>El siguiente fragmento de esquema especifica el contenido que se espera que haya en esta clase.
  * 
  * <pre>
- * &lt;complexType name="computecSTSDTO">
+ * &lt;complexType name="datoEnvioDTO">
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="password" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
- *         &lt;element name="user" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="mailCC" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="mailPara" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -27,61 +27,61 @@ import javax.xml.bind.annotation.XmlType;
  * 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "computecSTSDTO", propOrder = {
-    "password",
-    "user"
+@XmlType(name = "datoEnvioDTO", propOrder = {
+    "mailCC",
+    "mailPara"
 })
-public class ComputecSTSDTO {
+public class DatoEnvioDTO {
 
-    protected String password;
-    protected String user;
+    protected String mailCC;
+    protected String mailPara;
 
     /**
-     * Obtiene el valor de la propiedad password.
+     * Obtiene el valor de la propiedad mailCC.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getPassword() {
-        return password;
+    public String getMailCC() {
+        return mailCC;
     }
 
     /**
-     * Define el valor de la propiedad password.
+     * Define el valor de la propiedad mailCC.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setPassword(String value) {
-        this.password = value;
+    public void setMailCC(String value) {
+        this.mailCC = value;
     }
 
     /**
-     * Obtiene el valor de la propiedad user.
+     * Obtiene el valor de la propiedad mailPara.
      * 
      * @return
      *     possible object is
      *     {@link String }
      *     
      */
-    public String getUser() {
-        return user;
+    public String getMailPara() {
+        return mailPara;
     }
 
     /**
-     * Define el valor de la propiedad user.
+     * Define el valor de la propiedad mailPara.
      * 
      * @param value
      *     allowed object is
      *     {@link String }
      *     
      */
-    public void setUser(String value) {
-        this.user = value;
+    public void setMailPara(String value) {
+        this.mailPara = value;
     }
 
 }

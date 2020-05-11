@@ -1,5 +1,5 @@
 
-package co.com.santander.accesorecursos.soap.resources.token.co.experian.computec.sts;
+package co.com.santander.accesorecursos.soap.resources.token;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
