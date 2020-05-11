@@ -109,7 +109,7 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
                 return Boolean.TRUE;
             }
             setMinutosRestantes(parametro.getTiempoPosterior() - tiempoUltimaSolicitud);
-            throw new ValidateStatusAfterProcess("No supera el tiempo para una nueva solicitud", StringUtilities.ofuscarCorreo(cliente.getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), cliente.getConvenio(), getMinutosRestantes());
+            throw new ValidateStatusAfterProcess("No supera el tiempo para una nueva solicitud", StringUtilities.ofuscarCorreo(cliente.getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), cliente.getConvenio(), getMinutosRestantes(), "8");
         }
         return Boolean.FALSE;
     }
