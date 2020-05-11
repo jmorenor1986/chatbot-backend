@@ -29,7 +29,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     public final ResponseEntity<Object> validateStateCertificateException(ValidateStateCertificateException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .resultadoValidacion(Boolean.FALSE)
-                .idRespuesta(1)
+                .idRespuesta(7)
                 .minutos(ex.getMinutos())
                 .descripcionRespuesta(ex.getMessage())
                 .build(), HttpStatus.OK);
@@ -44,6 +44,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .convenio(ex.getConvenio())
                 .infoUnoR(ex.getMinutos().toString())
                 .descripcionRespuesta(ex.getMessage())
+                .idRespuesta(ex.getIdRespuesta())
                 .build(), HttpStatus.OK);
     }
 

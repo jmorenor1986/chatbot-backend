@@ -52,7 +52,7 @@ public class BussinesLogAspect {
         }catch (ValidateStatusAfterProcess e){
             strResponse = generateResponseExceptionAfter(e);
             generateLog(strResponse);
-            throw new ValidateStatusAfterProcess(e.getMessage(),e.getEmail(), e.getNumeroCredito(), e.getConvenio(), e.getMinutos());
+            throw new ValidateStatusAfterProcess(e.getMessage(),e.getEmail(), e.getNumeroCredito(), e.getConvenio(), e.getMinutos(), e.getIdRespuesta());
         }
         generateLog(strResponse);
         return response;
