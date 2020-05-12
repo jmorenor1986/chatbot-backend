@@ -1,6 +1,5 @@
 package co.com.santander.chatbot.acceso.recursos.clients.core;
 
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ParametrosServicioPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ValidarProcesoPayload;

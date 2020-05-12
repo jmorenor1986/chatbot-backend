@@ -1,7 +1,6 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
-import co.com.santander.chatbot.backend.web.common.aspect.afteroperation.ValidateAfter;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
@@ -11,9 +10,9 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

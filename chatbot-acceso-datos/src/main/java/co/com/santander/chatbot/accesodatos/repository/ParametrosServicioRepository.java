@@ -1,7 +1,6 @@
 package co.com.santander.chatbot.accesodatos.repository;
 
 import co.com.santander.chatbot.accesodatos.entity.ParametrosServicio;
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

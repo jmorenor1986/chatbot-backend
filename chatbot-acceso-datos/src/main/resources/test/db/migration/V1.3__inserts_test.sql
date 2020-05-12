@@ -1,4 +1,4 @@
-INSERT INTO cliente (id,Nombre_Cliente,Telefono,Cedula,Email,Numero_Credito,Banco,Estado,id_Producto,id_Banco,convenio) VALUES
+INSERT INTO cliente (id,Nombre_Cliente,Telefono,Cedula,Email,Numero_Credito,Banco,Estado,id_Producto,id_Banco,convenio,valor_a_pagar) VALUES
 (1,'LOPEZ LOPEZ LUIS EMILIO','3005632010','56789066','elisabeth.becerra@samtel.co','6000000456','BANCO COMERCIAL AVVILLAS','Cerrado','9991','52','MARCALI INTERNACIONAL SA',200000),
 (2,'GOMEZ GARCIA LUISA CLRA','3005632011','56789098','jesus.sierra@samtel.co','6000000457','BANCO COMERCIAL AVVILLAS','Cerrado','200','52','SIDA S.A.',200000),
 (3,'ALONSO ALONSO ALONSO','3005632012','1234567','a.alvarezb@ext.santanderconsumer.co','6000000458','BANCO COMERCIAL AVVILLAS','Cerrado','1','52','MARKIA SA',200000),

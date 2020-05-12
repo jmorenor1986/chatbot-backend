@@ -3,7 +3,6 @@ package co.com.santander.chatbot.acceso.recursos.clients.core;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
-import feign.Param;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
