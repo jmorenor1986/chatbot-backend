@@ -13,6 +13,7 @@
 
     <properties>
         <cxf.version>2.7.18</cxf.version>
+        <start-class>co.com.santander.accesorecursos.soap.AccesoRecursosSoapApplicationa</start-class>
     </properties>
     <dependencies>
         <dependency>
@@ -44,35 +45,63 @@
         </dependency>
 
     </dependencies>
+
     <build>
-        <!--                Generate artifacts from wsdl http://chuwiki.chuidiang.org/index.php?title=Generar_clases_java_a_partir_de_un_wsdl_con_maven_y_cxf-->
-        <!--        <plugins>-->
-        <!--            <plugin>-->
-        <!--                <groupId>org.apache.cxf</groupId>-->
-        <!--                <artifactId>cxf-codegen-plugin</artifactId>-->
-        <!--                <version>2.4.2</version>-->
-        <!--                <executions>-->
-        <!--                    <execution>-->
-        <!--                        <id>generate-sources</id>-->
-        <!--                        <phase>generate-sources</phase>-->
-        <!--                        <configuration>-->
-        <!--                            <sourceRoot>${basedir}/src/main/java/co/com/santander/accesorecursos/soap/resources/token-->
-        <!--                            </sourceRoot>-->
-        <!--                            <wsdlOptions>-->
-        <!--                                <wsdlOption>-->
-        <!--                                    <wsdl>${basedir}/src/main/resources/wsdl/ComputecSTSService.wsdl</wsdl>-->
-        <!--                                </wsdlOption>-->
-        <!--                            </wsdlOptions>-->
-        <!--                        </configuration>-->
-        <!--                        <goals>-->
-        <!--                            <goal>wsdl2java</goal>-->
-        <!--                        </goals>-->
-        <!--                    </execution>-->
-        <!--                </executions>-->
-        <!--            </plugin>-->
-
-        <!--        </plugins>-->
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>${start-class}</mainClass>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <excludes>
+                                        <exclude>co.com.santander.accesorecursos.soap.AccesoRecursosSoapApplication
+                                        </exclude>
+                                        <exclude>co.com.santander.accesorecursos.soap.resources.*</exclude>
+                                        <exclude>co.com.santander.accesorecursos.soap.common.*</exclude>
+                                        <exclude>co.com.santander.accesorecursos.soap.config.*</exclude>
+                                        <exclude>co.com.santander.accesorecursos.soap.clients.*</exclude>
+                                    </excludes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${percent.coverage}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
     </build>
-
-
 </project>
