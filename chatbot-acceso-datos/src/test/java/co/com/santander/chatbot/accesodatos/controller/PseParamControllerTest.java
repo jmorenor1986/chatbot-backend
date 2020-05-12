@@ -2,6 +2,7 @@ package co.com.santander.chatbot.accesodatos.controller;
 
 import co.com.santander.chatbot.accesodatos.entity.PseParam;
 import co.com.santander.chatbot.accesodatos.service.PseParamService;
+import co.com.santander.chatbot.domain.payload.accesodatos.PseParamPayload;
 import io.swagger.models.Model;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,6 +12,8 @@ import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
 
@@ -42,11 +45,9 @@ public class PseParamControllerTest {
 
         Mockito.doReturn(responseMockito).when(pseParamService).findByIdBancoAndTipoCredito(idBanco, tipoCredito);
 
-        Optional<PseParam> response = pseParamService.findByIdBancoAndTipoCredito(idBanco,tipoCredito);
+        ResponseEntity<PseParamPayload> response = pseParamController.getByIdBancoAndTipoCredito(idBanco,tipoCredito);
         Assert.assertNotNull(response);
-        Assert.assertTrue(response.isPresent());
-
-
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
 }
