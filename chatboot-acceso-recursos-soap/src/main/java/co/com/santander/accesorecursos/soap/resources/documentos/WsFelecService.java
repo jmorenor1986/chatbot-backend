@@ -2,6 +2,7 @@ package co.com.santander.accesorecursos.soap.resources.documentos;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.jws.HandlerChain;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
@@ -16,7 +17,7 @@ import javax.xml.ws.Service;
  */
 @WebServiceClient(name = "WsFelecService", 
                   wsdlLocation = "file:/C:/Users/JOJMOR~1/AppData/Local/Temp/tempdir3759899551026961253.tmp/WsFelecService_1.wsdl",
-                  targetNamespace = "http://co.com.computec.wsservicioselectronicos.ws/") 
+                  targetNamespace = "http://co.com.computec.wsservicioselectronicos.ws/")
 public class WsFelecService extends Service {
 
     public final static URL WSDL_LOCATION;

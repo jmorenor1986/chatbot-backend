@@ -36,6 +36,13 @@
             <artifactId>cxf-rt-transports-http</artifactId>
             <version>${cxf.version}</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
+        <dependency>
+            <groupId>com.sun.xml.ws</groupId>
+            <artifactId>jaxws-rt</artifactId>
+            <version>2.1.4</version>
+        </dependency>
+
     </dependencies>
     <build>
         <!--                Generate artifacts from wsdl http://chuwiki.chuidiang.org/index.php?title=Generar_clases_java_a_partir_de_un_wsdl_con_maven_y_cxf-->

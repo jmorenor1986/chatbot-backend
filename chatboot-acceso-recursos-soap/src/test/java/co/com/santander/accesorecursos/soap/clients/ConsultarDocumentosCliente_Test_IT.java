@@ -11,7 +11,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 @RunWith(SpringRunner.class)
 public class ConsultarDocumentosCliente_Test_IT {
     @Autowired
-    private DocumentosClient documentosClient;
+    private DocumentosCliente documentosCliente;
 
     @Test(expected = BusinessException.class)
     public void testConsultarDocumentosError() {

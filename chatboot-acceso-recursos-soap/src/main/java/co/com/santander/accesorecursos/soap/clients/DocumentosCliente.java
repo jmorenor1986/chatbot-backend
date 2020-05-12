@@ -5,7 +5,7 @@ import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumento
 
 import java.util.List;
 
-public interface DocumentosClient {
+public interface DocumentosCliente {
     List<ConsultarDocumentosResponse> consultarDocumentos(ConsultarDocumentoPayload consultarDocumentoPayload);
 
 }

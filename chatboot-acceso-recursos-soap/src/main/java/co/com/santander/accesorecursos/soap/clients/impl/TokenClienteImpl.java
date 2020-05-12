@@ -4,6 +4,7 @@ import co.com.santander.accesorecursos.soap.clients.TokenCliente;
 import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDTO;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDelegate;
+import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSService;
 import co.com.santander.accesorecursos.soap.resources.token.Exception_Exception;
 import co.com.santander.chatbot.domain.payload.enviarextracto.TokenPayload;
 import org.modelmapper.ModelMapper;
@@ -14,10 +15,10 @@ import org.springframework.stereotype.Service;
 public class TokenClienteImpl implements TokenCliente {
 
     private final ModelMapper getMapper;
-    private final ComputecSTSDelegate getServiceToken;
+    private final ComputecSTSService getServiceToken;
 
     @Autowired
-    public TokenClienteImpl(ModelMapper getMapper, ComputecSTSDelegate getServiceToken) {
+    public TokenClienteImpl(ModelMapper getMapper, ComputecSTSService getServiceToken) {
         this.getMapper = getMapper;
         this.getServiceToken = getServiceToken;
     }
@@ -25,7 +26,8 @@ public class TokenClienteImpl implements TokenCliente {
     @Override
     public String generarToken(TokenPayload user) {
         try {
-            return getServiceToken.obtenerToken(getMapper.map(user, ComputecSTSDTO.class));
+            ComputecSTSDelegate port = getServiceToken.getComputecSTSPort();
+            return port.obtenerToken(getMapper.map(user, ComputecSTSDTO.class));
         } catch (Exception_Exception exc) {
             throw new BusinessException(exc.getMessage());
         }

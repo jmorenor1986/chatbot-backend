@@ -2,6 +2,7 @@ package co.com.santander.accesorecursos.soap.resources.token;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import javax.jws.HandlerChain;
 import javax.xml.namespace.QName;
 import javax.xml.ws.WebEndpoint;
 import javax.xml.ws.WebServiceClient;
@@ -16,7 +17,7 @@ import javax.xml.ws.Service;
  */
 @WebServiceClient(name = "ComputecSTSService", 
                   wsdlLocation = "https://felec.computec.com/WSSAMLPruebas/ComputecSTSService/ComputecSTSService.wsdl",
-                  targetNamespace = "http://sts.computec.experian.co/") 
+                  targetNamespace = "http://sts.computec.experian.co/")
 public class ComputecSTSService extends Service {
 
     public final static URL WSDL_LOCATION;

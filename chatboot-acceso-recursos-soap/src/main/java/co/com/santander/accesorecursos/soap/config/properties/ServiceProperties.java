@@ -17,4 +17,6 @@ public class ServiceProperties {
     private String usuarioRemoto;
     private String cliente;
     private String producto;
+    private String user;
+    private String password;
 }
