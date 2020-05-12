@@ -17,16 +17,16 @@ ALTER TABLE pse_param ADD CONSTRAINT pse_param_tipo_credito CHECK (
 
 
 insert into pse_param(id,id_banco,tipo_credito,url)
-values(nextval('pse_param_seq'), 9000, 1, 'http://ur1'),
-(nextval('pse_param_seq'), 9000, 2, 'http://ur1' )     ,
-(nextval('pse_param_seq'), 9000, 3, 'http://ur1')      ,
-(nextval('pse_param_seq'), 52, 1, 'http://ur1')       ,
-(nextval('pse_param_seq'), 52, 2, 'http://ur1' )      ,
-(nextval('pse_param_seq'), 52, 3, 'http://ur1')       ,
+values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328'),
+(nextval('pse_param_seq'), 9000, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328' )     ,
+(nextval('pse_param_seq'), 9000, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328')      ,
+(nextval('pse_param_seq'), 52, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
+(nextval('pse_param_seq'), 52, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/' )      ,
+(nextval('pse_param_seq'), 52, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
 
-(nextval('pse_param_seq'), 296, 1, 'http://ur1')      ,
-(nextval('pse_param_seq'), 296, 2, 'http://ur1' )     ,
-(nextval('pse_param_seq'), 296, 3, 'http://ur1')      ,
+(nextval('pse_param_seq'), 296, 1, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
+(nextval('pse_param_seq'), 296, 2, 'https://financierajuriscoop.com.co/oficina-virtual/' )     ,
+(nextval('pse_param_seq'), 296, 3, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
 
 (nextval('pse_param_seq'), 65, 1, 'http://ur1')       ,
 (nextval('pse_param_seq'), 65, 2, 'http://ur1' )      ,

@@ -34,6 +34,7 @@ clientes:
     consultaProcesoParametros: /v1/parametros-servicio/consultar-proceso
     consultaParametrosByServicio: /v1/parametros-servicio/servicio/
     consultaCedulaAndCredito: /v1/cliente/cedulaAndNumCredit/
+    pseUrl: /v1/pse-param/
     logger: /v1/logger/
 
 

@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.acceso.recursos.clients.core.PseParamClient;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
@@ -24,12 +25,14 @@ public class EnlacePseServiceImplTest {
     private EnlacePseService enlacePseService;
     @Mock
     private ClienteClient clienteClient;
+    @Mock
+    private PseParamClient pseParamClient;
 
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.enlacePseService = new EnlacePseServiceImpl(clienteClient);
+        this.enlacePseService = new EnlacePseServiceImpl(clienteClient, pseParamClient);
     }
 
     @Test
