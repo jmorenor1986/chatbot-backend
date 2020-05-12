@@ -3,7 +3,6 @@ package co.com.santander.chatbot.accesodatos.repository;
 import co.com.santander.chatbot.accesodatos.entity.Canal;
 import co.com.santander.chatbot.accesodatos.entity.Log;
 import co.com.santander.chatbot.accesodatos.entity.Servicio;
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

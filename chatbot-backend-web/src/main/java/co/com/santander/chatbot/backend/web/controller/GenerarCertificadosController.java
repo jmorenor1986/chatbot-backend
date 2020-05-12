@@ -2,9 +2,9 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

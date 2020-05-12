@@ -1,9 +1,9 @@
 package co.com.santander.chatbot.backend.web.service;
 
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 
 import java.util.Optional;
 

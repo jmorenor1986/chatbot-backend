@@ -8,3 +8,6 @@ services:
   user: john
   password: 12345678
   documentos: https://felec.computec.com/WSFelecJAXWSP/WsFelecService/WsFelecService.wsdl
+  usuarioRemoto: 122232
+  producto: 123121
+  cliente: 1231243

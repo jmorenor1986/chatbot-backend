@@ -5,8 +5,8 @@ import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.common.utilities.GenericLogPayload;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
+import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
@@ -18,8 +18,6 @@ import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.annotation.Order;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 @Log
