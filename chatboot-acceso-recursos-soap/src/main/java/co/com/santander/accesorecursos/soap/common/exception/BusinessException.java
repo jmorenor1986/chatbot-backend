@@ -1,4 +1,4 @@
-package co.com.santander.accesorecursos.soap.common;
+package co.com.santander.accesorecursos.soap.common.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

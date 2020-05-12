@@ -1,6 +1,6 @@
 package co.com.santander.accesorecursos.soap.clients;
 
-import co.com.santander.accesorecursos.soap.common.BusinessException;
+import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.chatbot.domain.payload.enviarextracto.TokenPayload;
 import org.junit.Assert;
 import org.junit.Ignore;

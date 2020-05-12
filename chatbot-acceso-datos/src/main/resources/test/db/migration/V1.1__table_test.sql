@@ -2,18 +2,19 @@
 --
 --
 CREATE TABLE cliente (
-  id                    int8            not null ,
+  id                     int8            not null ,
   Nombre_Cliente         varchar                  ,
-  Telefono              varchar                  ,
-  Cedula                varchar                  ,
-  Email                 varchar                  ,
+  Telefono               varchar                  ,
+  Cedula                 varchar                  ,
+  Email                  varchar                  ,
   Numero_Credito         varchar                  ,
-  Banco                 varchar                  ,
-  Estado                varchar                  ,
+  Banco                  varchar                  ,
+  Estado                 varchar                  ,
   id_Producto            varchar                  ,
   id_Banco               varchar                  ,
-  convenio              varchar                  ,
+  convenio               varchar                  ,
   valor_a_pagar          numeric                  ,
+  tipo_credito           numeric                  ,
 primary key (id)
 );
 --
@@ -26,7 +27,6 @@ CREATE TABLE usuario_app (
     primary key (id)
 );
 
-
 CREATE TABLE info_whats_appws
 (
      id                    BIGINT NOT NULL,
@@ -37,5 +37,3 @@ CREATE TABLE info_whats_appws
      numero_identificacion VARCHAR(255),
      PRIMARY KEY (id)
 );
-
-

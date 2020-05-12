@@ -1,7 +1,7 @@
 package co.com.santander.accesorecursos.soap.clients.impl;
 
 import co.com.santander.accesorecursos.soap.clients.TokenCliente;
-import co.com.santander.accesorecursos.soap.common.BusinessException;
+import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDTO;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDelegate;
 import co.com.santander.accesorecursos.soap.resources.token.Exception_Exception;

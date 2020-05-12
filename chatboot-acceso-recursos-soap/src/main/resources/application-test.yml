@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /chatbot-acceso-rescursos-rest
+    context-path: /chatbot-acceso-rescursos-soap
   port: 5004
 
 services:

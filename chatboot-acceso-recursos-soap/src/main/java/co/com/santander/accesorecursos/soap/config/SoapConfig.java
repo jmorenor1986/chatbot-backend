@@ -1,6 +1,6 @@
 package co.com.santander.accesorecursos.soap.config;
 
-import co.com.santander.accesorecursos.soap.common.BusinessException;
+import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.accesorecursos.soap.resources.documentos.WsFelec;
 import co.com.santander.accesorecursos.soap.resources.documentos.WsFelecService;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDelegate;
@@ -40,5 +40,6 @@ public class SoapConfig {
             throw new BusinessException(e.getMessage());
         }
     }
+
 
 }
