@@ -3,7 +3,6 @@ package co.com.santander.chatbot.accesodatos.controller;
 import co.com.santander.chatbot.accesodatos.entity.PseParam;
 import co.com.santander.chatbot.accesodatos.service.PseParamService;
 import co.com.santander.chatbot.domain.payload.accesodatos.PseParamPayload;
-import io.swagger.models.Model;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
