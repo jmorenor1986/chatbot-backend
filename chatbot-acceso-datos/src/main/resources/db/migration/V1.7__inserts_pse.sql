@@ -35,3 +35,20 @@ values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.co
 (nextval('pse_param_seq'), 297, 1, 'http://ur1')      ,
 (nextval('pse_param_seq'), 297, 2, 'http://ur1' )     ,
 (nextval('pse_param_seq'), 297, 3, 'http://ur1');
+--
+--Tabla en la cual se almacenaran los terminos y condiciones de los usuarios que utilizarón el servicio.
+--
+CREATE TABLE terminos_condiciones (
+  id                    int8            not null  ,
+  telefono              int8            not null  ,
+  hora_enviado_term     timestamp       not null  ,
+  hora_operacion        timestamp       not null  ,
+  operacion             int8            not null  ,
+primary key (id)
+);
+
+create sequence terminos_condiciones_seq start 1 increment 1;
+
+ALTER TABLE terminos_condiciones ADD CONSTRAINT terminos_condiciones_operacion CHECK (
+	operacion in (1,2)
+);

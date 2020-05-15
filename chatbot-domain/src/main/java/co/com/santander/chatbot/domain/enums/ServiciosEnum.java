@@ -8,7 +8,8 @@ public enum ServiciosEnum {
     SERVICIO_DEBITO_AUTOMATICO("Debito Automático"),
     SERVICIO_INFORMACION_CREDITO("Informacion  credito"),
     SERVICIO_OBTENER_CREDITOS("Obtener creditos"),
-    SERVICIO_DECLARACION_RENTA("Declaracion Renta");
+    SERVICIO_DECLARACION_RENTA("Declaracion Renta"),
+    SERVICIO_TERMINOS_CONDICIONES( "Terminos y Condiciones");
 
     private final String message;
 
@@ -36,6 +37,8 @@ public enum ServiciosEnum {
                 return SERVICIO_OBTENER_CREDITOS;
             case "Declaracion Renta":
                 return SERVICIO_DECLARACION_RENTA;
+            case "Terminos y Condiciones":
+                return SERVICIO_TERMINOS_CONDICIONES;
             default:
                 return null;
         }
