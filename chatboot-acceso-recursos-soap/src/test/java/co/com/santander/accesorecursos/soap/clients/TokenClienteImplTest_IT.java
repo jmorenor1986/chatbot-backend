@@ -25,12 +25,12 @@ public class TokenClienteImplTest_IT {
     @Value("${services.password}")
     private String password;
 
-    @Ignore
+
     @Test
     public void testGenerateTokenSuccess() {
         TokenPayload user = TokenPayload.builder()
-                .password(password)
-                .user(usuario)
+                .password("s@nTAzd38!")
+                .user("pruebasantander")
                 .build();
         String result = tokenCliente.generarToken(user);
         Assert.assertNotNull(result);
@@ -39,8 +39,8 @@ public class TokenClienteImplTest_IT {
     @Test(expected = BusinessException.class)
     public void testGenerateTokenError() {
         TokenPayload user = TokenPayload.builder()
-                .password("12345678")
-                .user("john")
+                .password("s@nTAzd38!")
+                .user("pruebasantander")
                 .build();
         String result = tokenCliente.generarToken(user);
     }

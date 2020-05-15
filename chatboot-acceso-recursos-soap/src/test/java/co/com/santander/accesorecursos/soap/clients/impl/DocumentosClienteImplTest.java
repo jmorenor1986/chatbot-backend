@@ -37,7 +37,7 @@ public class DocumentosClienteImplTest {
         getMapper = new ModelMapper();
         MockitoAnnotations.initMocks(this);
         this.serviceProperties = new ServiceProperties();
-        documentosCliente = new DocumentosClienteImpl(getMapper, getServiceDocumentos, tokenCliente, serviceProperties);
+        documentosCliente = new DocumentosClienteImpl(getMapper, , tokenCliente, serviceProperties);
     }
 
     @Test(expected = WebServiceException.class)

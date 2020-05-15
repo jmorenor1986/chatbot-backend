@@ -19,4 +19,6 @@ public class ServiceProperties {
     private String producto;
     private String user;
     private String password;
+    private String documentos;
+
 }
