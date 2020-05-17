@@ -7,10 +7,12 @@ import co.com.santander.accesorecursos.soap.config.properties.ServiceProperties;
 import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
+import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.MessageContext;
 import java.util.*;
@@ -31,21 +33,36 @@ public class DocumentosClienteImpl implements DocumentosCliente {
         this.getServiceDocumentos = getServiceDocumentos;
     }
 
+    @PostConstruct
+    public void init() {
+        portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
+        Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
+        Map<String, List<String>> headers = new HashMap<String, List<String>>();
+        headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
+        req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
+    }
 
     @Override
     public List<ConsultarDocumentosPayloadResponse> consultarDocumentos(ConsultarDocumentoPayload consultarDocumentoPayload) {
         try {
-            portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
-            Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
-            Map<String, List<String>> headers = new HashMap<String, List<String>>();
-            headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
-            req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
             List<ResultadoConsultaDTO> resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
                     , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
             return setListResponseConsultaDocumentos(resultConsultarDocs);
         } catch (WSBusinessRuleException | WSSystemException e) {
             throw new BusinessException(e.getMessage());
         }
+    }
+
+    @Override
+    public String enviarMailDocumentoId(EnviarMailDocumentoPayload enviarMailDocumentoPayload) {
+        try {
+            return portConsultaDocumentos.enviarMailDocumentoId(getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class),
+                    setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave()),
+                    getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class));
+        } catch (WSBusinessRuleException | WSSystemException e) {
+            throw new BusinessException(e.getMessage());
+        }
+
     }
 
     private List<ConsultarDocumentosPayloadResponse> setListResponseConsultaDocumentos(List<ResultadoConsultaDTO> resultConsultarDocs) {

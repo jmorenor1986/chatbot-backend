@@ -1,8 +1,7 @@
 package co.com.santander.accesorecursos.soap.clients;
 
 import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
-import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
+import co.com.santander.chatbot.domain.payload.enviarextracto.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +27,7 @@ public class ConsultarDocumentosCliente_Test_IT {
                 .folder("")
                 .formatoConsulta("pdf")
                 .valorllave("41584206")
+                .producto(ProductoEnum.VEHICULO)
                 .build());
         Assert.assertNotNull(result);
     }
@@ -43,5 +43,26 @@ public class ConsultarDocumentosCliente_Test_IT {
                 .formatoConsulta("pdf")
                 .valorllave("")
                 .build());
+    }
+
+    @Test
+    public void testEnviarDocumentoId() {
+        EnviarMailDocumentoPayload enviarMailDocumentoPayload = EnviarMailDocumentoPayload.builder()
+                .consultarDocumentoPayload(ConsultarDocumentoPayload.builder()
+                        .docId("")
+                        .fechaFin("01/01/2020")
+                        .fechaIni("01/01/2000")
+                        .folder("")
+                        .formatoConsulta("pdf")
+                        .valorllave("41584206")
+                        .producto(ProductoEnum.VEHICULO)
+                        .build())
+                .envioDocumentoPayload(EnvioDocumentoPayload.builder()
+                        .mailCC("johnmorenoing@gmail.com")
+                        .mailPara("johnmorenoing@gmail.com")
+                        .build())
+                .build();
+        String result = documentosCliente.enviarMailDocumentoId(enviarMailDocumentoPayload);
+        Assert.assertNotNull(result);
     }
 }

@@ -1,10 +1,11 @@
 package co.com.santander.accesorecursos.soap.service.impl;
 
 import co.com.santander.accesorecursos.soap.clients.DocumentosCliente;
-import co.com.santander.accesorecursos.soap.resources.documentos.ConsultarDocumentosResponse;
 import co.com.santander.accesorecursos.soap.service.DocumentosService;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
+import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
+import co.com.santander.chatbot.domain.payload.enviarextracto.EnvioDocumentoMailResponsePayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -32,10 +33,19 @@ public class DocumentosServiceImplTest {
     }
 
     @Test
-    public void consultarDocumentosError() {
+    public void consultarDocumentos() {
         Mockito.when(documentosCliente.consultarDocumentos(Mockito.any())).thenReturn(new ArrayList<>());
         List<ConsultarDocumentosPayloadResponse> result = this.documentosService.consultarDocumentos(ConsultarDocumentoPayload.builder().build());
         Assert.assertNotNull(result);
     }
+
+    @Test
+    public void enviarMailDocumentoId() {
+        Mockito.when(documentosCliente.enviarMailDocumentoId(Mockito.any())).thenReturn("Envio correctamente");
+        EnvioDocumentoMailResponsePayload result = this.documentosService.enviarMailDocumentoId(EnviarMailDocumentoPayload.builder().build());
+        Assert.assertNotNull(result);
+
+    }
+
 
 }
