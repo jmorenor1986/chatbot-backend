@@ -1,8 +1,9 @@
 package co.com.santander.accesorecursos.soap.clients;
 
 import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
-import co.com.santander.accesorecursos.soap.resources.documentos.ConsultarDocumentosResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
+import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,17 +19,29 @@ public class ConsultarDocumentosCliente_Test_IT {
     private DocumentosCliente documentosCliente;
 
 
-    @Test(expected = BusinessException.class)
-    public void testConsultarDocumentosError() {
-        List<ConsultarDocumentosResponse> result = documentosCliente.consultarDocumentos(ConsultarDocumentoPayload.builder()
-                .docId("1")
-                .fechaFin("")
-                .fechaIni("1212")
-                .folder("1")
-                .formatoConsulta("1")
-                .valorllave("1")
+    @Test
+    public void testConsultarDocumentos() {
+        List<ConsultarDocumentosPayloadResponse> result = documentosCliente.consultarDocumentos(ConsultarDocumentoPayload.builder()
+                .docId("")
+                .fechaFin("01/01/2020")
+                .fechaIni("01/01/2000")
+                .folder("")
+                .formatoConsulta("pdf")
+                .valorllave("41584206")
                 .build());
+        Assert.assertNotNull(result);
     }
 
 
+    @Test(expected = BusinessException.class)
+    public void testConsultarDocumentosError() {
+        List<ConsultarDocumentosPayloadResponse> result = documentosCliente.consultarDocumentos(ConsultarDocumentoPayload.builder()
+                .docId("")
+                .fechaFin("01/01/2020")
+                .fechaIni("01/01/2000")
+                .folder("")
+                .formatoConsulta("pdf")
+                .valorllave("")
+                .build());
+    }
 }

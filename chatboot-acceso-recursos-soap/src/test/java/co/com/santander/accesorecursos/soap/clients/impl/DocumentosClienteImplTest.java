@@ -5,14 +5,12 @@ import co.com.santander.accesorecursos.soap.clients.TokenCliente;
 import co.com.santander.accesorecursos.soap.config.properties.ServiceProperties;
 import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
-import org.junit.Assert;
+import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -25,19 +23,20 @@ public class DocumentosClienteImplTest {
 
 
     private ModelMapper getMapper;
-    @Spy
+    @Mock
     private WsFelecService getServiceDocumentos;
     @Mock
     private TokenCliente tokenCliente;
     private ServiceProperties serviceProperties;
     private DocumentosCliente documentosCliente;
 
+
     @Before
     public void setUp() {
         getMapper = new ModelMapper();
         MockitoAnnotations.initMocks(this);
         this.serviceProperties = new ServiceProperties();
-        documentosCliente = new DocumentosClienteImpl(getMapper, , tokenCliente, serviceProperties);
+        documentosCliente = new DocumentosClienteImpl(getMapper, tokenCliente, serviceProperties, getServiceDocumentos);
     }
 
     @Test(expected = WebServiceException.class)
@@ -54,11 +53,11 @@ public class DocumentosClienteImplTest {
                 .docId("1")
                 .build();
         WsFelec port = getServiceDocumentos.getWsFelecPort();
-        Mockito.when(tokenCliente.generarToken(Mockito.any())).thenReturn("token");
+        Mockito.when(tokenCliente.generarToken()).thenReturn("token");
         List<ResultadoConsultaDTO> resultado = new ArrayList<>();
         Mockito.when(port.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
                 , getMapper.map(serviceProperties, BeanDatosCliente.class))).thenReturn(resultado);
         Mockito.when(getMapper.map(Mockito.eq(resultado), Mockito.any())).thenReturn(new ArrayList<>());
-        List<ConsultarDocumentosResponse> result = documentosCliente.consultarDocumentos(consultarDocumentoPayload);
+        List<ConsultarDocumentosPayloadResponse> result = documentosCliente.consultarDocumentos(consultarDocumentoPayload);
     }
 }

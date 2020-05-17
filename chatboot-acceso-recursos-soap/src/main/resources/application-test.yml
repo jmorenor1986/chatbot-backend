@@ -8,7 +8,7 @@ services:
   user: pruebasantander
   password: s@nTAzd38!
   documentos: https://felec.computec.com/WSFelecJAXWSP/WsFelecService/WsFelecService.wsdl
-  usuarioRemoto: 122232
-  producto: 123121
-  cliente: 1231243
+  usuarioRemoto: santander.41584206
+  producto: VEHICULO
+  cliente: SANTANDERCOL
 

@@ -2,32 +2,34 @@ package co.com.santander.accesorecursos.soap.clients.impl;
 
 import co.com.santander.accesorecursos.soap.clients.TokenCliente;
 import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
+import co.com.santander.accesorecursos.soap.config.properties.ServiceProperties;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDTO;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSDelegate;
 import co.com.santander.accesorecursos.soap.resources.token.ComputecSTSService;
 import co.com.santander.accesorecursos.soap.resources.token.Exception_Exception;
-import co.com.santander.chatbot.domain.payload.enviarextracto.TokenPayload;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class TokenClienteImpl implements TokenCliente {
 
-    private final ModelMapper getMapper;
     private final ComputecSTSService getServiceToken;
+    private final ServiceProperties serviceProperties;
 
     @Autowired
-    public TokenClienteImpl(ModelMapper getMapper, ComputecSTSService getServiceToken) {
-        this.getMapper = getMapper;
+    public TokenClienteImpl(ComputecSTSService getServiceToken, ServiceProperties serviceProperties) {
         this.getServiceToken = getServiceToken;
+        this.serviceProperties = serviceProperties;
     }
 
     @Override
-    public String generarToken(TokenPayload user) {
+    public String generarToken() {
         try {
             ComputecSTSDelegate port = getServiceToken.getComputecSTSPort();
-            return port.obtenerToken(getMapper.map(user, ComputecSTSDTO.class));
+            ComputecSTSDTO computecSTSDTO = new ComputecSTSDTO();
+            computecSTSDTO.setUser(serviceProperties.getUser());
+            computecSTSDTO.setPassword(serviceProperties.getPassword());
+            return port.obtenerToken(computecSTSDTO);
         } catch (Exception_Exception exc) {
             throw new BusinessException(exc.getMessage());
         }

@@ -20,5 +20,6 @@ public class ServiceProperties {
     private String user;
     private String password;
     private String documentos;
+    private String getToken;
 
 }
