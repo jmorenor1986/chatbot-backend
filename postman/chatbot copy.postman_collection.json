@@ -203,7 +203,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\t\"telefono\":\"3005632011\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\",\n\t\"tipoOperacionUsuario\" : \"1\"\n}",
+					"raw": "{\n\t\"telefono\":\"1212\",\n\t\"numeroCreditoOfuscado\" : \"XXXXXX0457\",\n\t\"numeroVerificador\" : \"lsRvIEZpB2EsJgEtsLZ6/udjTgwAZ75732I=\",\n\t\"tipoOperacionUsuario\" : \"1\"\n} ",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -395,6 +395,47 @@
 						"v1",
 						"parametros-servicio",
 						"consultar-proceso"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "consultar-documentos",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqbnNpZXJyYWNAZ21haWwuY29tIiwiYXV0aG9yaXRpZXMiOlsiUk9MRV9BRE1JTiJdLCJpYXQiOjE1ODkzMDk1MTAsImV4cCI6MTU4OTMxMzExMH0.qrrmRmjddaC5etFTcVkuvdUwkAez-wBh2gUDvTgzUqgSiGEBEEdCVPYb1tNxkbDqX-VqwB-4kbv8QVVHbn4Nog",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"docId\":\"\",\n\"fechaFin\":\"\",\n\"fechaIni\":\"\",\n\"folder\":\"\",\n\"formatoConsulta\":\"\",\n\"valorllave\":\"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5004/chatbot-acceso-rescursos-soap/v1/extracto/consultar-documentos",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5004",
+					"path": [
+						"chatbot-acceso-rescursos-soap",
+						"v1",
+						"extracto",
+						"consultar-documentos"
 					]
 				}
 			},
