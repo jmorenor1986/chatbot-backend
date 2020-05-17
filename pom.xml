@@ -129,5 +129,6 @@
         <module>chatbot-acceso-datos</module>
         <module>chatbot-domain</module>
         <module>chatbot-acceso-recursos</module>
+        <module>chatboot-acceso-recursos-soap</module>
     </modules>
 </project>
