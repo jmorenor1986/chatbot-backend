@@ -41,7 +41,7 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
             req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
             List<ResultadoConsultaDTO> resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
-                    , getMapper.map(serviceProperties, BeanDatosCliente.class));
+                    , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
             return setListResponseConsultaDocumentos(resultConsultarDocs);
         } catch (WSBusinessRuleException | WSSystemException e) {
             throw new BusinessException(e.getMessage());
@@ -54,6 +54,15 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             response.add(getMapper.map(item, ConsultarDocumentosPayloadResponse.class));
         }
         return response;
+    }
+
+    private BeanDatosCliente setDatosUsuarioBean(String producto, String llave) {
+        BeanDatosCliente result = new BeanDatosCliente();
+        result.setProducto(producto);
+        result.setCliente(this.serviceProperties.getCliente());
+        result.setUsuarioRemoto(this.serviceProperties.getUsuarioRemoto().concat(llave));
+        return result;
+
     }
 
 }

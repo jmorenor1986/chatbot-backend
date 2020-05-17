@@ -97,7 +97,7 @@
                                         <exclude>co.com.santander.accesorecursos.soap.resources.*</exclude>
                                         <exclude>co.com.santander.accesorecursos.soap.common.*</exclude>
                                         <exclude>co.com.santander.accesorecursos.soap.config.*</exclude>
-                                        <exclude>co.com.santander.accesorecursos.soap.clients.*</exclude>
+                                        <exclude>co.com.santander.accesorecursos.soap.clients.impl.DocumentosClienteImpl</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>

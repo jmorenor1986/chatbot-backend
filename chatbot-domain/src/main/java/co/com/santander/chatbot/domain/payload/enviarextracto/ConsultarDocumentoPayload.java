@@ -16,4 +16,5 @@ public class ConsultarDocumentoPayload {
     private String folder;
     private String formatoConsulta;
     private String valorllave;
+    private ProductoEnum producto;
 }

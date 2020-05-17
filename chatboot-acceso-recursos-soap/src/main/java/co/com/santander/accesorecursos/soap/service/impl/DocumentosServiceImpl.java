@@ -1,7 +1,6 @@
 package co.com.santander.accesorecursos.soap.service.impl;
 
 import co.com.santander.accesorecursos.soap.clients.DocumentosCliente;
-import co.com.santander.accesorecursos.soap.resources.documentos.ConsultarDocumentosResponse;
 import co.com.santander.accesorecursos.soap.service.DocumentosService;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
