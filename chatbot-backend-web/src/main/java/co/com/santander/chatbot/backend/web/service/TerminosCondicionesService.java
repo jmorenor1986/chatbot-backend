@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface TerminosCondicionesService {
 
-    Optional<TerminosCondicionesPayload> save(String token, ServiciosEnum servicio, TerminosCondicionesPayload terminosCondiciones);
+    Optional<TerminosCondicionesPayload> save(String token, ServiciosEnum servicio, String telefono, TerminosCondicionesPayload terminosCondiciones);
 }

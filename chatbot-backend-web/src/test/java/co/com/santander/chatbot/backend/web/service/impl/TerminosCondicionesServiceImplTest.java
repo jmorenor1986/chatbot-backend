@@ -42,7 +42,7 @@ public class TerminosCondicionesServiceImplTest {
 
         Mockito.doReturn(responseMockito).when(terminosCondicionesClient).save(Mockito.any(), Mockito.any());
 
-        Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save("12321afd", ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,responseMockito.getBody());
+        Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save("12321afd", ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,"3229032614",responseMockito.getBody());
 
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());

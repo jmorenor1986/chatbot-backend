@@ -7,8 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping("v1/extractos-cliente")
 public class EnvioExtractoController {
+
+    @PostMapping("/consulta-meses-disponibles")
+    public ResponseEntity<String> consultaMesesDisponibles(@RequestHeader("Authorization") String bearerToken){
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
     @PostMapping
     public ResponseEntity<ResponseEnvioExtractoPayload> generateExtract(@RequestHeader("Authorization") String bearerToken, @RequestBody EnvioExtractoPayload envioExtracto){

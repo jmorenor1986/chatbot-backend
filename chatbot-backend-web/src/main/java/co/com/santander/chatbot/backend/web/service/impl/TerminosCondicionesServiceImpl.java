@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.TerminosCondicionesClient;
+import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.service.TerminosCondicionesService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.TerminosCondicionesPayload;
@@ -22,7 +23,8 @@ public class TerminosCondicionesServiceImpl implements TerminosCondicionesServic
     }
 
     @Override
-    public Optional<TerminosCondicionesPayload> save(String token, ServiciosEnum servicio, TerminosCondicionesPayload terminosCondiciones) {
+    @BussinessLog
+    public Optional<TerminosCondicionesPayload> save(String token, ServiciosEnum servicio, String telefono, TerminosCondicionesPayload terminosCondiciones) {
         ResponseEntity<TerminosCondicionesPayload> response = terminosCondicionesClient.save(token,terminosCondiciones);
         if(HttpStatus.OK.equals(response.getStatusCode())){
             return Optional.of(response.getBody());

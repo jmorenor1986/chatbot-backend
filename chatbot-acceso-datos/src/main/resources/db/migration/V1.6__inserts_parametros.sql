@@ -35,6 +35,10 @@ INSERT INTO servcios
 (id, nombre_servicio)
 VALUES (nextval('servicio_seq'), 'SERVICIO_DECLARACION_RENTA');
 
+INSERT INTO servcios
+(id, nombre_servicio)
+VALUES (nextval('servicio_seq'), 'SERVICIO_TERMINOS_CONDICIONES');
+
 --
 --Insert parametros servicio
 --

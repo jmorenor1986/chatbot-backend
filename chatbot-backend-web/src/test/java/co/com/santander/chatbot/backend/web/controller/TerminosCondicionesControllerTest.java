@@ -46,7 +46,7 @@ public class TerminosCondicionesControllerTest {
                 .telefono(3229032614L)
                 .build());
 
-        Mockito.doReturn(responseMockito).when(terminosCondicionesService).save(Mockito.any(), Mockito.any(), Mockito.any());
+        Mockito.doReturn(responseMockito).when(terminosCondicionesService).save(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
         ResponseEntity<TerminosCondicionesPayload> response = terminosCondicionesController.save(token, terminosCondicionesPayload);
 
