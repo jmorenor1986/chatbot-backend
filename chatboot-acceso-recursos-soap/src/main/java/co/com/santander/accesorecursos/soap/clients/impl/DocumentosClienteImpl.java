@@ -33,18 +33,15 @@ public class DocumentosClienteImpl implements DocumentosCliente {
         this.getServiceDocumentos = getServiceDocumentos;
     }
 
-    @PostConstruct
-    public void init() {
-        portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
-        Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
-        Map<String, List<String>> headers = new HashMap<String, List<String>>();
-        headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
-        req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
-    }
 
     @Override
     public List<ConsultarDocumentosPayloadResponse> consultarDocumentos(ConsultarDocumentoPayload consultarDocumentoPayload) {
         try {
+            portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
+            Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
+            Map<String, List<String>> headers = new HashMap<String, List<String>>();
+            headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
+            req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
             List<ResultadoConsultaDTO> resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
                     , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
             return setListResponseConsultaDocumentos(resultConsultarDocs);
@@ -56,6 +53,11 @@ public class DocumentosClienteImpl implements DocumentosCliente {
     @Override
     public String enviarMailDocumentoId(EnviarMailDocumentoPayload enviarMailDocumentoPayload) {
         try {
+            portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
+            Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
+            Map<String, List<String>> headers = new HashMap<String, List<String>>();
+            headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
+            req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
             return portConsultaDocumentos.enviarMailDocumentoId(getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class),
                     setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave()),
                     getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class));
