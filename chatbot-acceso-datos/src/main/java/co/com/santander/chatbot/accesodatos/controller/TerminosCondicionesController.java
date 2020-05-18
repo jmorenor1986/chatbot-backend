@@ -19,8 +19,8 @@ import java.util.Optional;
 @RequestMapping("v1/terminos-condiciones")
 public class TerminosCondicionesController {
 
-    private TerminosCondicionesService terminosCondicionesService;
-    private ModelMapper mapper;
+    private final TerminosCondicionesService terminosCondicionesService;
+    private final ModelMapper mapper;
 
     @Autowired
     public TerminosCondicionesController(TerminosCondicionesService terminosCondicionesService, ModelMapper mapper) {
