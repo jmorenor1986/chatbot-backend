@@ -52,3 +52,6 @@ feignclient:
     url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
     service-name: usuario-app
 
+param:
+  mesesExtracto: 12
+

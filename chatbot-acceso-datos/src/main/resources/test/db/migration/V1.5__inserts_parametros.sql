@@ -3,7 +3,6 @@ CREATE TABLE parametros_servicio
     id                 BIGINT NOT NULL,
     canal              VARCHAR(255) NOT NULL,
     servicio           VARCHAR(255) NOT NULL,
-    numero_intentos    int8,
     tiempo_intentos    int8,
     tiempo_posterior   int8,
     PRIMARY KEY (id)
@@ -11,10 +10,10 @@ CREATE TABLE parametros_servicio
 --
 --Insert parametros servicio
 --
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos,tiempo_posterior) VALUES (1,'WhatssApp','Paz y Salvo',2,1,100);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos,tiempo_posterior) VALUES (2,'WhatssApp','Debito Automático',2,1,100);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos,tiempo_posterior) VALUES (3,'WhatssApp','Informacion  credito',2,1,100);
-INSERT INTO parametros_servicio (id,canal,servicio,numero_intentos,tiempo_intentos,tiempo_posterior) VALUES (4,'WhatssApp','Declaracion Renta',2,1,100);
+INSERT INTO parametros_servicio (id,canal,servicio,tiempo_intentos,tiempo_posterior) VALUES (1,'WhatssApp','Paz y Salvo',1,100);
+INSERT INTO parametros_servicio (id,canal,servicio,tiempo_intentos,tiempo_posterior) VALUES (2,'WhatssApp','Debito Automático',1,100);
+INSERT INTO parametros_servicio (id,canal,servicio,tiempo_intentos,tiempo_posterior) VALUES (3,'WhatssApp','Informacion  credito',1,100);
+INSERT INTO parametros_servicio (id,canal,servicio,tiempo_intentos,tiempo_posterior) VALUES (4,'WhatssApp','Declaracion Renta',1,100);
 
 
 INSERT INTO canal

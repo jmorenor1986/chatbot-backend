@@ -12,7 +12,7 @@ spring:
   flyway:
     schemas: public
     table: chatbot_acceso_datos_flyway_schema_history
-    baseline-on-migrate: true
+    baseline-on-migrate: false
   jpa:
     properties:
       hibernate:

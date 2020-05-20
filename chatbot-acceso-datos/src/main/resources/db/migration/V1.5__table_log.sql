@@ -48,18 +48,17 @@ ALTER TABLE log_cliente
     FOREIGN KEY (canal_id) references canal(id)
     ;
 
+create sequence infowhatsappws_seq start 1 increment 1;
+
 CREATE TABLE parametros_servicio
 (
-    id                 BIGINT NOT NULL,
+    id                 BIGINT           NOT NULL,
     canal_id            int8            not null,
     servicio_id         int8            not null,
-    numero_intentos     int8                    ,
     tiempo_intentos     int8                    ,
     tiempo_posterior    int8                    ,
     PRIMARY KEY (id)
 );
-
-create sequence infowhatsappws_seq start 1 increment 1;
 
 ALTER TABLE parametros_servicio
     ADD CONSTRAINT fk_parametros_servicio

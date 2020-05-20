@@ -1,10 +1,12 @@
 package co.com.santander.chatbot.backend.web.controller;
 
+import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
@@ -14,11 +16,13 @@ import org.springframework.http.ResponseEntity;
 public class EnvioExtractoControllerTest {
 
     private EnvioExtractoController envioExtractoController;
+    @Mock
+    private EnvioExtractoService envioExtractoService;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        envioExtractoController = new EnvioExtractoController();
+        envioExtractoController = new EnvioExtractoController(envioExtractoService);
     }
 
     @Test

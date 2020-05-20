@@ -40,17 +40,8 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     @BussinessLog
     public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, ServiciosEnum serviciosEnum, String telefono, String numcreditoEnc) {
         setToken(token);
-        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(token, telefono, desEncriptarNumCredito(numcreditoEnc));
+        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(token, telefono, SecurityUtilities.desencriptarCatch(numcreditoEnc));
         return generateInfo(response);
-    }
-
-    private String desEncriptarNumCredito(String numCredito) {
-        try {
-            return SecurityUtilities.desencriptar(numCredito);
-        } catch (Exception e) {
-            log.severe("Error al desencriptar el credito: ".concat(e.getMessage()));
-        }
-        return "";
     }
 
     private Optional<ResponseEnlacePsePayload> generateInfo(ResponseEntity<ClienteViewPayload> response) {

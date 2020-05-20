@@ -66,4 +66,13 @@ public class SecurityUtilities {
         return new String(decryptedText);
     }
 
+    public static String desencriptarCatch(String texto){
+        try {
+            return SecurityUtilities.desencriptar(texto);
+        } catch (Exception e) {
+            log.severe("Error al desencriptar el credito: ".concat(e.getMessage()));
+        }
+        return "";
+    }
+
 }

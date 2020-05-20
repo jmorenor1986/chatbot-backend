@@ -9,6 +9,7 @@ public enum ServiciosEnum {
     SERVICIO_INFORMACION_CREDITO("Informacion  credito"),
     SERVICIO_OBTENER_CREDITOS("Obtener creditos"),
     SERVICIO_DECLARACION_RENTA("Declaracion Renta"),
+    SERVICIO_ENVIO_EXTRACTO("Envio extracto"),
     SERVICIO_TERMINOS_CONDICIONES( "Terminos y Condiciones");
 
     private final String message;
@@ -39,6 +40,8 @@ public enum ServiciosEnum {
                 return SERVICIO_DECLARACION_RENTA;
             case "Terminos y Condiciones":
                 return SERVICIO_TERMINOS_CONDICIONES;
+            case "Envio extracto":
+                return SERVICIO_ENVIO_EXTRACTO;
             default:
                 return null;
         }

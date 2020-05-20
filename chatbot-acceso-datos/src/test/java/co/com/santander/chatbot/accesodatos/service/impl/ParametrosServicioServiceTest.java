@@ -42,7 +42,6 @@ public class ParametrosServicioServiceTest {
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
                 .canal(new Canal())
-                .numeroIntentos(2)
                 .servicio(new Servicio())
                 .tiempoIntentos(-5)
                 .build());
@@ -59,7 +58,6 @@ public class ParametrosServicioServiceTest {
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
                 .canal(new Canal())
-                .numeroIntentos(2)
                 .servicio(new Servicio())
                 .tiempoIntentos(5)
                 .build());
@@ -83,7 +81,6 @@ public class ParametrosServicioServiceTest {
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
                 .canal(new Canal())
-                .numeroIntentos(2)
                 .servicio(new Servicio())
                 .tiempoIntentos(5)
                 .build());
@@ -99,7 +96,6 @@ public class ParametrosServicioServiceTest {
         parametrosServicioList.add(ParametrosServicio.builder()
                 .id(1L)
                 .canal(new Canal())
-                .numeroIntentos(2)
                 .servicio(new Servicio())
                 .tiempoIntentos(5)
                 .build());
