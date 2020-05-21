@@ -70,3 +70,13 @@ ALTER TABLE parametros_servicio
     FOREIGN KEY (canal_id) references canal(id)
     ;
 
+CREATE TABLE id_documentos
+(
+    id                 BIGINT           NOT NULL,
+    id_documentos      text             NOT NULL,
+    anio               varchar(5)       NOT NULL,
+    mes                varchar(5)       NOT NULL,
+    PRIMARY KEY (id)
+);
+
+create sequence id_documentos_seq start 1 increment 1;
