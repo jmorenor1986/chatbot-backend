@@ -3,6 +3,8 @@ package co.com.santander.chatbot.accesodatos.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "id_documentos")
@@ -22,4 +24,14 @@ public class IdDocumento {
     private String anio;
     @Column(name = "mes")
     private String mes;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "fecha")
+    private Date fecha;
+
+    @PrePersist
+    private void prePersistFunction(){
+        if(Objects.isNull(fecha)){
+            setFecha(new Date());
+        }
+    }
 }
