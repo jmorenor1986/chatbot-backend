@@ -7,10 +7,9 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/id-documento")
@@ -30,4 +29,14 @@ public class IdDocumentoController {
         IdDocumentoPayload documento = mapper.map(idDocumentoService.save(mapper.map(idDocumentoPayload, IdDocumento.class)), IdDocumentoPayload.class);
         return new ResponseEntity<>(documento, HttpStatus.OK);
     }
+
+    @GetMapping(value = "/{id}/")
+    public ResponseEntity<IdDocumentoPayload> getDocumentById(@PathVariable("id") Long id){
+        Optional<IdDocumento> response = idDocumentoService.findById(id);
+        if(response.isPresent()){
+            return new ResponseEntity<>(mapper.map(response.get(), IdDocumentoPayload.class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 }

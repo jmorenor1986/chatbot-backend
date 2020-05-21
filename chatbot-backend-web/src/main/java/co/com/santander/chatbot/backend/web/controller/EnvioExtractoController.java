@@ -1,6 +1,6 @@
 package co.com.santander.chatbot.backend.web.controller;
 
-import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
+import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
@@ -16,10 +16,10 @@ import java.util.Optional;
 @RequestMapping("v1/extractos-cliente")
 public class EnvioExtractoController {
 
-    private final EnvioExtractoService envioExtractoService;
+    private final ConsultaExtractoService envioExtractoService;
 
     @Autowired
-    public EnvioExtractoController(EnvioExtractoService envioExtractoService) {
+    public EnvioExtractoController(ConsultaExtractoService envioExtractoService) {
         this.envioExtractoService = envioExtractoService;
     }
 

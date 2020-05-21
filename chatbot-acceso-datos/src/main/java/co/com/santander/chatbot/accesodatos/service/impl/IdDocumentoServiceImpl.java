@@ -6,6 +6,8 @@ import co.com.santander.chatbot.accesodatos.service.IdDocumentoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class IdDocumentoServiceImpl implements IdDocumentoService {
 
@@ -20,4 +22,10 @@ public class IdDocumentoServiceImpl implements IdDocumentoService {
     public IdDocumento save(IdDocumento documento) {
         return idDocumentoRepository.save(documento);
     }
+
+    @Override
+    public Optional<IdDocumento> findById(Long id){
+        return idDocumentoRepository.findById(id);
+    }
+
 }

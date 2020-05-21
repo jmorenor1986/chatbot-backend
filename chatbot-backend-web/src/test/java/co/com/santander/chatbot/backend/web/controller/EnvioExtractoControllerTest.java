@@ -1,6 +1,6 @@
 package co.com.santander.chatbot.backend.web.controller;
 
-import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
+import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import org.junit.Assert;
@@ -17,7 +17,7 @@ public class EnvioExtractoControllerTest {
 
     private EnvioExtractoController envioExtractoController;
     @Mock
-    private EnvioExtractoService envioExtractoService;
+    private ConsultaExtractoService envioExtractoService;
 
     @Before
     public void setUp(){
