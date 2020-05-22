@@ -76,6 +76,9 @@ CREATE TABLE id_documentos
     id_documentos      text             NOT NULL,
     anio               varchar(5)       NOT NULL,
     mes                varchar(5)       NOT NULL,
+    fecha_ini          varchar(20)       NOT NULL,
+    fecha_fin          varchar(20)       NOT NULL,
+    producto           varchar(50)       NOT NULL,
     PRIMARY KEY (id)
 );
 

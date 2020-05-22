@@ -17,5 +17,11 @@ public class VigenciaExtracto {
     private String idDocumentos;
     private String anio;
     private String mes;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String fechaIni;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String fechaFin;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private String producto;
 
 }

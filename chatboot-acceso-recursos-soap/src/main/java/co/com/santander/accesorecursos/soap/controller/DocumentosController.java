@@ -29,7 +29,10 @@ public class DocumentosController {
 
     @PostMapping("/consultar-documentos")
     public ResponseEntity<List<ConsultarDocumentosPayloadResponse>> consultaDocumentos(@RequestBody ConsultarDocumentoPayload consultarDocumentoPayload) {
-        return new ResponseEntity<>(documentosService.consultarDocumentos(consultarDocumentoPayload), HttpStatus.OK);
+        List<ConsultarDocumentosPayloadResponse> response = documentosService.consultarDocumentos(consultarDocumentoPayload);
+        if( !response.isEmpty() )
+            return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>( HttpStatus.NO_CONTENT );
     }
 
     @PostMapping("/envio-mail-documento")

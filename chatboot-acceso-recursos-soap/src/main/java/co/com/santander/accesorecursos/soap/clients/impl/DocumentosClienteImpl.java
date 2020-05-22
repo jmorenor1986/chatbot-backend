@@ -36,13 +36,18 @@ public class DocumentosClienteImpl implements DocumentosCliente {
 
     @Override
     public List<ConsultarDocumentosPayloadResponse> consultarDocumentos(ConsultarDocumentoPayload consultarDocumentoPayload) {
+        List<ResultadoConsultaDTO> resultConsultarDocs = new ArrayList<>();
         try {
             portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
             Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
             Map<String, List<String>> headers = new HashMap<String, List<String>>();
             headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
             req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
-            List<ResultadoConsultaDTO> resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
+            //Valido si el producto es NULO
+            if(Objects.isNull(consultarDocumentoPayload.getProducto())){
+                return new ArrayList<>();
+            }
+            resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
                     , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
             return setListResponseConsultaDocumentos(resultConsultarDocs);
         } catch (WSBusinessRuleException | WSSystemException e) {

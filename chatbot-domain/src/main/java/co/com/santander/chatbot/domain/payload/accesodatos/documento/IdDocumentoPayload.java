@@ -14,4 +14,7 @@ public class IdDocumentoPayload {
     private String idDocumentos;
     private String anio;
     private String mes;
+    private String fechaIni;
+    private String fechaFin;
+    private String producto;
 }

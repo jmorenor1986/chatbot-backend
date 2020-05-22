@@ -26,12 +26,20 @@ public class IdDocumento {
     private String mes;
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fecha")
-    private Date fecha;
+    private Date insercion;
+
+
+    @Column(name = "fecha_ini")
+    private String fechaIni;
+    @Column(name = "fecha_fin")
+    private String fechaFin;
+    @Column(name = "producto")
+    private String producto;
 
     @PrePersist
     private void prePersistFunction(){
-        if(Objects.isNull(fecha)){
-            setFecha(new Date());
+        if(Objects.isNull(insercion)){
+            setInsercion(new Date());
         }
     }
 }
