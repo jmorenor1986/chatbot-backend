@@ -11,6 +11,7 @@ public class ResponseEnlacePsePayload {
     private String tipoCredito; //1 (Vehiculo) 2 (Consumo)
     private String enlace;
     private String valorPagar;
+    private String valorMora;
     private String idRespuesta;
     private String descripcionRespuesta;
 }
