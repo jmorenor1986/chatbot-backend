@@ -8,6 +8,7 @@ import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
+import org.apache.cxf.binding.soap.SoapFault;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,13 +37,18 @@ public class DocumentosClienteImpl implements DocumentosCliente {
 
     @Override
     public List<ConsultarDocumentosPayloadResponse> consultarDocumentos(ConsultarDocumentoPayload consultarDocumentoPayload) {
+        List<ResultadoConsultaDTO> resultConsultarDocs = new ArrayList<>();
         try {
             portConsultaDocumentos = getServiceDocumentos.getWsFelecPort();
             Map<String, Object> req_ctx = ((BindingProvider) portConsultaDocumentos).getRequestContext();
             Map<String, List<String>> headers = new HashMap<String, List<String>>();
             headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
             req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
-            List<ResultadoConsultaDTO> resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
+            //Valido si el producto es NULO
+            if(Objects.isNull(consultarDocumentoPayload.getProducto())){
+                return new ArrayList<>();
+            }
+            resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
                     , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
             return setListResponseConsultaDocumentos(resultConsultarDocs);
         } catch (WSBusinessRuleException | WSSystemException e) {
@@ -58,10 +64,14 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             Map<String, List<String>> headers = new HashMap<String, List<String>>();
             headers.put("token", Collections.singletonList(tokenCliente.generarToken()));
             req_ctx.put(MessageContext.HTTP_REQUEST_HEADERS, headers);
-            return portConsultaDocumentos.enviarMailDocumentoId(getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class),
-                    setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave()),
-                    getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class));
-        } catch (WSBusinessRuleException | WSSystemException e) {
+
+            ConsultaDocDTO consulta = getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class);
+            BeanDatosCliente beanDatosCliente = setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave());
+            DatoEnvioDTO datosEnvioDto = getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class);
+            return portConsultaDocumentos.enviarMailDocumentoId(consulta,
+                    beanDatosCliente,
+                    datosEnvioDto);
+        } catch (WSBusinessRuleException | WSSystemException | SoapFault e) {
             throw new BusinessException(e.getMessage());
         }
 

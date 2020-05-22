@@ -14,6 +14,7 @@ CREATE TABLE cliente (
   id_Banco               varchar                  ,
   convenio               varchar                  ,
   valor_a_pagar          numeric                  ,
+  valor_mora             numeric                  ,
   tipo_credito           numeric                  ,
 primary key (id)
 );

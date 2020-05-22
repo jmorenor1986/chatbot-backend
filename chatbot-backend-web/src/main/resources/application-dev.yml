@@ -28,6 +28,8 @@ clientes:
     creditosUsuario: /v2/5e9038263300003c7227d5a4
     baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
     baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
+    insercionIdDocumento: /v1/id-documento/
+    consultaIdDocumentoById: /v1/id-documento/{id}/
     consultaDocumentos: /v1/extracto/consultar-documentos
     envioMailDocumentos: /v1/extracto/envio-mail-documento
     consultaCliente: /v1/cliente/
@@ -51,4 +53,7 @@ feignclient:
   usuario-app:
     url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
     service-name: usuario-app
+
+param:
+  mesesExtracto: 12
 

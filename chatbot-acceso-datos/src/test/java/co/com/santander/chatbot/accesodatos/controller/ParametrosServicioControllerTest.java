@@ -58,7 +58,6 @@ public class ParametrosServicioControllerTest {
                 .id(1L)
                 .canal(Canal.builder().build())
                 .servicio(Servicio.builder().build())
-                .numeroIntentos(1)
                 .tiempoIntentos(2)
                 .tiempoPosterior(2)
                 .build());

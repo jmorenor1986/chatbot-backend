@@ -44,6 +44,7 @@ CREATE TABLE terminos_condiciones (
   hora_enviado_term     timestamp       not null  ,
   hora_operacion        timestamp       not null  ,
   operacion             int8            not null  ,
+  fecha                 timestamp       not null  ,
 primary key (id)
 );
 

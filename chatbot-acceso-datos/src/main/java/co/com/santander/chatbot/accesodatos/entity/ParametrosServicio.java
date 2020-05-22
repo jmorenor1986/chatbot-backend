@@ -20,7 +20,6 @@ public class ParametrosServicio {
     private Servicio servicio;
     @ManyToOne(fetch = FetchType.LAZY)
     private Canal canal;
-    private Integer numeroIntentos;
     private Integer tiempoIntentos;
     @Column(name = "tiempo_posterior")
     private Integer tiempoPosterior;

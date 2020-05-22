@@ -13,6 +13,7 @@ public class EnvioExtractoPayload {
     private String telefono;
     private String numeroCreditoOfuscado;
     private String numeroVerificador;
+    private Integer idDocumentos;
     private Integer mes;
     private Integer vigencia;
 

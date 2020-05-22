@@ -39,8 +39,12 @@ public class Cliente {
     private String convenio;
     @Column(name = "valor_a_pagar")
     private Long valorPagar;
+    @Column( name = "valor_mora")
+    private Long valorMora;
     @Enumerated(value = EnumType.ORDINAL)
     @Column(name = "tipo_credito")
     private TipoCredito tipoCredito;
+
+
 
 }

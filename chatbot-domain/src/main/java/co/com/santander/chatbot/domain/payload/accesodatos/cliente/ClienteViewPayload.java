@@ -22,5 +22,6 @@ public class ClienteViewPayload {
     private String idBanco;
     private String convenio;
     private Long valorPagar;
+    private Long valorMora;
     private TipoCredito tipoCredito;
 }
