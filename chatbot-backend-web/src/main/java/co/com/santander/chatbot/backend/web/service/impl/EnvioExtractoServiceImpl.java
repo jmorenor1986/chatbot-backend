@@ -10,10 +10,7 @@ import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumentoPayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.EnvioDocumentoMailResponsePayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.EnvioDocumentoPayload;
+import co.com.santander.chatbot.domain.payload.enviarextracto.*;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import lombok.Getter;
@@ -36,8 +33,12 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     private final IdDocumentoClient idDocumentoClient;
 
     private final ModelMapper mapper;
-    @Getter  @Setter
+    @Getter
+    @Setter
     private String token;
+    @Getter
+    @Setter
+    private ClienteViewPayload clienteViewPayload;
 
     @Autowired
     public EnvioExtractoServiceImpl(DocumentosClient documentosClient, AppProperties appProperties, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
@@ -51,57 +52,76 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     @BussinessLog
     public Optional<ResponseEnvioExtractoPayload> envioExtracto(String token, ServiciosEnum servicio, String telefono, EnvioExtractoPayload envioExtracto) {
         setToken(token);
-        return generarEnvioExtracto(envioExtracto);
+        if (findCreditoCliente(envioExtracto)) {
+            return generarEnvioExtracto(envioExtracto);
+        }
+        return Optional.empty();
     }
 
-    private Optional<ResponseEnvioExtractoPayload> generarEnvioExtracto(EnvioExtractoPayload envioExtracto){
+    private Boolean findCreditoCliente(EnvioExtractoPayload envioExtracto) {
+        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), envioExtracto.getTelefono(), SecurityUtilities.desencriptarCatch(envioExtracto.getNumeroVerificador()));
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
+            setClienteViewPayload(response.getBody());
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    private Optional<ResponseEnvioExtractoPayload> generarEnvioExtracto(EnvioExtractoPayload envioExtracto) {
         //Busco el documento
-        Optional<IdDocumentoPayload> idDocumento = getDocumentId( Long.valueOf( envioExtracto.getIdDocumentos() ) );
-        if( idDocumento.isPresent() ){
-            //Busco los datos del cliente
-            Optional<ClienteViewPayload> cliente = findClient(envioExtracto.getTelefono(), envioExtracto.getNumeroVerificador());
-            if( cliente.isPresent() ){
-                Optional<EnvioDocumentoMailResponsePayload> envio = callService(envioExtracto, cliente.get(), idDocumento.get());
-                if(envio.isPresent()){
-                    return generarRespuesta();
-                }
+        Optional<IdDocumentoPayload> idDocumento = getDocumentId(Long.valueOf(envioExtracto.getIdDocumentos()));
+        if (idDocumento.isPresent()) {
+            Optional<EnvioDocumentoMailResponsePayload> envio = callService(envioExtracto, idDocumento.get());
+            if (envio.isPresent()) {
+                return generarRespuesta();
+
             }
         }
         return Optional.empty();
     }
 
-    private Optional<ResponseEnvioExtractoPayload> generarRespuesta(){
+    private Optional<ResponseEnvioExtractoPayload> generarRespuesta() {
         return Optional.of(ResponseEnvioExtractoPayload.builder().build());
     }
 
-    private Optional<IdDocumentoPayload> getDocumentId(Long id){
-        ResponseEntity<IdDocumentoPayload>  response = idDocumentoClient.getDocumentById(getToken(), id);
-        if(HttpStatus.OK.equals(response.getStatusCode())){
+    private Optional<IdDocumentoPayload> getDocumentId(Long id) {
+        ResponseEntity<IdDocumentoPayload> response = idDocumentoClient.getDocumentById(getToken(), id);
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Optional.of(response.getBody());
         }
         return Optional.empty();
     }
 
-    private Optional<ClienteViewPayload> findClient(String telefono, String codigoVerificador){
+    private Optional<ClienteViewPayload> findClient(String telefono, String codigoVerificador) {
         ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), telefono, SecurityUtilities.desencriptarCatch(codigoVerificador));
-        if(HttpStatus.OK.equals(response)){
+        if (HttpStatus.OK.equals(response)) {
             return Optional.of(response.getBody());
         }
         return Optional.empty();
     }
 
-    private Optional<EnvioDocumentoMailResponsePayload> callService(EnvioExtractoPayload envioExtracto, ClienteViewPayload cliente, IdDocumentoPayload documentoPayload){
+    private Optional<EnvioDocumentoMailResponsePayload> callService(EnvioExtractoPayload envioExtracto, IdDocumentoPayload documentoPayload) {
+        ProductoEnum producto = null;
+        if("EXTRACTO VEHICULO".equalsIgnoreCase(documentoPayload.getProducto().trim()) || "CREDITO VEHICULO".equalsIgnoreCase(documentoPayload.getProducto().trim())){
+            producto = ProductoEnum.VEHICULO;
+        }
         EnviarMailDocumentoPayload request = EnviarMailDocumentoPayload.builder()
                 .consultarDocumentoPayload(ConsultarDocumentoPayload.builder()
-                        .valorllave(cliente.getCedula())
+                        .valorllave(getClienteViewPayload().getCedula())
                         .docId(documentoPayload.getIdDocumentos())
+                        .fechaIni(documentoPayload.getFechaIni())
+                        .fechaFin(documentoPayload.getFechaFin())
+                        .formatoConsulta("pdf")
+                        .producto(producto)
+                        .folder("")
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
-                        .mailPara(cliente.getEmail())
+                        .mailPara(getClienteViewPayload().getEmail())
+                        .mailCC("johnmorenoing@gmail.com")
                         .build())
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> response = documentosClient.envioMailDocumento(getToken(), request);
-        if(HttpStatus.OK.equals(response.getStatusCode())){
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Optional.of(response.getBody());
         }
         return Optional.empty();

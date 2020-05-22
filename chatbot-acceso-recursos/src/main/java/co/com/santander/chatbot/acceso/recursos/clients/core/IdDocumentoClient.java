@@ -11,7 +11,7 @@ public interface IdDocumentoClient {
     @PostMapping(value = "${clientes.url.insercionIdDocumento}")
     ResponseEntity<IdDocumentoPayload> save(@RequestHeader("Authorization") String bearerToken, @RequestBody IdDocumentoPayload idDocumentoPayload);
 
-    @GetMapping(value = "/{id}/")
+    @GetMapping(value = "${clientes.url.consultaIdDocumentoById}")
     ResponseEntity<IdDocumentoPayload> getDocumentById(@RequestHeader("Authorization") String bearerToken, @PathVariable("id") Long id);
 
 }
