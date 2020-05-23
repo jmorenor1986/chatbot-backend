@@ -49,7 +49,6 @@ public class ClienteServiceImplTest {
         String telefono = "3005632010";
         List<Cliente> result = new ArrayList<>();
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -91,7 +90,6 @@ public class ClienteServiceImplTest {
         String numCredito = "123456789";
         List<Cliente> result = new ArrayList<>();
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .numerCredito("123456789")
@@ -134,7 +132,6 @@ public class ClienteServiceImplTest {
 
         List<Cliente> result = new ArrayList<>();
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("2"))
                 .nombreCliente("GOMEZ GARCIA LUISA CLRA")
                 .telefono("3005632011")
                 .cedula("56789098")
@@ -179,7 +176,6 @@ public class ClienteServiceImplTest {
 
         List<Cliente> result = new ArrayList<>();
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("2"))
                 .nombreCliente("GOMEZ GARCIA LUISA CLRA")
                 .telefono("3005632011")
                 .cedula("56789098")

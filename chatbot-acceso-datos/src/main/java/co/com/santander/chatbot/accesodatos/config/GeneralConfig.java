@@ -16,7 +16,9 @@ public class GeneralConfig {
 
     @Bean
     public ModelMapper getMapper(){
-        return new ModelMapper();
+        ModelMapper mapper = new ModelMapper();
+        mapper.getConfiguration().setAmbiguityIgnored(true);
+        return mapper;
     }
 
 }

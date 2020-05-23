@@ -74,7 +74,6 @@ public class ClienteControllerTest {
         String telefono = "3005632010";
         List<Cliente> listClients = new ArrayList<>();
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -112,7 +111,6 @@ public class ClienteControllerTest {
         String numCredito = "123456789";
 
         Cliente item = Cliente.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .numerCredito("123456789")

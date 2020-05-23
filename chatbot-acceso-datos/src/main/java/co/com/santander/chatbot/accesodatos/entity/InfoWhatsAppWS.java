@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "info_whats_appws")
+@Table(name = "infowhatsappwS")
 @Getter
 @Setter
 @Builder
@@ -15,23 +15,23 @@ import java.util.Date;
 @NamedQuery(name = "InfoWhatsAppWS.findByNumCreditoBancoAndNumeroIdentificacionAndNumPeticionServicio", query = "FROM InfoWhatsAppWS u where u.numCreditoBanco = ?1 and u.numeroIdentificacion = ?2 and u.numPeticionServicio = ?3 order by id desc ")
 public class InfoWhatsAppWS {
     @Id
-    @Column(name = "Id")
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "infowhatsappws_generator")
-    @SequenceGenerator(name = "infowhatsappws_generator", sequenceName = "infowhatsappws_seq", allocationSize = 1)
+    @Column(name = "id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "num_creditoBanco")
+    @Column(name = "numcreditobanco")
     private String numCreditoBanco;
 
-    @Column(name = "numero_identificacion")
+    @Column(name = "numeroidentificacion")
     private String numeroIdentificacion;
 
-    @Column(name = "num_peticion_servicio")
+    @Column(name = "numpeticionservicio")
     private Long numPeticionServicio;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha_envio")
+    @Column(name = "fechaenvio")
     private Date fechaEnvio;
+
     @Column(name = "estado")
     private Long estado;
 }

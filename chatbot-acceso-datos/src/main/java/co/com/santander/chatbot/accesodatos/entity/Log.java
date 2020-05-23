@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Objects;
 
 @Entity
 @Table(name = "log_cliente")
@@ -41,4 +42,10 @@ public class Log {
     private String credito;
     @Column(name = "correo")
     private String correo;
+
+    public void preInsert(){
+        if(Objects.isNull(feha)){
+            setFeha(new Date());
+        }
+    }
 }

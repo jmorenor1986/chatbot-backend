@@ -147,7 +147,6 @@ public class LogClienteServiceImplTest {
                 .telefono("3229032614")
                 .build();
         Cliente cliente = Cliente.builder()
-                .id(1L)
                 .numerCredito("123456")
                 .telefono("3229032614")
                 .cedula("1030585312")

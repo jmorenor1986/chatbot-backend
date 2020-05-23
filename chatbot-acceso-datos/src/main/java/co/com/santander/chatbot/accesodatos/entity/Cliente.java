@@ -13,11 +13,12 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Table( name = "consulta_Cliente")
 @NamedQuery(name = "Cliente.consultarXCedulaYTelefono", query = "FROM Cliente u where u.telefono = ?1 and u.cedula like ?2 ")
 public class Cliente {
-    @Id
-    private Long id;
-    @Column(name = "Nombre_Cliente")
+
+    //private Long id;
+    @Column(name = "nombrecliente")
     private String nombreCliente;
     @Column(name = "Telefono")
     private String telefono;
@@ -25,24 +26,25 @@ public class Cliente {
     private String cedula;
     @Column(name = "Email")
     private String email;
-    @Column(name = "Numero_Credito")
+    @Id
+    @Column(name = "numerocredito")
     private String numerCredito;
     @Column(name = "Banco")
     private String banco;
     @Column(name = "Estado")
     private String estado;
-    @Column(name = "id_Producto")
+    @Column(name = "idproducto")
     private String idProducto;
-    @Column(name = "id_Banco")
+    @Column(name = "idbanco")
     private String idBanco;
     @Column(name = "convenio")
     private String convenio;
-    @Column(name = "valor_a_pagar")
+    @Column(name = "valorapagar")
     private Long valorPagar;
-    @Column( name = "valor_mora")
+    @Column( name = "valormora")
     private Long valorMora;
     @Enumerated(value = EnumType.ORDINAL)
-    @Column(name = "tipo_credito")
+    @Column(name = "tipoproducto")
     private TipoCredito tipoCredito;
 
 
