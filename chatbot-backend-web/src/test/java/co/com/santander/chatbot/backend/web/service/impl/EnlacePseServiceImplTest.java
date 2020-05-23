@@ -54,6 +54,7 @@ public class EnlacePseServiceImplTest {
                 .idProducto("1")
                 .idBanco("9000")
                 .convenio("LOS COCHES F SAS")
+                .valorMora(10000L)
                 .tipoCredito(TipoCredito.CONSUMO)
                 .valorPagar(100000L)
                 .build();
@@ -112,6 +113,7 @@ public class EnlacePseServiceImplTest {
                 .convenio("LOS COCHES F SAS")
                 .tipoCredito(TipoCredito.CONSUMO)
                 .valorPagar(700000L)
+                .valorMora(50000L)
                 .build();
 
         ResponseEntity<ClienteViewPayload> response = new ResponseEntity<>(respuesta, HttpStatus.OK);

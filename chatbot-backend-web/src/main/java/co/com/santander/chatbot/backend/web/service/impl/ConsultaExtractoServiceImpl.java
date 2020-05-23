@@ -84,9 +84,21 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
                     //Genera la respuesta que va ha enviar al usuario
                     return generateResponse(listaDocumentosValidos.get(), envioExtracto);
                 }
+            }else{
+                return generateResponseWrong("No hay informacion de credito en el repositorio de extractos", envioExtracto.getNumeroCreditoOfuscado());
             }
+        }else{
+            return generateResponseWrong("No hay informacion de credito", envioExtracto.getNumeroCreditoOfuscado());
         }
         return Optional.empty();
+    }
+
+    private Optional<ResponseExtractosDisponibles> generateResponseWrong(String mensaje, String numeroCreditoOfuscado){
+        return Optional.of(ResponseExtractosDisponibles.builder()
+                .idRespuesta("2")
+                .descripcionRespuesta(mensaje)
+                .numeroCreditoOfuscado(numeroCreditoOfuscado)
+                .build());
     }
 
     private Optional<List<ConsultarDocumentosPayloadResponse>> callPrincipalService(EnvioExtractoPayload envioExtracto) {
@@ -127,7 +139,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Boolean.FALSE;
     }
 
-    public Optional<List<ConsultarDocumentosPayloadResponse>> filtraDocumentosCredito(List<ConsultarDocumentosPayloadResponse> documentos, String numCredito) {
+    private Optional<List<ConsultarDocumentosPayloadResponse>> filtraDocumentosCredito(List<ConsultarDocumentosPayloadResponse> documentos, String numCredito) {
         List<ConsultarDocumentosPayloadResponse> documentosValidos = documentos.stream().parallel()
                 .filter(item -> validaNumeroCredito(item.getIndices(), numCredito))
                 .filter(item -> validaFecha(item.getIndices()))
@@ -139,7 +151,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Optional.of(documentosValidos);
     }
 
-    public int comparaFechas(ConsultarDocumentosPayloadResponse itemUno, ConsultarDocumentosPayloadResponse itemDos) {
+    private int comparaFechas(ConsultarDocumentosPayloadResponse itemUno, ConsultarDocumentosPayloadResponse itemDos) {
         Optional<String> sFechaUno = obtieneValorIndices(itemUno.getIndices(), "FECHA_FACTURACION");
         Optional<String> sFechaDos = obtieneValorIndices(itemDos.getIndices(), "FECHA_FACTURACION");
         if (sFechaUno.isPresent() && sFechaDos.isPresent()) {
@@ -150,7 +162,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return 0;
     }
 
-    public Boolean validaNumeroCredito(List<IndicesPayloadResponse> indices, String credito) {
+    private Boolean validaNumeroCredito(List<IndicesPayloadResponse> indices, String credito) {
         List<IndicesPayloadResponse> numCreditos = indices.stream().parallel()
                 .filter(item -> "NUMCREDITO".equalsIgnoreCase(item.getNombre()))
                 .filter(item -> credito.equalsIgnoreCase(item.getValor().trim()))
@@ -161,7 +173,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Boolean.TRUE;
     }
 
-    public Boolean validaFecha(List<IndicesPayloadResponse> indices) {
+    private Boolean validaFecha(List<IndicesPayloadResponse> indices) {
         Optional<String> oFecha = obtieneValorIndices(indices, "FECHA_FACTURACION");
         if (!oFecha.isPresent()) {
             return Boolean.FALSE;
@@ -179,7 +191,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Boolean.TRUE;
     }
 
-    public Optional<String> obtieneValorIndices(List<IndicesPayloadResponse> indices, String clave) {
+    private Optional<String> obtieneValorIndices(List<IndicesPayloadResponse> indices, String clave) {
         List<IndicesPayloadResponse> numCreditos = indices.stream().parallel()
                 .filter(item -> clave.equalsIgnoreCase(item.getNombre()))
                 .collect(Collectors.toList());
@@ -189,7 +201,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Optional.of(numCreditos.get(0).getValor());
     }
 
-    public Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, EnvioExtractoPayload envioExtracto) {
+    private Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, EnvioExtractoPayload envioExtracto) {
         Optional<ResponseExtractosDisponibles> response = Optional.empty();
         response = Optional.of(ResponseExtractosDisponibles.builder()
                 .resultadoEnvio("true")

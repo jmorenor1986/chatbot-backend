@@ -11,6 +11,7 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.*;
+import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import lombok.Getter;
@@ -41,7 +42,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     private ClienteViewPayload clienteViewPayload;
 
     @Autowired
-    public EnvioExtractoServiceImpl(DocumentosClient documentosClient, AppProperties appProperties, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
+    public EnvioExtractoServiceImpl(DocumentosClient documentosClient, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
         this.documentosClient = documentosClient;
         this.clienteClient = clienteClient;
         this.idDocumentoClient = idDocumentoClient;
@@ -54,8 +55,18 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
         setToken(token);
         if (findCreditoCliente(envioExtracto)) {
             return generarEnvioExtracto(envioExtracto);
+        }else{
+            return generateResponseWrong("No hay informacion de credito", envioExtracto.getNumeroCreditoOfuscado());
         }
-        return Optional.empty();
+
+    }
+
+    private Optional<ResponseEnvioExtractoPayload> generateResponseWrong(String mensaje, String numeroCreditoOfuscado){
+        return Optional.of(ResponseEnvioExtractoPayload.builder()
+                .idRespuesta(2)
+                .descripcionRespuesta(mensaje)
+                .numeroCreditoOfuscado(numeroCreditoOfuscado)
+                .build());
     }
 
     private Boolean findCreditoCliente(EnvioExtractoPayload envioExtracto) {
