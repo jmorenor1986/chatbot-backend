@@ -35,7 +35,7 @@ public class DocumentosControllerTest {
         Mockito.when(documentosService.consultarDocumentos(Mockito.any())).thenReturn(new ArrayList<>());
         ResponseEntity<List<ConsultarDocumentosPayloadResponse>> result = documentosController.consultaDocumentos(ConsultarDocumentoPayload.builder().build());
         Assert.assertNotNull(result);
-        Assert.assertEquals(200, result.getStatusCodeValue());
+        Assert.assertEquals(204, result.getStatusCodeValue());
     }
 
     @Test

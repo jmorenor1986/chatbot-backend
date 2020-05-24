@@ -33,6 +33,7 @@ public class ClienteControllerTest {
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mapper = new ModelMapper();
+        mapper.getConfiguration().setAmbiguityIgnored(true);
         clienteController = new ClienteController(clienteService, mapper);
         clientePayload = ClientePayload.builder()
                 .cedula("5270")
@@ -124,7 +125,7 @@ public class ClienteControllerTest {
                 .convenio("MARCALI INTERNACIONAL SA")
                 .build();
 
-        Mockito.when( clienteService.consultarClienteByTelefonoAndNumCredito(telefono,numCredito) ).thenReturn(Optional.of(item));
+        Mockito.doReturn(Optional.of(item)).when(clienteService).consultarClienteByTelefonoAndNumCredito(Mockito.any(), Mockito.any());
 
         ResponseEntity<ClienteViewPayload> response = clienteController.getClientByTelefonoAndNumCredito(telefono,numCredito);
 
