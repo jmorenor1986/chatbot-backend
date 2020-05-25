@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="WsFelecService" targetNamespace="http://co.com.computec.wsservicioselectronicos.ws/" xmlns="http://schemas.xmlsoap.org/wsdl/" xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:tns="http://co.com.computec.wsservicioselectronicos.ws/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata">
+  <types>
+    <xsd:schema>
+      <xsd:import namespace="http://co.com.computec.wsservicioselectronicos.ws/" schemaLocation="WsFelecService_schema1.xsd"/>
+    </xsd:schema>
+  </types>
+  <message name="consultarDocumentosResponse">
+    <part name="parameters" element="tns:consultarDocumentosResponse">
+    </part>
+  </message>
+  <message name="consultarDocumentos">
+    <part name="parameters" element="tns:consultarDocumentos">
+    </part>
+  </message>
+  <message name="enviarMailDocumentoId">
+    <part name="parameters" element="tns:enviarMailDocumentoId">
+    </part>
+  </message>
+  <message name="obtenerDocumentoId">
+    <part name="parameters" element="tns:obtenerDocumentoId">
+    </part>
+  </message>
+  <message name="WSSystemException">
+    <part name="fault" element="tns:WSSystemException">
+    </part>
+  </message>
+  <message name="enviarMailDocumento">
+    <part name="parameters" element="tns:enviarMailDocumento">
+    </part>
+  </message>
+  <message name="enviarMailDocumentoResponse">
+    <part name="parameters" element="tns:enviarMailDocumentoResponse">
+    </part>
+  </message>
+  <message name="obtenerDocumento">
+    <part name="parameters" element="tns:obtenerDocumento">
+    </part>
+  </message>
+  <message name="obtenerDocumentoIdResponse">
+    <part name="parameters" element="tns:obtenerDocumentoIdResponse">
+    </part>
+  </message>
+  <message name="WSBusinessRuleException">
+    <part name="fault" element="tns:WSBusinessRuleException">
+    </part>
+  </message>
+  <message name="obtenerDocumentoResponse">
+    <part name="parameters" element="tns:obtenerDocumentoResponse">
+    </part>
+  </message>
+  <message name="enviarMailDocumentoIdResponse">
+    <part name="parameters" element="tns:enviarMailDocumentoIdResponse">
+    </part>
+  </message>
+  <portType name="WsFelec">
+    <operation name="consultarDocumentos">
+      <input message="tns:consultarDocumentos" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/consultarDocumentosRequest">
+    </input>
+      <output message="tns:consultarDocumentosResponse" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/consultarDocumentosResponse">
+    </output>
+      <fault name="WSSystemException" message="tns:WSSystemException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/consultarDocumentos/Fault/WSSystemException">
+    </fault>
+      <fault name="WSBusinessRuleException" message="tns:WSBusinessRuleException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/consultarDocumentos/Fault/WSBusinessRuleException">
+    </fault>
+    </operation>
+    <operation name="obtenerDocumento">
+      <input message="tns:obtenerDocumento" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoRequest">
+    </input>
+      <output message="tns:obtenerDocumentoResponse" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoResponse">
+    </output>
+      <fault name="WSSystemException" message="tns:WSSystemException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumento/Fault/WSSystemException">
+    </fault>
+      <fault name="WSBusinessRuleException" message="tns:WSBusinessRuleException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumento/Fault/WSBusinessRuleException">
+    </fault>
+    </operation>
+    <operation name="obtenerDocumentoId">
+      <input message="tns:obtenerDocumentoId" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoIdRequest">
+    </input>
+      <output message="tns:obtenerDocumentoIdResponse" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoIdResponse">
+    </output>
+      <fault name="WSSystemException" message="tns:WSSystemException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoId/Fault/WSSystemException">
+    </fault>
+      <fault name="WSBusinessRuleException" message="tns:WSBusinessRuleException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/obtenerDocumentoId/Fault/WSBusinessRuleException">
+    </fault>
+    </operation>
+    <operation name="enviarMailDocumento">
+      <input message="tns:enviarMailDocumento" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoRequest">
+    </input>
+      <output message="tns:enviarMailDocumentoResponse" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoResponse">
+    </output>
+      <fault name="WSSystemException" message="tns:WSSystemException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumento/Fault/WSSystemException">
+    </fault>
+      <fault name="WSBusinessRuleException" message="tns:WSBusinessRuleException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumento/Fault/WSBusinessRuleException">
+    </fault>
+    </operation>
+    <operation name="enviarMailDocumentoId">
+      <input message="tns:enviarMailDocumentoId" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoIdRequest">
+    </input>
+      <output message="tns:enviarMailDocumentoIdResponse" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoIdResponse">
+    </output>
+      <fault name="WSSystemException" message="tns:WSSystemException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoId/Fault/WSSystemException">
+    </fault>
+      <fault name="WSBusinessRuleException" message="tns:WSBusinessRuleException" wsam:Action="http://co.com.computec.wsservicioselectronicos.ws/WsFelec/enviarMailDocumentoId/Fault/WSBusinessRuleException">
+    </fault>
+    </operation>
+  </portType>
+  <binding name="WsFelecPortBinding" type="tns:WsFelec">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="consultarDocumentos">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSSystemException">
+        <soap:fault name="WSSystemException" use="literal"/>
+      </fault>
+      <fault name="WSBusinessRuleException">
+        <soap:fault name="WSBusinessRuleException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="obtenerDocumento">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSSystemException">
+        <soap:fault name="WSSystemException" use="literal"/>
+      </fault>
+      <fault name="WSBusinessRuleException">
+        <soap:fault name="WSBusinessRuleException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="obtenerDocumentoId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSSystemException">
+        <soap:fault name="WSSystemException" use="literal"/>
+      </fault>
+      <fault name="WSBusinessRuleException">
+        <soap:fault name="WSBusinessRuleException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="enviarMailDocumento">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSSystemException">
+        <soap:fault name="WSSystemException" use="literal"/>
+      </fault>
+      <fault name="WSBusinessRuleException">
+        <soap:fault name="WSBusinessRuleException" use="literal"/>
+      </fault>
+    </operation>
+    <operation name="enviarMailDocumentoId">
+      <soap:operation soapAction=""/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+      <fault name="WSSystemException">
+        <soap:fault name="WSSystemException" use="literal"/>
+      </fault>
+      <fault name="WSBusinessRuleException">
+        <soap:fault name="WSBusinessRuleException" use="literal"/>
+      </fault>
+    </operation>
+  </binding>
+  <service name="WsFelecService">
+    <port name="WsFelecPort" binding="tns:WsFelecPortBinding">
+      <soap:address location="https://felec.computec.com/WSFelecJAXWSP/WsFelecService"/>
+    </port>
+  </service>
+</definitions>

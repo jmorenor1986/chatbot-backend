@@ -20,7 +20,7 @@ import java.util.logging.Logger;
                       serviceName = "WsFelecService",
                       portName = "WsFelecPort",
                       targetNamespace = "http://co.com.computec.wsservicioselectronicos.ws/",
-                      wsdlLocation = "file:/C:/Users/JOJMOR~1/AppData/Local/Temp/tempdir3759899551026961253.tmp/WsFelecService_1.wsdl",
+                      wsdlLocation = "classpath:wsdl/WsFelecService.wsdl",
                       endpointInterface = "co.com.santander.accesorecursos.soap.resources.documentos.WsFelec")
                       
 public class WsFelecImpl implements WsFelec {

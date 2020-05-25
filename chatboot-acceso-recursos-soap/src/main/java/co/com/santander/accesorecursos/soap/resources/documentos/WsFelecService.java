@@ -14,7 +14,7 @@ import java.net.URL;
  * Generated source version: 2.7.2
  */
 @WebServiceClient(name = "WsFelecService",
-        wsdlLocation = "file:/C:/Users/JOJMOR~1/AppData/Local/Temp/tempdir3759899551026961253.tmp/WsFelecService_1.wsdl",
+        wsdlLocation = "",
         targetNamespace = "http://co.com.computec.wsservicioselectronicos.ws/")
 public class WsFelecService extends Service {
 
@@ -26,7 +26,7 @@ public class WsFelecService extends Service {
     static {
         URL url = null;
         try {
-            url = new URL("file:/C:/Users/JOJMOR~1/AppData/Local/Temp/tempdir3759899551026961253.tmp/WsFelecService_1.wsdl");
+            url = new URL("classpath:wsdl/WsFelecService.wsdl");
         } catch (MalformedURLException e) {
             java.util.logging.Logger.getLogger(WsFelecService.class.getName())
                     .log(java.util.logging.Level.INFO,
