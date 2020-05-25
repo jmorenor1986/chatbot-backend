@@ -1,0 +1,4 @@
+<!DOCTYPE xml>
+<jboss-web>
+    <context-root>/chatbot-acceso-rescursos-rest</context-root>
+</jboss-web>

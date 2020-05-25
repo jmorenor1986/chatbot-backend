@@ -8,12 +8,10 @@ import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
-import org.apache.cxf.binding.soap.SoapFault;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.annotation.PostConstruct;
 import javax.xml.ws.BindingProvider;
 import javax.xml.ws.handler.MessageContext;
 import java.util.*;
@@ -71,7 +69,7 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             return portConsultaDocumentos.enviarMailDocumentoId(consulta,
                     beanDatosCliente,
                     datosEnvioDto);
-        } catch (WSBusinessRuleException | WSSystemException | SoapFault e) {
+        } catch (WSBusinessRuleException | WSSystemException e) {
             throw new BusinessException(e.getMessage());
         }
 

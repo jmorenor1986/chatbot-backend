@@ -1,14 +1,6 @@
-server:
-  servlet:
-    context-path: /chatbot-acceso-datos
-  port: 5001
-
 spring:
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://;servername=172.60.1.4;databaseName=bdpremierprueba_0306
-    username: WhatsApp
-    password: W4t54pp2020
+    jndi-name: java:/MSSQLDS
   jpa:
     properties:
       hibernate:

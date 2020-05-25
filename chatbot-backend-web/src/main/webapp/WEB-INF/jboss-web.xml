@@ -1,0 +1,4 @@
+<!DOCTYPE xml>
+<jboss-web>
+    <context-root>/chatbot-backend-web</context-root>
+</jboss-web>

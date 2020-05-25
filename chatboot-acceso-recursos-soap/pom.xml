@@ -10,32 +10,34 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chatboot-acceso-recursos-soap</artifactId>
+    <packaging>war</packaging>
 
     <properties>
         <cxf.version>2.7.18</cxf.version>
         <start-class>co.com.santander.accesorecursos.soap.AccesoRecursosSoapApplicationa</start-class>
     </properties>
     <dependencies>
+        <!-- Ini Deployment Wildfly -->
+        <!--dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-tomcat</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency-->
+        <!-- Fin Deployment Wildfly -->
         <dependency>
             <groupId>co.com.santander</groupId>
             <artifactId>chatbot-domain</artifactId>
             <version>1.0.0</version>
-        </dependency>
-        <!--Apache cxf-->
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-ws-security</artifactId>
-            <version>${cxf.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-rt-transports-http</artifactId>
-            <version>${cxf.version}</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.sun.xml.ws/jaxws-rt -->
         <dependency>
@@ -57,6 +59,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
