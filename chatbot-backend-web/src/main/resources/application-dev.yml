@@ -1,6 +1,6 @@
 server:
   servlet:
-    context-path: /chatbot-backend
+    context-path: /chatbot-backend-web
   port: 5000
 
   ssl:

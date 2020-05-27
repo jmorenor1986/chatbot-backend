@@ -17,7 +17,8 @@ clientes:
     base: http://www.mocky.io
     creditosUsuario: /v2/5e9038263300003c7227d5a4
     baseUrlCliente: http://localhost:8080/chatbot-acceso-datos
-    baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
+    baseUrlSoa: http://localhost:8080/chatbot-acceso-rescursos-rest
+    #baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
     insercionIdDocumento: /v1/id-documento/
     consultaIdDocumentoById: /v1/id-documento/{id}/
     consultaDocumentos: /v1/extracto/consultar-documentos

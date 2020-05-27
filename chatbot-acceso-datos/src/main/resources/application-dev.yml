@@ -5,17 +5,29 @@ server:
 
 spring:
   datasource:
-    url: jdbc:h2:mem:santander
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    url: jdbc:sqlserver://;servername=172.60.1.4;databaseName=bdpremierprueba_0306
+    username: WhatsApp
+    password: W4t54pp2020
+    hikari:
+      connectionTimeout: 30000
+      idleTimeout: 600000
+      maxLifetime: 1800000
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect:  org.hibernate.dialect.SQLServer2012Dialect
     show-sql: true
-    generate-ddl: true
-  flyway:
-    table: chatbot_acceso_datos_flyway_schema_history
-    baseline-on-migrate: true
-    locations: classpath:test/db/migration
+    generate-ddl: false
+
+#show sql values
+logging:
+  path: C:\chatbot\
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            sql: trace
+
+

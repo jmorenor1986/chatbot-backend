@@ -182,3 +182,10 @@ CREATE SEQUENCE terminos_condiciones_seq START WITH 1 INCREMENT BY 1 ;
 ALTER TABLE BDPremierPrueba_0306.WhatsAppWS.terminos_condiciones ADD CONSTRAINT terminos_condiciones_operacion CHECK (
 	operacion in (1,2)
 );
+
+CREATE TABLE BDPremierPrueba_0306.WhatsAppWS.parametros_app (
+  id                    numeric                 not null  ,
+  clave                 varchar(255)            not null  ,
+  valor                 varchar(255)            not null  ,
+primary key (id)
+);

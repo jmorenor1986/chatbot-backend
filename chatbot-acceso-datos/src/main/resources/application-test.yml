@@ -18,7 +18,7 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
     show-sql: true
-    generate-ddl: false
+    generate-ddl: true
 
 #show sql values
 logging:
