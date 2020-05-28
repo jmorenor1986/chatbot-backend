@@ -30,14 +30,14 @@ primary key (id)
 --
 --Tabla dada por el banco
 --
-CREATE TABLE info_whats_appws
+CREATE TABLE infowhatsappws
 (
-     id                    BIGINT NOT NULL,
-     fecha_envio           TIMESTAMP,
-     estado                BIGINT,
-     num_credito_banco     VARCHAR(255),
-     num_peticion_servicio BIGINT,
-     numero_identificacion VARCHAR(255),
+     id                     BIGINT      NOT NULL,
+     fechaenvio             TIMESTAMP           ,
+     estado                 BIGINT              ,
+     numcreditobanco        VARCHAR(255)        ,
+     numpeticionservicio    BIGINT              ,
+     numeroidentificacion   VARCHAR(255)        ,
      PRIMARY KEY (id)
 );
 --

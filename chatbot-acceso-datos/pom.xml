@@ -13,11 +13,11 @@
         <h2.database.version>1.4.200</h2.database.version>
         <start-class>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</start-class>
     </properties>
-    <!--packaging>war</packaging-->
+    <packaging>war</packaging>
 
     <dependencies>
         <!-- Ini Deployment Wildfly -->
-        <!--dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
@@ -31,7 +31,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency-->
+        </dependency>
         <!-- Fin Deployment Wildfly -->
         <dependency>
             <groupId>com.h2database</groupId>
