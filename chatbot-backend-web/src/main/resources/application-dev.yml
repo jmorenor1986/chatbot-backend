@@ -26,8 +26,8 @@ clientes:
   url:
     base: http://www.mocky.io
     creditosUsuario: /v2/5e9038263300003c7227d5a4
-    #baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
-    baseUrlCliente: http://localhost:8080/chatbot-acceso-datos
+    baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
+    #baseUrlCliente: http://localhost:8080/chatbot-acceso-datos
     baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
     insercionIdDocumento: /v1/id-documento/
     consultaIdDocumentoById: /v1/id-documento/{id}/
@@ -52,8 +52,8 @@ security:
 
 feignclient:
   usuario-app:
-    url: http://localhost:8080/chatbot-acceso-datos/v1/usuarioapp/
-    #url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
+    #url: http://localhost:28080/chatbot-acceso-datos/v1/usuarioapp/
+    url: http://localhost:5001/chatbot-acceso-datos/v1/usuarioapp/
     service-name: usuario-app
 
 param:
