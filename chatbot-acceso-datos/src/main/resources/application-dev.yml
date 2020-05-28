@@ -5,20 +5,27 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    url: jdbc:sqlserver://;servername=172.60.1.4;databaseName=bdpremierprueba_0306
-    username: WhatsApp
-    password: W4t54pp2020
-    hikari:
-      connectionTimeout: 30000
-      idleTimeout: 600000
-      maxLifetime: 1800000
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://192.168.0.15:5432/chatbot
+    username: postgres
+    password: 12345678
+    #hikari:
+    #  connectionTimeout: 30000
+    #  idleTimeout: 600000
+    #  maxLifetime: 1800000
+  liquibase:
+    change-log: classpath:/db/db.changelog-dev.xml
   jpa:
     properties:
       hibernate:
-        dialect:  org.hibernate.dialect.SQLServer2012Dialect
+        dialect:  org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          lob:
+            non_contextual_creation: true
     show-sql: true
     generate-ddl: false
+
+
 
 #show sql values
 logging:

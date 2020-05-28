@@ -12,19 +12,19 @@ CREATE TABLE usuario_app (
 --
 CREATE TABLE cliente (
   id                     int8            not null ,
-  Nombre_Cliente         varchar                  ,
+  nombrecliente         varchar                  ,
   Telefono               varchar                  ,
   Cedula                 varchar                  ,
   Email                  varchar                  ,
-  Numero_Credito         varchar                  ,
+  numerocredito         varchar                  ,
   Banco                  varchar                  ,
   Estado                 varchar                  ,
-  id_Producto            varchar                  ,
-  id_Banco               varchar                  ,
+  idproducto            varchar                  ,
+  idbanco               varchar                  ,
   convenio               varchar                  ,
-  valor_a_pagar          numeric                  ,
-  valor_mora             numeric                  ,
-  tipo_credito           numeric                  ,
+  valorapagar          numeric                  ,
+  valormora             numeric                  ,
+  tipoproducto           numeric                  ,
 primary key (id)
 );
 --
