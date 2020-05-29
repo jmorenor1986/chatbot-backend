@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface ParametrosAppService {
 
     Optional<ParametrosApp> findByClave(String clave);
+
+    Optional<ParametrosApp> save(ParametrosApp entity);
 }

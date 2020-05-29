@@ -22,4 +22,9 @@ public class ParametrosAppServiceImpl implements ParametrosAppService {
     public Optional<ParametrosApp> findByClave(String clave) {
         return parametrosAppRepository.findByClave(clave);
     }
+
+    @Override
+    public Optional<ParametrosApp> save(ParametrosApp entity) {
+        return Optional.of( parametrosAppRepository.save(entity) );
+    }
 }

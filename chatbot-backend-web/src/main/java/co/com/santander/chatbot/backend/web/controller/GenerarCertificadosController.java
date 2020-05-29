@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
+import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
@@ -18,10 +19,12 @@ import java.util.Optional;
 @RequestMapping("v1/obtener-certificados")
 public class GenerarCertificadosController {
     private final GenerarCertificadosService generarCertificadosService;
+    private final ProxyInformacionCredito proxyInformacionCredito;
 
     @Autowired
-    public GenerarCertificadosController(GenerarCertificadosService generarCertificadosService) {
+    public GenerarCertificadosController(GenerarCertificadosService generarCertificadosService, ProxyInformacionCredito proxyInformacionCredito) {
         this.generarCertificadosService = generarCertificadosService;
+        this.proxyInformacionCredito = proxyInformacionCredito;
     }
 
 
@@ -35,7 +38,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/informacion-credito")
     public ResponseEntity<InformacionCreditoResponsePayload> informacionCredito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody InformacionCreditoPayload informacionCreditoPayload) {
-        Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarInformacionCredito(bearerToken, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
+        Optional<InformacionCreditoResponsePayload> result = proxyInformacionCredito.generarInformacionCredito(bearerToken, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos", 0L);

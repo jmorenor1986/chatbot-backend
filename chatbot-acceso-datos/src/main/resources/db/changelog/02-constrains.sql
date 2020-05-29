@@ -17,6 +17,8 @@ create sequence pse_param_seq start 1 increment 1;
 
 create sequence terminos_condiciones_seq start 1 increment 1;
 
+create sequence parametros_app_seq start 1 increment 1;
+
 
 ALTER TABLE log_cliente
     ADD CONSTRAINT fk_log_servicio
