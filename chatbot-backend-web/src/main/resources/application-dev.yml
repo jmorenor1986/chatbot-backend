@@ -42,6 +42,9 @@ clientes:
     pseUrl: /v1/pse-param/
     terminosCondiciones: /v1/terminos-condiciones/
     logger: /v1/logger/
+    saveParametosApp: /v1/parametros-app/
+    consultaParametosApp: /v1/parametros-app/
+
 
 
 

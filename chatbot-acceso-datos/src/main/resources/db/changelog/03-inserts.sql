@@ -92,3 +92,8 @@ values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.co
 (nextval('pse_param_seq'), 297, 1, 'http://ur1')      ,
 (nextval('pse_param_seq'), 297, 2, 'http://ur1' )     ,
 (nextval('pse_param_seq'), 297, 3, 'http://ur1');
+
+
+insert into parametros_app (id, clave, valor )
+values (nextval ('parametros_app_seq'),'MESES_EXTRACTO' , '12')
+;

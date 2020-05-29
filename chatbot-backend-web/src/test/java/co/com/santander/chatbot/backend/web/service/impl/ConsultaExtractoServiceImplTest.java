@@ -3,15 +3,14 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
-import co.com.santander.chatbot.backend.web.common.AppProperties;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
+import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.backend.web.service.impl.mock.ResponseComputecMock;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumentoPayload;
-import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
@@ -38,7 +37,7 @@ public class ConsultaExtractoServiceImplTest {
     @Mock
     private DocumentosClient documentosClient;
     @Mock
-    private AppProperties appProperties;
+    private ParametrosAppService parametrosAppService;
     @Mock
     private ClienteClient clienteClient;
     @Mock
@@ -49,7 +48,7 @@ public class ConsultaExtractoServiceImplTest {
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.consultaExtractoService = new ConsultaExtractoServiceImpl(documentosClient, appProperties, clienteClient, idDocumentoClient, mapper);
+        this.consultaExtractoService = new ConsultaExtractoServiceImpl(documentosClient, parametrosAppService, clienteClient, idDocumentoClient, mapper);
     }
     @Test
     public void testConsultaDocumentosNOT_FOUND_CLIENT(){

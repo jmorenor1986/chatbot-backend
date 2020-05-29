@@ -44,5 +44,22 @@ public class ParametrosAppControllerTest {
         Assert.assertNotNull(response);
         Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+    @Test
+    public void testGetByClaveNO_CONTENT(){
+        ParametrosAppPayload request = ParametrosAppPayload.builder()
+                .clave("DIAS_DESEMBOLSO")
+                .valor("70")
+                .build();
+        Optional<ParametrosApp> responseMockito = Optional.of(ParametrosApp.builder()
+                .id(1L)
+                .clave("DIAS_DESEMBOLSO")
+                .valor("70")
+                .build());
+        Mockito.doReturn(responseMockito).when(parametrosAppService).save(Mockito.any());
+
+        ResponseEntity<ParametrosAppPayload> response = parametrosAppController.save( request );
+        Assert.assertNotNull(response);
+        Assert.assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
 
 }
