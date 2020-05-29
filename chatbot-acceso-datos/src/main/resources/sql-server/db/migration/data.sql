@@ -183,9 +183,3 @@ ALTER TABLE BDPremierPrueba_0306.WhatsAppWS.terminos_condiciones ADD CONSTRAINT 
 	operacion in (1,2)
 );
 
-CREATE TABLE BDPremierPrueba_0306.WhatsAppWS.parametros_app (
-  id                    numeric                 not null  ,
-  clave                 varchar(255)            not null  ,
-  valor                 varchar(255)            not null  ,
-primary key (id)
-);

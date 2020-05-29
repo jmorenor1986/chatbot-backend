@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
+import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
@@ -22,12 +23,14 @@ import java.util.Optional;
 public class GenerarCertificadosControllerTest {
     @Mock
     private GenerarCertificadosService generarCertificadosService;
+    @Mock
+    private ProxyInformacionCredito proxyInformacionCredito;
     private GenerarCertificadosController generarCertificadosController;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        generarCertificadosController = new GenerarCertificadosController(generarCertificadosService);
+        generarCertificadosController = new GenerarCertificadosController(generarCertificadosService, proxyInformacionCredito);
     }
 
     @Test
@@ -87,7 +90,7 @@ public class GenerarCertificadosControllerTest {
     public void testGenerarInformacionCredito() {
         String token = "1221221";
         Date date = new Date();
-        Mockito.when(generarCertificadosService.generarInformacionCredito(Mockito.eq(token), Mockito.eq(ServiciosEnum.SERVICIO_INFORMACION_CREDITO), Mockito.any())).thenReturn(Optional.of(InformacionCreditoResponsePayload.builder().build()));
+        Mockito.when(proxyInformacionCredito.generarInformacionCredito(Mockito.eq(token), Mockito.eq(ServiciosEnum.SERVICIO_INFORMACION_CREDITO), Mockito.any())).thenReturn(Optional.of(InformacionCreditoResponsePayload.builder().build()));
         ResponseEntity<InformacionCreditoResponsePayload> result = generarCertificadosController.informacionCredito(token, InformacionCreditoPayload.builder().build());
         Assert.assertNotNull(result);
     }

@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(name = "${feignclient.usuario-app.service-name}", url = "${feignclient.usuario-app.url}")
+@FeignClient(name = "usuario-app", url = "${clientes.url.baseUrlCliente}")
 public interface UsuarioAppClient {
 
     @PostMapping(value = "/login/")

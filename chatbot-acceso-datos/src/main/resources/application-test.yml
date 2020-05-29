@@ -9,16 +9,16 @@ spring:
     driverClassName: org.h2.Driver
     username: sa
     password: password
-  flyway:
-    table: chatbot_acceso_datos_flyway_schema_history
-    baseline-on-migrate: true
-    locations: classpath:test/db/migration
+  liquibase:
+    change-log: classpath:/db/db.changelog-dev.xml
   jpa:
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.H2Dialect
+        dialect:  org.hibernate.dialect.H2Dialect
     show-sql: true
-    generate-ddl: true
+    generate-ddl: false
+
+
 
 #show sql values
 logging:

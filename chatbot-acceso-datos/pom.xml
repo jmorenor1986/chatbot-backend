@@ -13,7 +13,7 @@
         <h2.database.version>1.4.200</h2.database.version>
         <start-class>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</start-class>
     </properties>
-    <!--packaging>war</packaging-->
+    <packaging>war</packaging>
 
     <dependencies>
         <!-- Ini Deployment Wildfly -->
@@ -38,6 +38,11 @@
             <artifactId>h2</artifactId>
             <version>${h2.database.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
 
         <dependency>
@@ -60,6 +65,10 @@
             <artifactId>spring-cloud-starter-contract-verifier</artifactId>
             <version>2.1.1.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

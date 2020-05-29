@@ -3,7 +3,6 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
-import co.com.santander.chatbot.backend.web.common.AppProperties;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;

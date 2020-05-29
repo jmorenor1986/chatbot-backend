@@ -20,18 +20,18 @@ public class Cliente {
     //private Long id;
     @Column(name = "nombrecliente")
     private String nombreCliente;
-    @Column(name = "Telefono")
+    @Column(name = "telefono")
     private String telefono;
-    @Column(name = "Cedula")
+    @Column(name = "cedula")
     private String cedula;
-    @Column(name = "Email")
+    @Column(name = "email")
     private String email;
     @Id
     @Column(name = "numerocredito")
     private String numerCredito;
-    @Column(name = "Banco")
+    @Column(name = "banco")
     private String banco;
-    @Column(name = "Estado")
+    @Column(name = "estado")
     private String estado;
     @Column(name = "idproducto")
     private String idProducto;

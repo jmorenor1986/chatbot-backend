@@ -3,12 +3,12 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
-import co.com.santander.chatbot.backend.web.common.AppProperties;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
+import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -39,7 +39,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
 
     private final DocumentosClient documentosClient;
 
-    private final AppProperties appProperties;
+    private final ParametrosAppService parametrosAppService;
 
     private final ClienteClient clienteClient;
 
@@ -61,9 +61,9 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
     private String sFechaFin;
 
     @Autowired
-    public ConsultaExtractoServiceImpl(DocumentosClient documentosClient, AppProperties appProperties, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
+    public ConsultaExtractoServiceImpl(DocumentosClient documentosClient, ParametrosAppService parametrosAppService, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
         this.documentosClient = documentosClient;
-        this.appProperties = appProperties;
+        this.parametrosAppService = parametrosAppService;
         this.clienteClient = clienteClient;
         this.idDocumentoClient = idDocumentoClient;
         this.mapper = mapper;
@@ -107,7 +107,12 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         Date fechaFin = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        calendar.add(Calendar.MONTH, - appProperties.getMesesExtracto().intValue());
+        Optional<String> parametro = parametrosAppService.getParamByKey("MESES_EXTRACTO");
+        int meses = 0;
+        if(parametro.isPresent()){
+            meses = Integer.valueOf(parametro.get());
+        }
+        calendar.add(Calendar.MONTH, - meses);
         Date fechaIni = calendar.getTime();
         setSFechaIni(d.format(fechaIni));
         setSFechaFin(d.format(fechaFin));
@@ -185,7 +190,12 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         }
         Long differencia = DateUtilities.generateDifferenceDates(fechaDocumento, new Date());
         Long meses = DateUtilities.transformMinutesToMonths(differencia);
-        if (meses > appProperties.getMesesExtracto()) {
+        Optional<String> parametro = parametrosAppService.getParamByKey("MESES_EXTRACTO");
+        int mesesParam = 0;
+        if(parametro.isPresent()){
+            mesesParam = Integer.valueOf(parametro.get());
+        }
+        if (meses > mesesParam) {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;

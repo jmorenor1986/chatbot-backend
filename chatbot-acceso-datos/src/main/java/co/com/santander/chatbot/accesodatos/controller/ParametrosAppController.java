@@ -8,9 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -32,6 +30,15 @@ public class ParametrosAppController {
         Optional<ParametrosApp> response = parametrosAppService.findByClave(clave);
         if(response.isPresent()){
             return new ResponseEntity<>(modelMapper.map( response.get(), ParametrosAppPayload.class), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<ParametrosAppPayload> save( @RequestBody ParametrosAppPayload parametros ){
+        Optional<ParametrosApp> response = parametrosAppService.save( modelMapper.map(parametros, ParametrosApp.class) );
+        if( response.isPresent() ){
+            return new ResponseEntity<>( modelMapper.map(response.get(), ParametrosAppPayload.class) ,HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
