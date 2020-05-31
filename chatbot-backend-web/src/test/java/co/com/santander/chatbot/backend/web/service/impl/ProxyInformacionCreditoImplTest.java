@@ -1,6 +1,9 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
+import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
+import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosAppClient;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
+import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
@@ -21,11 +24,15 @@ public class ProxyInformacionCreditoImplTest {
     private ProxyInformacionCredito proxyInformacionCredito;
     @Mock
     private GenerarCertificadosService generarCertificadosService;
+    @Mock
+    private ClienteClient clienteClient;
+    @Mock
+    private ParametrosAppService parametrosAppService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        this.proxyInformacionCredito = new ProxyInformacionCreditoImpl(generarCertificadosService);
+        this.proxyInformacionCredito = new ProxyInformacionCreditoImpl(generarCertificadosService, clienteClient, parametrosAppService);
     }
 
     @Test

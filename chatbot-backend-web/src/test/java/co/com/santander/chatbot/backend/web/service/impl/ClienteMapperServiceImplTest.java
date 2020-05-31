@@ -26,7 +26,6 @@ public class ClienteMapperServiceImplTest {
     public void testFromListClientViewSUCCESS(){
         List<ClienteViewPayload> clients = new ArrayList<>();
         ClienteViewPayload item = ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -49,7 +48,6 @@ public class ClienteMapperServiceImplTest {
     public void testFromListClientViewSUCCESS_LONG_CREDIT(){
         List<ClienteViewPayload> clients = new ArrayList<>();
         ClienteViewPayload item = ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")

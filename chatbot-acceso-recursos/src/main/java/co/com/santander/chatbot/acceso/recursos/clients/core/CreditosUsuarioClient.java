@@ -6,9 +6,10 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 
-@FeignClient(name = "creditoUsuario", url = "${clientes.url.base}")
+@FeignClient(name = "creditoUsuario", url = "${clientes.url.baseUrlCliente}")
 public interface CreditosUsuarioClient {
+
     @PostMapping(value = "${clientes.url.creditosUsuario}")
-    public ResponseEntity<ResponseDto> conusltarCreditosCliente(RequestDto requestDto);
+    ResponseEntity<ResponseDto> conusltarCreditosCliente(RequestDto requestDto);
 
 }

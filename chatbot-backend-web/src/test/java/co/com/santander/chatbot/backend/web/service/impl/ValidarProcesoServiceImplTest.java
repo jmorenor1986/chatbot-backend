@@ -73,7 +73,6 @@ public class ValidarProcesoServiceImplTest {
                 .build(), HttpStatus.OK));
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -158,7 +157,6 @@ public class ValidarProcesoServiceImplTest {
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK));
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -209,7 +207,6 @@ public class ValidarProcesoServiceImplTest {
                 .build(), HttpStatus.OK));
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -258,7 +255,6 @@ public class ValidarProcesoServiceImplTest {
                 .build();
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  new Date(), 1L};
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -311,7 +307,6 @@ public class ValidarProcesoServiceImplTest {
                 .build();
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  new Date(), 1L};
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")

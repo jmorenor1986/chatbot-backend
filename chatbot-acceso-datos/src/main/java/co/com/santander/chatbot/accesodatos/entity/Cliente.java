@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Entity
 @Data
@@ -46,7 +48,12 @@ public class Cliente {
     @Enumerated(value = EnumType.ORDINAL)
     @Column(name = "tipoproducto")
     private TipoCredito tipoCredito;
-
-
+    @Temporal(TemporalType.DATE)
+    @Column( name = "fechadesembolso")
+    private Date fechaDesembolso;
+    @Column( name = "saldocapital")
+    private BigDecimal saldoCapital;
+    @Column( name = "valordesembolso")
+    private BigDecimal valorDesembolso;
 
 }

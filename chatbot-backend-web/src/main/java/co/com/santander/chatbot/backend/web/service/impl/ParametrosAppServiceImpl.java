@@ -21,8 +21,8 @@ public class ParametrosAppServiceImpl implements ParametrosAppService {
     }
 
     @Override
-    public Optional<String> getParamByKey(String clave) {
-        ResponseEntity<ParametrosAppPayload> response = parametrosAppClient.getByClave(clave);
+    public Optional<String> getParamByKey(String token, String clave) {
+        ResponseEntity<ParametrosAppPayload> response = parametrosAppClient.getByClave(token, clave);
         if(HttpStatus.OK.equals(response.getStatusCode())){
             ParametrosAppPayload responseObj = response.getBody();
             return  Optional.of(responseObj.getValor());

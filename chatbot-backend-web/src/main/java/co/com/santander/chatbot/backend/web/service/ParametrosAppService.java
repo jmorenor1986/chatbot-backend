@@ -5,5 +5,5 @@ import java.util.Optional;
 
 public interface ParametrosAppService {
 
-    Optional<String> getParamByKey(String clave);
+    Optional<String> getParamByKey(String token,String clave);
 }

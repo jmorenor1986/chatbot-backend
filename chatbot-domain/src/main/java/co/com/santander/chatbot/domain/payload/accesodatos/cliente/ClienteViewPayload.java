@@ -6,11 +6,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
 @Data
 @Builder
 @AllArgsConstructor @NoArgsConstructor
 public class ClienteViewPayload {
-    private Long id;
     private String nombreCliente;
     private String telefono;
     private String cedula;
@@ -24,4 +26,7 @@ public class ClienteViewPayload {
     private Long valorPagar;
     private Long valorMora;
     private TipoCredito tipoCredito;
+    private Date fechaDesembolso;
+    private BigDecimal saldoCapital;
+    private BigDecimal valorDesembolso;
 }

@@ -30,6 +30,7 @@ public class ParametrosAppServiceImplTest {
     }
     @Test
     public void testGetParamByKey(){
+        String token = "1";
         ResponseEntity<ParametrosAppPayload> responseMockito = new ResponseEntity<>(
                 ParametrosAppPayload.builder()
                         .id(1L)
@@ -38,9 +39,9 @@ public class ParametrosAppServiceImplTest {
                         .build(), HttpStatus.OK
         );
 
-        Mockito.doReturn(responseMockito).when(parametrosAppClient).getByClave(Mockito.any());
+        Mockito.doReturn(responseMockito).when(parametrosAppClient).getByClave(Mockito.any(), Mockito.any());
 
-        Optional<String> response = parametrosAppService.getParamByKey("MESES_EXTRACTO");
+        Optional<String> response = parametrosAppService.getParamByKey(token,"MESES_EXTRACTO");
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
     }

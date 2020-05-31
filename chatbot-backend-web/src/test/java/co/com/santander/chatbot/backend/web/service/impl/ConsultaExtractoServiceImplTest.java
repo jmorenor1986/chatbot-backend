@@ -83,7 +83,6 @@ public class ConsultaExtractoServiceImplTest {
                 .build();
         //Mockito para el servicio de buscar cliente
         ResponseEntity<ClienteViewPayload> responseClienteMockito = new ResponseEntity<>(ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -124,7 +123,6 @@ public class ConsultaExtractoServiceImplTest {
         }catch (Exception e){}
         //Mockito para el servicio de buscar cliente
         ResponseEntity<ClienteViewPayload> responseClienteMockito = new ResponseEntity<>(ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")

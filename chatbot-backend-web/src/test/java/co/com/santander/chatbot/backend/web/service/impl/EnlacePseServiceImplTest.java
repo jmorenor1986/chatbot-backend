@@ -43,7 +43,6 @@ public class EnlacePseServiceImplTest {
         String numCredito = "6000000461";
         String numCreditoEnc = "lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=";
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -100,7 +99,6 @@ public class EnlacePseServiceImplTest {
         String numCredito = "6000000461";
         String numCreditoEnc = "lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=";
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")

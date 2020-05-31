@@ -107,7 +107,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         Date fechaFin = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(new Date());
-        Optional<String> parametro = parametrosAppService.getParamByKey("MESES_EXTRACTO");
+        Optional<String> parametro = parametrosAppService.getParamByKey(getToken(),"MESES_EXTRACTO");
         int meses = 0;
         if(parametro.isPresent()){
             meses = Integer.valueOf(parametro.get());
@@ -190,7 +190,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         }
         Long differencia = DateUtilities.generateDifferenceDates(fechaDocumento, new Date());
         Long meses = DateUtilities.transformMinutesToMonths(differencia);
-        Optional<String> parametro = parametrosAppService.getParamByKey("MESES_EXTRACTO");
+        Optional<String> parametro = parametrosAppService.getParamByKey(getToken(),"MESES_EXTRACTO");
         int mesesParam = 0;
         if(parametro.isPresent()){
             mesesParam = Integer.valueOf(parametro.get());

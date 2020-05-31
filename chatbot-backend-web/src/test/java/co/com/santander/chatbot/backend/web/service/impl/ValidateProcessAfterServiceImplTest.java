@@ -72,7 +72,6 @@ public class ValidateProcessAfterServiceImplTest {
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  date, 1L};
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -113,7 +112,6 @@ public class ValidateProcessAfterServiceImplTest {
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  date, 1L};
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -154,7 +152,6 @@ public class ValidateProcessAfterServiceImplTest {
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  date, 1L};
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")
@@ -201,7 +198,6 @@ public class ValidateProcessAfterServiceImplTest {
         Object[] args = {token, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, certificado,  date, 1L};
 
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
-                .id(Long.valueOf("6"))
                 .nombreCliente("OUTEIRO LAMAS FERNANDO")
                 .telefono("3005632015")
                 .cedula("19977690")

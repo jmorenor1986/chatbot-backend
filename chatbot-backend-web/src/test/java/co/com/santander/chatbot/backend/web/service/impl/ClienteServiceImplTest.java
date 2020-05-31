@@ -59,7 +59,6 @@ public class ClienteServiceImplTest {
         String telefono = "3005632010";
         List<ClienteViewPayload> lista = new ArrayList<>();
         ClienteViewPayload item = ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -112,7 +111,6 @@ public class ClienteServiceImplTest {
 
         List<ClienteViewPayload> lista = new ArrayList<>();
         ClienteViewPayload item = ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("LOPEZ LOPEZ LUIS EMILIO")
                 .telefono("3005632010")
                 .cedula("56789066")
@@ -126,7 +124,6 @@ public class ClienteServiceImplTest {
                 .build();
         lista.add(item);
         ClienteViewPayload item1 = ClienteViewPayload.builder()
-                .id(Long.valueOf("1"))
                 .nombreCliente("GOMEZ GARCIA LUISA CLRA")
                 .telefono("3005632010")
                 .cedula("56789098")
