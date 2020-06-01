@@ -14,11 +14,9 @@ jwt:
 
 clientes:
   url:
-    base: http://www.mocky.io
-    creditosUsuario: /v2/5e9038263300003c7227d5a4
-    baseUrlCliente: http://localhost:8080/chatbot-acceso-datos
-    baseUrlSoa: http://localhost:8080/chatbot-acceso-rescursos-rest
-    #baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
+    baseUrlCliente: http://localhost:28080/chatbot-acceso-datos
+    baseUrlSoa: http://localhost:28080/chatbot-acceso-rescursos-rest
+
     insercionIdDocumento: /v1/id-documento/
     consultaIdDocumentoById: /v1/id-documento/{id}/
     consultaDocumentos: /v1/extracto/consultar-documentos
@@ -33,18 +31,9 @@ clientes:
     pseUrl: /v1/pse-param/
     terminosCondiciones: /v1/terminos-condiciones/
     logger: /v1/logger/
-
+    saveParametosApp: /v1/parametros-app/
+    consultaParametosApp: /v1/parametros-app/
 
 
 security:
   semilla: 1234567890123456
-
-
-feignclient:
-  usuario-app:
-    url: http://localhost:8080/chatbot-acceso-datos/v1/usuarioapp/
-    service-name: usuario-app
-
-param:
-  mesesExtracto: 12
-

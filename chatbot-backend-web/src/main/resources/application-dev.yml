@@ -2,7 +2,6 @@ server:
   servlet:
     context-path: /chatbot-backend-web
   port: 5000
-
   ssl:
     key-store: classpath:santanderbot.p12
     key-store-password: changeme
@@ -25,9 +24,8 @@ jwt:
 clientes:
   url:
     baseUrlCliente: http://localhost:5001/chatbot-acceso-datos
-    #baseUrlCliente: http://172.60.1.3:28080/chatbot-acceso-datos
-    #baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
-    baseUrlSoa: http://172.60.1.3:28080/chatbot-acceso-rescursos-rest
+    baseUrlSoa: http://localhost:5004/chatbot-acceso-rescursos-soap
+
     insercionIdDocumento: /v1/id-documento/
     consultaIdDocumentoById: /v1/id-documento/{id}/
     consultaDocumentos: /v1/extracto/consultar-documentos
@@ -45,12 +43,6 @@ clientes:
     saveParametosApp: /v1/parametros-app/
     consultaParametosApp: /v1/parametros-app/
 
-
-
-
 security:
   semilla: 1234567890123456
-
-param:
-  mesesExtracto: 12
 
