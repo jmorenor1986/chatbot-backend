@@ -38,7 +38,7 @@ public class WsFelecImpl implements WsFelec {
             byte[] _return = new byte[0];
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new WSBusinessRuleException("WSBusinessRuleException...");
@@ -57,7 +57,7 @@ public class WsFelecImpl implements WsFelec {
             String _return = "";
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new WSBusinessRuleException("WSBusinessRuleException...");
@@ -75,7 +75,7 @@ public class WsFelecImpl implements WsFelec {
             java.util.List<ResultadoConsultaDTO> _return = null;
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new WSBusinessRuleException("WSBusinessRuleException...");
@@ -93,7 +93,7 @@ public class WsFelecImpl implements WsFelec {
             byte[] _return = new byte[0];
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new WSBusinessRuleException("WSBusinessRuleException...");
@@ -112,7 +112,7 @@ public class WsFelecImpl implements WsFelec {
             String _return = "";
             return _return;
         } catch (Exception ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new WSBusinessRuleException("WSBusinessRuleException...");

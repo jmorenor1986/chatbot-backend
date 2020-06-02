@@ -45,6 +45,7 @@ public class ProxyInformacionCreditoImplTest {
         InformacionCreditoPayload informacionCreditoPayload = InformacionCreditoPayload.builder()
                 .telefono("3229032614")
                 .numeroVerificador("mMdvIEZpB2UpIGe05u/tr4jyjtMEUiFaf2FGCg==")
+                .tipoOperacionUsuario("2")
                 .build();
 
         Optional<InformacionCreditoResponsePayload> responseMock = Optional.of(
@@ -76,6 +77,7 @@ public class ProxyInformacionCreditoImplTest {
         InformacionCreditoPayload informacionCreditoPayload = InformacionCreditoPayload.builder()
                 .telefono("3229032614")
                 .numeroVerificador("mMdvIEZpB2UpIGe05u/tr4jyjtMEUiFaf2FGCg==")
+                .tipoOperacionUsuario("2")
                 .build();
 
         Optional<InformacionCreditoResponsePayload> responseMock = Optional.of(

@@ -85,7 +85,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 .build();
         ResponseEntity<ResponsePayload> resultProcessWithParams = parametrosServiceClient.consultarProcesoParametros(token, valida);
         if (resultProcessWithParams.getStatusCodeValue() == 200)
-            if (resultProcessWithParams.getBody().getResultadoValidacion() == Boolean.TRUE) {
+            if ( Boolean.TRUE.equals(resultProcessWithParams.getBody().getResultadoValidacion()) ) {
                 return Boolean.TRUE;
             } else {
                 Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());

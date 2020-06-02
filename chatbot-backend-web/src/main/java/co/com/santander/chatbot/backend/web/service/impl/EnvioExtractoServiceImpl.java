@@ -103,7 +103,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
 
     private Optional<ClienteViewPayload> findClient(String telefono, String codigoVerificador) {
         ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), telefono, SecurityUtilities.desencriptarCatch(codigoVerificador));
-        if (HttpStatus.OK.equals(response)) {
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Optional.of(response.getBody());
         }
         return Optional.empty();

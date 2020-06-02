@@ -22,7 +22,7 @@ public class ComputecSTSDelegate_ComputecSTSPort_Server {
         new ComputecSTSDelegate_ComputecSTSPort_Server();
         System.out.println("Server ready...");
 
-        Thread.sleep(5 * 60 * 1000);
+        Thread.sleep(5L * 60L * 1000L);
         System.out.println("Server exiting");
         System.exit(0);
     }

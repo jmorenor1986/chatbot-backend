@@ -36,7 +36,7 @@ public class ComputecSTSDelegateImpl implements ComputecSTSDelegate {
             String _return = "";
             return _return;
         } catch (Throwable ex) {
-            ex.printStackTrace();
+            LOG.severe(ex.getMessage());
             throw new RuntimeException(ex);
         }
         //throw new Exception_Exception("Exception...");
