@@ -2,7 +2,6 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
@@ -15,8 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
 
 import java.util.Optional;
 

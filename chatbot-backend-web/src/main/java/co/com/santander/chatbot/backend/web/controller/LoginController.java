@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 
@@ -28,7 +29,7 @@ public class LoginController {
     }
 
     @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<TokenDto> login(@RequestBody UsuarioDto usuarioDto) throws CustomAuthenticationException {
+    public ResponseEntity<TokenDto> login(@Valid @RequestBody UsuarioDto usuarioDto) throws CustomAuthenticationException {
         Optional<TokenDto> token = usuarioService.generaToken(usuarioDto.getCorreo(), usuarioDto.getContrasena());
         if (!token.isPresent()) {
             return new ResponseEntity<>(TokenDto.builder().mensaje("Error al generar el token").build(), HttpStatus.UNAUTHORIZED);

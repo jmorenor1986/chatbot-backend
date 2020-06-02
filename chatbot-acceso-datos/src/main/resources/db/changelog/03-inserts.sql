@@ -97,6 +97,7 @@ values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.co
 
 
 insert into parametros_app (id, clave, valor ) values
- (nextval ('parametros_app_seq'),'MESES_EXTRACTO' , '12'),
- (nextval ('parametros_app_seq'),'DIAS_MACHINELERNING' , '100')
+ (nextval ('parametros_app_seq'),'MESES_EXTRACTO' , '6'),
+ (nextval ('parametros_app_seq'),'DIAS_MACHINELERNING' , '700'),
+ (nextval ('parametros_app_seq'),'PORCENTAJE_MACHINELERNING' , '70')
 ;

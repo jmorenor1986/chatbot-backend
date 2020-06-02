@@ -1,14 +1,12 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
-import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosAppClient;
 import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
 import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
-import co.com.santander.chatbot.domain.payload.accesodatos.ParametrosAppPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
@@ -33,6 +31,8 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
     private ClienteViewPayload cliente;
     @Getter @Setter
     private Long numDias;
+    @Getter @Setter
+    private Long porcentaje;
 
     @Autowired
     public ProxyInformacionCreditoImpl(GenerarCertificadosService generarCertificadosService, ClienteClient clienteClient, ParametrosAppService parametrosAppService) {
@@ -43,14 +43,14 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
 
     @Override
     public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, ServiciosEnum serviciosEnum, InformacionCreditoPayload informacionCreditoPayload) {
-        if(findCliente(token, informacionCreditoPayload) && findParamDias(token) && formulaDays()){
+        if(informacionCreditoPayload.getTipoOperacionUsuario().equalsIgnoreCase("2") && findCliente(token, informacionCreditoPayload) && findParamDias(token) && findParamPorcentaje(token)){
             //Si llega ha este punto es por que el cliente fue encontrado, esta parametrizado los días
             //y cumple el número de días
-            if(percentageEvaluation()){
+            if( formulaDays() && percentageEvaluation()){
                 //Envia error a cariAi
                 return Optional.of(InformacionCreditoResponsePayload.builder()
                         .idRespuesta("1")
-                        .descripcionRespuesta("Redirigir con agente")
+                        .descripcionRespuesta("Redirigir con agente compra cartera")
                         .build());
 
             }
@@ -76,6 +76,15 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
         return Boolean.FALSE;
     }
 
+    public Boolean findParamPorcentaje(String token){
+        Optional<String> response = parametrosAppService.getParamByKey(token, "PORCENTAJE_MACHINELERNING");
+        if(response.isPresent()){
+            setPorcentaje(Long.valueOf(response.get()));
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
     public Boolean formulaDays(){
         Long days = DateUtilities.generateDifferenceInDays(getCliente().getFechaDesembolso(), new Date());
         if(days < numDias)
@@ -86,7 +95,7 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
     public Boolean percentageEvaluation(){
         BigDecimal result = getCliente().getSaldoCapital().divide(getCliente().getValorDesembolso());
         BigDecimal porcentagePaidOut = (new BigDecimal(1).subtract(result)).multiply(new BigDecimal(100));
-        if(porcentagePaidOut.longValue() < 70L){
+        if(porcentagePaidOut.longValue() < getPorcentaje()){
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

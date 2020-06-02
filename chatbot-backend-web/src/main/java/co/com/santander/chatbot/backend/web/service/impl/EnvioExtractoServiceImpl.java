@@ -126,7 +126,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
                         .mailPara(getClienteViewPayload().getEmail())
-                        .mailCC("johnmorenoing@gmail.com")
+                        .mailCC("servicioalcliente@santanderconsumer.co")
                         .build())
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> response = documentosClient.envioMailDocumento(getToken(), request);
