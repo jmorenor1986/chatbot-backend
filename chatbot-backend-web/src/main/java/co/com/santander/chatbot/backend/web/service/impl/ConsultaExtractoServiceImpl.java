@@ -31,6 +31,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -75,8 +76,9 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
     @BussinessLog
     public Optional<ResponseExtractosDisponibles> consultaDocumentos(String token, ServiciosEnum servicio, String telefono, EnvioExtractoPayload envioExtracto) {
         setToken(token);
+        Boolean valida = findCreditoCliente(envioExtracto);
         //Busca los datos del cliente y del credito que se esta solicitando
-        if (findCreditoCliente(envioExtracto)) {
+        if (Boolean.TRUE.equals(valida)) {
             //Llama el servicio de computec
             Optional<List<ConsultarDocumentosPayloadResponse>> listaDocumentosValidos = callPrincipalService();
             if (listaDocumentosValidos.isPresent()) {
@@ -126,7 +128,6 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
                 .fechaIni(getSFechaIni())
                 .fechaFin(getSFechaFin())
                 .formatoConsulta("pdf")
-                //TODO Validar si 1. Credito consumo 2. Credito Vehiculo
                 .producto(producto)
                 .valorllave(clienteViewPayload.getCedula())
                 .folder("")
@@ -150,7 +151,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         List<ConsultarDocumentosPayloadResponse> documentosValidos = documentos.stream().parallel()
                 .filter(item -> validaNumeroCredito(item.getIndices(), numCredito))
                 .filter(item -> validaFecha(item.getIndices()))
-                .sorted((item1, item2) -> comparaFechas(item1, item2))
+                .sorted(comparaFechas())
                 .collect(Collectors.toList());
         if (documentosValidos.isEmpty()) {
             return Optional.empty();
@@ -158,15 +159,17 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Optional.of(documentosValidos);
     }
 
-    private int comparaFechas(ConsultarDocumentosPayloadResponse itemUno, ConsultarDocumentosPayloadResponse itemDos) {
-        Optional<String> sFechaUno = obtieneValorIndices(itemUno.getIndices(), LABEL_FECHA_FACTURACION);
-        Optional<String> sFechaDos = obtieneValorIndices(itemDos.getIndices(), LABEL_FECHA_FACTURACION);
-        if (sFechaUno.isPresent() && sFechaDos.isPresent()) {
-            Date fechaUno = DateUtilities.stringToDate(sFechaUno.get());
-            Date fechaDos = DateUtilities.stringToDate(sFechaDos.get());
-            return fechaUno.compareTo(fechaDos);
-        }
-        return 0;
+    private Comparator<ConsultarDocumentosPayloadResponse> comparaFechas(){
+        return (itemUno, itemDos ) -> {
+            Optional<String> sFechaUno = obtieneValorIndices(itemUno.getIndices(), LABEL_FECHA_FACTURACION);
+            Optional<String> sFechaDos = obtieneValorIndices(itemDos.getIndices(), LABEL_FECHA_FACTURACION);
+            if (sFechaUno.isPresent() && sFechaDos.isPresent()) {
+                Date fechaUno = DateUtilities.stringToDate(sFechaUno.get());
+                Date fechaDos = DateUtilities.stringToDate(sFechaDos.get());
+                return fechaUno.compareTo(fechaDos);
+            }
+            return 0;
+        };
     }
 
     private Boolean validaNumeroCredito(List<IndicesPayloadResponse> indices, String credito) {
@@ -225,35 +228,43 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
                 .build());
     }
 
+    private Function<ConsultarDocumentosPayloadResponse, VigenciaExtracto> mapperToVigenciaExtracto(){
+        return entrada ->{
+            String anio = DateUtilities.getDataFromDateString(obtieneValorIndices(entrada.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.YEAR);
+            String mes = DateUtilities.getDataFromDateString(obtieneValorIndices(entrada.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.MONTH);
+            String producto = obtieneValorIndices(entrada.getIndices(), "PRODUCTO").get();
+            return VigenciaExtracto.builder()
+                    .idDocumentos(entrada.getDocId())
+                    .anio(anio)
+                    .mes(mes)
+                    .fechaIni(getSFechaIni())
+                    .fechaFin(getSFechaFin())
+                    .producto( producto )
+                    .build();
+        };
+    }
     private List<VigenciaExtracto> generateVigencia(List<ConsultarDocumentosPayloadResponse> listDoc) {
-        List<VigenciaExtracto> vigencias = listDoc.stream().parallel()
-                .map(item -> VigenciaExtracto.builder()
-                        .idDocumentos(item.getDocId())
-                        //.anio((DateUtilities.stringToDate(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get()).getYear() + 1900) + "")
-                        .anio(DateUtilities.getDataFromDateString(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.YEAR))
-                        .mes(DateUtilities.getDataFromDateString(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.MONTH))
-                        .fechaIni(getSFechaIni())
-                        .fechaFin(getSFechaFin())
-                        .producto( obtieneValorIndices(item.getIndices(), "PRODUCTO").get() )
-                        .build())
-                .map(item -> persistVigencia(item))
+        return listDoc.stream().parallel()
+                .map(mapperToVigenciaExtracto() )
+                .map(persistVigencia())
                 .filter(item -> Objects.nonNull(item.getId()))
                 .collect(Collectors.toList());
-        return vigencias;
     }
 
-    private VigenciaExtracto persistVigencia(VigenciaExtracto vigencia) {
-        IdDocumentoPayload payload = mapper.map(vigencia, IdDocumentoPayload.class);
-        ResponseEntity<IdDocumentoPayload> response = idDocumentoClient.save(getToken(), payload);
-        if (HttpStatus.OK.equals(response.getStatusCode())) {
-            IdDocumentoPayload responseService = response.getBody();
-            VigenciaExtracto retorno = VigenciaExtracto.builder()
-                    .id(responseService.getId().toString())
-                    .mes(responseService.getMes())
-                    .anio(responseService.getAnio())
-                    .build();
-            return retorno;
-        }
-        return vigencia;
+    private Function<VigenciaExtracto, VigenciaExtracto >  persistVigencia() {
+        return vigencia -> {
+            IdDocumentoPayload payload = mapper.map(vigencia, IdDocumentoPayload.class);
+            ResponseEntity<IdDocumentoPayload> response = idDocumentoClient.save(getToken(), payload);
+            if (HttpStatus.OK.equals(response.getStatusCode())) {
+                IdDocumentoPayload responseService = response.getBody();
+                return VigenciaExtracto.builder()
+                        .id(responseService.getId().toString())
+                        .mes(responseService.getMes())
+                        .anio(responseService.getAnio())
+                        .build();
+            }
+            return vigencia;
+        };
     }
+
 }

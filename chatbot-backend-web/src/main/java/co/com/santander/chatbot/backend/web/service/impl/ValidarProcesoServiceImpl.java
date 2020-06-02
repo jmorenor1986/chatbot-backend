@@ -4,15 +4,13 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosServiceClient;
 import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.ValidarProcesoService;
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ValidarProcesoPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
 import lombok.Getter;
@@ -25,19 +23,19 @@ import org.springframework.stereotype.Service;
 
 import java.util.Date;
 
-@Log @Getter @Setter
+@Log
+@Getter
+@Setter
 @Service
 public class ValidarProcesoServiceImpl implements ValidarProcesoService {
 
     public static final String ERROR_CONSUMO_SERVICE = "Error al consultar los datos";
     public static final String ERROR_CIPHER = "Número de credito invalido";
     public static final String ERROR_SOLICITUD_CURSO = "Ya existe una solicitud pendiente en curso";
-    private String token;
-    private String credito;
-    private String identificacion;
-    private ServiciosEnum serviciosEnum;
+
+
+    private CommonAspectDto commonAspectDto;
     private ClienteViewPayload cliente;
-    private Long numPeticionServicio;
 
     private final InfoWhatsAppWSClient infoWhatsAppWSClient;
     private final ParametrosServiceClient parametrosServiceClient;
@@ -53,24 +51,25 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
     @Override
     public Boolean validateExistingProcesss(Object[] args) {
         getParams(args);
-        if(findClient()) {
-            ResponseEntity<InfoWhatsAppWSPayload>  result = infoWhatsAppWSClient.validateExistingProcess(token, getCredito(), getIdentificacion(), getNumPeticionServicio());
-            if (result.getStatusCodeValue() == 200)
+        Boolean valida = findClient();
+        if (Boolean.TRUE.equals(valida)) {
+            ResponseEntity<InfoWhatsAppWSPayload> result = infoWhatsAppWSClient.validateExistingProcess(commonAspectDto.getToken(), commonAspectDto.getCredito(), commonAspectDto.getIdentificacion(), commonAspectDto.getNumPeticionServicio());
+            if (result.getStatusCodeValue() == 200) {
                 if (result.getBody().getEstado() == 0) {
-                    return validateProcessWithParams(getToken(), result.getBody().getFechaEnvio(), getServiciosEnum().getMessage());
-                } else {
-                    return Boolean.TRUE;
+                    return validateProcessWithParams(commonAspectDto.getToken(), result.getBody().getFechaEnvio(), commonAspectDto.getServicioEnum().getMessage());
                 }
-            if (result.getStatusCodeValue() == 204)
                 return Boolean.TRUE;
+            } else if (result.getStatusCodeValue() == 204) {
+                return Boolean.TRUE;
+            }
             throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);
         }
         return Boolean.FALSE;
     }
 
-    private Boolean findClient(){
-        ResponseEntity<ClienteViewPayload> response =  clienteClient.getClientByCedulaAndNumCredito(getToken(), getIdentificacion(), getCredito());
-        if(HttpStatus.OK.equals(response.getStatusCode())){
+    private Boolean findClient() {
+        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByCedulaAndNumCredito(commonAspectDto.getToken(), commonAspectDto.getIdentificacion(), commonAspectDto.getCredito());
+        if (HttpStatus.OK.equals(response.getStatusCode())) {
             setCliente(response.getBody());
             return Boolean.TRUE;
         }
@@ -84,29 +83,19 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 .canal("WhatsApp")
                 .build();
         ResponseEntity<ResponsePayload> resultProcessWithParams = parametrosServiceClient.consultarProcesoParametros(token, valida);
-        if (resultProcessWithParams.getStatusCodeValue() == 200)
-            if ( Boolean.TRUE.equals(resultProcessWithParams.getBody().getResultadoValidacion()) ) {
+        if (resultProcessWithParams.getStatusCodeValue() == 200) {
+            Boolean resValidacion = resultProcessWithParams.getBody().getResultadoValidacion();
+            if (Boolean.TRUE.equals(resValidacion)) {
                 return Boolean.TRUE;
             } else {
                 Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());
-                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), getCliente().getConvenio(), minutos, "7");
+                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5), StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), getCliente().getConvenio(), minutos, "7");
             }
+        }
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);
     }
 
-    private void getParams(Object[] args){
-        setToken((String) args[0]);
-        setServiciosEnum((ServiciosEnum) args[1]);
-        setNumPeticionServicio((Long) args[4]);
-        if (args[2] instanceof CertificadoPayload) {
-            CertificadoPayload data = (CertificadoPayload) args[2];
-            setIdentificacion(data.getIdentificacion());
-            setCredito(data.getNumeroCredito());
-        }
-        try {
-            setCredito(SecurityUtilities.desencriptar(getCredito()));
-        } catch (Exception e) {
-            log.severe(e.getMessage());
-        }
+    private void getParams(Object[] args) {
+        setCommonAspectDto( StringUtilities.getCommon(args) );
     }
 }

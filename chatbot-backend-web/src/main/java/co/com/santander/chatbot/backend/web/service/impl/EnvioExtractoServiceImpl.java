@@ -48,7 +48,8 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     @BussinessLog
     public Optional<ResponseEnvioExtractoPayload> envioExtracto(String token, ServiciosEnum servicio, String telefono, EnvioExtractoPayload envioExtracto) {
         setToken(token);
-        if (findCreditoCliente(envioExtracto)) {
+        Boolean valida = findCreditoCliente(envioExtracto);
+        if ( Boolean.TRUE.equals(valida) ) {
             return generarEnvioExtracto(envioExtracto);
         }else{
             return generateResponseWrong("No hay informacion de credito", envioExtracto.getNumeroCreditoOfuscado());

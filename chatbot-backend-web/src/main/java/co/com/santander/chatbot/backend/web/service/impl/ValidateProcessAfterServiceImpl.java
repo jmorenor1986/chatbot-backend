@@ -4,14 +4,12 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ParametrosServiceClient;
 import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.ValidateProcessAfterService;
-import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ParametrosServicioPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
-import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,12 +27,8 @@ import java.util.Date;
 @Service
 public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterService {
 
-    private String token;
-    private String credito;
-    private String identificacion;
-    private ServiciosEnum serviciosEnum;
+    private CommonAspectDto commonAspectDto;
     private ClienteViewPayload cliente;
-    private Long numPeticionServicio;
     private Long minutosRestantes;
 
     private ClienteClient clienteClient;
@@ -51,30 +45,19 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
     @Override
     public Boolean validateExistingAfterProcess(Object[] args) {
         getParams(args);
-        if(findClient()){
+        Boolean valida = findClient();
+        if(Boolean.TRUE.equals(valida)){
             return validacionProcessoInfoWhatsApp();
         }
         return Boolean.FALSE;
     }
 
     private void getParams(Object[] args){
-        setToken((String) args[0]);
-        setServiciosEnum((ServiciosEnum) args[1]);
-        setNumPeticionServicio((Long) args[4]);
-        if(args[2] instanceof CertificadoPayload){
-            CertificadoPayload data = (CertificadoPayload)  args[2];
-            setIdentificacion(data.getIdentificacion());
-            setCredito(data.getNumeroCredito());
-        }
-        try {
-            setCredito(SecurityUtilities.desencriptar(getCredito()));
-        }catch (Exception e){
-            log.severe(e.getMessage());
-        }
+        setCommonAspectDto( StringUtilities.getCommon(args) );
     }
 
     private Boolean findClient(){
-        ResponseEntity<ClienteViewPayload> response =  clienteClient.getClientByCedulaAndNumCredito(getToken(), getIdentificacion(), getCredito());
+        ResponseEntity<ClienteViewPayload> response =  clienteClient.getClientByCedulaAndNumCredito(commonAspectDto.getToken(), commonAspectDto.getIdentificacion(), commonAspectDto.getCredito());
         if(HttpStatus.OK.equals(response.getStatusCode())){
             setCliente(response.getBody());
             return Boolean.TRUE;
@@ -83,7 +66,7 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
     }
 
     private Boolean validacionProcessoInfoWhatsApp() {
-        ResponseEntity<InfoWhatsAppWSPayload> response = infoWhatsAppWSClient.validateExistingProcess(getToken(),getCredito(),cliente.getCedula(), numPeticionServicio);
+        ResponseEntity<InfoWhatsAppWSPayload> response = infoWhatsAppWSClient.validateExistingProcess(commonAspectDto.getToken(),commonAspectDto.getCredito(),cliente.getCedula(), commonAspectDto.getNumPeticionServicio());
         if(HttpStatus.OK.equals(response.getStatusCode())){
             InfoWhatsAppWSPayload info = response.getBody();
             if(info.getEstado().equals(1L)){
@@ -101,7 +84,7 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
     }
 
     private Boolean evaluaTiempo(Long tiempoUltimaSolicitud){
-        ResponseEntity<ParametrosServicioPayload> response = parametrosServiceClient.getParametroService(token, serviciosEnum.name());
+        ResponseEntity<ParametrosServicioPayload> response = parametrosServiceClient.getParametroService(commonAspectDto.getToken(), commonAspectDto.getServicioEnum().name());
         if( HttpStatus.OK.equals(response.getStatusCode()) ){
             ParametrosServicioPayload parametro = response.getBody();
             if( tiempoUltimaSolicitud > parametro.getTiempoPosterior() ){
@@ -109,7 +92,7 @@ public class ValidateProcessAfterServiceImpl implements ValidateProcessAfterServ
                 return Boolean.TRUE;
             }
             setMinutosRestantes(parametro.getTiempoPosterior() - tiempoUltimaSolicitud);
-            throw new ValidateStatusAfterProcess("No supera el tiempo para una nueva solicitud", StringUtilities.ofuscarCorreo(cliente.getEmail(), 5) , StringUtilities.ofuscarCredito(getCredito()), cliente.getConvenio(), getMinutosRestantes(), "8");
+            throw new ValidateStatusAfterProcess("No supera el tiempo para una nueva solicitud", StringUtilities.ofuscarCorreo(cliente.getEmail(), 5) , StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), cliente.getConvenio(), getMinutosRestantes(), "8");
         }
         return Boolean.FALSE;
     }

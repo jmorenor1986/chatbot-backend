@@ -43,10 +43,15 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
 
     @Override
     public Optional<InformacionCreditoResponsePayload> generarInformacionCredito(String token, ServiciosEnum serviciosEnum, InformacionCreditoPayload informacionCreditoPayload) {
-        if(informacionCreditoPayload.getTipoOperacionUsuario().equalsIgnoreCase("2") && findCliente(token, informacionCreditoPayload) && findParamDias(token) && findParamPorcentaje(token)){
+        Boolean findPorcentage = findParamPorcentaje(token);
+        Boolean findDays =  findParamDias(token);
+        Boolean findClient = findCliente(token, informacionCreditoPayload);
+        if(informacionCreditoPayload.getTipoOperacionUsuario().equalsIgnoreCase("2") && Boolean.TRUE.equals(findClient) &&  Boolean.TRUE.equals(findDays) && Boolean.TRUE.equals(findPorcentage) ){
             //Si llega ha este punto es por que el cliente fue encontrado, esta parametrizado los días
             //y cumple el número de días
-            if( formulaDays() && percentageEvaluation()){
+            Boolean days = formulaDays();
+            Boolean porcentage = percentageEvaluation();
+            if(  Boolean.TRUE.equals(days) && Boolean.TRUE.equals(porcentage) ){
                 //Envia error a cariAi
                 return Optional.of(InformacionCreditoResponsePayload.builder()
                         .idRespuesta("1")

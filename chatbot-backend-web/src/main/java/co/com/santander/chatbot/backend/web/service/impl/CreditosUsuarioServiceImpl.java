@@ -26,10 +26,10 @@ public class CreditosUsuarioServiceImpl implements CreditosUsuarioService {
 
     @Override
     public Optional<RespuestaDto> consultarCreditosUsuario(String telefono, int tipoOperacion) {
-        ResponseEntity<ResponseDto> resultClient = creditosUsuarioClient.conusltarCreditosCliente(RequestDto.builder()
-                .telefono(telefono)
-                .tipoOperacion(tipoOperacion)
-                .build());
+        // ResponseEntity<ResponseDto> resultClient = creditosUsuarioClient.conusltarCreditosCliente(RequestDto.builder()
+//                .telefono(telefono)
+//                .tipoOperacion(tipoOperacion)
+//                .build());
         return Optional.empty();
     }
 }
