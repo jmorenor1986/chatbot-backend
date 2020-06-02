@@ -229,3 +229,6 @@ INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VAL
 (NEXT VALUE FOR parametros_app_seq,'DIAS_MACHINELERNING' , '700'),
 (NEXT VALUE FOR parametros_app_seq,'PORCENTAJE_MACHINELERNING' , '70')
 ;
+
+ALTER TABLE id_documentos
+ADD fecha TIMESTAMP NOT NULL;

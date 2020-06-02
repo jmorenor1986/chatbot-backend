@@ -93,12 +93,13 @@ CREATE TABLE parametros_servicio
 --
 CREATE TABLE id_documentos
 (
-    id                 BIGINT           NOT NULL,
-    id_documentos      text             NOT NULL,
-    anio               varchar(5)       NOT NULL,
-    mes                varchar(5)       NOT NULL,
+    id                 BIGINT            NOT NULL,
+    id_documentos      text              NOT NULL,
+    anio               varchar(5)        NOT NULL,
+    mes                varchar(5)        NOT NULL,
     fecha_ini          varchar(20)       NOT NULL,
     fecha_fin          varchar(20)       NOT NULL,
+    fecha              TIMESTAMP         NOT NULL,
     producto           varchar(50)       NOT NULL,
     PRIMARY KEY (id)
 );

@@ -9,6 +9,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class AccesoRecursosSoapApplication extends SpringBootServletInitializer {
     public static void main(String... args) {
-        SpringApplication.run(AccesoRecursosSoapApplication.class, args);
+        SpringApplication.run(AccesoRecursosSoapApplication.class);
     }
 }

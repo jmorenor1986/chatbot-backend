@@ -10,14 +10,8 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class AccesoDatosApplication extends SpringBootServletInitializer {
 
-    private static Class<AccesoDatosApplication> applicationClass = AccesoDatosApplication.class;
-
     public static void main(String... args) {
-        SpringApplication.run(AccesoDatosApplication.class, args);
+        SpringApplication.run(AccesoDatosApplication.class);
     }
 
-    @Override
-    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
-        return application.sources(applicationClass);
-    }
 }

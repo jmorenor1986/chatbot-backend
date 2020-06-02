@@ -8,11 +8,10 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 @EnableSwagger2
-//@EnableFeignClients("co.com.santander.chatbot.acceso.recursos.clients.core")
 @ComponentScan("co.com.santander")
 public class Application extends SpringBootServletInitializer {
 
     public static void main(String... args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(Application.class);
     }
 }
