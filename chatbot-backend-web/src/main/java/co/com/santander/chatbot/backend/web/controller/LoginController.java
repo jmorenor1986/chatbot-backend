@@ -8,10 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Optional;
@@ -28,12 +25,12 @@ public class LoginController {
         this.usuarioService = usuarioService;
     }
 
-    @RequestMapping(value = "/", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<TokenDto> login(@Valid @RequestBody UsuarioDto usuarioDto) throws CustomAuthenticationException {
         Optional<TokenDto> token = usuarioService.generaToken(usuarioDto.getCorreo(), usuarioDto.getContrasena());
         if (!token.isPresent()) {
             return new ResponseEntity<>(TokenDto.builder().mensaje("Error al generar el token").build(), HttpStatus.UNAUTHORIZED);
         }
-        return new ResponseEntity<TokenDto>(token.get(), HttpStatus.OK);
+        return new ResponseEntity<>(token.get(), HttpStatus.OK);
     }
 }

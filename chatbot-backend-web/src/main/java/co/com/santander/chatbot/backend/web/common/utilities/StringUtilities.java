@@ -1,15 +1,21 @@
 package co.com.santander.chatbot.backend.web.common.utilities;
 
 public class StringUtilities {
+
+    private StringUtilities() {
+        throw new IllegalStateException("StringUtilities class");
+    }
+
     public static String ofuscarString(String texto, int caracteres) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < texto.length(); i++) {
             if (i >= texto.length() - caracteres) {
                 break;
             }
-            result += "X";
+            result.append("X");
         }
-        return result.concat(texto.substring(texto.length() - caracteres));
+        result.append(texto.substring(texto.length() - caracteres));
+        return result.toString();
 
     }
 
@@ -20,19 +26,19 @@ public class StringUtilities {
 
 
     public static String ofuscarCredito(String credito) {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         int tamanio = credito.length();
         for (int i = 0; i < tamanio; i++) {
-            resultado += "x";
+            resultado.append("X");
         }
-        String temporal = "";
+        StringBuilder temporal = new StringBuilder();
         for(int i = 0 ; i < 5 ; i++){
             String caracter = credito.substring(tamanio-1, tamanio);
-            temporal =   caracter + temporal;
+            temporal = new StringBuilder(caracter.concat(temporal.toString()));
             tamanio--;
         }
-        resultado = resultado.substring(0, tamanio);
-        return resultado + temporal;
+        resultado = new StringBuilder(resultado.substring(0, tamanio));
+        return resultado.append(temporal).toString();
     }
 
 }

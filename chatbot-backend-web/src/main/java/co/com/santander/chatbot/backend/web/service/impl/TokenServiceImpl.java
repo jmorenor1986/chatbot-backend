@@ -22,7 +22,7 @@ public class TokenServiceImpl implements TokenService {
     @Setter
     private final String secret;
 
-    public static final Integer seconds = Integer.valueOf("3600");
+    public static final Integer SECONDS = 3600;
 
     @Autowired
     public TokenServiceImpl(@Value("${jwt.secret}") String secret) {
@@ -38,7 +38,7 @@ public class TokenServiceImpl implements TokenService {
         jwt = Jwts.builder().setSubject(user)
                 .claim("authorities",
                         grantedAuthorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList()))
-                .setIssuedAt(Date.from(now)).setExpiration(Date.from(now.plus(seconds, ChronoUnit.SECONDS)))
+                .setIssuedAt(Date.from(now)).setExpiration(Date.from(now.plus(SECONDS, ChronoUnit.SECONDS)))
                 .signWith(SignatureAlgorithm.HS512, TextCodec.BASE64.encode(secret)).compact();
         return jwt;
     }

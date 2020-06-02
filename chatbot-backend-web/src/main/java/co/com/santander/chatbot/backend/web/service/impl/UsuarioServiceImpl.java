@@ -40,7 +40,7 @@ public class UsuarioServiceImpl implements UsuarioService {
         //Genero el token
         String jwt = tokenService.generateToken(usuario, grantedAuthorities);
         return Optional.of(TokenDto.builder()
-                .time(TokenServiceImpl.seconds)
+                .time(TokenServiceImpl.SECONDS)
                 .token(jwt)
                 .build());
     }

@@ -47,6 +47,8 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
 
     private final ModelMapper mapper;
 
+    private static final String LABEL_FECHA_FACTURACION = "FECHA_FACTURACION";
+
     @Setter
     @Getter
     private String token;
@@ -76,7 +78,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         //Busca los datos del cliente y del credito que se esta solicitando
         if (findCreditoCliente(envioExtracto)) {
             //Llama el servicio de computec
-            Optional<List<ConsultarDocumentosPayloadResponse>> listaDocumentosValidos = callPrincipalService(envioExtracto);
+            Optional<List<ConsultarDocumentosPayloadResponse>> listaDocumentosValidos = callPrincipalService();
             if (listaDocumentosValidos.isPresent()) {
                 //Filtra documentos del credito
                 listaDocumentosValidos = filtraDocumentosCredito(listaDocumentosValidos.get(), SecurityUtilities.desencriptarCatch(envioExtracto.getNumeroVerificador()));
@@ -101,7 +103,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
                 .build());
     }
 
-    private Optional<List<ConsultarDocumentosPayloadResponse>> callPrincipalService(EnvioExtractoPayload envioExtracto) {
+    private Optional<List<ConsultarDocumentosPayloadResponse>> callPrincipalService() {
         SimpleDateFormat d = new SimpleDateFormat("dd/MM/yyyy");
         //Obtener las fechas extremas
         Date fechaFin = new Date();
@@ -157,8 +159,8 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
     }
 
     private int comparaFechas(ConsultarDocumentosPayloadResponse itemUno, ConsultarDocumentosPayloadResponse itemDos) {
-        Optional<String> sFechaUno = obtieneValorIndices(itemUno.getIndices(), "FECHA_FACTURACION");
-        Optional<String> sFechaDos = obtieneValorIndices(itemDos.getIndices(), "FECHA_FACTURACION");
+        Optional<String> sFechaUno = obtieneValorIndices(itemUno.getIndices(), LABEL_FECHA_FACTURACION);
+        Optional<String> sFechaDos = obtieneValorIndices(itemDos.getIndices(), LABEL_FECHA_FACTURACION);
         if (sFechaUno.isPresent() && sFechaDos.isPresent()) {
             Date fechaUno = DateUtilities.stringToDate(sFechaUno.get());
             Date fechaDos = DateUtilities.stringToDate(sFechaDos.get());
@@ -179,7 +181,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
     }
 
     private Boolean validaFecha(List<IndicesPayloadResponse> indices) {
-        Optional<String> oFecha = obtieneValorIndices(indices, "FECHA_FACTURACION");
+        Optional<String> oFecha = obtieneValorIndices(indices, LABEL_FECHA_FACTURACION);
         if (!oFecha.isPresent()) {
             return Boolean.FALSE;
         }
@@ -212,8 +214,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
     }
 
     private Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, EnvioExtractoPayload envioExtracto) {
-        Optional<ResponseExtractosDisponibles> response = Optional.empty();
-        response = Optional.of(ResponseExtractosDisponibles.builder()
+        return Optional.of(ResponseExtractosDisponibles.builder()
                 .resultadoEnvio("true")
                 .idRespuesta("0")
                 .descripcionRespuesta("Consulta realizada correctamente")
@@ -222,15 +223,15 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
                 .emailOfuscado(StringUtilities.ofuscarCorreo(clienteViewPayload.getEmail(), 5))
                 .vigencias(generateVigencia(list))
                 .build());
-        return response;
     }
 
     private List<VigenciaExtracto> generateVigencia(List<ConsultarDocumentosPayloadResponse> listDoc) {
         List<VigenciaExtracto> vigencias = listDoc.stream().parallel()
                 .map(item -> VigenciaExtracto.builder()
                         .idDocumentos(item.getDocId())
-                        .anio((DateUtilities.stringToDate(obtieneValorIndices(item.getIndices(), "FECHA_FACTURACION").get()).getYear() + 1900) + "")
-                        .mes((DateUtilities.stringToDate(obtieneValorIndices(item.getIndices(), "FECHA_FACTURACION").get()).getMonth() + 1) + "")
+                        //.anio((DateUtilities.stringToDate(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get()).getYear() + 1900) + "")
+                        .anio(DateUtilities.getDataFromDateString(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.YEAR))
+                        .mes(DateUtilities.getDataFromDateString(obtieneValorIndices(item.getIndices(), LABEL_FECHA_FACTURACION).get(), Calendar.MONTH))
                         .fechaIni(getSFechaIni())
                         .fechaFin(getSFechaFin())
                         .producto( obtieneValorIndices(item.getIndices(), "PRODUCTO").get() )

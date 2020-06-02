@@ -21,7 +21,6 @@ public class ValidarClienteController {
 
     @PostMapping(value = "/")
     public ResponseEntity<ResponsePayload> validar(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody ClientePayload clientePayload) {
-        ResponseEntity<ResponsePayload> response = clienteService.validarCliente(bearerToken, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono(), clientePayload);
-        return response;
+        return clienteService.validarCliente(bearerToken, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono(), clientePayload);
     }
 }

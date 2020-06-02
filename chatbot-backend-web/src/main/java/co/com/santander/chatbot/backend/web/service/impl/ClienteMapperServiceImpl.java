@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Service
@@ -27,7 +28,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
                     .build();
             response.setCreditos(
                     clients.stream().parallel()
-                            .map(item -> mapper(item))
+                            .map(mapper())
                             .collect(Collectors.toList())
             );
             return Optional.of(response);
@@ -35,21 +36,21 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
         return Optional.empty();
     }
 
-    private ResponseCreditosPayload mapper(ClienteViewPayload clientes) {
-        String creditoEncriptado = "";
-        try {
-            creditoEncriptado = SecurityUtilities.encriptar(clientes.getNumerCredito());
-        } catch (Exception e) {
-            log.severe("Error al desencriptar la informacion ".concat(e.getMessage()) );
-        }
-        return ResponseCreditosPayload.builder()
-                .banco(Long.valueOf(clientes.getIdBanco()))
-                .convenio(clientes.getConvenio())
-                .numeroVerificador(creditoEncriptado)
-                .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clientes.getNumerCredito()))
-                .build();
+    private Function<ClienteViewPayload, ResponseCreditosPayload> mapper() {
+        return clientes -> {
+            String creditoEncriptado = "";
+            try {
+                creditoEncriptado = SecurityUtilities.encriptar(clientes.getNumerCredito());
+            } catch (Exception e) {
+                log.severe("Error al desencriptar la informacion ".concat(e.getMessage()) );
+            }
+            return ResponseCreditosPayload.builder()
+                    .banco(Long.valueOf(clientes.getIdBanco()))
+                    .convenio(clientes.getConvenio())
+                    .numeroVerificador(creditoEncriptado)
+                    .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clientes.getNumerCredito()))
+                    .build();
+        };
     }
-
-
 
 }
