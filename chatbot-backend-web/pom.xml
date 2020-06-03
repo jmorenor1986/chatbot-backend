@@ -11,6 +11,15 @@
     <artifactId>chatbot-backend-web</artifactId>
     <properties>
         <start-class>co.com.santander.chatbot.backend.web.Application</start-class>
+        <sonar.coverage.exclusions>
+            **/*Application.java,
+            **/*AppProperties.java,
+            **/*SwaggerConfig.java,
+            **/*WebSecurityConfig.java,
+            **/*ValidateAfterAspect.java,
+            **/*BussinesLogAspect.java,
+            **/*BussinesLogAspect.java,
+        </sonar.coverage.exclusions>
     </properties>
     <packaging>war</packaging>
     <dependencies>
@@ -62,7 +71,6 @@
             <artifactId>slf4j-ext</artifactId>
         </dependency>
     </dependencies>
-
     <build>
         <finalName>${project.artifactId}</finalName>
         <plugins>
