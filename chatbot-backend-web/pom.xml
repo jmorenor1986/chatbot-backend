@@ -13,13 +13,10 @@
         <start-class>co.com.santander.chatbot.backend.web.Application</start-class>
         <sonar.coverage.exclusions>
             **/*Application.java,
-            **/*AppProperties.java,
-            **/*SwaggerConfig.java,
-            **/*WebSecurityConfig.java,
-            **/*ValidateAfterAspect.java,
-            **/*ValidarEstadoAspect.java,
-            **/*BussinesLogAspect.java,
-            **/*BussinesLogAspect.java,
+            **/*GenerarCertificadosServiceImpl.java,
+            src/main/java/co/com/santander/chatbot/backend/web/common/aspect/**/*,
+            src/main/java/co/com/santander/chatbot/backend/web/common/config/**/*,
+            src/main/java/co/com/santander/chatbot/backend/web/exceptions/**/*
         </sonar.coverage.exclusions>
     </properties>
     <packaging>war</packaging>
@@ -110,15 +107,11 @@
                                     <element>CLASS</element>
                                     <excludes>
                                         <exclude>co.com.santander.chatbot.backend.web.Application</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.controller.payload.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.dto.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.common.aspect.validate.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.common.aspect.afteroperation.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.common.aspect.log.*</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.service.impl.GenerarCertificadosServiceImpl</exclude>
-                                        <exclude>co.com.santander.chatbot.backend.web.common.AppProperties</exclude>
+                                        <exclude>co.com.santander.chatbot.backend.web.common.aspect*</exclude>
+                                        <exclude>
+                                            co.com.santander.chatbot.backend.web.service.impl.GenerarCertificadosServiceImpl
+                                        </exclude>
                                         <exclude>*Config</exclude>
-                                        <exclude>*Filter</exclude>
                                     </excludes>
                                     <limits>
                                         <limit>
