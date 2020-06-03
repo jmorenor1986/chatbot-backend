@@ -47,9 +47,12 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .numeroCredito(informacionCreditoPayload.getNumeroVerificador())
                     .identificacion(cliente.getBody().getCedula())
                     .build(), new Date(), 1L);
-            if (respuestaGuardarCliente.isPresent())
-                if (Boolean.TRUE.equals(respuestaGuardarCliente.get().getResultadoValidacion()))
+            if (respuestaGuardarCliente.isPresent()){
+                Boolean valida = respuestaGuardarCliente.get().getResultadoValidacion();
+                if (Boolean.TRUE.equals(valida)){
                     return Optional.of(generarRespuesta(cliente.getBody()));
+                }
+            }
         }
         throw new ValidateStateCertificateException("Cliente con datos incorrectos",0L);
 
@@ -69,9 +72,14 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .numeroCredito(genericCertificatePayload.getNumeroVerificador())
                     .identificacion(cliente.getBody().getCedula())
                     .build(), new Date(), idTransaccion);
-            if (respuestaGuardarCliente.isPresent())
-                if (Boolean.TRUE.equals(respuestaGuardarCliente.get().getResultadoValidacion()))
+            if (respuestaGuardarCliente.isPresent()){
+                Boolean valida = respuestaGuardarCliente.get().getResultadoValidacion();
+                if (Boolean.TRUE.equals( valida )){
                     return Optional.of(generarRespuesta(cliente.getBody()));
+                }
+
+            }
+
         }
         throw new ValidateStateCertificateException("Cliente con datos incorrectos", 0L);
     }

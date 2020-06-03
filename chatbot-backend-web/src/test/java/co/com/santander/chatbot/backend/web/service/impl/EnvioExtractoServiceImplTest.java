@@ -17,7 +17,6 @@ import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
-import org.modelmapper.ModelMapper;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -35,13 +34,11 @@ public class EnvioExtractoServiceImplTest {
     @Mock
     private IdDocumentoClient idDocumentoClient;
 
-    private ModelMapper mapper;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.mapper = new ModelMapper();
-        envioExtractoService = new EnvioExtractoServiceImpl( documentosClient,  clienteClient,  idDocumentoClient,  mapper);
+        envioExtractoService = new EnvioExtractoServiceImpl( documentosClient,  clienteClient,  idDocumentoClient);
     }
     @Test
     public void testEnvioExtractoNOT_FOUND_CLIENT(){

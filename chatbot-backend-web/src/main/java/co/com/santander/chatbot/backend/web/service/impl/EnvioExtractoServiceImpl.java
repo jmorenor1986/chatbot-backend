@@ -14,7 +14,6 @@ import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPay
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import lombok.Getter;
 import lombok.Setter;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,7 +30,6 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
 
     private final IdDocumentoClient idDocumentoClient;
 
-    private final ModelMapper mapper;
     @Getter
     @Setter
     private String token;
@@ -40,18 +38,18 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     private ClienteViewPayload clienteViewPayload;
 
     @Autowired
-    public EnvioExtractoServiceImpl(DocumentosClient documentosClient, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient, ModelMapper mapper) {
+    public EnvioExtractoServiceImpl(DocumentosClient documentosClient, ClienteClient clienteClient, IdDocumentoClient idDocumentoClient) {
         this.documentosClient = documentosClient;
         this.clienteClient = clienteClient;
         this.idDocumentoClient = idDocumentoClient;
-        this.mapper = mapper;
     }
 
     @Override
     @BussinessLog
     public Optional<ResponseEnvioExtractoPayload> envioExtracto(String token, ServiciosEnum servicio, String telefono, EnvioExtractoPayload envioExtracto) {
         setToken(token);
-        if (findCreditoCliente(envioExtracto)) {
+        Boolean valida = findCreditoCliente(envioExtracto);
+        if ( Boolean.TRUE.equals(valida) ) {
             return generarEnvioExtracto(envioExtracto);
         }else{
             return generateResponseWrong("No hay informacion de credito", envioExtracto.getNumeroCreditoOfuscado());
@@ -80,7 +78,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
         //Busco el documento
         Optional<IdDocumentoPayload> idDocumento = getDocumentId(Long.valueOf(envioExtracto.getIdDocumentos()));
         if (idDocumento.isPresent()) {
-            Optional<EnvioDocumentoMailResponsePayload> envio = callService(envioExtracto, idDocumento.get());
+            Optional<EnvioDocumentoMailResponsePayload> envio = callService(idDocumento.get());
             if (envio.isPresent()) {
                 return generarRespuesta();
 
@@ -101,15 +99,8 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
         return Optional.empty();
     }
 
-    private Optional<ClienteViewPayload> findClient(String telefono, String codigoVerificador) {
-        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), telefono, SecurityUtilities.desencriptarCatch(codigoVerificador));
-        if (HttpStatus.OK.equals(response.getStatusCode())) {
-            return Optional.of(response.getBody());
-        }
-        return Optional.empty();
-    }
 
-    private Optional<EnvioDocumentoMailResponsePayload> callService(EnvioExtractoPayload envioExtracto, IdDocumentoPayload documentoPayload) {
+    private Optional<EnvioDocumentoMailResponsePayload> callService(IdDocumentoPayload documentoPayload) {
         ProductoEnum producto = null;
         if("EXTRACTO VEHICULO".equalsIgnoreCase(documentoPayload.getProducto().trim()) || "CREDITO VEHICULO".equalsIgnoreCase(documentoPayload.getProducto().trim())){
             producto = ProductoEnum.VEHICULO;

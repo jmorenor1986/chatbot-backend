@@ -23,7 +23,8 @@ public class ValidarEstadoAspect {
 
     @Around("@annotation( co.com.santander.chatbot.backend.web.common.aspect.validate.ValidateState)")
     public Object validarEstado(ProceedingJoinPoint joinPoint) throws Throwable {
-        if (validarProcesoService.validateExistingProcesss(joinPoint.getArgs()))
+        Boolean valida = validarProcesoService.validateExistingProcesss(joinPoint.getArgs());
+        if (Boolean.TRUE.equals(valida))
             return joinPoint.proceed();
         throw new ValidateStateCertificateException("Ya existe una solicitud en curso, por favor espere un momento.", 0L);
     }

@@ -41,7 +41,7 @@ public class ClienteMapperServiceImplTest {
         Optional<ResponseObtenerCreditosPayload> response = clienteMapperService.fromListClientView(clients);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
-        Assert.assertEquals("xxxxx00456", response.get().getCreditos().get(0).getNumeroCreditoOfuscado());
+        Assert.assertEquals("XXXXX00456", response.get().getCreditos().get(0).getNumeroCreditoOfuscado());
     }
 
     @Test
@@ -63,6 +63,6 @@ public class ClienteMapperServiceImplTest {
         Optional<ResponseObtenerCreditosPayload> response = clienteMapperService.fromListClientView(clients);
         Assert.assertNotNull(response);
         Assert.assertTrue(response.isPresent());
-        Assert.assertEquals("xxxxxxxxxxxxxxxxxx13246", response.get().getCreditos().get(0).getNumeroCreditoOfuscado());
+        Assert.assertEquals("XXXXXXXXXXXXXXXXXX13246", response.get().getCreditos().get(0).getNumeroCreditoOfuscado());
     }
 }

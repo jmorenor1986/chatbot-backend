@@ -1,15 +1,25 @@
 package co.com.santander.chatbot.backend.web.common.utilities;
 
+import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
+import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
+
 public class StringUtilities {
+
+    private StringUtilities() {
+        throw new IllegalStateException("StringUtilities class");
+    }
+
     public static String ofuscarString(String texto, int caracteres) {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < texto.length(); i++) {
             if (i >= texto.length() - caracteres) {
                 break;
             }
-            result += "X";
+            result.append("X");
         }
-        return result.concat(texto.substring(texto.length() - caracteres));
+        result.append(texto.substring(texto.length() - caracteres));
+        return result.toString();
 
     }
 
@@ -20,19 +30,37 @@ public class StringUtilities {
 
 
     public static String ofuscarCredito(String credito) {
-        String resultado = "";
+        StringBuilder resultado = new StringBuilder();
         int tamanio = credito.length();
         for (int i = 0; i < tamanio; i++) {
-            resultado += "x";
+            resultado.append("X");
         }
-        String temporal = "";
-        for(int i = 0 ; i < 5 ; i++){
-            String caracter = credito.substring(tamanio-1, tamanio);
-            temporal =   caracter + temporal;
+        StringBuilder temporal = new StringBuilder();
+        for (int i = 0; i < 5; i++) {
+            String caracter = credito.substring(tamanio - 1, tamanio);
+            temporal = new StringBuilder(caracter.concat(temporal.toString()));
             tamanio--;
         }
-        resultado = resultado.substring(0, tamanio);
-        return resultado + temporal;
+        resultado = new StringBuilder(resultado.substring(0, tamanio));
+        return resultado.append(temporal).toString();
+    }
+
+    public static CommonAspectDto getCommon(Object[] args) {
+        String credito = "";
+        String identificacion = "";
+        if (args[2] instanceof CertificadoPayload) {
+            CertificadoPayload data = (CertificadoPayload) args[2];
+            identificacion = data.getIdentificacion();
+            credito = data.getNumeroCredito();
+
+        }
+        return CommonAspectDto.builder()
+                .token((String) args[0])
+                .servicioEnum((ServiciosEnum) args[1])
+                .numPeticionServicio((Long) args[4])
+                .credito(SecurityUtilities.desencriptarCatch(credito))
+                .identificacion(identificacion)
+                .build();
     }
 
 }

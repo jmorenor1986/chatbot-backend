@@ -12,6 +12,8 @@ import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosU
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
 import com.google.gson.Gson;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.extern.java.Log;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -28,6 +30,7 @@ public class BussinesLogAspect {
 
     private GenericLogPayload genericLog;
     private final LogCliente logCliente;
+    @Getter @Setter
     private String token;
 
     @Autowired
@@ -88,9 +91,9 @@ public class BussinesLogAspect {
 
     public void generateLog(String response){
         genericLog.setTraza(response);
-        token = genericLog.getToken();
+        setToken(genericLog.getToken());
         genericLog.setToken("");
-        logCliente.insertarLog(token, genericLog);
+        logCliente.insertarLog(getToken(), genericLog);
     }
 
     public void mapperArgs(Object[] args){
@@ -104,14 +107,18 @@ public class BussinesLogAspect {
             telefono = data.getTelefono();
             try{
                 credito = SecurityUtilities.desencriptar( data.getNumeroVerificador() );
-            }catch (Exception e){}
+            }catch (Exception e){
+                log.severe(e.getMessage());
+            }
         }else if(args[2] instanceof GenericCertificatePayload){
             GenericCertificatePayload data = (GenericCertificatePayload) args[2];
             request = new Gson().toJson(args[2]);
             telefono = data.getTelefono();
             try{
                 credito = SecurityUtilities.desencriptar( data.getNumeroVerificador() );
-            }catch (Exception e){}
+            }catch (Exception e){
+                log.severe(e.getMessage());
+            }
         }else{
             request = new Gson().toJson(args[3]);
             telefono = (String) args[2];

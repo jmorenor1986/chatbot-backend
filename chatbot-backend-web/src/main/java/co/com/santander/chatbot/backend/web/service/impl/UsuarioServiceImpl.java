@@ -33,14 +33,16 @@ public class UsuarioServiceImpl implements UsuarioService {
 
     @Override
     public Optional<TokenDto> generaToken(String usuario, String contra) throws CustomAuthenticationException {
-        if (!validateCredentials(usuario, contra))
+        Boolean validaCredentials = validateCredentials(usuario, contra);
+        if (Boolean.FALSE.equals(validaCredentials)){
             throw new CustomAuthenticationException("Usuario o Contrasenia incorrecta");
+        }
 
         List<GrantedAuthority> grantedAuthorities = AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN");
         //Genero el token
         String jwt = tokenService.generateToken(usuario, grantedAuthorities);
         return Optional.of(TokenDto.builder()
-                .time(TokenServiceImpl.seconds)
+                .time(TokenServiceImpl.SECONDS)
                 .token(jwt)
                 .build());
     }
