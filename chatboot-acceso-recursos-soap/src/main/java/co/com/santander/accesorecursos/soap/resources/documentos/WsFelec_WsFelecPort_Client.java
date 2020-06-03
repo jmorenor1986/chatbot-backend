@@ -7,9 +7,6 @@ package co.com.santander.accesorecursos.soap.resources.documentos;
  */
 
 import javax.xml.namespace.QName;
-import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.logging.Logger;
 
 /**

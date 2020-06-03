@@ -19,7 +19,7 @@ import java.util.Date;
 @NamedQuery(name = "Cliente.consultarXCedulaYTelefono", query = "FROM Cliente u where u.telefono = ?1 and u.cedula like ?2 ")
 public class Cliente {
 
-    //private Long id;
+
     @Column(name = "nombrecliente")
     private String nombreCliente;
     @Column(name = "telefono")

@@ -24,9 +24,11 @@ public class ParametrosServicioServiceImpl implements ParametrosServicioService 
     @Override
     public ResponsePayload validarSolicitud(String canal, String servicio, Date fecha) {
         List<ParametrosServicio> resultRepository = parametrosServicioRepository.findByNameService( ServiciosEnum.findEnum(servicio).name());
-        if (resultRepository.isEmpty())
+        if (resultRepository.isEmpty()){
             throw new ValidateStateCertificateException("No hay parametros para consultar en el servicio ", 0L);
-        if (validarHoraSolicitud(fecha, new Date(), resultRepository.get(0).getTiempoIntentos())) {
+        }
+        Boolean valida = validarHoraSolicitud(fecha, new Date(), resultRepository.get(0).getTiempoIntentos());
+        if (Boolean.TRUE.equals(valida)) {
             return ResponsePayload.builder()
                     .resultadoValidacion(Boolean.TRUE)
                     .idRespuesta(0)

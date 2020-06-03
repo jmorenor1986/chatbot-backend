@@ -52,7 +52,7 @@ public class LogClienteServiceImpl implements LogClienteService {
     }
 
     private Log buscaAdicionalesEntidad(Log logEntity){
-        List<Cliente> clientes = new ArrayList<>();
+        List<Cliente> clientes;
         //En el caso de que sea nulo el telefono quiere decir que esta solicitando un certificado y se busca el cliente
         //por medio de los ultimos 4 digitos de la cedula y el numero de credito
         if(Objects.isNull(logEntity.getTelefono())){

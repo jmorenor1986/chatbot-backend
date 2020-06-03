@@ -2,13 +2,10 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.CreditosUsuarioClient;
-import co.com.santander.chatbot.acceso.recursos.clients.core.dto.RequestDto;
-import co.com.santander.chatbot.acceso.recursos.clients.core.dto.ResponseDto;
 import co.com.santander.chatbot.backend.web.service.CreditosUsuarioService;
 import co.com.santander.chatbot.domain.dto.accesorecursos.RespuestaDto;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

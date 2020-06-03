@@ -17,6 +17,7 @@
             **/*SwaggerConfig.java,
             **/*WebSecurityConfig.java,
             **/*ValidateAfterAspect.java,
+            **/*ValidarEstadoAspect.java,
             **/*BussinesLogAspect.java,
             **/*BussinesLogAspect.java,
         </sonar.coverage.exclusions>

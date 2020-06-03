@@ -38,7 +38,7 @@ public class ParametrosServicioController {
         Optional<ParametrosServicio> response = parametrosServicioService.findByServicio(servicioEnum);
         if(response.isPresent()){
             ParametrosServicioPayload dto = map.map(response.get(), ParametrosServicioPayload.class );
-            return new ResponseEntity<ParametrosServicioPayload>(dto , HttpStatus.OK);
+            return new ResponseEntity<>(dto , HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
