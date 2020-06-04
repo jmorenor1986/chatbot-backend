@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -22,7 +23,7 @@ public class TerminosCondicionesController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<TerminosCondicionesPayload> save(@RequestHeader("Authorization") String bearerToken, @RequestBody TerminosCondicionesPayload terminosCondiciones){
+    public ResponseEntity<TerminosCondicionesPayload> save(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody TerminosCondicionesPayload terminosCondiciones){
         Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save(bearerToken, ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,terminosCondiciones.getTelefono().toString(), terminosCondiciones);
         if(response.isPresent()){
             return new ResponseEntity<>(response.get(), HttpStatus.OK);

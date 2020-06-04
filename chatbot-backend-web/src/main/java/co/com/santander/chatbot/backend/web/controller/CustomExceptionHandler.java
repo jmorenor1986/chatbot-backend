@@ -2,9 +2,8 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
-import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
-import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
+import co.com.santander.chatbot.domain.validators.LengthValues;
+import co.com.santander.chatbot.domain.validators.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -16,13 +15,31 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(LengthValuesException.class)
+    public final ResponseEntity<Object> lengthValuesException(LengthValuesException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (tamanio no permitido) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(4)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
+    @ExceptionHandler(AllowedValuesException.class)
+    public final ResponseEntity<Object> handlerAllowedValuesException(AllowedValuesException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(4)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(MandatoryFieldException.class)
     public final ResponseEntity<Object> handlerMandatoryFieldException(MandatoryFieldException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()
-                .descripcionRespuesta(ex.getMessage())
-                .idRespuesta(1)
+                .descripcionRespuesta("Datos incompletos (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(5)
                 .resultadoValidacion(Boolean.FALSE)
-                .build(), HttpStatus.BAD_REQUEST);
+                .build(), HttpStatus.OK);
     }
 
     @ExceptionHandler(ValidateStateCertificateException.class)

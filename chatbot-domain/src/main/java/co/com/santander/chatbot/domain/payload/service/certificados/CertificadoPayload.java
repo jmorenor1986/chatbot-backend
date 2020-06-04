@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Builder
 public class CertificadoPayload {
-    @MandatoryConstraint(message = "Número de identificacion errado", min = 4, max = 4)
+    @MandatoryConstraint(message = "Número de identificacion errado")
     private String identificacion;
     @MandatoryConstraint(message = "Número de credito errado")
     private String numeroCredito;

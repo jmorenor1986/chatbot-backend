@@ -1,6 +1,4 @@
 spring:
-  liquibase:
-    change-log: classpath:/db/db.changelog-prod.xml
   datasource:
     jndi-name: java:/MSSQLDS
   jpa:

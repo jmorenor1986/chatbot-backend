@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.OK)
-public class MandatoryFieldException extends RuntimeException {
+public class LengthValuesException extends RuntimeException  {
 
-    public MandatoryFieldException(String message) {
+    public LengthValuesException(String message) {
         super(message);
     }
 }

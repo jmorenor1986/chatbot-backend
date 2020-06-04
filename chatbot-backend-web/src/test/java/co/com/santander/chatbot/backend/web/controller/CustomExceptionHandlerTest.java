@@ -24,7 +24,7 @@ public class CustomExceptionHandlerTest {
     public void testHandlerMandatoryFieldException() {
         MandatoryFieldException mandatoryFieldException = new MandatoryFieldException("test");
         ResponseEntity<?> result = customExceptionHandler.handlerMandatoryFieldException(mandatoryFieldException, null);
-        Assert.assertEquals(400, result.getStatusCodeValue());
+        Assert.assertEquals(200, result.getStatusCodeValue());
 
     }
 

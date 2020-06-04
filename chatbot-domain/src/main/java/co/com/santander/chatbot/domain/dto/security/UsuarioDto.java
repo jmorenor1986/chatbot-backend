@@ -7,8 +7,8 @@ import lombok.Data;
 @Data
 @Builder
 public class UsuarioDto {
-    @MandatoryConstraint(message = "Correo es obligatorio", min = 1, max = Integer.MAX_VALUE)
+    @MandatoryConstraint(message = "Correo")
     private String correo;
-    @MandatoryConstraint(message = "Correo es obligatorio", min = 1, max = Integer.MAX_VALUE)
+    @MandatoryConstraint(message = "Password")
     private String contrasena;
 }

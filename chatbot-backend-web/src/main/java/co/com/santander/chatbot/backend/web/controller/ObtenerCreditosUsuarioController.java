@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -24,7 +25,7 @@ public class ObtenerCreditosUsuarioController {
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader("Authorization") String bearerToken, @RequestBody CreditosUsuarioPayload credito) {
+    public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CreditosUsuarioPayload credito) {
         Optional<ResponseObtenerCreditosPayload> response = clienteService.obtenerCreditos(bearerToken, ServiciosEnum.SERVICIO_OBTENER_CREDITOS, credito.getTelefono(), credito);
         if (response.isPresent()) {
             return new ResponseEntity<>(response.get(), HttpStatus.OK);

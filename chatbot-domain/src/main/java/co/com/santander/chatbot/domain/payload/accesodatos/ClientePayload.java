@@ -1,5 +1,7 @@
 package co.com.santander.chatbot.domain.payload.accesodatos;
 
+import co.com.santander.chatbot.domain.validators.AllowedValues;
+import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,8 +12,9 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor @AllArgsConstructor
 public class ClientePayload {
-    @MandatoryConstraint(message = "Número de telefono errado", min = 10, max = 10)
+    @MandatoryConstraint(message = "telefono")
+    @LengthValues(min = 10, max = 10, message = "telefono")
     private String telefono;
-    @MandatoryConstraint(message = "Número de cedula errado", min = 4, max = 4)
+    @MandatoryConstraint(message = "cedula")
     private String cedula;
 }

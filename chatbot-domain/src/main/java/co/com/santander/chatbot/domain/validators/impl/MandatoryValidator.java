@@ -2,28 +2,44 @@ package co.com.santander.chatbot.domain.validators.impl;
 
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
 import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
+import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.util.Objects;
 
-public class MandatoryValidator implements ConstraintValidator<MandatoryConstraint, String> {
+@Component
+public class MandatoryValidator implements ConstraintValidator<MandatoryConstraint, Object> {
 
-    private int min;
-    private int max;
     private String message;
+    private boolean zeroIsValid;
 
     @Override
-    public boolean isValid(String s, ConstraintValidatorContext constraintValidatorContext) {
-        if (!Objects.isNull(s) && !s.isEmpty() && s.length() >= min && s.length() <= max)
-            return true;
-        throw new MandatoryFieldException(message);
+    public boolean isValid(Object s, ConstraintValidatorContext constraintValidatorContext) {
+        String mensajeExc = message;
+        if(Objects.nonNull(s)){
+            if(s instanceof String){
+                if( ! String.valueOf(s).isEmpty()  ){
+                    return true;
+                }
+            }else if(s instanceof Long){
+                if( !zeroIsValid ){
+                    if(s.equals(0L)){
+                        mensajeExc = mensajeExc.concat(", Zero is a invalid value");
+                    }else{
+                        return true;
+                    }
+                }else if( zeroIsValid ){
+                    return true;
+                }
+            }
+        }
+        throw new MandatoryFieldException(mensajeExc);
     }
 
     @Override
     public void initialize(MandatoryConstraint constraintAnnotation) {
-        min = constraintAnnotation.min();
-        max = constraintAnnotation.max();
         message = constraintAnnotation.message();
+        zeroIsValid = constraintAnnotation.zeroIsValid();
     }
 }

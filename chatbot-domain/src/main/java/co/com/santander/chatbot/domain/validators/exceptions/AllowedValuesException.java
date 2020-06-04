@@ -4,9 +4,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.OK)
-public class MandatoryFieldException extends RuntimeException {
+public class AllowedValuesException extends RuntimeException {
 
-    public MandatoryFieldException(String message) {
+    public AllowedValuesException(String message) {
         super(message);
     }
 }
