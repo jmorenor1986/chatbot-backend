@@ -38,8 +38,19 @@ public class ValidarClienteControllerTest {
         ResponseEntity<ResponsePayload> result = validarClienteController.validar(token, clientePayload);
         Assert.assertNotNull(result);
         Assert.assertEquals(200, result.getStatusCodeValue());
+    }
 
-
+    @Test
+    public void testValidarUsuarioNO_CONTENT() {
+        String token = "1";
+        ClientePayload clientePayload = ClientePayload.builder()
+                .cedula("1")
+                .telefono("2")
+                .build();
+        Mockito.when(clienteService.validarCliente(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono(), clientePayload )).thenReturn(new ResponseEntity<>(HttpStatus.NO_CONTENT));
+        ResponseEntity<ResponsePayload> result = validarClienteController.validar(token, clientePayload);
+        Assert.assertNotNull(result);
+        Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
 }

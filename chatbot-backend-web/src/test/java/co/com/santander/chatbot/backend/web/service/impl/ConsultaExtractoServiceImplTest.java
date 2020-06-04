@@ -150,6 +150,12 @@ public class ConsultaExtractoServiceImplTest {
                 .build();
         ResponseEntity<IdDocumentoPayload> responseMockIdDoc = new ResponseEntity<>(idDocumentoPayload, HttpStatus.OK);
         Mockito.doReturn(responseMockIdDoc).when(idDocumentoClient).save(Mockito.any(), Mockito.any());
+        //Mock para obtener los parametros
+        Optional<String> responseParamMock = Optional.of("12");
+        Mockito.doReturn(responseParamMock).when(parametrosAppService).getParamByKey(token, "MESES_EXTRACTO");
+
+
+
         Optional<ResponseExtractosDisponibles> response = consultaExtractoService.consultaDocumentos(token, servicio, "3229032614" ,envioExtracto);
         Assert.assertNotNull(response);
     }

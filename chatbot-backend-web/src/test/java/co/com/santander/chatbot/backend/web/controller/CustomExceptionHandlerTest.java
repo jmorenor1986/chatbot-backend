@@ -1,8 +1,6 @@
 package co.com.santander.chatbot.backend.web.controller;
 
-import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
-import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
-import co.com.santander.chatbot.domain.validators.exceptions.ValidateStatusAfterProcess;
+import co.com.santander.chatbot.domain.validators.exceptions.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -39,6 +37,18 @@ public class CustomExceptionHandlerTest {
     public void testHandlerValidateStateAfter() {
         ValidateStatusAfterProcess validateStatusAfterProcessException = new ValidateStatusAfterProcess("test", "xxxxxa@gmail.com", "xxxxx12345","LOS COCHES S.A.", 0L, "7");
         ResponseEntity<?> result = customExceptionHandler.validateStateAfter(validateStatusAfterProcessException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+    @Test
+    public void testLengthValuesException(){
+        LengthValuesException lengthValuesException = new LengthValuesException("test");
+        ResponseEntity<?> result = customExceptionHandler.lengthValuesException(lengthValuesException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+    @Test
+    public void testHandlerAllowedValuesException(){
+        AllowedValuesException allowedValuesException = new AllowedValuesException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerAllowedValuesException(allowedValuesException, null);
         Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
