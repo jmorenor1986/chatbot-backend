@@ -16,5 +16,6 @@ public class ClientePayload {
     @LengthValues(min = 10, max = 10, message = "telefono")
     private String telefono;
     @MandatoryConstraint(message = "cedula")
+    @LengthValues(min = 4, max = 4, message = "cedula")
     private String cedula;
 }
