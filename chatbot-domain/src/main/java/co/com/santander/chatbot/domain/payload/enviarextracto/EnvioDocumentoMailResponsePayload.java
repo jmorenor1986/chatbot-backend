@@ -7,4 +7,5 @@ import lombok.Data;
 @Data
 public class EnvioDocumentoMailResponsePayload {
     private String respuesta;
+    private Boolean envioExitoso;
 }

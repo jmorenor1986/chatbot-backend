@@ -18,7 +18,7 @@
     </properties>
     <dependencies>
         <!-- Ini Deployment Wildfly -->
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
@@ -32,7 +32,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency-->
         <!-- Fin Deployment Wildfly -->
         <dependency>
             <groupId>co.com.santander</groupId>

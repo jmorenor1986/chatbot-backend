@@ -14,6 +14,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(MailConstraintException.class)
+    public final ResponseEntity<Object> handlerMailConstraintException(MailConstraintException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (correo invalido) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(4)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(LengthValuesException.class)
     public final ResponseEntity<Object> lengthValuesException(LengthValuesException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()

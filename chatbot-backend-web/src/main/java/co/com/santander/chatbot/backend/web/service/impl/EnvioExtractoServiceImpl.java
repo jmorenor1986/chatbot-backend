@@ -5,6 +5,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -80,15 +81,22 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
         if (idDocumento.isPresent()) {
             Optional<EnvioDocumentoMailResponsePayload> envio = callService(idDocumento.get());
             if (envio.isPresent()) {
-                return generarRespuesta();
+                return generarRespuesta(envio.get());
 
             }
         }
         return Optional.empty();
     }
 
-    private Optional<ResponseEnvioExtractoPayload> generarRespuesta() {
-        return Optional.of(ResponseEnvioExtractoPayload.builder().build());
+    private Optional<ResponseEnvioExtractoPayload> generarRespuesta(EnvioDocumentoMailResponsePayload respuesta) {
+        return Optional.of(ResponseEnvioExtractoPayload.builder()
+                .resultadoEnvio(respuesta.getEnvioExitoso())
+                .idRespuesta(respuesta.getEnvioExitoso() ? 0 : 1)
+                .descripcionRespuesta(respuesta.getEnvioExitoso() ? "Servicio consumido de forma exitosa" : respuesta.getRespuesta())
+                .tipoCredito(clienteViewPayload.getTipoCredito().ordinal())
+                .emailOfuscado(StringUtilities.ofuscarCorreo(clienteViewPayload.getEmail(), 5))
+                .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clienteViewPayload.getNumerCredito()))
+                .build());
     }
 
     private Optional<IdDocumentoPayload> getDocumentId(Long id) {
@@ -116,7 +124,9 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
                         .folder("")
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
-                        .mailPara(getClienteViewPayload().getEmail())
+                        //TODO CAMBIAR CUANDO SE PASE  PRODUCCION
+                        //.mailPara(getClienteViewPayload().getEmail())
+                        .mailPara("jnsierrac@gmail.com")
                         .mailCC("servicioalcliente@santanderconsumer.co")
                         .build())
                 .build();

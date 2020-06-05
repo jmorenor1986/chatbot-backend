@@ -33,6 +33,7 @@ public class DocumentosServiceImpl implements DocumentosService {
     public EnvioDocumentoMailResponsePayload enviarMailDocumentoId(EnviarMailDocumentoPayload enviarMailDocumentoPayload) {
         return EnvioDocumentoMailResponsePayload.builder()
                 .respuesta(documentosCliente.enviarMailDocumentoId(enviarMailDocumentoPayload))
+                .envioExitoso(Boolean.TRUE)
                 .build();
     }
 

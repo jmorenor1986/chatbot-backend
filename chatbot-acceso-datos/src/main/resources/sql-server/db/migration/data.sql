@@ -229,6 +229,28 @@ INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VAL
 (NEXT VALUE FOR parametros_app_seq,'DIAS_MACHINELERNING' , '700'),
 (NEXT VALUE FOR parametros_app_seq,'PORCENTAJE_MACHINELERNING' , '70')
 ;
-
+--
+--Falta esto en produccion.
+---
 ALTER TABLE id_documentos
 ADD fecha TIMESTAMP NOT NULL;
+--
+insert into BDPremierPrueba_0306.WhatsAppWS.pse_param(id,id_banco,tipo_credito,url)
+values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328'),
+(nextval('pse_param_seq'), 9000, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328' )     ,
+(nextval('pse_param_seq'), 9000, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328')      ,
+(nextval('pse_param_seq'), 52, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
+(nextval('pse_param_seq'), 52, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/' )      ,
+(nextval('pse_param_seq'), 52, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
+
+(nextval('pse_param_seq'), 296, 1, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
+(nextval('pse_param_seq'), 296, 2, 'https://financierajuriscoop.com.co/oficina-virtual/' )     ,
+(nextval('pse_param_seq'), 296, 3, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
+
+(nextval('pse_param_seq'), 65, 1, 'http://ur1')       ,
+(nextval('pse_param_seq'), 65, 2, 'http://ur1' )      ,
+(nextval('pse_param_seq'), 65, 3, 'http://ur1')       ,
+
+(nextval('pse_param_seq'), 297, 1, 'http://ur1')      ,
+(nextval('pse_param_seq'), 297, 2, 'http://ur1' )     ,
+(nextval('pse_param_seq'), 297, 3, 'http://ur1');

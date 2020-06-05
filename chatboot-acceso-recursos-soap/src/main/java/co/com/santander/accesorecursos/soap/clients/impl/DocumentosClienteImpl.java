@@ -3,6 +3,7 @@ package co.com.santander.accesorecursos.soap.clients.impl;
 import co.com.santander.accesorecursos.soap.clients.DocumentosCliente;
 import co.com.santander.accesorecursos.soap.clients.TokenCliente;
 import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
+import co.com.santander.accesorecursos.soap.common.exception.EnvioExtractoMailException;
 import co.com.santander.accesorecursos.soap.config.properties.ServiceProperties;
 import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
@@ -66,11 +67,13 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             ConsultaDocDTO consulta = getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class);
             BeanDatosCliente beanDatosCliente = setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave());
             DatoEnvioDTO datosEnvioDto = getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class);
-            return portConsultaDocumentos.enviarMailDocumentoId(consulta,
+            String respuesta = portConsultaDocumentos.enviarMailDocumentoId(consulta,
                     beanDatosCliente,
                     datosEnvioDto);
+
+            return respuesta;
         } catch (WSBusinessRuleException | WSSystemException e) {
-            throw new BusinessException(e.getMessage());
+            throw new EnvioExtractoMailException(e.getMessage());
         }
 
     }
