@@ -16,25 +16,43 @@ public class MandatoryValidator implements ConstraintValidator<MandatoryConstrai
 
     @Override
     public boolean isValid(Object s, ConstraintValidatorContext constraintValidatorContext) {
-        String mensajeExc = message;
         if(Objects.nonNull(s)){
-            if(s instanceof String){
-                if( ! String.valueOf(s).isEmpty()  ){
-                    return true;
-                }
-            }else if(s instanceof Long){
-                if( !zeroIsValid ){
-                    if(s.equals(0L)){
-                        mensajeExc = mensajeExc.concat(", Zero is a invalid value");
-                    }else{
-                        return true;
-                    }
-                }else if( zeroIsValid ){
-                    return true;
-                }
+            Boolean valida = validateObject(s);
+            if ( Boolean.TRUE.equals(valida) ) {
+                return true;
             }
         }
-        throw new MandatoryFieldException(mensajeExc);
+        throw new MandatoryFieldException(message);
+    }
+
+    private boolean validateObject(Object s) {
+        if( s instanceof String){
+            Boolean valida = validaString(String.valueOf(s));
+            if(Boolean.TRUE.equals(valida)){
+                return true;
+            }
+        }else if(s instanceof Long){
+            Boolean valida = validaLong( (Long) s);
+            if(Boolean.TRUE.equals(valida)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public Boolean validaString(String value){
+        if( !value.isEmpty() ){
+            return Boolean.TRUE;
+        }
+        return Boolean.FALSE;
+    }
+
+    public Boolean validaLong(Long value){
+        if( !zeroIsValid && value.equals(0L) ){
+            message = message.concat(", Zero is a invalid value");
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 
     @Override

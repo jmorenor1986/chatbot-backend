@@ -1,6 +1,5 @@
 package co.com.santander.chatbot.domain.validators;
 
-import co.com.santander.chatbot.domain.validators.impl.AllowedValuesValidator;
 import co.com.santander.chatbot.domain.validators.impl.LengthValueValidator;
 
 import javax.validation.Constraint;

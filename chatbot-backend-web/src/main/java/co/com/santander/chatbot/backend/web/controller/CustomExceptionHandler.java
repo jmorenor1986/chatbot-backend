@@ -2,7 +2,6 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
-import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

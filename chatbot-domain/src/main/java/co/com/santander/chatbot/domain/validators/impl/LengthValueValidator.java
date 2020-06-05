@@ -1,7 +1,6 @@
 package co.com.santander.chatbot.domain.validators.impl;
 
 import co.com.santander.chatbot.domain.validators.LengthValues;
-import co.com.santander.chatbot.domain.validators.exceptions.AllowedValuesException;
 import co.com.santander.chatbot.domain.validators.exceptions.LengthValuesException;
 import org.springframework.stereotype.Component;
 

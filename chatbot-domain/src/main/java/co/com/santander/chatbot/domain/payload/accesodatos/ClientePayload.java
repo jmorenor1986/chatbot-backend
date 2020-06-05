@@ -1,6 +1,5 @@
 package co.com.santander.chatbot.domain.payload.accesodatos;
 
-import co.com.santander.chatbot.domain.validators.AllowedValues;
 import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
 import lombok.AllArgsConstructor;
