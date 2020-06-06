@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.controller;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.*;
+import co.com.santander.chatbot.domain.validators.impl.InvalidNumVerificadorValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -13,6 +14,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @SuppressWarnings({"unchecked", "rawtypes"})
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
+
+    @ExceptionHandler(InvalidNumVerificadorException.class)
+    public final ResponseEntity<Object> handlerInvalidNumVerificadorException(InvalidNumVerificadorException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (Numero validador) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(4)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
 
     @ExceptionHandler(MailConstraintException.class)
     public final ResponseEntity<Object> handlerMailConstraintException(MailConstraintException ex, WebRequest request) {

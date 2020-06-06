@@ -3,7 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.InfoWhatsAppWSClient;
 import co.com.santander.chatbot.backend.web.common.aspect.afteroperation.ValidateAfter;
 import co.com.santander.chatbot.backend.web.common.aspect.validate.ValidateState;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GuardarTransaccionCertificadoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.InfoWhatsAppWSPayload;

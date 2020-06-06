@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.backend.web.common.utilities;
 
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;

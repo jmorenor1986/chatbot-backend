@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.backend.web.common.utilities;
 
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;

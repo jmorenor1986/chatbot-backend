@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.domain.payload.service.certificados;
 
 import co.com.santander.chatbot.domain.validators.AllowedValues;
+import co.com.santander.chatbot.domain.validators.InvalidNumVerificador;
 import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
 import lombok.Builder;
@@ -14,6 +15,7 @@ public class InformacionCreditoPayload {
     private String telefono;
     @MandatoryConstraint(message = "crédito")
     private String numeroCreditoOfuscado;
+    @InvalidNumVerificador(message = "numero verificador")
     @MandatoryConstraint(message = "numero verificador")
     private String numeroVerificador;
     @AllowedValues(message = "tipo operacion", stringValues = {"1", "2"} )

@@ -4,7 +4,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;

@@ -2,7 +2,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.backend.web.common.utilities.DateUtilities;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
 import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;

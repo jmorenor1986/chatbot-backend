@@ -1,5 +1,5 @@
 
-package co.com.santander.chatbot.backend.web.common.utilities;
+package co.com.santander.chatbot.domain.common.utilities;
 
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Value;

@@ -1,7 +1,7 @@
 package co.com.santander.chatbot.backend.web.common.aspect.log;
 
 import co.com.santander.chatbot.acceso.recursos.clients.core.LogCliente;
-import co.com.santander.chatbot.backend.web.common.utilities.SecurityUtilities;
+import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.common.utilities.GenericLogPayload;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
