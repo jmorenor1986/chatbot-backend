@@ -67,11 +67,10 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             ConsultaDocDTO consulta = getMapper.map(enviarMailDocumentoPayload.getConsultarDocumentoPayload(), ConsultaDocDTO.class);
             BeanDatosCliente beanDatosCliente = setDatosUsuarioBean(enviarMailDocumentoPayload.getConsultarDocumentoPayload().getProducto().name(), enviarMailDocumentoPayload.getConsultarDocumentoPayload().getValorllave());
             DatoEnvioDTO datosEnvioDto = getMapper.map(enviarMailDocumentoPayload.getEnvioDocumentoPayload(), DatoEnvioDTO.class);
-            String respuesta = portConsultaDocumentos.enviarMailDocumentoId(consulta,
+
+            return portConsultaDocumentos.enviarMailDocumentoId(consulta,
                     beanDatosCliente,
                     datosEnvioDto);
-
-            return respuesta;
         } catch (WSBusinessRuleException | WSSystemException e) {
             throw new EnvioExtractoMailException(e.getMessage());
         }

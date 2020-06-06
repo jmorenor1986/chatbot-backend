@@ -97,7 +97,8 @@ public class EnvioExtractoServiceImplTest {
                 .build(),HttpStatus.OK);
         Mockito.doReturn(responseMockitoGetDoc).when(idDocumentoClient).getDocumentById(Mockito.any(), Mockito.any());
         EnvioDocumentoMailResponsePayload responseMail = EnvioDocumentoMailResponsePayload.builder()
-                .respuesta("Correo electrónico no enviado")
+                .respuesta("Correo electrónico enviado")
+                .envioExitoso(Boolean.TRUE)
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> responseMockitoMail = new ResponseEntity<>(responseMail, HttpStatus.OK);
 

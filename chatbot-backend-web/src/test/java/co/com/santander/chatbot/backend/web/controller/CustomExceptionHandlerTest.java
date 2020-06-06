@@ -52,4 +52,18 @@ public class CustomExceptionHandlerTest {
         Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
+    @Test
+    public void testHandlerInvalidNumVerificadorException(){
+        InvalidNumVerificadorException allowedValuesException = new InvalidNumVerificadorException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerInvalidNumVerificadorException(allowedValuesException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+
+    @Test
+    public void testHandlerMailConstraintException(){
+        MailConstraintException allowedValuesException = new MailConstraintException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerMailConstraintException(allowedValuesException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+
 }

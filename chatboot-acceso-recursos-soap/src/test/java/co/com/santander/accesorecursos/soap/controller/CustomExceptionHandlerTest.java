@@ -1,5 +1,24 @@
-import static org.junit.jupiter.api.Assertions.*;
+package co.com.santander.accesorecursos.soap.controller;
 
-class CustomExceptionHandlerTest {
+import co.com.santander.accesorecursos.soap.common.exception.EnvioExtractoMailException;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.ResponseEntity;
 
+@SpringBootTest
+public class CustomExceptionHandlerTest {
+
+    private CustomExceptionHandler customExceptionHandler;
+    @Before
+    public void setUp(){
+        customExceptionHandler = new CustomExceptionHandler();
+    }
+    @Test
+    public void testHandlerEnvioExtractoMailException(){
+        EnvioExtractoMailException ex = new EnvioExtractoMailException("test");
+        ResponseEntity<Object> response = customExceptionHandler.handlerEnvioExtractoMailException(ex, null);
+        Assert.assertNotNull(response);
+    }
 }

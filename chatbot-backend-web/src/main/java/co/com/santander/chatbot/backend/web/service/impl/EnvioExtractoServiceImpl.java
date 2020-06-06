@@ -89,10 +89,20 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
     }
 
     private Optional<ResponseEnvioExtractoPayload> generarRespuesta(EnvioDocumentoMailResponsePayload respuesta) {
+        String descripcionRespuesta;
+        Integer idRespuesta;
+        Boolean valida = respuesta.getEnvioExitoso();
+        if(Boolean.TRUE.equals(valida)){
+            descripcionRespuesta = "Servicio consumido de forma exitosa";
+            idRespuesta = 0;
+        }else{
+            descripcionRespuesta = respuesta.getRespuesta();
+            idRespuesta = 1;
+        }
         return Optional.of(ResponseEnvioExtractoPayload.builder()
                 .resultadoEnvio(respuesta.getEnvioExitoso())
-                .idRespuesta(respuesta.getEnvioExitoso() ? 0 : 1)
-                .descripcionRespuesta(respuesta.getEnvioExitoso() ? "Servicio consumido de forma exitosa" : respuesta.getRespuesta())
+                .idRespuesta(idRespuesta)
+                .descripcionRespuesta(descripcionRespuesta)
                 .tipoCredito(clienteViewPayload.getTipoCredito().ordinal())
                 .emailOfuscado(StringUtilities.ofuscarCorreo(clienteViewPayload.getEmail(), 5))
                 .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clienteViewPayload.getNumerCredito()))
@@ -124,9 +134,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
                         .folder("")
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
-                        //TODO CAMBIAR CUANDO SE PASE  PRODUCCION
-                        //.mailPara(getClienteViewPayload().getEmail())
-                        .mailPara("jnsierrac@gmail.com")
+                        .mailPara(getClienteViewPayload().getEmail())
                         .mailCC("servicioalcliente@santanderconsumer.co")
                         .build())
                 .build();
