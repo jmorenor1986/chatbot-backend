@@ -2,14 +2,12 @@ package co.com.santander.chatbot.domain.validators.impl;
 
 import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.validators.InvalidNumVerificador;
-import co.com.santander.chatbot.domain.validators.exceptions.AllowedValuesException;
 import co.com.santander.chatbot.domain.validators.exceptions.InvalidNumVerificadorException;
 import lombok.extern.java.Log;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
-import java.security.GeneralSecurityException;
 
 @Log
 @Component
