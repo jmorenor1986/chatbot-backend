@@ -36,6 +36,11 @@ public class MandatoryValidator implements ConstraintValidator<MandatoryConstrai
             if(Boolean.TRUE.equals(valida)){
                 return true;
             }
+        }else if(s instanceof Integer){
+            Boolean valida = validaInteger( (Integer) s);
+            if(Boolean.TRUE.equals(valida)){
+                return true;
+            }
         }
         return false;
     }
@@ -49,6 +54,14 @@ public class MandatoryValidator implements ConstraintValidator<MandatoryConstrai
 
     public Boolean validaLong(Long value){
         if( !zeroIsValid && value.equals(0L) ){
+            message = message.concat(", Zero is a invalid value");
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
+    }
+
+    public Boolean validaInteger(Integer value){
+        if( !zeroIsValid && value.equals(0) ){
             message = message.concat(", Zero is a invalid value");
             return Boolean.FALSE;
         }

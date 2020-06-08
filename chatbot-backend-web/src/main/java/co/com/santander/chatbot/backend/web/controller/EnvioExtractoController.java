@@ -6,15 +6,20 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/extractos-cliente")
+@Api(value = "Acceso a la consulta y envío de extratos de vehiculo", tags = {"V1: Consulta por meses de extractos por cliente"})
 public class EnvioExtractoController {
 
     private final ConsultaExtractoService consultaExtractoService;
@@ -25,9 +30,13 @@ public class EnvioExtractoController {
         this.consultaExtractoService = consultaExtractoService;
         this.envioExtractoService = envioExtractoService;
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping("/consulta-meses-disponibles")
-    public ResponseEntity<ResponseExtractosDisponibles> consultaMesesDisponibles(@RequestHeader("Authorization") String bearerToken, @RequestBody EnvioExtractoPayload envioExtracto){
+    public ResponseEntity<ResponseExtractosDisponibles> consultaMesesDisponibles(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody EnvioExtractoPayload envioExtracto){
         Optional<ResponseExtractosDisponibles> response = consultaExtractoService.consultaDocumentos(bearerToken, ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS, envioExtracto.getTelefono(), envioExtracto );
         if(response.isPresent()){
             return new ResponseEntity<>(response.get() ,HttpStatus.OK);
