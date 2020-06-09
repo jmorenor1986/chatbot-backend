@@ -39,14 +39,14 @@ public class TerminosCondicionesControllerTest {
                 .horaEnviadoTeminos(new Date())
                 .horaOperacion(new Date())
                 .operacion(1L)
-                .telefono(3229032614L)
+                .telefono("3229032614")
                 .build();
         Optional<TerminosCondicionesPayload> responseMockito = Optional.of(TerminosCondicionesPayload.builder()
                 .id(1L)
                 .horaEnviadoTeminos(new Date())
                 .horaOperacion(new Date())
                 .operacion(1L)
-                .telefono(3229032614L)
+                .telefono("3229032614")
                 .build());
         Mockito.doReturn(responseMockito).when(terminosCondicionesService).save(Mockito.any());
 

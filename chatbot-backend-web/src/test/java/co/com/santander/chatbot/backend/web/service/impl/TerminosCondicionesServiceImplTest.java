@@ -37,7 +37,7 @@ public class TerminosCondicionesServiceImplTest {
                 .horaEnviadoTeminos(new Date())
                 .horaOperacion(new Date())
                 .operacion(1L)
-                .telefono(3229032614L)
+                .telefono("3229032614")
                 .build(),HttpStatus.OK);
 
         Mockito.doReturn(responseMockito).when(terminosCondicionesClient).save(Mockito.any(), Mockito.any());

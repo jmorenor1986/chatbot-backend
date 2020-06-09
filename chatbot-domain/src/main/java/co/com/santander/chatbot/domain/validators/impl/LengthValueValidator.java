@@ -21,6 +21,8 @@ public class LengthValueValidator implements ConstraintValidator<LengthValues, O
             if (tamanio >= min && tamanio <= max){
                 return true;
             }
+        }else{
+
         }
         throw new LengthValuesException(message);
     }

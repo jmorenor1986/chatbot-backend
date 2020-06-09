@@ -18,7 +18,7 @@ public class TerminosCondicionesPayload {
     private Long id;
     @LengthValues(min = 10, max = 10, message = "telefono")
     @MandatoryConstraint(message = "operacion")
-    private Long telefono;
+    private String telefono;
     private Date horaEnviadoTeminos;
     private Date horaOperacion;
     @AllowedValues(message = "operacion", longValues = { 1L , 2L })
