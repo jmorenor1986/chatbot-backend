@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.EnlacePsePayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
@@ -21,10 +22,13 @@ import java.util.Optional;
 public class EnlacePseController {
 
     private final EnlacePseService enlacePseService;
+    private final MapperTelService mapperTelService;
+
 
     @Autowired
-    public EnlacePseController(EnlacePseService enlacePseService) {
+    public EnlacePseController(EnlacePseService enlacePseService, MapperTelService mapperTelService) {
         this.enlacePseService = enlacePseService;
+        this.mapperTelService = mapperTelService;
     }
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
@@ -33,6 +37,7 @@ public class EnlacePseController {
     })
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseEnlacePsePayload> getEnlacePse(@RequestHeader("Authorization") String bearerToken, @RequestBody EnlacePsePayload enlacePsePayload){
+        enlacePsePayload.setTelefono(mapperTelService.mapTelDigits(enlacePsePayload.getTelefono()));
         Optional<ResponseEnlacePsePayload> response = enlacePseService.getEnlacePse(bearerToken, ServiciosEnum.SERVICIO_ENLACE_PSE,enlacePsePayload.getTelefono(), enlacePsePayload.getNumeroVerificador());
         if(response.isPresent()){
             return new ResponseEntity<>(response.get(), HttpStatus.OK);

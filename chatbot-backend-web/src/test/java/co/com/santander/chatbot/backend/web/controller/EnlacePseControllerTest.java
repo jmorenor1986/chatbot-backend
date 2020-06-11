@@ -1,6 +1,8 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.backend.web.service.MapperTelService;
+import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.EnlacePsePayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
@@ -24,10 +26,13 @@ public class EnlacePseControllerTest {
     @Mock
     private EnlacePseService enlacePseService;
 
+    private MapperTelService mapperTelService;
+
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        enlacePseController = new EnlacePseController(enlacePseService);
+        this.mapperTelService = new MapperTelServiceImpl();
+        enlacePseController = new EnlacePseController(enlacePseService, mapperTelService);
 
     }
 
