@@ -16,7 +16,7 @@ import java.util.Date;
 public class TerminosCondicionesPayload {
 
     private Long id;
-    @LengthValues(min = 10, max = 10, message = "telefono")
+    @LengthValues(min = 10, max = 12, message = "telefono")
     @MandatoryConstraint(message = "operacion")
     private String telefono;
     private Date horaEnviadoTeminos;

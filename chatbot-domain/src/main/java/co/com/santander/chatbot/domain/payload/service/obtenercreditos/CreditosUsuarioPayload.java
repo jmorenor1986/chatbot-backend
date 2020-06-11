@@ -10,7 +10,7 @@ import lombok.Data;
 @Builder
 public class CreditosUsuarioPayload {
     @MandatoryConstraint(message = "telefono")
-    @LengthValues(min = 10, max = 10, message = "telefono")
+    @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;
     @MandatoryConstraint(message = "tipo operacion")
     @AllowedValues(message = "tipo operacion", longValues = {1L,2L})

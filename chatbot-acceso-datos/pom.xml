@@ -12,6 +12,11 @@
     <properties>
         <h2.database.version>1.4.200</h2.database.version>
         <start-class>co.com.santander.chatbot.accesodatos.AccesoDatosApplication</start-class>
+        <sonar.coverage.exclusions>
+            **/*AccesoDatosApplication.java,
+            **/*Config*,
+            src/main/java/co/com/santander/chatbot/accesodatos/entity/*,
+        </sonar.coverage.exclusions>
     </properties>
     <packaging>war</packaging>
 

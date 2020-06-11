@@ -10,7 +10,7 @@ import lombok.Data;
 @Builder
 public class GenericCertificatePayload {
     @MandatoryConstraint(message = "télefono")
-    @LengthValues(min = 10, max = 10, message = "telefono")
+    @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;
     @MandatoryConstraint(message = "Número de crédito")
     private String numeroCreditoOfuscado;

@@ -2,6 +2,7 @@ package co.com.santander.chatbot.domain.validators.impl;
 
 import co.com.santander.chatbot.domain.validators.AllowedValues;
 import co.com.santander.chatbot.domain.validators.exceptions.AllowedValuesException;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
@@ -11,7 +12,9 @@ import javax.validation.ConstraintValidatorContext;
 public class AllowedValuesValidator implements ConstraintValidator<AllowedValues, Object> {
 
     private String message;
+    @Setter
     private String[] stringValues;
+    @Setter
     private long[] longValues;
 
     @Override

@@ -18,5 +18,56 @@
         </dependency>
 
     </dependencies>
-
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>0.8.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-report</id>
+                        <phase>test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>jacoco-check</id>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <rule>
+                                    <element>CLASS</element>
+                                    <excludes>
+                                        <exclude>co.com.santander.chatbot.domain.payload*</exclude>
+                                        <exclude>co.com.santander.chatbot.domain.dto*</exclude>
+                                        <exclude>co.com.santander.chatbot.domain.enums*</exclude>
+                                        <exclude>co.com.santander.chatbot.domain.filter.security.JwtFilter</exclude>
+                                        <exclude>co.com.santander.chatbot.domain.common.utilities.GenericLogPayload*</exclude>
+                                        <exclude>co.com.santander.chatbot.domain.validators.impl.InvalidNumVerificadorValidator</exclude>
+                                    </excludes>
+                                    <limits>
+                                        <limit>
+                                            <counter>LINE</counter>
+                                            <value>COVEREDRATIO</value>
+                                            <minimum>${percent.coverage}</minimum>
+                                        </limit>
+                                    </limits>
+                                </rule>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>

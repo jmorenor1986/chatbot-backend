@@ -18,6 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Date;
 import java.util.Optional;
 
@@ -98,7 +99,7 @@ public class ProxyInformacionCreditoImpl implements ProxyInformacionCredito {
     }
 
     public Boolean percentageEvaluation(){
-        BigDecimal result = getCliente().getSaldoCapital().divide(getCliente().getValorDesembolso());
+        BigDecimal result = getCliente().getSaldoCapital().divide(getCliente().getValorDesembolso(), RoundingMode.HALF_UP);
         BigDecimal porcentagePaidOut = (new BigDecimal(1).subtract(result)).multiply(new BigDecimal(100));
         if(porcentagePaidOut.longValue() < getPorcentaje()){
             return Boolean.TRUE;

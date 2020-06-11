@@ -2,6 +2,7 @@ package co.com.santander.chatbot.domain.validators.impl;
 
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
 import co.com.santander.chatbot.domain.validators.exceptions.MandatoryFieldException;
+import lombok.Setter;
 import org.springframework.stereotype.Component;
 
 import javax.validation.ConstraintValidator;
@@ -10,8 +11,9 @@ import java.util.Objects;
 
 @Component
 public class MandatoryValidator implements ConstraintValidator<MandatoryConstraint, Object> {
-
+    @Setter
     private String message;
+    @Setter
     private boolean zeroIsValid;
 
     @Override

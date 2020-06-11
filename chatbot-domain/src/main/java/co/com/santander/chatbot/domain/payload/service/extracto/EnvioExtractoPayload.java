@@ -18,10 +18,10 @@ public class EnvioExtractoPayload {
             name = "Telefono",
             dataType = "String",
             required = true,
-            allowableValues = "Debe contener 10 caracteres"
+            allowableValues = "Debe contener 10 a 12 caracteres"
     )
     @MandatoryConstraint(message = "telefono")
-    @LengthValues(min = 10, max = 10, message = "telefono")
+    @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;
     @ApiModelProperty(
             notes = "Número de credito en el cual solo se exponen los ultimos 5 digitos",
