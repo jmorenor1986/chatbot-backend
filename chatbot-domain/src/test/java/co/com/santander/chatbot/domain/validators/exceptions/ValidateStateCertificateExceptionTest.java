@@ -36,4 +36,10 @@ public class ValidateStateCertificateExceptionTest {
         Assert.assertNotNull(exception.getEmail());
 
     }
+
+    @Test
+    public void testException(){
+        NonExistentCustomerException exception = new NonExistentCustomerException("test");
+        Assert.assertNotNull(exception);
+    }
 }

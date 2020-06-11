@@ -14,6 +14,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(NonExistentCustomerException.class)
+    public final ResponseEntity<Object> handlerNonExistentCustomerException(NonExistentCustomerException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("No hay información del crédito (Telefono inexistente) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(2)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(InvalidNumVerificadorException.class)
     public final ResponseEntity<Object> handlerInvalidNumVerificadorException(InvalidNumVerificadorException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()

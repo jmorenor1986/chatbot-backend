@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
 import co.com.santander.chatbot.backend.web.service.MapperTelService;
+import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
@@ -23,12 +24,14 @@ public class ValidarClienteControllerTest {
     @Mock
     private ClienteService clienteService;
     private MapperTelService mapperTelService;
+    @Mock
+    private ValidateClienteService validateClienteService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.mapperTelService = new MapperTelServiceImpl();
-        validarClienteController = new ValidarClienteController(clienteService, mapperTelService);
+        validarClienteController = new ValidarClienteController(clienteService, mapperTelService, validateClienteService);
     }
 
     @Test

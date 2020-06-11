@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.backend.web.service.TerminosCondicionesService;
+import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.payload.accesodatos.TerminosCondicionesPayload;
 import org.junit.Assert;
@@ -24,12 +25,14 @@ public class TerminosCondicionesControllerTest {
     @Mock
     private TerminosCondicionesService terminosCondicionesService;
     private MapperTelService mapperTelService;
+    @Mock
+    private ValidateClienteService validateClienteService;
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
         mapperTelService = new MapperTelServiceImpl();
-        terminosCondicionesController = new TerminosCondicionesController(terminosCondicionesService, mapperTelService);
+        terminosCondicionesController = new TerminosCondicionesController(terminosCondicionesService, mapperTelService, validateClienteService);
     }
 
     @Test

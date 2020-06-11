@@ -2,6 +2,7 @@ package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
 import co.com.santander.chatbot.backend.web.service.MapperTelService;
+import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
@@ -17,15 +18,18 @@ public class ValidarClienteController {
 
     private final ClienteService clienteService;
     private final MapperTelService mapperTelService;
+    private final ValidateClienteService validateClienteService;
 
-    public ValidarClienteController(ClienteService clienteService, MapperTelService mapperTelService) {
+    public ValidarClienteController(ClienteService clienteService, MapperTelService mapperTelService, ValidateClienteService validateClienteService) {
         this.clienteService = clienteService;
         this.mapperTelService = mapperTelService;
+        this.validateClienteService = validateClienteService;
     }
 
     @PostMapping(value = "/")
     public ResponseEntity<ResponsePayload> validar(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody ClientePayload clientePayload) {
         clientePayload.setTelefono(mapperTelService.mapTelDigits(clientePayload.getTelefono()));
+        validateClienteService.validateClient(bearerToken, clientePayload.getTelefono());
         ResponseEntity<ResponsePayload> response = clienteService.validarCliente(bearerToken, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, clientePayload.getTelefono(), clientePayload);
         if(HttpStatus.OK.equals(response.getStatusCode())){
             ResponsePayload objResponse = response.getBody();

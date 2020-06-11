@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.controller;
 import co.com.santander.chatbot.backend.web.service.ConsultaExtractoService;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
 import co.com.santander.chatbot.backend.web.service.MapperTelService;
+import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
@@ -29,12 +30,14 @@ public class EnvioExtractoControllerTest {
     private EnvioExtractoService envioExtractoService;
 
     private MapperTelService mapperTelService;
+    @Mock
+    private ValidateClienteService validateClienteService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         this.mapperTelService = new MapperTelServiceImpl();
-        envioExtractoController = new EnvioExtractoController(consultaExtractoService, envioExtractoService, mapperTelService);
+        envioExtractoController = new EnvioExtractoController(consultaExtractoService, envioExtractoService, mapperTelService, validateClienteService);
     }
 
     @Test

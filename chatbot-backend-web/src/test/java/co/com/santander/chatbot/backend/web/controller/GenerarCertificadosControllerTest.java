@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.controller;
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
 import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
+import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
@@ -29,12 +30,14 @@ public class GenerarCertificadosControllerTest {
     private ProxyInformacionCredito proxyInformacionCredito;
     private GenerarCertificadosController generarCertificadosController;
     private MapperTelService mapperTelService;
+    @Mock
+    private ValidateClienteService validateClienteService;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
         mapperTelService = new MapperTelServiceImpl();
-        generarCertificadosController = new GenerarCertificadosController(generarCertificadosService, proxyInformacionCredito, mapperTelService);
+        generarCertificadosController = new GenerarCertificadosController(generarCertificadosService, proxyInformacionCredito, mapperTelService, validateClienteService);
     }
 
     @Test
