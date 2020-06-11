@@ -3,6 +3,7 @@ package co.com.santander.chatbot.domain.payload.service.enlacePse;
 import co.com.santander.chatbot.domain.validators.InvalidNumVerificador;
 import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
+import co.com.santander.chatbot.domain.validators.OnlyNumbers;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
@@ -17,6 +18,7 @@ public class EnlacePsePayload {
             required = true,
             allowableValues = "Debe contener 10 a 12 caracteres"
     )
+    @OnlyNumbers(message = "telefono")
     @MandatoryConstraint(message = "telefono")
     @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;

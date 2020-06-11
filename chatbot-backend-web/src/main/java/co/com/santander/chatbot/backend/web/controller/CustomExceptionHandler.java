@@ -14,6 +14,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(OnlyNumbersException.class)
+    public final ResponseEntity<Object> handlerOnlyNumbersException(OnlyNumbersException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Datos erroneos, los datos no cumplen con el formato (Formato Número) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(4)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(NonExistentCustomerException.class)
     public final ResponseEntity<Object> handlerNonExistentCustomerException(NonExistentCustomerException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()

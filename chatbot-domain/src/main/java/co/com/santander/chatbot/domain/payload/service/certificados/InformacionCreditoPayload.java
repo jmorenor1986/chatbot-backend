@@ -1,15 +1,13 @@
 package co.com.santander.chatbot.domain.payload.service.certificados;
 
-import co.com.santander.chatbot.domain.validators.AllowedValues;
-import co.com.santander.chatbot.domain.validators.InvalidNumVerificador;
-import co.com.santander.chatbot.domain.validators.LengthValues;
-import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
+import co.com.santander.chatbot.domain.validators.*;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
 @Builder
 public class InformacionCreditoPayload {
+    @OnlyNumbers(message = "telefono")
     @MandatoryConstraint(message = "télefono")
     @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;

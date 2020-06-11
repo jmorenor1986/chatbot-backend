@@ -3,6 +3,7 @@ package co.com.santander.chatbot.domain.payload.accesodatos;
 import co.com.santander.chatbot.domain.validators.AllowedValues;
 import co.com.santander.chatbot.domain.validators.LengthValues;
 import co.com.santander.chatbot.domain.validators.MandatoryConstraint;
+import co.com.santander.chatbot.domain.validators.OnlyNumbers;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -16,6 +17,7 @@ import java.util.Date;
 public class TerminosCondicionesPayload {
 
     private Long id;
+    @OnlyNumbers(message = "telefono")
     @LengthValues(min = 10, max = 12, message = "telefono")
     @MandatoryConstraint(message = "operacion")
     private String telefono;
