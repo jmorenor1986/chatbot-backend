@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
+import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.backend.web.service.ProxyInformacionCredito;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.GenericCertificatePayload;
@@ -20,16 +21,20 @@ import java.util.Optional;
 public class GenerarCertificadosController {
     private final GenerarCertificadosService generarCertificadosService;
     private final ProxyInformacionCredito proxyInformacionCredito;
+    private final MapperTelService mapperTelService;
 
     @Autowired
-    public GenerarCertificadosController(GenerarCertificadosService generarCertificadosService, ProxyInformacionCredito proxyInformacionCredito) {
+    public GenerarCertificadosController(GenerarCertificadosService generarCertificadosService, ProxyInformacionCredito proxyInformacionCredito, MapperTelService mapperTelService) {
         this.generarCertificadosService = generarCertificadosService;
         this.proxyInformacionCredito = proxyInformacionCredito;
+        this.mapperTelService = mapperTelService;
     }
 
 
     @PostMapping(value = "/paz-y-salvo")
     public ResponseEntity<InformacionCreditoResponsePayload> generarCertificadoPazYSalvo(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload genericCertificatePayload) {
+        genericCertificatePayload.setTelefono(mapperTelService.mapTelDigits(genericCertificatePayload.getTelefono()));
+
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_PAZ_Y_SALVO, genericCertificatePayload, 3L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
@@ -38,6 +43,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/informacion-credito")
     public ResponseEntity<InformacionCreditoResponsePayload> informacionCredito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody InformacionCreditoPayload informacionCreditoPayload) {
+        informacionCreditoPayload.setTelefono(mapperTelService.mapTelDigits(informacionCreditoPayload.getTelefono()));
         Optional<InformacionCreditoResponsePayload> result = proxyInformacionCredito.generarInformacionCredito(bearerToken, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
@@ -46,6 +52,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/autorizacion-debito")
     public ResponseEntity<InformacionCreditoResponsePayload> autorizacionDebito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload debitoPayload) {
+        debitoPayload.setTelefono(mapperTelService.mapTelDigits(debitoPayload.getTelefono()));
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_DEBITO_AUTOMATICO, debitoPayload, 4L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
@@ -54,6 +61,7 @@ public class GenerarCertificadosController {
 
     @PostMapping(value = "/certificacion-declaracion-renta")
     public ResponseEntity<InformacionCreditoResponsePayload> certificacionDeclaracionRenta(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload declaracionRentaPayload) {
+        declaracionRentaPayload.setTelefono(mapperTelService.mapTelDigits(declaracionRentaPayload.getTelefono()));
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(bearerToken, ServiciosEnum.SERVICIO_DECLARACION_RENTA, declaracionRentaPayload,  5L);
         if (result.isPresent())
             return new ResponseEntity<>(result.get(), HttpStatus.OK);

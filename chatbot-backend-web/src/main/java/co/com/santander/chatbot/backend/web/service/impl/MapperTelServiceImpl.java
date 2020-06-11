@@ -8,10 +8,8 @@ public class MapperTelServiceImpl implements MapperTelService {
     @Override
     public String mapTelDigits(String telefono) {
         int tamanio = telefono.length();
-        if(tamanio == 12){
-            if(telefono.startsWith("57")){
-               telefono = telefono.substring(2, tamanio);
-            }
+        if (tamanio == 12 && telefono.startsWith("57")) {
+            telefono = telefono.substring(2, tamanio);
         }
         return telefono;
     }

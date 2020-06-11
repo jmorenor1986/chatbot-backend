@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
@@ -18,14 +19,17 @@ import java.util.Optional;
 public class ObtenerCreditosUsuarioController {
 
     private final ClienteService clienteService;
+    private final MapperTelService mapperTelService;
 
     @Autowired
-    public ObtenerCreditosUsuarioController(ClienteService clienteService) {
+    public ObtenerCreditosUsuarioController(ClienteService clienteService, MapperTelService mapperTelService) {
         this.clienteService = clienteService;
+        this.mapperTelService = mapperTelService;
     }
 
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ResponseObtenerCreditosPayload> obtener(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody CreditosUsuarioPayload credito) {
+        credito.setTelefono(mapperTelService.mapTelDigits(credito.getTelefono()));
         Optional<ResponseObtenerCreditosPayload> response = clienteService.obtenerCreditos(bearerToken, ServiciosEnum.SERVICIO_OBTENER_CREDITOS, credito.getTelefono(), credito);
         if (response.isPresent()) {
             return new ResponseEntity<>(response.get(), HttpStatus.OK);

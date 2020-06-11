@@ -1,6 +1,8 @@
 package co.com.santander.chatbot.backend.web.controller;
 
 import co.com.santander.chatbot.backend.web.service.ClienteService;
+import co.com.santander.chatbot.backend.web.service.MapperTelService;
+import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
@@ -22,10 +24,13 @@ public class ObtenerCreditosUsuarioControllerTest {
     private ObtenerCreditosUsuarioController obtenerCreditosUsuarioController;
     @Mock
     private ClienteService clienteService;
+
+    private MapperTelService mapperTelService;
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        obtenerCreditosUsuarioController = new ObtenerCreditosUsuarioController(clienteService);
+        mapperTelService = new MapperTelServiceImpl();
+        obtenerCreditosUsuarioController = new ObtenerCreditosUsuarioController(clienteService, mapperTelService);
     }
 
     @Test
