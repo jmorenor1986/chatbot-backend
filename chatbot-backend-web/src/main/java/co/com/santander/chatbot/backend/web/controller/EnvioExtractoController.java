@@ -6,6 +6,7 @@ import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
+import co.com.santander.chatbot.domain.payload.service.extracto.ConsultaExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import io.swagger.annotations.Api;
@@ -42,10 +43,10 @@ public class EnvioExtractoController {
             @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
     })
     @PostMapping("/consulta-meses-disponibles")
-    public ResponseEntity<ResponseExtractosDisponibles> consultaMesesDisponibles(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody EnvioExtractoPayload envioExtracto){
-        envioExtracto.setTelefono(mapperTelService.mapTelDigits(envioExtracto.getTelefono()));
-        validateClienteService.validateClient(bearerToken, envioExtracto.getTelefono());
-        Optional<ResponseExtractosDisponibles> response = consultaExtractoService.consultaDocumentos(bearerToken, ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS, envioExtracto.getTelefono(), envioExtracto );
+    public ResponseEntity<ResponseExtractosDisponibles> consultaMesesDisponibles(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody ConsultaExtractoPayload consultaExtracto){
+        consultaExtracto.setTelefono(mapperTelService.mapTelDigits(consultaExtracto.getTelefono()));
+        validateClienteService.validateClient(bearerToken, consultaExtracto.getTelefono());
+        Optional<ResponseExtractosDisponibles> response = consultaExtractoService.consultaDocumentos(bearerToken, ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS, consultaExtracto.getTelefono(), consultaExtracto );
         if(response.isPresent()){
             return new ResponseEntity<>(response.get() ,HttpStatus.OK);
         }

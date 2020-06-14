@@ -15,7 +15,7 @@ jwt:
 clientes:
   url:
     baseUrlCliente: http://localhost:28080/chatbot-acceso-datos
-    baseUrlSoa: http://localhost:28080/chatbot-acceso-rescursos-rest
+    baseUrlSoa: http://localhost:28080/chatbot-acceso-rescursos-soap
     insercionIdDocumento: /v1/id-documento/
     consultaIdDocumentoById: /v1/id-documento/{id}/
     consultaDocumentos: /v1/extracto/consultar-documentos

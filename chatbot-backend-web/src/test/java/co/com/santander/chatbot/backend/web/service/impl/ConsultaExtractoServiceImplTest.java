@@ -13,6 +13,7 @@ import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPa
 import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
+import co.com.santander.chatbot.domain.payload.service.extracto.ConsultaExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -55,7 +56,7 @@ public class ConsultaExtractoServiceImplTest {
         String token = "1";
         ServiciosEnum servicio = ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS;
         String telefono = "3229032614";
-        EnvioExtractoPayload envioExtracto = EnvioExtractoPayload.builder()
+        ConsultaExtractoPayload envioExtracto = ConsultaExtractoPayload.builder()
                 .telefono("3229032614")
                 .numeroVerificador("3229039988")
                 .numeroCreditoOfuscado("xxxxx04018")
@@ -75,7 +76,7 @@ public class ConsultaExtractoServiceImplTest {
         String token = "1";
         ServiciosEnum servicio = ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS;
         String telefono = "3229032614";
-        EnvioExtractoPayload envioExtracto = EnvioExtractoPayload.builder()
+        ConsultaExtractoPayload envioExtracto = ConsultaExtractoPayload.builder()
                 .telefono("3229032614")
                 .numeroVerificador("3229039988")
                 .numeroCreditoOfuscado("xxxxx04018")
@@ -112,9 +113,9 @@ public class ConsultaExtractoServiceImplTest {
         String token = "1";
         ServiciosEnum servicio = ServiciosEnum.SERVICIO_CONSULTA_EXTRACTOS;
         String telefono = "3229032614";
-        EnvioExtractoPayload envioExtracto = null;
+        ConsultaExtractoPayload envioExtracto = null;
         try {
-            envioExtracto = EnvioExtractoPayload.builder()
+            envioExtracto = ConsultaExtractoPayload.builder()
                     .telefono("3229032614")
                     .numeroVerificador("3229039988")
                     .numeroCreditoOfuscado("830000000185")

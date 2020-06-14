@@ -5,6 +5,7 @@ import co.com.santander.chatbot.backend.web.service.GenerarCertificadosService;
 import co.com.santander.chatbot.backend.web.service.GuardarTransaccionCertificadoService;
 import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
@@ -59,6 +60,7 @@ public class GenerarCertificadosServiceImplTest {
                 .nombreCliente("aasad")
                 .numerCredito("6000000457")
                 .telefono("13444")
+                .tipoCredito(TipoCredito.VEHICULO)
                 .build();
         InformacionCreditoPayload informacionCreditoPayload = InformacionCreditoPayload.builder()
                 .telefono(telefono)
@@ -125,6 +127,7 @@ public class GenerarCertificadosServiceImplTest {
                 .nombreCliente("aasad")
                 .numerCredito("6000000457")
                 .telefono("13444")
+                .tipoCredito(TipoCredito.VEHICULO)
                 .build();
         GenericCertificatePayload genericCertificatePayload = GenericCertificatePayload.builder()
                 .numeroVerificador(numeroVerificador)

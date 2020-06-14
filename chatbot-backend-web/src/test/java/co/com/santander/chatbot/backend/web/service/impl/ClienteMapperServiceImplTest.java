@@ -1,6 +1,7 @@
 package co.com.santander.chatbot.backend.web.service.impl;
 
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
 import org.junit.Assert;
@@ -36,6 +37,7 @@ public class ClienteMapperServiceImplTest {
                 .idProducto("9991")
                 .idBanco("52")
                 .convenio("MARCALI INTERNACIONAL SA")
+                .tipoCredito(TipoCredito.VEHICULO)
                 .build();
         clients.add(item);
         Optional<ResponseObtenerCreditosPayload> response = clienteMapperService.fromListClientView(clients);
@@ -58,6 +60,7 @@ public class ClienteMapperServiceImplTest {
                 .idProducto("9991")
                 .idBanco("52")
                 .convenio("MARCALI INTERNACIONAL SA")
+                .tipoCredito(TipoCredito.VEHICULO)
                 .build();
         clients.add(item);
         Optional<ResponseObtenerCreditosPayload> response = clienteMapperService.fromListClientView(clients);

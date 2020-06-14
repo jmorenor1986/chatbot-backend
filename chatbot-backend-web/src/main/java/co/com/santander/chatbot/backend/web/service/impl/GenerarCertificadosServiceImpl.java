@@ -91,7 +91,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                 .emailOfuscado(StringUtilities.ofuscarCorreo(clienteViewPayload.getEmail(), 4))
                 .numeroCreditoOfuscado(StringUtilities.ofuscarString(clienteViewPayload.getNumerCredito(), 5))
                 .resultadoEnvio("true")
-                .tipoCredito(clienteViewPayload.getIdProducto())
+                .tipoCredito(clienteViewPayload.getTipoCredito().ordinal() +"")
                 .idRespuesta("0")
                 .descripcionRespuesta("Servicio consumido de forma exitosa")
                 .build();

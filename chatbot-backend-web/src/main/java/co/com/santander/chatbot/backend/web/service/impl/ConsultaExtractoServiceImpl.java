@@ -19,7 +19,7 @@ import co.com.santander.chatbot.domain.payload.enviarextracto.IndicesPayloadResp
 import co.com.santander.chatbot.domain.payload.enviarextracto.ProductoEnum;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.VigenciaExtracto;
-import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
+import co.com.santander.chatbot.domain.payload.service.extracto.ConsultaExtractoPayload;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -74,7 +74,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
 
     @Override
     @BussinessLog
-    public Optional<ResponseExtractosDisponibles> consultaDocumentos(String token, ServiciosEnum servicio, String telefono, EnvioExtractoPayload envioExtracto) {
+    public Optional<ResponseExtractosDisponibles> consultaDocumentos(String token, ServiciosEnum servicio, String telefono, ConsultaExtractoPayload envioExtracto) {
         setToken(token);
         Boolean valida = findCreditoCliente(envioExtracto);
         //Busca los datos del cliente y del credito que se esta solicitando
@@ -123,6 +123,9 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         ProductoEnum producto = null;
         if (TipoCredito.VEHICULO.equals(getClienteViewPayload().getTipoCredito())) {
             producto = ProductoEnum.VEHICULO;
+        }else if(TipoCredito.CONSUMO.equals(getClienteViewPayload().getTipoCredito())){
+            //TODO VALIDAR QUE TIPOS DE CREDITO ESTAN EN COMPUTEC
+            producto = ProductoEnum.VEHICULO;
         }
         ResponseEntity<List<ConsultarDocumentosPayloadResponse>> response = documentosClient.consultaDocumentos(token, ConsultarDocumentoPayload.builder()
                 .fechaIni(getSFechaIni())
@@ -138,7 +141,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Optional.empty();
     }
 
-    private Boolean findCreditoCliente(EnvioExtractoPayload envioExtracto) {
+    private Boolean findCreditoCliente(ConsultaExtractoPayload envioExtracto) {
         ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), envioExtracto.getTelefono(), SecurityUtilities.desencriptarCatch(envioExtracto.getNumeroVerificador()));
         if (HttpStatus.OK.equals(response.getStatusCode())) {
             setClienteViewPayload(response.getBody());
@@ -216,7 +219,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
         return Optional.of(numCreditos.get(0).getValor());
     }
 
-    private Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, EnvioExtractoPayload envioExtracto) {
+    private Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, ConsultaExtractoPayload envioExtracto) {
         return Optional.of(ResponseExtractosDisponibles.builder()
                 .resultadoEnvio("true")
                 .idRespuesta("0")

@@ -4,7 +4,10 @@ import co.com.santander.chatbot.backend.web.exceptions.CustomAuthenticationExcep
 import co.com.santander.chatbot.backend.web.service.UsuarioService;
 import co.com.santander.chatbot.domain.dto.security.TokenDto;
 import co.com.santander.chatbot.domain.dto.security.UsuarioDto;
-import io.swagger.annotations.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

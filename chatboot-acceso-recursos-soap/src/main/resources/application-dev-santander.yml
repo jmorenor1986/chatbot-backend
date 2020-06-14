@@ -1,0 +1,9 @@
+services:
+  getToken: https://felec.computec.com/WSSAMLPruebas/ComputecSTSService/ComputecSTSService.wsdl
+  user: pruebasantander
+  password: s@nTAzd38!
+  documentos: https://felec.computec.com/WSFelecJAXWSP/WsFelecService/WsFelecService.wsdl
+  usuarioRemoto: santander.
+  producto: VEHICULO
+  cliente: SANTANDERCOL
+

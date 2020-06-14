@@ -49,7 +49,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
                     .convenio(clientes.getConvenio())
                     .numeroVerificador(creditoEncriptado)
                     .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clientes.getNumerCredito()))
-                    .tipoCredito(Long.valueOf(clientes.getIdProducto()))
+                    .tipoCredito(Long.valueOf(clientes.getTipoCredito().ordinal()))
                     .build();
         };
     }

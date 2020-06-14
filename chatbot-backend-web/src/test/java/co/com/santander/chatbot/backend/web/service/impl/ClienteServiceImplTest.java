@@ -4,6 +4,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.backend.web.service.ClienteMapperService;
 import co.com.santander.chatbot.backend.web.service.ClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
+import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -69,6 +70,7 @@ public class ClienteServiceImplTest {
                 .idProducto("9991")
                 .idBanco("52")
                 .convenio("MARCALI INTERNACIONAL SA")
+                .tipoCredito(TipoCredito.VEHICULO)
                 .build();
         lista.add(item);
         CreditosUsuarioPayload credito = CreditosUsuarioPayload.builder()

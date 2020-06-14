@@ -6,6 +6,7 @@ import co.com.santander.chatbot.backend.web.service.MapperTelService;
 import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.backend.web.service.impl.MapperTelServiceImpl;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
+import co.com.santander.chatbot.domain.payload.service.extracto.ConsultaExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
 import org.junit.Assert;
@@ -88,12 +89,10 @@ public class EnvioExtractoControllerTest {
     @Test
     public void testConsultaMesesDisponiblesSUCCESS(){
         String token = "1";
-        EnvioExtractoPayload envioExtractoPayload = EnvioExtractoPayload.builder()
+        ConsultaExtractoPayload envioExtractoPayload = ConsultaExtractoPayload.builder()
                 .telefono("3105235467")
                 .numeroCreditoOfuscado("XXXXXXXX02123")
                 .numeroVerificador("kjfaitufdsjlvjfñlg")
-                .mes(7)
-                .vigencia(2020)
                 .build();
         Optional<ResponseExtractosDisponibles> respuestaEnvio = Optional.empty();
 

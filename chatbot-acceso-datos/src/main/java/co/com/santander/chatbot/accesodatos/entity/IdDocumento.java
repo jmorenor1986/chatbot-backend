@@ -28,7 +28,7 @@ public class IdDocumento {
     @Column(name = "mes")
     private String mes;
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fecha")
+    @Column(name = "fecha", insertable = false)
     private Date insercion;
 
 
@@ -39,10 +39,4 @@ public class IdDocumento {
     @Column(name = "producto")
     private String producto;
 
-    @PrePersist
-    private void prePersistFunction(){
-        if(Objects.isNull(insercion)){
-            setInsercion(new Date());
-        }
-    }
 }

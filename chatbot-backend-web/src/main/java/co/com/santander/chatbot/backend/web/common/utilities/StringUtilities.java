@@ -5,6 +5,8 @@ import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 
+import java.util.Objects;
+
 public class StringUtilities {
 
     private StringUtilities() {
@@ -31,19 +33,23 @@ public class StringUtilities {
 
 
     public static String ofuscarCredito(String credito) {
-        StringBuilder resultado = new StringBuilder();
-        int tamanio = credito.length();
-        for (int i = 0; i < tamanio; i++) {
-            resultado.append("X");
+        if (Objects.nonNull(credito) && credito.length() > 5) {
+            StringBuilder resultado = new StringBuilder();
+            int tamanio = credito.length();
+            for (int i = 0; i < tamanio; i++) {
+                resultado.append("X");
+            }
+            StringBuilder temporal = new StringBuilder();
+            for (int i = 0; i < 5; i++) {
+                String caracter = credito.substring(tamanio - 1, tamanio);
+                temporal = new StringBuilder(caracter.concat(temporal.toString()));
+                tamanio--;
+            }
+            resultado = new StringBuilder(resultado.substring(0, tamanio));
+            return resultado.append(temporal).toString();
+        }else {
+            return credito;
         }
-        StringBuilder temporal = new StringBuilder();
-        for (int i = 0; i < 5; i++) {
-            String caracter = credito.substring(tamanio - 1, tamanio);
-            temporal = new StringBuilder(caracter.concat(temporal.toString()));
-            tamanio--;
-        }
-        resultado = new StringBuilder(resultado.substring(0, tamanio));
-        return resultado.append(temporal).toString();
     }
 
     public static CommonAspectDto getCommon(Object[] args) {
