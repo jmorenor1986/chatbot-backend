@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Service
+@Service("clienteServiceImpl")
 public class ClienteServiceImpl implements ClienteService {
 
     private final ClienteClient clienteClient;
@@ -39,7 +39,6 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    @BussinessLog
     public Optional<ResponseObtenerCreditosPayload> obtenerCreditos(String token, ServiciosEnum serviciosEnum, String telefono, CreditosUsuarioPayload credito) {
         Optional<List<ClienteViewPayload>> clientesCreditos = callServiceCreditosByTel(token, telefono);
         if (clientesCreditos.isPresent()) {

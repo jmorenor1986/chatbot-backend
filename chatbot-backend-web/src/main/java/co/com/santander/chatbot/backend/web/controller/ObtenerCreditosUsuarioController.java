@@ -7,6 +7,7 @@ import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.CreditosUsuarioPayload;
 import co.com.santander.chatbot.domain.payload.service.obtenercreditos.ResponseObtenerCreditosPayload;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -24,7 +25,7 @@ public class ObtenerCreditosUsuarioController {
     private final ValidateClienteService validateClienteService;
 
     @Autowired
-    public ObtenerCreditosUsuarioController(ClienteService clienteService, MapperTelService mapperTelService, ValidateClienteService validateClienteService) {
+    public ObtenerCreditosUsuarioController(@Qualifier("proxyClienteServiceImpl") ClienteService clienteService, MapperTelService mapperTelService, ValidateClienteService validateClienteService) {
         this.clienteService = clienteService;
         this.mapperTelService = mapperTelService;
         this.validateClienteService = validateClienteService;

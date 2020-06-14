@@ -15,7 +15,7 @@ public class CreditosUsuarioPayload {
     @LengthValues(min = 10, max = 12, message = "telefono")
     private String telefono;
     @MandatoryConstraint(message = "tipo operacion")
-    @AllowedValues(message = "tipo operacion", longValues = {1L,2L})
+    @AllowedValues(message = "tipo operacion", longValues = {0L,1L,2L,3L,4L,5L,6L})
     private Long tipoOperacion;
     private String infoUno;
     private String infoDos;

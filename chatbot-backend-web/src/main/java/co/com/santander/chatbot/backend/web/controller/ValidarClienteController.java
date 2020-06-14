@@ -6,6 +6,7 @@ import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +21,7 @@ public class ValidarClienteController {
     private final MapperTelService mapperTelService;
     private final ValidateClienteService validateClienteService;
 
-    public ValidarClienteController(ClienteService clienteService, MapperTelService mapperTelService, ValidateClienteService validateClienteService) {
+    public ValidarClienteController(@Qualifier("clienteServiceImpl") ClienteService clienteService, MapperTelService mapperTelService, ValidateClienteService validateClienteService) {
         this.clienteService = clienteService;
         this.mapperTelService = mapperTelService;
         this.validateClienteService = validateClienteService;
