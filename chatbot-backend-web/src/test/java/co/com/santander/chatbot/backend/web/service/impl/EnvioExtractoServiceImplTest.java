@@ -4,6 +4,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.DocumentosClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.IdDocumentoClient;
 import co.com.santander.chatbot.backend.web.service.EnvioExtractoService;
+import co.com.santander.chatbot.backend.web.service.ParametrosAppService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
@@ -33,12 +34,14 @@ public class EnvioExtractoServiceImplTest {
     private ClienteClient clienteClient;
     @Mock
     private IdDocumentoClient idDocumentoClient;
+    @Mock
+    private ParametrosAppService parametrosAppService;
 
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        envioExtractoService = new EnvioExtractoServiceImpl( documentosClient,  clienteClient,  idDocumentoClient);
+        envioExtractoService = new EnvioExtractoServiceImpl( documentosClient,  clienteClient,  idDocumentoClient, parametrosAppService);
     }
     @Test
     public void testEnvioExtractoNOT_FOUND_CLIENT(){
@@ -69,6 +72,8 @@ public class EnvioExtractoServiceImplTest {
                 .numeroCreditoOfuscado("xxxxx04018")
                 .numeroVerificador("lsRvIEZpA2UoKQy9vxXh3JYav2v6djZo7iw=")
                 .idExtracto(12345678)
+                .vigencia(2020)
+                .mes(5)
                 .build();
         //Mockito para el servicio de buscar cliente
         ResponseEntity<ClienteViewPayload> responseClienteMockito = new ResponseEntity<>(ClienteViewPayload.builder()
@@ -84,25 +89,29 @@ public class EnvioExtractoServiceImplTest {
                 .convenio("MARCALI INTERNACIONAL SA")
                 .tipoCredito(TipoCredito.VEHICULO)
                 .build(),HttpStatus.OK);
-        Mockito.doReturn(responseClienteMockito).when(clienteClient).getClientByTelefonoAndNumCredito(Mockito.any(), Mockito.any(),Mockito.any());
 
         ResponseEntity<IdDocumentoPayload> responseMockitoGetDoc = new ResponseEntity<>(IdDocumentoPayload.builder()
                 .id(1L)
-                .producto(TipoCredito.VEHICULO.name())
+                .producto("EXTRACTO VEHICULO")
                 .mes("05")
                 .anio("2020")
                 .idDocumentos("jkdfghafñlkghñkldñ")
                 .fechaIni("01/01/2019")
                 .fechaFin("23/05/2020")
                 .build(),HttpStatus.OK);
-        Mockito.doReturn(responseMockitoGetDoc).when(idDocumentoClient).getDocumentById(Mockito.any(), Mockito.any());
+
         EnvioDocumentoMailResponsePayload responseMail = EnvioDocumentoMailResponsePayload.builder()
                 .respuesta("Correo electrónico enviado")
                 .envioExitoso(Boolean.TRUE)
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> responseMockitoMail = new ResponseEntity<>(responseMail, HttpStatus.OK);
 
+        Optional<String> responseParamCopia = Optional.of("elisabeth.becerra@samtel.co");
+
+        Mockito.doReturn(responseClienteMockito).when(clienteClient).getClientByTelefonoAndNumCredito(Mockito.any(), Mockito.any(),Mockito.any());
+        Mockito.doReturn(responseMockitoGetDoc).when(idDocumentoClient).getDocumentById(Mockito.any(), Mockito.any());
         Mockito.doReturn(responseMockitoMail).when(documentosClient).envioMailDocumento(Mockito.any(), Mockito.any());
+        Mockito.doReturn(responseParamCopia).when(parametrosAppService).getParamByKey(token, "COPIA_ENVIO_EXTRACTO");
 
         Optional<ResponseEnvioExtractoPayload> response = envioExtractoService.envioExtracto(token ,ServiciosEnum.SERVICIO_ENVIO_EXTRACTO, telefono, envioExtracto);
         Assert.assertNotNull(response);

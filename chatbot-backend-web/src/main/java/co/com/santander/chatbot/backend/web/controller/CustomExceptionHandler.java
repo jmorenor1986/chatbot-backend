@@ -14,6 +14,15 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(MissingParameterException.class)
+    public final ResponseEntity<Object> handlerMissingParameterException(MissingParameterException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("Fallo en la comunicación, intente más tarde (falta parametro) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(6)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(ExtractoDataErrorException.class)
     public final ResponseEntity<Object> handlerExtractoDataErrorException(ExtractoDataErrorException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()

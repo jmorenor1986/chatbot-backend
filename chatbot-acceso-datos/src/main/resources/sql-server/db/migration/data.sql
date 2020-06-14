@@ -232,8 +232,12 @@ INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VAL
 --
 --Falta esto en produccion.
 ---
+delete from id_documentos ;
+
 ALTER TABLE id_documentos
-ADD fecha TIMESTAMP NOT NULL;
+DROP COLUMN fecha;
+
+ALTER TABLE id_documentos ADD fecha datetime ;
 --
 insert into BDPremierPrueba_0306.WhatsAppWS.pse_param(id,id_banco,tipo_credito,url)
 values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328'),

@@ -80,4 +80,11 @@ public class CustomExceptionHandlerTest {
         Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
+    @Test
+    public void testHandlerMissingParameterException(){
+        MissingParameterException missingParameterException = new MissingParameterException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerMissingParameterException(missingParameterException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+
 }
