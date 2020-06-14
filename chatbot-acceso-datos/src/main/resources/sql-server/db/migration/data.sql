@@ -258,3 +258,7 @@ values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.co
 (nextval('pse_param_seq'), 297, 1, 'http://ur1')      ,
 (nextval('pse_param_seq'), 297, 2, 'http://ur1' )     ,
 (nextval('pse_param_seq'), 297, 3, 'http://ur1');
+
+INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VALUES
+(NEXT VALUE FOR parametros_app_seq, 'COPIA_ENVIO_EXTRACTO' , 'elisabeth.becerra@samtel.co')
+;
