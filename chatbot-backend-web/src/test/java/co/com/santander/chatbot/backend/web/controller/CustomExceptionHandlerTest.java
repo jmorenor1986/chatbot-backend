@@ -66,4 +66,18 @@ public class CustomExceptionHandlerTest {
         Assert.assertEquals(200, result.getStatusCodeValue());
     }
 
+    @Test
+    public void testHandlerIdExtractoNotFound(){
+        IdExtractoNotFoundException idExtractoNotFoundException = new IdExtractoNotFoundException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerIdExtractoNotFound(idExtractoNotFoundException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+
+    @Test
+    public void testHandlerExtractoDataErrorException(){
+        ExtractoDataErrorException extractoDataErrorException = new ExtractoDataErrorException("test");
+        ResponseEntity<?> result = customExceptionHandler.handlerExtractoDataErrorException(extractoDataErrorException, null);
+        Assert.assertEquals(200, result.getStatusCodeValue());
+    }
+
 }

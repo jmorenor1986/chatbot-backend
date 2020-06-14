@@ -54,7 +54,7 @@ public class EnvioExtractoController {
     }
 
     @PostMapping("/enviar-extracto")
-    public ResponseEntity<ResponseEnvioExtractoPayload> generateExtract(@RequestHeader("Authorization") String bearerToken, @RequestBody EnvioExtractoPayload envioExtracto){
+    public ResponseEntity<ResponseEnvioExtractoPayload> generateExtract(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody EnvioExtractoPayload envioExtracto){
         envioExtracto.setTelefono(mapperTelService.mapTelDigits(envioExtracto.getTelefono()));
         validateClienteService.validateClient(bearerToken, envioExtracto.getTelefono());
         Optional<ResponseEnvioExtractoPayload> response = envioExtractoService.envioExtracto(bearerToken, ServiciosEnum.SERVICIO_ENVIO_EXTRACTO, envioExtracto.getTelefono(), envioExtracto);

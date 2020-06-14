@@ -68,7 +68,7 @@ public class EnvioExtractoServiceImplTest {
                 .numeroVerificador("3229039988")
                 .numeroCreditoOfuscado("xxxxx04018")
                 .numeroVerificador("lsRvIEZpA2UoKQy9vxXh3JYav2v6djZo7iw=")
-                .idDocumentos(12345678)
+                .idExtracto(12345678)
                 .build();
         //Mockito para el servicio de buscar cliente
         ResponseEntity<ClienteViewPayload> responseClienteMockito = new ResponseEntity<>(ClienteViewPayload.builder()

@@ -48,7 +48,7 @@ public class EnvioExtractoPayload {
             dataType = "Integer"
     )
     @MandatoryConstraint(message = "Identificador único del documento", zeroIsValid = false)
-    private Integer idDocumentos;
+    private Integer idExtracto;
     @ApiModelProperty(
             notes = "Mes del Extracto a solicitar",
             name = "mes",
@@ -61,6 +61,12 @@ public class EnvioExtractoPayload {
             name = "vigencia",
             dataType = "Integer"
     )
-    @MandatoryConstraint(message = "Mes Extracto", zeroIsValid = false)
+    @MandatoryConstraint(message = "Vigencia", zeroIsValid = false)
     private Integer vigencia;
+
+    private String infoUno;
+
+    private String  infoDos;
+
+    private String infoTres;
 }

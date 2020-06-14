@@ -36,7 +36,7 @@ public class IdDocumentoController {
         if(response.isPresent()){
             return new ResponseEntity<>(mapper.map(response.get(), IdDocumentoPayload.class), HttpStatus.OK);
         }
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 }

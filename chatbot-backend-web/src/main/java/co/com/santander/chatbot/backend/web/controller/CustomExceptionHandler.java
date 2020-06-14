@@ -14,6 +14,25 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
 
+    @ExceptionHandler(ExtractoDataErrorException.class)
+    public final ResponseEntity<Object> handlerExtractoDataErrorException(ExtractoDataErrorException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("No hay información de credito (no concuerda información solicitada con la del documento) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(2)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
+
+    @ExceptionHandler(IdExtractoNotFoundException.class)
+    public final ResponseEntity<Object> handlerIdExtractoNotFound(IdExtractoNotFoundException ex, WebRequest request) {
+        return new ResponseEntity<>(ResponsePayload.builder()
+                .descripcionRespuesta("No hay información de credito (id extracto no existe) (".concat(ex.getMessage()).concat(")"))
+                .idRespuesta(2)
+                .resultadoValidacion(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
+
     @ExceptionHandler(OnlyNumbersException.class)
     public final ResponseEntity<Object> handlerOnlyNumbersException(OnlyNumbersException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()

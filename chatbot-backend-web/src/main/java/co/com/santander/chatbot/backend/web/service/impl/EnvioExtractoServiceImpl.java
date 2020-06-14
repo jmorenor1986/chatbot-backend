@@ -13,6 +13,8 @@ import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumento
 import co.com.santander.chatbot.domain.payload.enviarextracto.*;
 import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import co.com.santander.chatbot.domain.payload.service.extracto.ResponseEnvioExtractoPayload;
+import co.com.santander.chatbot.domain.validators.exceptions.ExtractoDataErrorException;
+import co.com.santander.chatbot.domain.validators.exceptions.IdExtractoNotFoundException;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -77,7 +79,7 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
 
     private Optional<ResponseEnvioExtractoPayload> generarEnvioExtracto(EnvioExtractoPayload envioExtracto) {
         //Busco el documento
-        Optional<IdDocumentoPayload> idDocumento = getDocumentId(Long.valueOf(envioExtracto.getIdDocumentos()));
+        Optional<IdDocumentoPayload> idDocumento = getDocumentId(Long.valueOf(envioExtracto.getIdExtracto()));
         if (idDocumento.isPresent()) {
             Optional<EnvioDocumentoMailResponsePayload> envio = callService(idDocumento.get());
             if (envio.isPresent()) {
@@ -86,6 +88,19 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
             }
         }
         return Optional.empty();
+    }
+
+    private void validaDatosSolicitadosToDatosExtracto(IdDocumentoPayload idDocumentoPayload, EnvioExtractoPayload envioExtracto){
+        //Validamos la vigencia almacenada en la bd contra la solicitada en el servicio
+        Boolean validaMes = envioExtracto.getMes().equals(Integer.parseInt(idDocumentoPayload.getMes()));
+        if( Boolean.FALSE.equals(validaMes) ){
+            throw new ExtractoDataErrorException("mes");
+        }
+        Boolean validaVigencia = envioExtracto.getVigencia().equals(Integer.parseInt(idDocumentoPayload.getAnio()));
+        if( Boolean.FALSE.equals( validaVigencia )){
+            throw new ExtractoDataErrorException("mes");
+        }
+
     }
 
     private Optional<ResponseEnvioExtractoPayload> generarRespuesta(EnvioDocumentoMailResponsePayload respuesta) {
@@ -113,6 +128,8 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
         ResponseEntity<IdDocumentoPayload> response = idDocumentoClient.getDocumentById(getToken(), id);
         if (HttpStatus.OK.equals(response.getStatusCode())) {
             return Optional.of(response.getBody());
+        }else if(HttpStatus.NO_CONTENT.equals(response.getStatusCode())){
+            throw new IdExtractoNotFoundException(id.toString());
         }
         return Optional.empty();
     }
@@ -134,8 +151,11 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
                         .folder("")
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
-                        .mailPara(getClienteViewPayload().getEmail())
-                        .mailCC("servicioalcliente@santanderconsumer.co")
+                        .mailPara("jesus.sierra@samtel.co")
+                        .mailCC("elisabeth.becerra@samtel.co")
+                        //TODO CAMBIAR LOS CORREOS
+                        //.mailPara(getClienteViewPayload().getEmail())
+                        //.mailCC("servicioalcliente@santanderconsumer.co")
                         .build())
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> response = documentosClient.envioMailDocumento(getToken(), request);
