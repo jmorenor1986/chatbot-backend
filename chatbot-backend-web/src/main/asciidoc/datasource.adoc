@@ -1,0 +1,91 @@
+Creación Datasource wildfly Windows
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+* Para crear el datasource es necesario descargar el driver de la siguiente página:
+https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc/7.4.1.jre8
+
+* Cuando tenemos el driver (jar) se debe crear un archivo llamado module.xml con el siguiente contenido:
+
+[source,xml]
+-----------------
+<?xml version='1.0' encoding='UTF-8'?>
+
+<module xmlns="urn:jboss:module:1.1" name="com.mssql">
+    <resources>
+        <resource-root path="mssql-jdbc-7.4.1.jre8.jar"/>
+    </resources>
+    <dependencies>
+        <module name="javax.api"/>
+        <module name="javax.transaction.api"/>
+    </dependencies>
+</module>"
+-----------------
+* Estos dos archivos se deben ubicar en la siguiente ruta:
+
+image::images/ds1.PNG[width=80%]
+
+* Luego se debe crear el driver JDBC en configuration-> Subsystems -> Datasources & Drivers -> JDBC Drivers
+
+image::images/ds3.PNG[width=80%]
+
+* Estos son los atributos que se deben configurar
+
+image::images/ds4.PNG[width=80%]
+
+* Para configurar el datasource se debe hacer clic en la siguiente ruta Subsystems -> Datasources & Drivers -> Datasources
+
+image::images/ds5.PNG[width=80%]
+
+* Se selecciona el template
+
+image::images/ds6.PNG[width=80%]
+
+* Se pone el nombre del datasource
+
+image::images/ds7.PNG[width=80%]
+
+* Seleccionar el driver
+
+image::images/ds8.PNG[width=80%]
+
+* Luego se pone los datos de conexión de la base de datos
+
+image::images/ds9.PNG[width=80%]
+
+* En esta sección se puede testear la conexión
+
+image::images/ds10.PNG[width=80%]
+
+* Se valida los datos de conexión
+
+image::images/ds11.PNG[width=80%]
+
+* Se valida que el datasource esta habilitado
+
+image::images/ds12.PNG[width=80%]
+
+
+Creación Datasource wildfly Linux
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Para crear el datasource es necesario descargar el driver de la siguiente página:
+https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc/7.4.1.jre8
+
+* Luego se debe ejecutar el siguiente comando donde esté el archivo  jboss-cli.sh para crear el módulo
+
+[source,python]
+-----------------
+module add --name=com.mssql--resources=/tmp/mssql-jdbc-7.4.1.jre8.jar --dependencies=javax.api,javax.transaction.api
+-----------------
+* Para crear el Driver
+
+[source,python]
+-----------------
+/subsystem=datasources/jdbc-driver=mssql:add(driver-name="mssql",driver-module-name="com.mssql",driver-class-name=com.microsoft.sqlserver.jdbc.SQLServerDriver)
+-----------------
+
+* Para crear el datasource
+
+[source,python]
+-----------------
+data-source add --jndi-name=java:/santander --name=santander --connection-url=jdbc:sqlserver://sqlserversantander.database.windows.net:1433;DatabaseName=chatbot --driver-name=mssql --user-name=user --password=password
+-----------------
