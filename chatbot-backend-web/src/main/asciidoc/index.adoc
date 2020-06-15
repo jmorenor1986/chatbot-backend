@@ -120,6 +120,8 @@ Ejecuta el siguiente comando *_mvn clean install_* (Se debe tener en cuenta que 
 <home_proyect>/chatbot-backend/chatbot-backend-web/target/chatbot-backend-web.war
 ====
 
+include::datasource.adoc[]
+
 * *Despliegue de aplicaciones*
 
 Se debe acceder al administrador de Wildfly con la seguiente url:
