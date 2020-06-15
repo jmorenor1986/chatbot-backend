@@ -6,6 +6,7 @@ import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.ClientePayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.ResponsePayload;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("v1/validarCliente")
+@Api(value = "Validación de autenticidad del cliente contra el banco", tags = {"V1: Generá validación del cliente por medio del número de telefono movil y sus últimos 4 digitos de la cedula"})
 public class ValidarClienteController {
 
     private final ClienteService clienteService;
