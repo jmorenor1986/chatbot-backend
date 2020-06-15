@@ -21,7 +21,7 @@ public class ConsultaExtractoPayload {
             name = "Telefono",
             dataType = "String",
             required = true,
-            allowableValues = "Debe contener 10 a 12 caracteres"
+            allowableValues = "{Debe contener 10 a 12 caracteres} {Solo acepta datos númericos}"
     )
     @OnlyNumbers(message = "telefono")
     @MandatoryConstraint(message = "telefono")
@@ -39,7 +39,8 @@ public class ConsultaExtractoPayload {
             notes = "Número verificador obtenido del servicio (Obtener creditos)",
             name = "Número verficador",
             dataType = "String",
-            required = true
+            required = true,
+            allowableValues = "{Número validado por algoritmo de desencripción}"
     )
     @InvalidNumVerificador(message = "Número verificador")
     @MandatoryConstraint(message = "Número Verificador")

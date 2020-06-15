@@ -19,7 +19,7 @@ public class EnvioExtractoPayload {
             name = "Telefono",
             dataType = "String",
             required = true,
-            allowableValues = "Debe contener 10 a 12 caracteres"
+            allowableValues = "{Debe contener 10 a 12 caracteres} {Solo acepta datos númericos}"
     )
     @OnlyNumbers(message = "telefono")
     @MandatoryConstraint(message = "telefono")
@@ -27,7 +27,7 @@ public class EnvioExtractoPayload {
     private String telefono;
     @ApiModelProperty(
             notes = "Número de credito en el cual solo se exponen los ultimos 5 digitos",
-            name = "Numero credito ofuscado",
+            name = "Número credito ofuscado",
             dataType = "String",
             required = true
     )
@@ -43,7 +43,7 @@ public class EnvioExtractoPayload {
     @MandatoryConstraint(message = "Número Verificador")
     private String numeroVerificador;
     @ApiModelProperty(
-            notes = "Idetificador unico del documento",
+            notes = "Idetificador único del documento",
             name = "Id Documento",
             dataType = "Integer"
     )

@@ -16,7 +16,7 @@ public class EnlacePsePayload {
             name = "Telefono",
             dataType = "String",
             required = true,
-            allowableValues = "Debe contener 10 a 12 caracteres"
+            allowableValues = "{Debe contener 10 a 12 caracteres} {Solo acepta datos númericos}"
     )
     @OnlyNumbers(message = "telefono")
     @MandatoryConstraint(message = "telefono")
@@ -24,7 +24,7 @@ public class EnlacePsePayload {
     private String telefono;
     @ApiModelProperty(
             notes = "Número de credito en el cual solo se exponen los ultimos 5 digitos",
-            name = "Numero credito ofuscado",
+            name = "Número credito ofuscado",
             dataType = "String",
             required = true
     )
@@ -34,7 +34,8 @@ public class EnlacePsePayload {
             notes = "Número verificador obtenido del servicio (Obtener creditos)",
             name = "Número verficador",
             dataType = "String",
-            required = true
+            required = true,
+            allowableValues = "{Numero validado por algoritmo de desencripción}"
     )
     @InvalidNumVerificador(message = "Número verificador")
     @MandatoryConstraint(message = "Número Verificador")

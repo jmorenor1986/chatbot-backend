@@ -14,7 +14,7 @@ public class UsuarioDto {
             name = "Correo",
             dataType = "String",
             required = true,
-            allowableValues = "Formato correo example@mail.com"
+            allowableValues = "{Formato correo example@mail.com}"
     )
     @MailConstraint(message = "Correo")
     @MandatoryConstraint(message = "Correo")

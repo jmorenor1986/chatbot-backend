@@ -9,6 +9,9 @@ import co.com.santander.chatbot.domain.payload.service.certificados.GenericCerti
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoPayload;
 import co.com.santander.chatbot.domain.payload.service.certificados.InformacionCreditoResponsePayload;
 import co.com.santander.chatbot.domain.validators.exceptions.ValidateStateCertificateException;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +22,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/obtener-certificados")
+@Api(value = "Generación de certificados ofrecidos", tags = {"V1: {Paz y Salvo} {informacion de credito} {autorizacion debito automatico} {certificación declaración de renta}"})
 public class GenerarCertificadosController {
     private final GenerarCertificadosService generarCertificadosService;
     private final ProxyInformacionCredito proxyInformacionCredito;
@@ -33,7 +37,11 @@ public class GenerarCertificadosController {
         this.validateClienteService = validateClienteService;
     }
 
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping(value = "/paz-y-salvo")
     public ResponseEntity<InformacionCreditoResponsePayload> generarCertificadoPazYSalvo(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload genericCertificatePayload) {
         genericCertificatePayload.setTelefono(mapperTelService.mapTelDigits(genericCertificatePayload.getTelefono()));
@@ -43,7 +51,11 @@ public class GenerarCertificadosController {
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos al consultar el paz y salvo",0L);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping(value = "/informacion-credito")
     public ResponseEntity<InformacionCreditoResponsePayload> informacionCredito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody InformacionCreditoPayload informacionCreditoPayload) {
         informacionCreditoPayload.setTelefono(mapperTelService.mapTelDigits(informacionCreditoPayload.getTelefono()));
@@ -53,7 +65,11 @@ public class GenerarCertificadosController {
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos en informacion de credito", 0L);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping(value = "/autorizacion-debito")
     public ResponseEntity<InformacionCreditoResponsePayload> autorizacionDebito(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload debitoPayload) {
         debitoPayload.setTelefono(mapperTelService.mapTelDigits(debitoPayload.getTelefono()));
@@ -63,7 +79,11 @@ public class GenerarCertificadosController {
             return new ResponseEntity<>(result.get(), HttpStatus.OK);
         throw new ValidateStateCertificateException("Error al consultar los datos en autorizacion de debito automatico",0L);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping(value = "/certificacion-declaracion-renta")
     public ResponseEntity<InformacionCreditoResponsePayload> certificacionDeclaracionRenta(@RequestHeader("Authorization") String bearerToken, @Valid @RequestBody GenericCertificatePayload declaracionRentaPayload) {
         declaracionRentaPayload.setTelefono(mapperTelService.mapTelDigits(declaracionRentaPayload.getTelefono()));

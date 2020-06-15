@@ -498,5 +498,3 @@ que se permitirá una nueva solicitud que ha sido procesada exitosamente
 4+| *Relaciones:* N/A
 4+| *Descripción:* Tabla en la cual se almacenaran temporalmente la información de los extractos consultados por computec, esto para no exponer información sensible del cliente
 |=======================================================
-
-

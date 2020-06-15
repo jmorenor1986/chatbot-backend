@@ -52,7 +52,11 @@ public class EnvioExtractoController {
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "{Operacion exitosa}, {Error formato telefono}, {Error campo obligatorio}, {Error Número de verificador}"),
+            @ApiResponse(code = 401, message = "{No autorizado para este recurso}"),
+            @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
+    })
     @PostMapping("/enviar-extracto")
     public ResponseEntity<ResponseEnvioExtractoPayload> generateExtract(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody EnvioExtractoPayload envioExtracto){
         envioExtracto.setTelefono(mapperTelService.mapTelDigits(envioExtracto.getTelefono()));
