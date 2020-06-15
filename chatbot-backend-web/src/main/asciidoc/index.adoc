@@ -446,4 +446,57 @@ que se permitirá una nueva solicitud que ha sido procesada exitosamente
 4+| *Descripción:* Tabla en la cual se almacenaran las Urls de pago para los creditos
 |=======================================================
 
+.Id documentos
+[cols="2,1,1,4", options="header"]
+|=======================================================
+| *_Campo_*
+| *_Tamaño_*
+| *_Tipo dato_*
+| *_Descripcion_*
+
+| id
+| 9
+| numeric
+| Llave primaria de la tabla
+
+| id_documentos
+| 2147483647
+| text
+| Id del documento retornado por Computec y con el cual se realizará el envío del documento al correo electronico
+
+| anio
+| 5
+| varchar
+| Año al cual pertence el documento
+
+| mes
+| 5
+| varchar
+| Mes al cual pertenece el documento
+
+| fecha_ini
+| 20
+| varchar
+| Inidica la fecha inicial con la cual se consulto la lista de documentos que tiene el usuario
+
+| fecha_fin
+| 20
+| varchar
+| Inidica la fecha final con la cual se consulto la lista de documentos que tiene el usuario
+
+| producto
+| 50
+| varchar
+| Indica el producto con el cual tiene tipificado computec el credito
+
+| fecha
+| 8
+| datetiem
+| Indica fecha y hora en la cual se realizó la transacción contra Computec
+
+4+| *Campos clave:* id
+4+| *Relaciones:* N/A
+4+| *Descripción:* Tabla en la cual se almacenaran temporalmente la información de los extractos consultados por computec, esto para no exponer información sensible del cliente
+|=======================================================
+
 
