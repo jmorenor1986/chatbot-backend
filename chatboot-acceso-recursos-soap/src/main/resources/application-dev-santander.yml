@@ -7,3 +7,5 @@ services:
   producto: VEHICULO
   cliente: SANTANDERCOL
 
+jwt:
+  secret: a6e21884876f43819523c31033fa697e

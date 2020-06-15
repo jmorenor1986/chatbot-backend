@@ -17,10 +17,14 @@ import java.util.stream.Collectors;
 
 public class JwtFilter extends OncePerRequestFilter {
 
-    private static final String secret = "a6e21884876f43819523c31033fa697e";
+    private final String seedToken;
 
     private static final String HEADER = "Authorization";
     private static final String PREFIX = "Bearer ";
+
+    public JwtFilter(String seedToken) {
+        this.seedToken = seedToken;
+    }
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
@@ -44,7 +48,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String jwtToken = request.getHeader(HEADER).replace(PREFIX, "");
         return Jwts
                 .parser()
-                .setSigningKey(TextCodec.BASE64.encode(secret))
+                .setSigningKey(TextCodec.BASE64.encode(seedToken))
                 .parseClaimsJws(jwtToken)
                 .getBody();
     }

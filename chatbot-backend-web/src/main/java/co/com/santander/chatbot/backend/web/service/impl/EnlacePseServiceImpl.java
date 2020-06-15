@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.PseParamClient;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
+import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
 import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
@@ -10,6 +11,7 @@ import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.PseParamPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
+import co.com.santander.chatbot.domain.validators.exceptions.NonExistentCustomerException;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
@@ -29,6 +31,9 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     @Getter
     @Setter
     private String token;
+    @Getter
+    @Setter
+    private ClienteViewPayload clienteViewPayload;
 
     @Autowired
     public EnlacePseServiceImpl(ClienteClient clienteClient, PseParamClient pseParamClient) {
@@ -40,31 +45,38 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     @BussinessLog
     public Optional<ResponseEnlacePsePayload> getEnlacePse(String token, ServiciosEnum serviciosEnum, String telefono, String numcreditoEnc) {
         setToken(token);
-        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(token, telefono, SecurityUtilities.desencriptarCatch(numcreditoEnc));
-        return generateInfo(response);
+        Boolean validaCliente = findCliente(telefono, SecurityUtilities.desencriptarCatch(numcreditoEnc));
+        if (Boolean.TRUE.equals(validaCliente)) {
+            return generateInfo();
+        }
+        return Optional.empty();
     }
 
-    private Optional<ResponseEnlacePsePayload> generateInfo(ResponseEntity<ClienteViewPayload> response) {
+    private Boolean findCliente(String telefono, String numCredito) {
+        ResponseEntity<ClienteViewPayload> response = clienteClient.getClientByTelefonoAndNumCredito(getToken(), telefono, numCredito);
         if (HttpStatus.OK.equals(response.getStatusCode())) {
-            Optional<String> linkPse = validaBancoEnlacePse(Long.valueOf(response.getBody().getIdBanco()), response.getBody().getTipoCredito());
-            if (linkPse.isPresent()) {
-                return Optional.of(
-                        ResponseEnlacePsePayload.builder()
-                                .resultadoOperacion("true")
-                                .idRespuesta("0")
-                                .tipoCredito(response.getBody().getTipoCredito().name())
-                                .valorPagar(response.getBody().getValorPagar().toString())
-                                .valorMora(response.getBody().getValorMora().toString())
-                                .enlace(linkPse.get())
-                                .descripcionRespuesta("Servicio consumido de forma exitosa")
-                                .build());
-            } else {
-                return generateFailedResponse("Banco no existente");
-            }
-        } else if (HttpStatus.NO_CONTENT.equals(response.getStatusCode())) {
-            return generateFailedResponse("No existe informacion");
+            setClienteViewPayload(response.getBody());
+            return Boolean.TRUE;
+        }
+        throw new NonExistentCustomerException("Telefono: " + telefono + " Numero credito: " + StringUtilities.ofuscarCredito(numCredito));
+    }
+
+    private Optional<ResponseEnlacePsePayload> generateInfo() {
+        Optional<String> linkPse = validaBancoEnlacePse(Long.valueOf(getClienteViewPayload().getIdBanco())
+                , getClienteViewPayload().getTipoCredito());
+        if (linkPse.isPresent()) {
+            return Optional.of(
+                    ResponseEnlacePsePayload.builder()
+                            .resultadoOperacion("true")
+                            .idRespuesta("0")
+                            .tipoCredito(getClienteViewPayload().getTipoCredito().ordinal() +"")
+                            .valorPagar(getClienteViewPayload().getValorPagar().toString())
+                            .valorMora(getClienteViewPayload().getValorMora().toString())
+                            .enlace(linkPse.get())
+                            .descripcionRespuesta("Servicio consumido de forma exitosa")
+                            .build());
         } else {
-            return generateFailedResponse("Error de negocio");
+            return generateFailedResponse("No hay información de credito ( No existe link para su credito )");
         }
     }
 

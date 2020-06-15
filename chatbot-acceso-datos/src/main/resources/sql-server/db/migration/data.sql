@@ -105,6 +105,7 @@ CREATE TABLE BDPremierPrueba_0306.WhatsAppWS.id_documentos
     fecha_ini          varchar(20)       NOT NULL,
     fecha_fin          varchar(20)       NOT NULL,
     producto           varchar(50)       NOT NULL,
+    fecha              datetime                  ,
     PRIMARY KEY (id)
 );
 
@@ -228,37 +229,18 @@ INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VAL
 (NEXT VALUE FOR parametros_app_seq, 'MESES_EXTRACTO' , '6'),
 (NEXT VALUE FOR parametros_app_seq,'DIAS_MACHINELERNING' , '700'),
 (NEXT VALUE FOR parametros_app_seq,'PORCENTAJE_MACHINELERNING' , '70')
-;
---
---Falta esto en produccion.
----
-delete from id_documentos ;
-
-ALTER TABLE id_documentos
-DROP COLUMN fecha;
-
-ALTER TABLE id_documentos ADD fecha datetime ;
---
-insert into BDPremierPrueba_0306.WhatsAppWS.pse_param(id,id_banco,tipo_credito,url)
-values(nextval('pse_param_seq'), 9000, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328'),
-(nextval('pse_param_seq'), 9000, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328' )     ,
-(nextval('pse_param_seq'), 9000, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328')      ,
-(nextval('pse_param_seq'), 52, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
-(nextval('pse_param_seq'), 52, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/' )      ,
-(nextval('pse_param_seq'), 52, 3, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/')       ,
-
-(nextval('pse_param_seq'), 296, 1, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
-(nextval('pse_param_seq'), 296, 2, 'https://financierajuriscoop.com.co/oficina-virtual/' )     ,
-(nextval('pse_param_seq'), 296, 3, 'https://financierajuriscoop.com.co/oficina-virtual/')      ,
-
-(nextval('pse_param_seq'), 65, 1, 'http://ur1')       ,
-(nextval('pse_param_seq'), 65, 2, 'http://ur1' )      ,
-(nextval('pse_param_seq'), 65, 3, 'http://ur1')       ,
-
-(nextval('pse_param_seq'), 297, 1, 'http://ur1')      ,
-(nextval('pse_param_seq'), 297, 2, 'http://ur1' )     ,
-(nextval('pse_param_seq'), 297, 3, 'http://ur1');
-
-INSERT INTO BDPremierPrueba_0306.WhatsAppWS.parametros_app(id, clave, valor) VALUES
 (NEXT VALUE FOR parametros_app_seq, 'COPIA_ENVIO_EXTRACTO' , 'elisabeth.becerra@samtel.co')
 ;
+
+--
+insert into pse_param(id,id_banco,tipo_credito,url)
+values(NEXT VALUE FOR pse_param_seq, 1, 2, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328'),
+(NEXT VALUE FOR pse_param_seq, 1, 1, 'https://www.pagosvirtualesavvillas.com.co/personal/pagos/'),
+(NEXT VALUE FOR pse_param_seq, 2, 1, 'https://financierajuriscoop.com.co/oficina-virtual/'),
+(NEXT VALUE FOR pse_param_seq, 3, 1, 'www.pagosvirtualesavvillas.com.co');
+-- Banco Santander(1) Tipo Credito Consumo (2)
+-- Banco Santander(1) Tipo Credito Vehiculo (1)
+-- Juriscop(2) Tipo Credito Vehiculo (1)
+-- Av Villas(2) Tipo Credito Vehiculo (1)
+
+

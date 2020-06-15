@@ -14,7 +14,6 @@ import co.com.santander.chatbot.domain.payload.accesodatos.documento.IdDocumento
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.response.ResponseExtractosDisponibles;
 import co.com.santander.chatbot.domain.payload.service.extracto.ConsultaExtractoPayload;
-import co.com.santander.chatbot.domain.payload.service.extracto.EnvioExtractoPayload;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.junit.Assert;

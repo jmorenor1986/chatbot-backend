@@ -15,15 +15,22 @@ public class OnlyNumbersValidator implements ConstraintValidator<OnlyNumbers, Ob
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
-        if(value instanceof String){
-            try {
-                Long.parseLong((String) value);
-                return true;
-            }catch (Exception e){}
-        }else if(value instanceof Long || value instanceof Integer){
+        if(value instanceof Long ||
+                value instanceof Integer ||
+                ( value instanceof String && validateString( (String) value) ) ){
             return true;
         }
         throw new OnlyNumbersException(message);
+    }
+
+    public Boolean validateString(String value){
+        try {
+            Long.parseLong((String) value);
+            return Boolean.TRUE;
+        }catch (Exception e){
+            log.severe(e.getMessage());
+        }
+        return Boolean.FALSE;
     }
 
     @Override

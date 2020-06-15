@@ -8,3 +8,6 @@ spring:
         default_schema: whatsappws
     show-sql: false
     generate-ddl: false
+
+jwt:
+  secret: a6e21884876f43819523c31033fa697e

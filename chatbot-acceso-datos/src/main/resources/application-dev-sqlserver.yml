@@ -31,4 +31,8 @@ logging:
           descriptor:
             sql: trace
 
+jwt:
+  secret: a6e21884876f43819523c31033fa697e
+
+
 

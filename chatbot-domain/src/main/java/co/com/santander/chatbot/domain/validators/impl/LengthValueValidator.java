@@ -37,9 +37,9 @@ public class LengthValueValidator implements ConstraintValidator<LengthValues, O
     private Boolean validaTamanioString(String valor){
         int tamanio = String.valueOf(valor).length();
         if (tamanio >= min && tamanio <= max){
-            return true;
+            return Boolean.TRUE;
         }
-        return false;
+        return Boolean.FALSE;
     }
 
     @Override

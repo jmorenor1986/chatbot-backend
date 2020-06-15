@@ -8,6 +8,7 @@ import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.PseParamPayload;
 import co.com.santander.chatbot.domain.payload.accesodatos.cliente.ClienteViewPayload;
 import co.com.santander.chatbot.domain.payload.service.enlacePse.ResponseEnlacePsePayload;
+import co.com.santander.chatbot.domain.validators.exceptions.NonExistentCustomerException;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,7 +77,7 @@ public class EnlacePseServiceImplTest {
 
     }
 
-    @Test
+    @Test(expected = NonExistentCustomerException.class)
     public void testGetEnlacePseFAILED_DES_ENCRIPT(){
         String token = "1";
         String telefono = "3005632015";
@@ -87,9 +88,6 @@ public class EnlacePseServiceImplTest {
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, "") ).thenReturn(response);
 
         Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token,ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
-        Assert.assertNotNull(respuestaServicio);
-        Assert.assertTrue(respuestaServicio.isPresent());
-        Assert.assertNotNull(respuestaServicio.get());
     }
 
     @Test
@@ -132,19 +130,16 @@ public class EnlacePseServiceImplTest {
 
     }
 
-    @Test
+    @Test(expected = NonExistentCustomerException.class)
     public void testGetEnlacePseFAILED(){
         String token = "1";
         String telefono = "3005632015";
         String numCredito = "6000000461";
         String numCreditoEnc = "lsRvIEZpB2EvIOeT";
-        ResponseEntity<ClienteViewPayload> response = new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        ResponseEntity<ClienteViewPayload> response = new ResponseEntity<>(HttpStatus.NO_CONTENT);
 
         Mockito.when( clienteClient.getClientByTelefonoAndNumCredito(token,telefono, "") ).thenReturn(response);
 
         Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
-        Assert.assertNotNull(respuestaServicio);
-        Assert.assertTrue(respuestaServicio.isPresent());
-        Assert.assertNotNull(respuestaServicio.get());
     }
 }
