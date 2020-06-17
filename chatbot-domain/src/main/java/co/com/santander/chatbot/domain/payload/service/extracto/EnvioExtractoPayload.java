@@ -54,7 +54,7 @@ public class EnvioExtractoPayload {
             name = "mes",
             dataType = "Integer"
     )
-    @MandatoryConstraint(message = "Mes Extracto", zeroIsValid = false)
+    @MandatoryConstraint(message = "Mes Extracto")
     private Integer mes;
     @ApiModelProperty(
             notes = "Año del cual se desea enviar el extracto",

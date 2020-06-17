@@ -22,7 +22,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("v1/extractos-cliente")
-@Api(value = "Acceso a la consulta y envío de extratos de vehiculo", tags = {"V1: Consulta por meses de extractos por cliente"})
+@Api(value = "Acceso a la consulta y envío de extratos de vehiculo", tags = {"V1: Consulta y Envío por meses de extractos disponibles para el cliente"})
 public class EnvioExtractoController {
 
     private final ConsultaExtractoService consultaExtractoService;

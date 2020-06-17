@@ -15,6 +15,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.Optional;
 
 @RestController
@@ -39,7 +40,7 @@ public class EnlacePseController {
             @ApiResponse(code = 403, message = "{Peticion Sin token}, {Token expirado}")
     })
     @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<ResponseEnlacePsePayload> getEnlacePse(@RequestHeader("Authorization") String bearerToken, @RequestBody EnlacePsePayload enlacePsePayload){
+    public ResponseEntity<ResponseEnlacePsePayload> getEnlacePse(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody EnlacePsePayload enlacePsePayload){
         enlacePsePayload.setTelefono(mapperTelService.mapTelDigits(enlacePsePayload.getTelefono()));
         validateClienteService.validateClient(bearerToken, enlacePsePayload.getTelefono());
         Optional<ResponseEnlacePsePayload> response = enlacePseService.getEnlacePse(bearerToken, ServiciosEnum.SERVICIO_ENLACE_PSE,enlacePsePayload.getTelefono(), enlacePsePayload.getNumeroVerificador());
