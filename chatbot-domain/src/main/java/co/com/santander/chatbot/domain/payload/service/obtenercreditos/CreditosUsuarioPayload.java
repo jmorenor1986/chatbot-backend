@@ -27,10 +27,10 @@ public class CreditosUsuarioPayload {
             name = "Tipo Operacion Usuario",
             dataType = "String",
             required = true,
-            allowableValues = "{0:Todos los servicios}{1: Información de crédito},{2: Enviar extracto}, {3: Enviar certificacion saldo}, {4: Enviar certificación Paz y Salvo}, {5: Enviar autorización débito}, {6: Enviar declaracion de renta}"
+            allowableValues = "{0:Todos los servicios}{1: Información de crédito},{2: Enviar extracto}, {3: Enviar certificacion saldo}, {4: Enviar certificación Paz y Salvo}, {5: Enviar autorización débito}, {6: Enviar declaracion de renta}, {7: Link PSE}"
     )
     @MandatoryConstraint(message = "tipo operacion")
-    @AllowedValues(message = "tipo operacion", longValues = {0L,1L,2L,3L,4L,5L,6L})
+    @AllowedValues(message = "tipo operacion", longValues = {0L,1L,2L,3L,4L,5L,6L,7L})
     private Long tipoOperacion;
     private String infoUno;
     private String infoDos;
