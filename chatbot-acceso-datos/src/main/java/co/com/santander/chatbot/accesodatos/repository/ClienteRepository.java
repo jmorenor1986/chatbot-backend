@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
-    Cliente consultarXCedulaYTelefono(String telefono, String cedula);
+    List<Cliente> consultarXCedulaYTelefono(String telefono, String cedula);
 
     List<Cliente> findByTelefono(String telefono);
 

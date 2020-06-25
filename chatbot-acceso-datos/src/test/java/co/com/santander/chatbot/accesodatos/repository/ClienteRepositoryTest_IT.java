@@ -23,13 +23,13 @@ public class ClienteRepositoryTest_IT {
     @Test
     public void testConsultaUsuarioSuccess() {
         List<Cliente> listaCliente = clienteRepository.findAll();
-        Cliente result = clienteRepository.consultarXCedulaYTelefono("3005632010", "%9066");
+        List<Cliente> result = clienteRepository.consultarXCedulaYTelefono("3005632010", "%9066");
         Assert.assertNotNull(result);
     }
 
     @Test
     public void testConsultarUsuarioNotExist() {
-        Cliente result = clienteRepository.consultarXCedulaYTelefono("3005632010", "5270");
+        List<Cliente> result = clienteRepository.consultarXCedulaYTelefono("3005632010", "5270");
         Assert.assertNull(result);
     }
     @Test
