@@ -1,11 +1,16 @@
+server:
+  servlet:
+    context-path: /chatbot-acceso-rescursos-soap
+  port: 5004
+
 services:
   getToken: https://felec.computec.com/WSSAML/ComputecSTSService/ComputecSTSService.wsdl
-  user: pruebasantander
-  password: s@nTAzd38!
-  documentos: https://felec.computec.com/WSFelecJAXWSP/WsFelecService/WsFelecService.wsdl
-  usuarioRemoto: 122232
-  producto: 123121
-  cliente: 1231243
+  user: bancosantander
+  password: 8@Zc024Z7n!#
+  documentos: https://felec.computec.com/WSFelecJAXWS/WsFelecService/WsFelecService.wsdl
+  usuarioRemoto: santander.
+  producto: VEHICULO
+  cliente: SANTANDERCOL
 
 jwt:
   secret: a6e21884876f43819523c31033fa697e

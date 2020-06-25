@@ -9,6 +9,7 @@ import co.com.santander.accesorecursos.soap.resources.documentos.*;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentoPayload;
 import co.com.santander.chatbot.domain.payload.enviarextracto.ConsultarDocumentosPayloadResponse;
 import co.com.santander.chatbot.domain.payload.enviarextracto.EnviarMailDocumentoPayload;
+import lombok.extern.java.Log;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +19,7 @@ import javax.xml.ws.handler.MessageContext;
 import java.util.*;
 
 @Service
+@Log
 public class DocumentosClienteImpl implements DocumentosCliente {
     private final ModelMapper getMapper;
     private final TokenCliente tokenCliente;
@@ -47,10 +49,14 @@ public class DocumentosClienteImpl implements DocumentosCliente {
             if(Objects.isNull(consultarDocumentoPayload.getProducto())){
                 return new ArrayList<>();
             }
-            resultConsultarDocs = portConsultaDocumentos.consultarDocumentos(getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class)
-                    , setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave()));
+            BeanDatosCliente beanDatosCliente = setDatosUsuarioBean(consultarDocumentoPayload.getProducto().name(), consultarDocumentoPayload.getValorllave());
+            ConsultaDocDTO consultaDocDTO = getMapper.map(consultarDocumentoPayload, ConsultaDocDTO.class);
+
+
+            resultConsultarDocs = portConsultaDocumentos.consultarDocumentos( consultaDocDTO, beanDatosCliente);
             return setListResponseConsultaDocumentos(resultConsultarDocs);
         } catch (WSBusinessRuleException | WSSystemException e) {
+            log.severe(e.getMessage());
             throw new BusinessException(e.getMessage());
         }
     }
