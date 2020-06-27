@@ -39,7 +39,6 @@ public class TerminosCondicionesController {
     @PostMapping("/")
     public ResponseEntity<TerminosCondicionesPayload> save(@RequestHeader("Authorization") String bearerToken,@Valid @RequestBody TerminosCondicionesPayload terminosCondiciones){
         terminosCondiciones.setTelefono(mapperTelService.mapTelDigits(terminosCondiciones.getTelefono()));
-        validateClienteService.validateClient(bearerToken, terminosCondiciones.getTelefono());
         Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save(bearerToken, ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,terminosCondiciones.getTelefono().toString(), terminosCondiciones);
         if(response.isPresent()){
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
