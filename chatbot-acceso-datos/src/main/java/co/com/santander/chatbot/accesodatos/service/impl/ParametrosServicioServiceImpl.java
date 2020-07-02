@@ -30,13 +30,13 @@ public class ParametrosServicioServiceImpl implements ParametrosServicioService 
         Boolean valida = validarHoraSolicitud(fecha, new Date(), resultRepository.get(0).getTiempoIntentos());
         if (Boolean.TRUE.equals(valida)) {
             return ResponsePayload.builder()
-                    .resultadoEnvio(Boolean.TRUE)
+                    .resultado(Boolean.TRUE)
                     .idRespuesta(0)
                     .descripcionRespuesta("Puede realizar la solicitud")
                     .build();
         }else{
             return ResponsePayload.builder()
-                    .resultadoEnvio(Boolean.FALSE)
+                    .resultado(Boolean.FALSE)
                     .idRespuesta(1)
                     .descripcionRespuesta("No puede realizar la solicitud de nuevo tiene una pendiente de procesar")
                     .build();

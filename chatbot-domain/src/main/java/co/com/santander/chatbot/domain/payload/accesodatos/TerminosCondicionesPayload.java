@@ -17,6 +17,8 @@ import java.util.Date;
 @AllArgsConstructor @NoArgsConstructor
 public class TerminosCondicionesPayload {
 
+    private Boolean resultado;
+
     private Long id;
     @ApiModelProperty(
             notes = "Número de telefono del cliente",

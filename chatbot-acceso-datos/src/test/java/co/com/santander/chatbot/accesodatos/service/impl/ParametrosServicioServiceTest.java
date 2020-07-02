@@ -48,7 +48,7 @@ public class ParametrosServicioServiceTest {
         Mockito.doReturn(parametrosServicioList).when(parametrosServicioRepository).findByNameService(Mockito.any());
         ResponsePayload respuesta = parametrosServicioService.validarSolicitud(CANAL, ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage(), date);
         Assert.assertNotNull(respuesta);
-        Assert.assertEquals(Boolean.TRUE, respuesta.getResultadoEnvio());
+        Assert.assertEquals(Boolean.TRUE, respuesta.getResultado());
     }
 
     @Test(expected = ValidateStateCertificateException.class)
@@ -87,7 +87,7 @@ public class ParametrosServicioServiceTest {
         Mockito.doReturn(parametrosServicioList).when(parametrosServicioRepository).findByNameService(Mockito.any());
         ResponsePayload respuesta = parametrosServicioService.validarSolicitud(CANAL, ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage(), date);
         Assert.assertNotNull(respuesta);
-        Assert.assertEquals(Boolean.FALSE, respuesta.getResultadoEnvio());
+        Assert.assertEquals(Boolean.FALSE, respuesta.getResultado());
     }
 
     @Test

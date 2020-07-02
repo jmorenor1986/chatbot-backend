@@ -8,7 +8,7 @@ import lombok.Data;
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ResponsePayload {
-    private Boolean resultadoEnvio;
+    private Boolean resultado;
     private Integer idRespuesta;
     private Object descripcionRespuesta;
     private Long minutos;

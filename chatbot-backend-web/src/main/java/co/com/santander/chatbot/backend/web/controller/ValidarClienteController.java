@@ -47,7 +47,7 @@ public class ValidarClienteController {
         }else if(HttpStatus.NO_CONTENT.equals(response.getStatusCode())){
             ResponsePayload objResponse = ResponsePayload.builder()
                     .idRespuesta(0)
-                    .resultadoEnvio(Boolean.FALSE)
+                    .resultado(Boolean.FALSE)
                     .descripcionRespuesta("servicio consumido de forma exitosa")
                     .build();
             return new ResponseEntity<>(objResponse, HttpStatus.OK);

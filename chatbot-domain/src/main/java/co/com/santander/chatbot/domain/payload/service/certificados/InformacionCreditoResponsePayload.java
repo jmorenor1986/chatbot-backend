@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class InformacionCreditoResponsePayload {
 
-    private String resultadoEnvio;
+    private String resultado;
     private String emailOfuscado;
     private String tipoCredito;
     private String numeroCreditoOfuscado;

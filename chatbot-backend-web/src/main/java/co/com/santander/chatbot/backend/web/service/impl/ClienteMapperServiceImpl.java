@@ -50,6 +50,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
                     .numeroVerificador(creditoEncriptado)
                     .numeroCreditoOfuscado(StringUtilities.ofuscarCredito(clientes.getNumerCredito()))
                     .tipoCredito(Long.valueOf(clientes.getTipoCredito().ordinal()))
+                    .estado(clientes.getEstado())
                     .build();
         };
     }

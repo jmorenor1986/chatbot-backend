@@ -1,5 +1,6 @@
 package co.com.santander.chatbot.domain.payload.service.obtenercreditos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Data;
 
@@ -16,5 +17,7 @@ public class ResponseCreditosPayload {
     private String infoUnoR;
     private String infoDosR;
     private String infoTresR;
+    @JsonIgnore
+    private String estado;
 
 }

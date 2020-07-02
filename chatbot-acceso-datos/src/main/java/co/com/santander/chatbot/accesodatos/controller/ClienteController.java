@@ -36,12 +36,12 @@ public class ClienteController {
         Optional<Boolean> result = clienteService.consultarCliente(input.getTelefono(), input.getCedula());
         if (result.isPresent())
             return new ResponseEntity<>(ResponsePayload.builder()
-                    .resultadoEnvio(result.get())
+                    .resultado(result.get())
                     .idRespuesta(0)
                     .descripcionRespuesta(result.get().toString())
                     .build(), result.get().equals(Boolean.TRUE) ? HttpStatus.OK : HttpStatus.NO_CONTENT);
         return new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .idRespuesta(0)
                 .descripcionRespuesta("Error consultando el servicio")
                 .build(), HttpStatus.INTERNAL_SERVER_ERROR);

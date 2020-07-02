@@ -68,7 +68,7 @@ public class ValidarProcesoServiceImplTest {
                 .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
                 .fechaUltimaSolicitud(date)
                 .build())).thenReturn(new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK));
 
@@ -117,7 +117,7 @@ public class ValidarProcesoServiceImplTest {
                 .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
                 .fechaUltimaSolicitud(date)
                 .build())).thenReturn(new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK));
         Boolean result = Boolean.FALSE;
@@ -153,7 +153,7 @@ public class ValidarProcesoServiceImplTest {
                 .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
                 .fechaUltimaSolicitud(date)
                 .build())).thenReturn(new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK));
         ClienteViewPayload respuesta = ClienteViewPayload.builder()
@@ -202,7 +202,7 @@ public class ValidarProcesoServiceImplTest {
                 .servicio(ServiciosEnum.SERVICIO_PAZ_Y_SALVO.getMessage())
                 .fechaUltimaSolicitud(date)
                 .build())).thenReturn(new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK));
 
@@ -284,7 +284,7 @@ public class ValidarProcesoServiceImplTest {
         Mockito.doReturn(responseMock).when(infoWhatsAppWSClient).validateExistingProcess(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
         ResponseEntity<ResponsePayload> responseValidateMock = new ResponseEntity<ResponsePayload>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.TRUE)
+                .resultado(Boolean.TRUE)
                 .descripcionRespuesta("test")
                 .build(), HttpStatus.OK);
 
@@ -336,7 +336,7 @@ public class ValidarProcesoServiceImplTest {
         Mockito.doReturn(responseMock).when(infoWhatsAppWSClient).validateExistingProcess(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
         ResponseEntity<ResponsePayload> responseValidateMock = new ResponseEntity<ResponsePayload>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .descripcionRespuesta("No ha superado el tiempo para realizar otra transaccion")
                 .build(), HttpStatus.OK);
 

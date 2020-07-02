@@ -84,12 +84,12 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 .build();
         ResponseEntity<ResponsePayload> resultProcessWithParams = parametrosServiceClient.consultarProcesoParametros(token, valida);
         if (resultProcessWithParams.getStatusCodeValue() == 200) {
-            Boolean resValidacion = resultProcessWithParams.getBody().getResultadoEnvio();
+            Boolean resValidacion = resultProcessWithParams.getBody().getResultado();
             if (Boolean.TRUE.equals(resValidacion)) {
                 return Boolean.TRUE;
             } else {
                 Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());
-                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5), StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), getCliente().getConvenio(), minutos, "7", cliente.getTipoCredito().toString());
+                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5), StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), getCliente().getConvenio(), minutos, "7", cliente.getTipoCredito().ordinal()+"");
             }
         }
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);

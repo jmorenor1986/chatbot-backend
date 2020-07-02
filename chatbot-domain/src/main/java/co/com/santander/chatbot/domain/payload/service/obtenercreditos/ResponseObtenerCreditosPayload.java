@@ -8,7 +8,7 @@ import java.util.List;
 @Data
 @Builder
 public class ResponseObtenerCreditosPayload {
-    private Boolean resultadoConsulta;
+    private Boolean resultado;
     private Long idRespuesta;
     private String descripcionRespuesta;
     private String infoUnoR;
