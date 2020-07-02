@@ -71,7 +71,7 @@ public class ClienteServiceImpl implements ClienteService {
         return  Optional.of(
                 ResponseObtenerCreditosPayload.builder()
                         .idRespuesta(Long.valueOf("2"))
-                        .resultadoConsulta(false)
+                        .resultado(false)
                         .descripcionRespuesta(mensaje)
                         .build());
     }

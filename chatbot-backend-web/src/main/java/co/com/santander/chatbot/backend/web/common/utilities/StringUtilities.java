@@ -5,6 +5,7 @@ import co.com.santander.chatbot.domain.dto.aspects.CommonAspectDto;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.service.certificados.CertificadoPayload;
 
+import java.text.DecimalFormat;
 import java.util.Objects;
 
 public class StringUtilities {
@@ -68,6 +69,11 @@ public class StringUtilities {
                 .credito(SecurityUtilities.desencriptarCatch(credito))
                 .identificacion(identificacion)
                 .build();
+    }
+
+    public static String formatoMoneda(String formatoMoneda, Long valor){
+        DecimalFormat formato = new DecimalFormat(formatoMoneda);
+        return formato.format(valor);
     }
 
 }

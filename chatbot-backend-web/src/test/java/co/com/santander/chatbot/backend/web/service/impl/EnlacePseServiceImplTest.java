@@ -3,6 +3,7 @@ package co.com.santander.chatbot.backend.web.service.impl;
 import co.com.santander.chatbot.acceso.recursos.clients.core.ClienteClient;
 import co.com.santander.chatbot.acceso.recursos.clients.core.PseParamClient;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.backend.web.service.FormatoMonedaService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
 import co.com.santander.chatbot.domain.payload.accesodatos.PseParamPayload;
@@ -29,12 +30,14 @@ public class EnlacePseServiceImplTest {
     private ClienteClient clienteClient;
     @Mock
     private PseParamClient pseParamClient;
+    @Mock
+    private FormatoMonedaService formatoMonedaService;
 
 
     @Before
     public void setUp(){
         MockitoAnnotations.initMocks(this);
-        this.enlacePseService = new EnlacePseServiceImpl(clienteClient, pseParamClient);
+        this.enlacePseService = new EnlacePseServiceImpl(clienteClient, pseParamClient, formatoMonedaService);
     }
 
     @Test
@@ -70,6 +73,15 @@ public class EnlacePseServiceImplTest {
                 .url("https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328")
                 .build(), HttpStatus.OK);
         Mockito.doReturn(responseMock).when(pseParamClient).getByIdBancoAndTipoCredito(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEnlacePsePayload responseMockEnlace = ResponseEnlacePsePayload.builder()
+                .valorTotal("1000")
+                .valorMora("10")
+                .valorPagar("990")
+                .build();
+
+        Mockito.doReturn(responseMockEnlace).when(formatoMonedaService).currencyFormat(Mockito.any(), Mockito.any());
+
         Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE,telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);
         Assert.assertTrue(respuestaServicio.isPresent());
@@ -122,6 +134,14 @@ public class EnlacePseServiceImplTest {
                 .url("https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328")
                 .build(), HttpStatus.OK);
         Mockito.doReturn(responseMock).when(pseParamClient).getByIdBancoAndTipoCredito(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEnlacePsePayload responseMockEnlace = ResponseEnlacePsePayload.builder()
+                .valorTotal("1000")
+                .valorMora("10")
+                .valorPagar("990")
+                .build();
+
+        Mockito.doReturn(responseMockEnlace).when(formatoMonedaService).currencyFormat(Mockito.any(), Mockito.any());
 
         Optional<ResponseEnlacePsePayload> respuestaServicio =  enlacePseService.getEnlacePse(token, ServiciosEnum.SERVICIO_ENLACE_PSE, telefono,numCreditoEnc);
         Assert.assertNotNull(respuestaServicio);

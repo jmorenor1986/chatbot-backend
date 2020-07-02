@@ -12,6 +12,7 @@ public class ResponseEnlacePsePayload {
     private String enlace;
     private String valorPagar;
     private String valorMora;
+    private String valorTotal;
     private String idRespuesta;
     private String descripcionRespuesta;
 }

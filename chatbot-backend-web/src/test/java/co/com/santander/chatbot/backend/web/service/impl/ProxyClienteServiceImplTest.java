@@ -69,7 +69,7 @@ public class ProxyClienteServiceImplTest {
 
         Optional<ResponseObtenerCreditosPayload> responseMock = Optional.of(
                 ResponseObtenerCreditosPayload.builder()
-                        .resultadoConsulta(Boolean.TRUE)
+                        .resultado(Boolean.TRUE)
                         .idRespuesta(0L)
                         .descripcionRespuesta("Servicio consumido de forma exitosa")
                         .creditos(creditos)
@@ -111,7 +111,7 @@ public class ProxyClienteServiceImplTest {
 
         Optional<ResponseObtenerCreditosPayload> responseMock = Optional.of(
                 ResponseObtenerCreditosPayload.builder()
-                        .resultadoConsulta(Boolean.TRUE)
+                        .resultado(Boolean.TRUE)
                         .idRespuesta(0L)
                         .descripcionRespuesta("Servicio consumido de forma exitosa")
                         .creditos(creditos)
@@ -137,7 +137,7 @@ public class ProxyClienteServiceImplTest {
 
         Optional<ResponseObtenerCreditosPayload> responseMock = Optional.of(
                 ResponseObtenerCreditosPayload.builder()
-                        .resultadoConsulta(Boolean.TRUE)
+                        .resultado(Boolean.TRUE)
                         .idRespuesta(0L)
                         .descripcionRespuesta("Servicio consumido de forma exitosa")
                         .creditos(creditos)

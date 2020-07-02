@@ -23,7 +23,7 @@ public class ClienteMapperServiceImpl implements ClienteMapperService {
         if (!clients.isEmpty()) {
             ResponseObtenerCreditosPayload response = ResponseObtenerCreditosPayload.builder()
                     .idRespuesta(Long.valueOf("0"))
-                    .resultadoConsulta(Boolean.TRUE)
+                    .resultado(Boolean.TRUE)
                     .descripcionRespuesta("Servicio consumido de forma exitosa")
                     .build();
             response.setCreditos(

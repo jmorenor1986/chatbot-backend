@@ -144,7 +144,7 @@ public class ClienteServiceImplTest {
         Optional<ResponseObtenerCreditosPayload> respuesta = clienteService.obtenerCreditos(token, ServiciosEnum.SERVICIO_VALIDA_CLIENTE, telefono, credito);
         Assert.assertNotNull(respuesta);
         Assert.assertTrue(respuesta.isPresent());
-        Assert.assertEquals(Boolean.FALSE, respuesta.get().getResultadoConsulta());
+        Assert.assertEquals(Boolean.FALSE, respuesta.get().getResultado());
         Assert.assertEquals("Numero de telefono asociado a dos clientes", respuesta.get().getDescripcionRespuesta());
     }
 }

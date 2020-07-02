@@ -221,7 +221,7 @@ public class ConsultaExtractoServiceImpl implements ConsultaExtractoService {
 
     private Optional<ResponseExtractosDisponibles> generateResponse(List<ConsultarDocumentosPayloadResponse> list, ConsultaExtractoPayload envioExtracto) {
         return Optional.of(ResponseExtractosDisponibles.builder()
-                .resultadoEnvio("true")
+                .resultado("true")
                 .idRespuesta("0")
                 .descripcionRespuesta("Consulta realizada correctamente")
                 .numeroCreditoOfuscado(envioExtracto.getNumeroCreditoOfuscado())

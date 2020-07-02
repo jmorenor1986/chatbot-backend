@@ -5,7 +5,6 @@ import co.com.santander.chatbot.backend.web.service.TerminosCondicionesService;
 import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.TerminosCondicionesPayload;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;

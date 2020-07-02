@@ -48,7 +48,7 @@ public class EnlacePseControllerTest {
                 .numeroVerificador("lsRvIEZpB2EvIOeT7NMtoDPhlF0sTCHtCug=")
                 .build();
         ResponseEnlacePsePayload response = ResponseEnlacePsePayload.builder()
-                .resultadoOperacion("true")
+                .resultado("true")
                 .enlace("https://www.pagosvirtualesavvillas.com.co/personal/pagos/12328")
                 .idRespuesta("0")
                 .descripcionRespuesta("Servicio consumido de forma exitosa")

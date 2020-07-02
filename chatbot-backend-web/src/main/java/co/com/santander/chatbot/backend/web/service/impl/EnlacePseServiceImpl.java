@@ -5,6 +5,7 @@ import co.com.santander.chatbot.acceso.recursos.clients.core.PseParamClient;
 import co.com.santander.chatbot.backend.web.common.aspect.log.BussinessLog;
 import co.com.santander.chatbot.backend.web.common.utilities.StringUtilities;
 import co.com.santander.chatbot.backend.web.service.EnlacePseService;
+import co.com.santander.chatbot.backend.web.service.FormatoMonedaService;
 import co.com.santander.chatbot.domain.common.utilities.SecurityUtilities;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.enums.TipoCredito;
@@ -35,10 +36,13 @@ public class EnlacePseServiceImpl implements EnlacePseService {
     @Setter
     private ClienteViewPayload clienteViewPayload;
 
+    private FormatoMonedaService formatoMonedaService;
+
     @Autowired
-    public EnlacePseServiceImpl(ClienteClient clienteClient, PseParamClient pseParamClient) {
+    public EnlacePseServiceImpl(ClienteClient clienteClient, PseParamClient pseParamClient, FormatoMonedaService formatoMonedaService) {
         this.clienteClient = clienteClient;
         this.pseParamClient = pseParamClient;
+        this.formatoMonedaService = formatoMonedaService;
     }
 
     @Override
@@ -65,16 +69,18 @@ public class EnlacePseServiceImpl implements EnlacePseService {
         Optional<String> linkPse = validaBancoEnlacePse(Long.valueOf(getClienteViewPayload().getIdBanco())
                 , getClienteViewPayload().getTipoCredito());
         if (linkPse.isPresent()) {
-            return Optional.of(
-                    ResponseEnlacePsePayload.builder()
-                            .resultadoOperacion("true")
-                            .idRespuesta("0")
-                            .tipoCredito(getClienteViewPayload().getTipoCredito().ordinal() +"")
-                            .valorPagar(getClienteViewPayload().getValorPagar().toString())
-                            .valorMora(getClienteViewPayload().getValorMora().toString())
-                            .enlace(linkPse.get())
-                            .descripcionRespuesta("Servicio consumido de forma exitosa")
-                            .build());
+            Long valorTotal = getClienteViewPayload().getValorPagar() + getClienteViewPayload().getValorMora();
+            ResponseEnlacePsePayload response = ResponseEnlacePsePayload.builder()
+                    .resultado("true")
+                    .idRespuesta("0")
+                    .tipoCredito(getClienteViewPayload().getTipoCredito().ordinal() + "")
+                    .valorPagar(getClienteViewPayload().getValorPagar().toString())
+                    .valorMora(getClienteViewPayload().getValorMora().toString())
+                    .valorTotal(valorTotal.toString())
+                    .enlace(linkPse.get())
+                    .descripcionRespuesta("Servicio consumido de forma exitosa")
+                    .build();
+            return Optional.of(formatoMonedaService.currencyFormat(getToken(), response));
         } else {
             return generateFailedResponse("No hay información de credito ( No existe link para su credito )");
         }
@@ -90,7 +96,7 @@ public class EnlacePseServiceImpl implements EnlacePseService {
 
     private Optional<ResponseEnlacePsePayload> generateFailedResponse(String message) {
         return Optional.of(ResponseEnlacePsePayload.builder()
-                .resultadoOperacion("false")
+                .resultado("false")
                 .idRespuesta("2")
                 .descripcionRespuesta(message)
                 .build());

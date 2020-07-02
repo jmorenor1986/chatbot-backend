@@ -47,7 +47,7 @@ public class ObtenerCreditosUsuarioControllerTest {
         ResponseObtenerCreditosPayload respuesta = ResponseObtenerCreditosPayload.builder().build();
         respuesta.setIdRespuesta(Long.valueOf("1"));
         respuesta.setDescripcionRespuesta("Servicio consumido de forma exitosa");
-        respuesta.setResultadoConsulta(Boolean.TRUE);
+        respuesta.setResultado(Boolean.TRUE);
 
         Mockito.doReturn(Optional.of(respuesta)).when(clienteService).obtenerCreditos(Mockito.any(), Mockito.any(), Mockito.any(), Mockito.any());
 
