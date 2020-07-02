@@ -13,13 +13,16 @@ public class ValidateStatusAfterProcess extends RuntimeException {
     private Long minutos;
     @Getter
     private String idRespuesta;
+    @Getter
+    private String tipoCredito;
 
-    public ValidateStatusAfterProcess(String message, String email, String numeroCredito, String convenio, Long minutos, String idRespuesta) {
+    public ValidateStatusAfterProcess(String message, String email, String numeroCredito, String convenio, Long minutos, String idRespuesta, String tipoCredito) {
         super(message);
         this.email = email;
         this.numeroCredito = numeroCredito;
         this.convenio = convenio;
         this.minutos = minutos;
         this.idRespuesta = idRespuesta;
+        this.tipoCredito = tipoCredito;
     }
 }

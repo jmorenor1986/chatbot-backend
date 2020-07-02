@@ -53,7 +53,7 @@ public class BussinesLogAspect {
         }catch (ValidateStatusAfterProcess e){
             strResponse = generateResponseExceptionAfter(e);
             generateLog(strResponse);
-            throw new ValidateStatusAfterProcess(e.getMessage(),e.getEmail(), e.getNumeroCredito(), e.getConvenio(), e.getMinutos(), e.getIdRespuesta());
+            throw new ValidateStatusAfterProcess(e.getMessage(),e.getEmail(), e.getNumeroCredito(), e.getConvenio(), e.getMinutos(), e.getIdRespuesta(), e.getTipoCredito());
         }
         generateLog(strResponse);
         return response;
@@ -72,7 +72,7 @@ public class BussinesLogAspect {
 
     public String generateResponseException(Exception e){
         return new Gson().toJson( ResponsePayload.builder()
-                .resultadoValidacion(Boolean.FALSE)
+                .resultadoEnvio(Boolean.FALSE)
                 .idRespuesta(1)
                 .descripcionRespuesta(e.getMessage())
                 .build() );

@@ -35,7 +35,7 @@ public class CustomExceptionHandlerTest {
 
     @Test
     public void testHandlerValidateStateAfter() {
-        ValidateStatusAfterProcess validateStatusAfterProcessException = new ValidateStatusAfterProcess("test", "xxxxxa@gmail.com", "xxxxx12345","LOS COCHES S.A.", 0L, "7");
+        ValidateStatusAfterProcess validateStatusAfterProcessException = new ValidateStatusAfterProcess("test", "xxxxxa@gmail.com", "xxxxx12345","LOS COCHES S.A.", 0L, "7", "1");
         ResponseEntity<?> result = customExceptionHandler.validateStateAfter(validateStatusAfterProcessException, null);
         Assert.assertEquals(200, result.getStatusCodeValue());
     }

@@ -48,7 +48,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .identificacion(cliente.getBody().getCedula())
                     .build(), new Date(), 1L);
             if (respuestaGuardarCliente.isPresent()){
-                Boolean valida = respuestaGuardarCliente.get().getResultadoValidacion();
+                Boolean valida = respuestaGuardarCliente.get().getResultadoEnvio();
                 if (Boolean.TRUE.equals(valida)){
                     return Optional.of(generarRespuesta(cliente.getBody()));
                 }
@@ -73,7 +73,7 @@ public class GenerarCertificadosServiceImpl implements GenerarCertificadosServic
                     .identificacion(cliente.getBody().getCedula())
                     .build(), new Date(), idTransaccion);
             if (respuestaGuardarCliente.isPresent()){
-                Boolean valida = respuestaGuardarCliente.get().getResultadoValidacion();
+                Boolean valida = respuestaGuardarCliente.get().getResultadoEnvio();
                 if (Boolean.TRUE.equals( valida )){
                     return Optional.of(generarRespuesta(cliente.getBody()));
                 }

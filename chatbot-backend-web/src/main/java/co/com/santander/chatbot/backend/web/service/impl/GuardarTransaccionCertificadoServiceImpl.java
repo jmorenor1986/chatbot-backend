@@ -53,7 +53,7 @@ public class GuardarTransaccionCertificadoServiceImpl implements GuardarTransacc
     private Optional<ResponsePayload> generateRespuesta(Boolean resultado, Integer id, String descripcion) {
         return Optional.of(ResponsePayload.builder()
                 .descripcionRespuesta(descripcion)
-                .resultadoValidacion(resultado)
+                .resultadoEnvio(resultado)
                 .idRespuesta(id)
                 .build());
 

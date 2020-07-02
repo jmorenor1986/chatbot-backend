@@ -9,26 +9,35 @@ public class ValidateStateCertificateExceptionTest {
 
     @Test
     public void test(){
-        ValidateStateCertificateException exception = new ValidateStateCertificateException("test", 10L);
+        ValidateStateCertificateException exception = new ValidateStateCertificateException("test", "correo@gmail.com", "123","123",10L, "123", "1");
+        Assert.assertNotNull(exception);
+    }
+
+    @Test
+    public void testConstructor(){
+        ValidateStateCertificateException exception = new ValidateStateCertificateException("test",1L);
         Assert.assertNotNull(exception);
     }
 
     @Test
     public void testGETmin(){
-        ValidateStateCertificateException exception = new ValidateStateCertificateException("test", 10L);
+        ValidateStateCertificateException exception = new ValidateStateCertificateException("test", "correo@gmail.com", "123","123",10L, "123", "1");
         Assert.assertNotNull(exception);
         Assert.assertNotNull(exception.getMinutos());
+        Assert.assertNotNull(exception.getEmail());
+        Assert.assertNotNull(exception.getNumeroCredito());
+        Assert.assertNotNull(exception.getTipoCredito());
     }
 
     @Test
     public void testExc(){
-        ValidateStatusAfterProcess exception = new ValidateStatusAfterProcess("test", "correo@gmail.com", "123","123",10L, "123");
+        ValidateStatusAfterProcess exception = new ValidateStatusAfterProcess("test", "correo@gmail.com", "123","123",10L, "123","1");
         Assert.assertNotNull(exception);
     }
 
     @Test
     public void testExcGets(){
-        ValidateStatusAfterProcess exception = new ValidateStatusAfterProcess("test", "correo@gmail.com", "123","123",10L, "123");
+        ValidateStatusAfterProcess exception = new ValidateStatusAfterProcess("test", "correo@gmail.com", "123","123",10L, "123", "1");
         Assert.assertNotNull(exception);
         Assert.assertNotNull(exception.getMessage());
         Assert.assertNotNull(exception.getConvenio());

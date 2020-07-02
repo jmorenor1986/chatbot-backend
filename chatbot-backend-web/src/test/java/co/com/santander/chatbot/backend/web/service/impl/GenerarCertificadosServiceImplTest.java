@@ -71,7 +71,7 @@ public class GenerarCertificadosServiceImplTest {
                 .numeroCredito(informacionCreditoPayload.getNumeroVerificador())
                 .identificacion(clienteViewPayload.getCedula())
                 .build()), Mockito.any(), Mockito.eq(1L))).thenReturn(Optional.of(ResponsePayload.builder()
-                .resultadoValidacion(Boolean.TRUE)
+                .resultadoEnvio(Boolean.TRUE)
                 .build()));
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarInformacionCredito(token, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
         Assert.assertNotNull(result);
@@ -138,7 +138,7 @@ public class GenerarCertificadosServiceImplTest {
                 .numeroCredito(genericCertificatePayload.getNumeroVerificador())
                 .identificacion(clienteViewPayload.getCedula())
                 .build()), Mockito.any(), Mockito.eq(1L))).thenReturn(Optional.of(ResponsePayload.builder()
-                .resultadoValidacion(Boolean.TRUE)
+                .resultadoEnvio(Boolean.TRUE)
                 .build()));
         Optional<InformacionCreditoResponsePayload> result = generarCertificadosService.generarCertificadoEstandar(token, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, genericCertificatePayload, 1L);
         Assert.assertNotNull(result);

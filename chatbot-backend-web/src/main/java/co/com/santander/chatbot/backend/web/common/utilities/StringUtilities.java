@@ -19,7 +19,7 @@ public class StringUtilities {
             if (i >= texto.length() - caracteres) {
                 break;
             }
-            result.append("X");
+            result.append("*");
         }
         result.append(texto.substring(texto.length() - caracteres));
         return result.toString();
@@ -37,7 +37,7 @@ public class StringUtilities {
             StringBuilder resultado = new StringBuilder();
             int tamanio = credito.length();
             for (int i = 0; i < tamanio; i++) {
-                resultado.append("X");
+                resultado.append("*");
             }
             StringBuilder temporal = new StringBuilder();
             for (int i = 0; i < 5; i++) {

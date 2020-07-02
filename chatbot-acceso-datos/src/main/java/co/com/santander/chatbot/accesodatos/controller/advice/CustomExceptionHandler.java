@@ -18,7 +18,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta(ex.getMessage())
                 .idRespuesta(1)
-                .resultadoValidacion(Boolean.FALSE)
+                .resultadoEnvio(Boolean.FALSE)
                 .build(), HttpStatus.BAD_REQUEST);
     }
 
