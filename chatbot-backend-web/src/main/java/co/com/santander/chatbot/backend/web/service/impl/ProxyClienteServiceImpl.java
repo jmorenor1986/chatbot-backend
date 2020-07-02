@@ -44,11 +44,18 @@ public class ProxyClienteServiceImpl implements ClienteService {
         List<ResponseCreditosPayload> response = null;
         if (creditos.isPresent()) {
             response = creditos.get().getCreditos();
+            if(Long.valueOf(2L).equals(tipoOperacion) || Long.valueOf(3L).equals(tipoOperacion) || Long.valueOf(5L).equals(tipoOperacion) || Long.valueOf(7L).equals(tipoOperacion) ){
+                response = proccessToStatusCredits(response, "Cerrado", Boolean.FALSE);
+            }
             //Operacion Informacion de credito
             if (Long.valueOf(2L).equals(tipoOperacion)) {
                 response = proccessToVehicleCredits(response);
-                creditos.get().setCreditos(response);
             }
+            //Operacion Paz y Salvo
+            if(Long.valueOf(4L).equals(tipoOperacion)){
+                response = proccessToStatusCredits(response, "Cerrado", Boolean.TRUE);
+            }
+            creditos.get().setCreditos(response);
         }
         return creditos;
     }
@@ -69,6 +76,21 @@ public class ProxyClienteServiceImpl implements ClienteService {
                 return Boolean.FALSE;
             }
             return Boolean.TRUE;
+        };
+    }
+
+    private List<ResponseCreditosPayload> proccessToStatusCredits(List<ResponseCreditosPayload> credits, String status, Boolean closed) {
+        return credits.stream().parallel()
+                .filter(filterStatusCredits(status, closed))
+                .collect(Collectors.toList());
+    }
+
+    private Predicate<ResponseCreditosPayload> filterStatusCredits(String status, Boolean closed) {
+        return (ResponseCreditosPayload credit) -> {
+            if( status.equalsIgnoreCase(credit.getEstado()) ){
+                return closed;
+            }
+            return !closed;
         };
     }
 }

@@ -125,6 +125,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .infoUnoR(ex.getMinutos().toString())
                 .descripcionRespuesta(ex.getMessage())
                 .idRespuesta(ex.getIdRespuesta())
+                .tipoCredito(ex.getTipoCredito())
                 .build(), HttpStatus.OK);
     }
 

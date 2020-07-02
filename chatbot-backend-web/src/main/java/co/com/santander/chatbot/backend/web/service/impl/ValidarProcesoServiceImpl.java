@@ -89,7 +89,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 return Boolean.TRUE;
             } else {
                 Long minutos = DateUtilities.generateDifferenceDates(fechaEnvio, new Date());
-                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5), StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), getCliente().getConvenio(), minutos, "7", cliente.getTipoCredito().toString());
+                throw new ValidateStatusAfterProcess(resultProcessWithParams.getBody().getDescripcionRespuesta().toString(), StringUtilities.ofuscarCorreo(getCliente().getEmail(), 5), StringUtilities.ofuscarCredito(commonAspectDto.getCredito()), getCliente().getConvenio(), minutos, "7", cliente.getTipoCredito().ordinal()+"");
             }
         }
         throw new ValidateStateCertificateException(ERROR_CONSUMO_SERVICE, 0L);

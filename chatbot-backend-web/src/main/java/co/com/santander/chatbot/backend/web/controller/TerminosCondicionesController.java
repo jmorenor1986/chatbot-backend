@@ -5,6 +5,7 @@ import co.com.santander.chatbot.backend.web.service.TerminosCondicionesService;
 import co.com.santander.chatbot.backend.web.service.ValidateClienteService;
 import co.com.santander.chatbot.domain.enums.ServiciosEnum;
 import co.com.santander.chatbot.domain.payload.accesodatos.TerminosCondicionesPayload;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -41,6 +42,7 @@ public class TerminosCondicionesController {
         terminosCondiciones.setTelefono(mapperTelService.mapTelDigits(terminosCondiciones.getTelefono()));
         Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save(bearerToken, ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,terminosCondiciones.getTelefono().toString(), terminosCondiciones);
         if(response.isPresent()){
+            response.get().setResultado(Boolean.TRUE);
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
