@@ -55,5 +55,12 @@ public class TerminosCondicionesPayload {
     @AllowedValues(message = "operacion", longValues = { 1L , 2L })
     @MandatoryConstraint(message = "operacion", zeroIsValid = false)
     private Long operacion;
+    @ApiModelProperty(
+            notes = "Indica el si la operacion fue exitosa",
+            name = "Id Respuesta",
+            dataType = "String",
+            allowableValues = "{0: Correcta}"
+    )
+    private String idRespuesta;
 
 }

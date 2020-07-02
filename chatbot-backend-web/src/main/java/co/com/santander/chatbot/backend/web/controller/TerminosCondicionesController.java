@@ -42,6 +42,7 @@ public class TerminosCondicionesController {
         Optional<TerminosCondicionesPayload> response = terminosCondicionesService.save(bearerToken, ServiciosEnum.SERVICIO_TERMINOS_CONDICIONES,terminosCondiciones.getTelefono().toString(), terminosCondiciones);
         if(response.isPresent()){
             response.get().setResultado(Boolean.TRUE);
+            response.get().setIdRespuesta("0");
             return new ResponseEntity<>(response.get(), HttpStatus.OK);
         }
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
