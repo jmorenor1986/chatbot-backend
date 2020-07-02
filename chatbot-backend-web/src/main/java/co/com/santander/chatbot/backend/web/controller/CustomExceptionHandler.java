@@ -19,7 +19,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Fallo en la comunicación, intente más tarde (falta parametro) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(6)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -28,7 +28,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("No hay información de credito (no concuerda información solicitada con la del documento) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(2)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -38,7 +38,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("No hay información de credito (id extracto no existe) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(2)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -47,7 +47,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos erroneos, los datos no cumplen con el formato (Formato Número) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(4)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -56,7 +56,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("No hay información del crédito (Telefono inexistente) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(2)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -65,7 +65,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (Numero validador) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(4)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -74,7 +74,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (correo invalido) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(4)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -83,7 +83,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (tamanio no permitido) (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(4)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -92,7 +92,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos erróneos, los datos no cumplen con el formato (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(4)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
@@ -101,14 +101,14 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
         return new ResponseEntity<>(ResponsePayload.builder()
                 .descripcionRespuesta("Datos incompletos (".concat(ex.getMessage()).concat(")"))
                 .idRespuesta(5)
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .build(), HttpStatus.OK);
     }
 
     @ExceptionHandler(ValidateStateCertificateException.class)
     public final ResponseEntity<Object> validateStateCertificateException(ValidateStateCertificateException ex, WebRequest request) {
         return new ResponseEntity<>(ResponsePayload.builder()
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .idRespuesta(7)
                 .minutos(ex.getMinutos())
                 .descripcionRespuesta(ex.getMessage())
@@ -118,7 +118,7 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ValidateStatusAfterProcess.class)
     public final ResponseEntity<Object> validateStateAfter(ValidateStatusAfterProcess ex, WebRequest request){
         return new ResponseEntity<>(InformacionCreditoResponsePayload.builder()
-                .resultadoEnvio(Boolean.FALSE.toString())
+                .resultado(Boolean.FALSE.toString())
                 .emailOfuscado(ex.getEmail())
                 .numeroCreditoOfuscado(ex.getNumeroCredito())
                 .convenio(ex.getConvenio())
@@ -128,6 +128,4 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                 .tipoCredito(ex.getTipoCredito())
                 .build(), HttpStatus.OK);
     }
-
-
 }

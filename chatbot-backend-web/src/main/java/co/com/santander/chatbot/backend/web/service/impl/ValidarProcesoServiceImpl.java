@@ -84,7 +84,7 @@ public class ValidarProcesoServiceImpl implements ValidarProcesoService {
                 .build();
         ResponseEntity<ResponsePayload> resultProcessWithParams = parametrosServiceClient.consultarProcesoParametros(token, valida);
         if (resultProcessWithParams.getStatusCodeValue() == 200) {
-            Boolean resValidacion = resultProcessWithParams.getBody().getResultadoEnvio();
+            Boolean resValidacion = resultProcessWithParams.getBody().getResultado();
             if (Boolean.TRUE.equals(resValidacion)) {
                 return Boolean.TRUE;
             } else {

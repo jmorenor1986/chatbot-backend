@@ -7,7 +7,7 @@ import lombok.Data;
 @Builder
 public class ResponseEnlacePsePayload {
 
-    private String resultadoOperacion;
+    private String resultado;
     private String tipoCredito; //1 (Vehiculo) 2 (Consumo)
     private String enlace;
     private String valorPagar;

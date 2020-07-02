@@ -57,7 +57,7 @@ public class ClienteControllerTest {
         ResponseEntity<ResponsePayload> result = clienteController.consultaCliente(clientePayload);
 
         Assert.assertNotNull(result);
-        Assert.assertEquals(Boolean.FALSE, result.getBody().getResultadoEnvio());
+        Assert.assertEquals(Boolean.FALSE, result.getBody().getResultado());
         Assert.assertEquals(204, result.getStatusCodeValue());
     }
 

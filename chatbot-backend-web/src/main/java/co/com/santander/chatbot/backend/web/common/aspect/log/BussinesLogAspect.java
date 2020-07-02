@@ -72,7 +72,7 @@ public class BussinesLogAspect {
 
     public String generateResponseException(Exception e){
         return new Gson().toJson( ResponsePayload.builder()
-                .resultadoEnvio(Boolean.FALSE)
+                .resultado(Boolean.FALSE)
                 .idRespuesta(1)
                 .descripcionRespuesta(e.getMessage())
                 .build() );
@@ -80,7 +80,7 @@ public class BussinesLogAspect {
 
     public String generateResponseExceptionAfter(ValidateStatusAfterProcess ex){
         return new Gson().toJson( InformacionCreditoResponsePayload.builder()
-                .resultadoEnvio(Boolean.FALSE.toString())
+                .resultado(Boolean.FALSE.toString())
                 .emailOfuscado(ex.getEmail())
                 .numeroCreditoOfuscado(ex.getNumeroCredito())
                 .convenio(ex.getConvenio())

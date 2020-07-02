@@ -13,7 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 public class ResponseExtractosDisponibles {
 
-    private String resultadoEnvio;
+    private String resultado;
     private String emailOfuscado;
     private String numeroCreditoOfuscado;
     private String numeroVerificador;
