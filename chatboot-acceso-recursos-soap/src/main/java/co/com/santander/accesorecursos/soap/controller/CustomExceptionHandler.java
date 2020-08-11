@@ -1,5 +1,6 @@
 package co.com.santander.accesorecursos.soap.controller;
 
+import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.accesorecursos.soap.common.exception.EnvioExtractoMailException;
 import co.com.santander.chatbot.domain.payload.enviarextracto.EnvioDocumentoMailResponsePayload;
 import org.springframework.http.HttpStatus;
@@ -21,4 +22,11 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler {
                         .build(), HttpStatus.OK);
     }
 
+    @ExceptionHandler(BusinessException.class)
+    public final ResponseEntity<Object> handlerBusinessException(BusinessException ex, WebRequest request) {
+        return new ResponseEntity<>(EnvioDocumentoMailResponsePayload.builder()
+                .respuesta("Error de negocio: ".concat(ex.getMessage()))
+                .envioExitoso(Boolean.FALSE)
+                .build(), HttpStatus.OK);
+    }
 }

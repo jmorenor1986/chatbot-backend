@@ -10,11 +10,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chatboot-acceso-recursos-soap</artifactId>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 
     <properties>
         <cxf.version>2.7.18</cxf.version>
-        <start-class>co.com.santander.accesorecursos.soap.AccesoRecursosSoapApplicationa</start-class>
+        <start-class>co.com.santander.accesorecursos.soap.AccesoRecursosSoapApplication</start-class>
         <sonar.coverage.exclusions>
             **/*AccesoRecursosSoapApplication.java,
             src/main/java/co/com/santander/accesorecursos/soap/resources/**/*,
@@ -25,7 +25,7 @@
     </properties>
     <dependencies>
         <!-- Ini Deployment Wildfly -->
-        <dependency>
+        <!--dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
@@ -39,7 +39,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
+        </dependency-->
         <!-- Fin Deployment Wildfly -->
         <dependency>
             <groupId>co.com.santander</groupId>

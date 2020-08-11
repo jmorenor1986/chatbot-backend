@@ -55,9 +55,12 @@ public class DocumentosClienteImpl implements DocumentosCliente {
 
             resultConsultarDocs = portConsultaDocumentos.consultarDocumentos( consultaDocDTO, beanDatosCliente);
             return setListResponseConsultaDocumentos(resultConsultarDocs);
-        } catch (WSBusinessRuleException | WSSystemException e) {
+        } catch (WSSystemException e) {
             log.severe(e.getMessage());
             throw new BusinessException(e.getMessage());
+        } catch (WSBusinessRuleException e){
+            log.severe(e.getMessage());
+            return new ArrayList<>();
         }
     }
 

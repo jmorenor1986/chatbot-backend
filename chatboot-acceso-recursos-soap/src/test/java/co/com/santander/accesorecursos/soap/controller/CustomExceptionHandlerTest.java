@@ -1,5 +1,6 @@
 package co.com.santander.accesorecursos.soap.controller;
 
+import co.com.santander.accesorecursos.soap.common.exception.BusinessException;
 import co.com.santander.accesorecursos.soap.common.exception.EnvioExtractoMailException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -21,4 +22,13 @@ public class CustomExceptionHandlerTest {
         ResponseEntity<Object> response = customExceptionHandler.handlerEnvioExtractoMailException(ex, null);
         Assert.assertNotNull(response);
     }
+
+    @Test
+    public void testhandlerBusinessExceptionSuccess(){
+        BusinessException ex = new BusinessException("test");
+        ResponseEntity<Object> response = customExceptionHandler.handlerBusinessException(ex, null);
+        Assert.assertNotNull(response);
+    }
+
+
 }
