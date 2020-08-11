@@ -9,6 +9,7 @@
             <module name="com.fasterxml.jackson.jaxrs.jackson-jaxrs-json-provider" />
             <module name="org.jboss.resteasy.resteasy-jackson2-provider" />
             <module name="org.jboss.resteasy.resteasy-jackson-provider" />
+            <module name="javax.xml.bind.api"/>
         </exclusions>
         <exclude-subsystems>
             <subsystem name="webservices" />

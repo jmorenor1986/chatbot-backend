@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chatboot-acceso-recursos-soap</artifactId>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <properties>
         <cxf.version>2.7.18</cxf.version>
@@ -25,7 +25,7 @@
     </properties>
     <dependencies>
         <!-- Ini Deployment Wildfly -->
-        <!--dependency>
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
             <exclusions>
@@ -39,7 +39,7 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency-->
+        </dependency>
         <!-- Fin Deployment Wildfly -->
         <dependency>
             <groupId>co.com.santander</groupId>
