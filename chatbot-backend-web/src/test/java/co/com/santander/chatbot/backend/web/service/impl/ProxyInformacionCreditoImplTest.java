@@ -40,6 +40,38 @@ public class ProxyInformacionCreditoImplTest {
     }
 
     @Test
+    public void testGenerarInformacionCreditoNOT_FOUND_CLIENT() {
+        String token = "1";
+        InformacionCreditoPayload informacionCreditoPayload = InformacionCreditoPayload.builder()
+                .telefono("3229032614")
+                .numeroVerificador("mMdvIEZpB2UpIGe05u/tr4jyjtMEUiFaf2FGCg==")
+                .tipoOperacionUsuario("2")
+                .build();
+
+        Optional<InformacionCreditoResponsePayload> responseMock = Optional.of(
+                InformacionCreditoResponsePayload.builder()
+                        .idRespuesta("1")
+                        .build()
+        );
+        Mockito.doReturn(responseMock).when(generarCertificadosService).generarInformacionCredito(Mockito.any(), Mockito.any(), Mockito.any());
+
+        ResponseEntity<ClienteViewPayload> responseMockCliente = new ResponseEntity<>(ClienteViewPayload.builder()
+                .fechaDesembolso(new Date("01/05/2020"))
+                .valorDesembolso(new BigDecimal(10000000))
+                .saldoCapital(new BigDecimal(1000000))
+                .build(), HttpStatus.NO_CONTENT);
+        Mockito.doReturn(responseMockCliente).when(clienteClient).getClientByTelefonoAndNumCredito(Mockito.any(), Mockito.any(), Mockito.any());
+
+        Optional<String> responseParam = Optional.of("200");
+
+        Mockito.doReturn(responseParam).when(parametrosAppService).getParamByKey(Mockito.any(), Mockito.any());
+
+        Optional<InformacionCreditoResponsePayload> response = proxyInformacionCredito.generarInformacionCredito(token, ServiciosEnum.SERVICIO_INFORMACION_CREDITO, informacionCreditoPayload);
+
+        Assert.assertNotNull(response);
+    }
+
+    @Test
     public void testGenerarInformacionCredito() {
         String token = "1";
         InformacionCreditoPayload informacionCreditoPayload = InformacionCreditoPayload.builder()
