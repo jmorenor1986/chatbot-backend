@@ -160,9 +160,8 @@ public class EnvioExtractoServiceImpl implements EnvioExtractoService {
                         .build())
                 .envioDocumentoPayload(EnvioDocumentoPayload.builder()
                         .mailCC(responseCopia.get())
-                        //TODO CAMBIAR EL CORREO DEL CLIENTE
-                        .mailPara("jesus.sierra@samtel.co")
-                        //.mailPara(getClienteViewPayload().getEmail())
+                        //.mailPara("jesus.sierra@samtel.co")
+                        .mailPara(getClienteViewPayload().getEmail())
                         .build())
                 .build();
         ResponseEntity<EnvioDocumentoMailResponsePayload> response = documentosClient.envioMailDocumento(getToken(), request);
