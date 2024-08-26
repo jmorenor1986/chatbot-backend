@@ -17,7 +17,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.8</java.version>
-        <swagger.version>2.9.2</swagger.version>
+        <swagger.version>2.10.0</swagger.version>
         <guava.version>20.0</guava.version>
         <modelmapper.version>2.3.0</modelmapper.version>
         <cucumber.version>4.7.0</cucumber.version>
